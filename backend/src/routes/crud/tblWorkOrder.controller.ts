@@ -6,6 +6,7 @@ import {
 } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
 import { buildResponseSchema } from "@/utils/base.schema";
+import { responseSchemaList } from "@/types";
 import { prisma } from "@/utils/prisma";
 import { periodToDays } from "@/helper";
 import {
@@ -14,154 +15,149 @@ import {
   TblWorkOrderInputUpdate,
   TblWorkOrderPlain,
 } from "orm/generated/prismabox/TblWorkOrder";
+import { TblComponentUnit } from "orm/generated/prismabox/TblComponentUnit";
+import { TblLocation } from "orm/generated/prismabox/TblLocation";
+import { TblCompJob } from "orm/generated/prismabox/TblCompJob";
+import { TblJobDescription } from "orm/generated/prismabox/TblJobDescription";
+import { TblPeriod } from "orm/generated/prismabox/TblPeriod";
+import { TblPendingType } from "orm/generated/prismabox/TblPendingType";
+import { TblDiscipline } from "orm/generated/prismabox/TblDiscipline";
+import { TblWorkOrderStatus } from "orm/generated/prismabox/TblWorkOrderStatus";
 import { authPlugin } from "../auth/auth.guard";
+import type { Prisma } from "orm/generated/prisma/client";
 
-export const ServiceTblWorkOrder = new BaseService(prisma.tblWorkOrder);
+// =========================
+// SELECT
+// =========================
+const workOrderListSelect = {
+  workOrderId: true,
+  compId: true,
+  pendingdate: true,
+  issuedDate: true,
+  title: true,
+  priority: true,
+  description: true,
+  userComment: true,
+  window: true,
+  dueDate: true,
+  created: true,
+  started: true,
+  completed: true,
+  woNo: true,
+
+  tblComponentUnit: {
+    select: {
+      compId: true,
+      compNo: true,
+      serialNo: true,
+      isCritical: true,
+      notes: true,
+      tblLocation: {
+        select: { name: true },
+      },
+    },
+  },
+
+  tblCompJob: {
+    select: {
+      jobDescId: true,
+      frequency: true,
+      compJobId: true,
+      nextDueDate: true,
+      tblJobDescription: {
+        select: {
+          jobDescCode: true,
+          jobDescTitle: true,
+          jobDesc: true,
+        },
+      },
+      tblPeriod: {
+        select: { name: true },
+      },
+    },
+  },
+
+  tblPendingType: {
+    select: { pendTypeName: true, description: true },
+  },
+
+  tblDiscipline: {
+    select: { name: true },
+  },
+
+  tblWorkOrderStatus: {
+    select: { name: true },
+  },
+} satisfies Prisma.TblWorkOrderSelect;
+
+export type WorkOrderItem = Prisma.TblWorkOrderGetPayload<{
+  select: typeof workOrderListSelect;
+}>;
+
+// =========================
+// SCHEMA
+// =========================
 export const WorkOrderItemSchema = t.Object({
-  workOrderId: t.Number(),
-  compId: t.Union([t.Number(), t.Null()]),
-  // compId: t.Optional(t.Number()),
-  title: t.String(),
-  priority: t.Nullable(t.Number()),
-  description: t.Nullable(t.String()),
-  window: t.Nullable(t.Number()),
-  userComment: t.Nullable(t.String()),
+  ...t.Pick(TblWorkOrder, [
+    "workOrderId",
+    "compId",
+    "pendingdate",
+    "issuedDate",
+    "title",
+    "priority",
+    "description",
+    "created",
+    "woNo",
+    "started",
+    "dueDate",
+    "window",
+    "completed",
+    "userComment",
+  ]).properties,
 
-  dueDate: t.Nullable(t.Date()),
-  pendingdate: t.Union([t.Date(), t.Null()]),
-  issuedDate: t.Union([t.Date(), t.Null()]),
-  created: t.Nullable(t.Date()),
-  started: t.Nullable(t.Date()),
-  completed: t.Nullable(t.Date()),
-
-  tblComponentUnit: t.Optional(
+  tblComponentUnit: t.Nullable(
     t.Object({
-      compId: t.Number(),
-      compNo: t.Union([t.String(), t.Null()]),
-      tblLocation: t.Optional(
-        t.Object({
-          name: t.Optional(t.String()),
-        }),
-      ),
+      ...t.Pick(TblComponentUnit, [
+        "compId",
+        "compNo",
+        "serialNo",
+        "isCritical",
+        "notes",
+      ]).properties,
+      tblLocation: t.Nullable(t.Pick(TblLocation, ["name"])),
     }),
   ),
 
   tblCompJob: t.Nullable(
-    t.Optional(
-      t.Object({
-        compJobId: t.Number(),
-        frequency: t.Nullable(t.Number()),
-        nextDueDate: t.Optional(t.Date()),
-        tblJobDescription: t.Optional(
-          t.Object({
-            jobDescCode: t.String(),
-            jobDescTitle: t.String(),
-            jobDesc: t.String(),
-          }),
-        ),
-        tblPeriod: t.Optional(
-          t.Object({
-            name: t.String(),
-          }),
-        ),
-      }),
-    ),
-  ),
-
-  tblPendingType: t.Optional(
     t.Object({
-      pendTypeName: t.Optional(t.String()),
+      ...t.Pick(TblCompJob, [
+        "jobDescId",
+        "compJobId",
+        "frequency",
+        "nextDueDate",
+      ]).properties,
+      tblJobDescription: t.Nullable(
+        t.Pick(TblJobDescription, ["jobDescCode", "jobDescTitle", "jobDesc"]),
+      ),
+      tblPeriod: t.Nullable(t.Pick(TblPeriod, ["name"])),
     }),
   ),
 
-  tblDiscipline: t.Optional(
-    t.Object({
-      name: t.String(),
-    }),
+  tblPendingType: t.Nullable(
+    t.Pick(TblPendingType, ["pendTypeName", "description"]),
   ),
-
-  tblWorkOrderStatus: t.Optional(
-    t.Object({
-      name: t.String(),
-    }),
-  ),
+  tblDiscipline: t.Nullable(t.Pick(TblDiscipline, ["name"])),
+  tblWorkOrderStatus: t.Nullable(t.Pick(TblWorkOrderStatus, ["name"])),
 });
 
-export const TblWorkOrderSchema = t.Object({
-  workOrderId: t.Number(),
-  // compId: t.Nullable(t.Optional(t.Number())),
-  compId: t.Union([t.Number(), t.Null()]),
-  pendingdate: t.Union([t.Date(), t.Null()]),
-  issuedDate: t.Union([t.Date(), t.Null()]),
-  title: t.Optional(t.String()),
-  priority: t.Optional(t.Number()),
-  description: t.Optional(t.String()),
-  userComment: t.Optional(t.String()),
-  window: t.Optional(t.Number()),
-  dueDate: t.Optional(t.Date()),
-  created: t.Optional(t.Date()),
-  started: t.Optional(t.Date()),
-  completed: t.Optional(t.Date()),
-  woNo: t.Union([t.String(), t.Null()]),
+// =========================
+// SERVICE
+// =========================
+export const ServiceTblWorkOrder = new BaseService(prisma.tblWorkOrder);
 
-  tblComponentUnit: t.Optional(
-    t.Object({
-      compId: t.Number(),
-      compNo: t.Optional(t.String()),
-      serialNo: t.Optional(t.String()),
-      isCritical: t.Optional(t.Number()),
-      notes: t.Optional(t.Number()),
-      tblLocation: t.Optional(
-        t.Object({
-          name: t.Optional(t.String()),
-        }),
-      ),
-    }),
-  ),
-
-  tblCompJob: t.Optional(
-    t.Object({
-      jobDescId: t.Number(),
-      frequency: t.Any(),
-      compJobId: t.Number(),
-      nextDueDate: t.Optional(t.Date()),
-
-      tblJobDescription: t.Optional(
-        t.Object({
-          jobDescCode: t.Optional(t.String()),
-          jobDescTitle: t.Optional(t.String()),
-          jobDesc: t.Optional(t.String()),
-        }),
-      ),
-
-      tblPeriod: t.Optional(
-        t.Object({
-          name: t.Optional(t.String()),
-        }),
-      ),
-    }),
-  ),
-
-  tblPendingType: t.Optional(
-    t.Object({
-      pendTypeName: t.Optional(t.String()),
-      description: t.Optional(t.String()),
-    }),
-  ),
-
-  tblDiscipline: t.Optional(
-    t.Object({
-      name: t.Optional(t.String()),
-    }),
-  ),
-
-  tblWorkOrderStatus: t.Optional(
-    t.Object({
-      name: t.Optional(t.String()),
-    }),
-  ),
-});
-
+// =========================
+// CONTROLLER
+// =========================
 const ControllerTblWorkOrder = new BaseController({
   prefix: "/tblWorkOrder",
   swagger: {
@@ -175,14 +171,15 @@ const ControllerTblWorkOrder = new BaseController({
   scope: true,
 
   extend: (app) => {
+    // =========================
+    // GET LIST
+    // =========================
     app.get(
       "/",
       async ({ query, headers }) => {
         const instId = Number(headers["x-inst-id"] || 0);
 
-        if (!instId) {
-          throw new Error("Instance ID is required");
-        }
+        if (!instId) throw new Error("Instance ID is required");
 
         const {
           page = 1,
@@ -190,129 +187,48 @@ const ControllerTblWorkOrder = new BaseController({
           sort,
           filter,
           paginate = false,
-          select,
         } = query;
 
         const parsedFilter = filter ? JSON.parse(filter) : {};
-        const sortObj = parseSortString(sort);
         const usePagination = !!paginate;
-
-        const defaultSelect = {
-          workOrderId: true,
-          compId: true,
-          pendingdate: true,
-          issuedDate: true,
-          title: true,
-          priority: true,
-          description: true,
-          userComment: true,
-          window: true,
-          dueDate: true,
-          created: true,
-          started: true,
-          completed: true,
-          woNo: true,
-
-          tblComponentUnit: {
-            select: {
-              compId: true,
-              compNo: true,
-              serialNo: true,
-              isCritical: true,
-              notes: true,
-              tblLocation: {
-                select: { name: true },
-              },
-            },
-          },
-
-          tblCompJob: {
-            select: {
-              jobDescId: true,
-              frequency: true,
-              compJobId: true,
-              nextDueDate: true,
-              tblJobDescription: {
-                select: {
-                  jobDescCode: true,
-                  jobDescTitle: true,
-                  jobDesc: true,
-                },
-              },
-              tblPeriod: {
-                select: { name: true },
-              },
-            },
-          },
-
-          tblPendingType: {
-            select: { pendTypeName: true, description: true },
-          },
-
-          tblDiscipline: {
-            select: { name: true },
-          },
-
-          tblWorkOrderStatus: {
-            select: { name: true },
-          },
-        };
-
-        let selectObj = defaultSelect;
-        if (select) {
-          try {
-            const customSelect = JSON.parse(select);
-            selectObj = {
-              ...customSelect,
-            };
-          } catch (error) {
-            console.warn("Invalid select JSON, using default");
-            selectObj = defaultSelect;
-          }
-        }
 
         return await ServiceTblWorkOrder.findAll({
           where: { ...parsedFilter, instId },
-          orderBy: sortObj,
+          orderBy: parseSortString(sort),
           page: usePagination ? Number(page) : undefined,
           perPage: usePagination ? Number(perPage) : 250_000,
-          select: selectObj,
+          select: workOrderListSelect,
         });
       },
       {
         tags: ["tblWorkOrder"],
-        detail: { summary: "Get all with custom select" },
+        detail: { summary: "Get all work orders" },
         query: querySchema,
-        response: t.Any(),
+        response: responseSchemaList(WorkOrderItemSchema),
       },
     );
 
+    // =========================
+    // POST /generate
+    // =========================
     app.use(authPlugin).post(
       "/generate",
-      async ({ body, set, headers, userId }) => {
+      async ({ headers, userId }) => {
         const instId = Number(headers["x-inst-id"] || 0);
 
-        if (!instId) {
-          throw new Error("Instance ID is required");
-        }
+        if (!instId) throw new Error("Instance ID is required");
 
         const user = await prisma.tblUser.findFirst({
           where: { userId },
-          include: {
-            tblEmployee: true,
-          },
+          include: { tblEmployee: true },
         });
 
         const employeeId = user?.tblEmployee?.employeeId;
-
         const now = new Date();
 
         return await prisma.$transaction(async (tx) => {
           const compJobs = await tx.tblCompJob.findMany({
-            where: {
-              nextDueDate: null,
-              instId,
-            },
+            where: { nextDueDate: null, instId },
             select: {
               compJobId: true,
               discId: true,
@@ -336,19 +252,19 @@ const ControllerTblWorkOrder = new BaseController({
             };
           }
 
-          let workOrders = compJobs.map((i, index) => ({
+          const workOrders = compJobs.map((job, index) => ({
             woNo: String(index),
             plannedBy: employeeId,
-            compJobId: i.compJobId,
+            compJobId: job.compJobId,
             createdBy: employeeId,
-            maintCauseId: i.maintCauseId,
-            maintClassId: i.maintClassId,
-            maintTypeId: i.maintTypeId,
-            respDiscId: i.discId,
-            compId: i.compId,
-            title: i.tblJobDescription?.jobDescTitle ?? null,
-            priority: i.priority,
-            window: i.window,
+            maintCauseId: job.maintCauseId,
+            maintClassId: job.maintClassId,
+            maintTypeId: job.maintTypeId,
+            respDiscId: job.discId,
+            compId: job.compId,
+            title: job.tblJobDescription?.jobDescTitle ?? null,
+            priority: job.priority,
+            window: job.window,
             dueDate: now,
             created: now,
             lastUpdate: now,
@@ -364,12 +280,9 @@ const ControllerTblWorkOrder = new BaseController({
           const resultCompJob = await tx.tblCompJob.updateMany({
             where: {
               instId,
-              compJobId: { in: compJobs.map((i) => i.compJobId) },
+              compJobId: { in: compJobs.map((job) => job.compJobId) },
             },
-            data: {
-              nextDueDate: now,
-              lastUpdate: now,
-            },
+            data: { nextDueDate: now, lastUpdate: now },
           });
 
           return {
@@ -392,6 +305,9 @@ const ControllerTblWorkOrder = new BaseController({
       },
     );
 
+    // =========================
+    // POST /generate/next
+    // =========================
     app.use(authPlugin).post(
       "/generate/next",
       async ({ body, set, headers, userId }) => {
@@ -399,21 +315,17 @@ const ControllerTblWorkOrder = new BaseController({
 
         const instId = Number(headers["x-inst-id"] || 0);
 
-        if (!instId) {
-          throw new Error("Instance ID is required");
-        }
+        if (!instId) throw new Error("Instance ID is required");
 
         const user = await prisma.tblUser.findFirst({
           where: { userId },
-          include: {
-            tblEmployee: true,
-          },
+          include: { tblEmployee: true },
         });
 
         const employeeId = user?.tblEmployee?.employeeId;
 
         return prisma.$transaction(async (tx) => {
-          /* 1. MaintLog --------------------------------------------------------------------- */
+          /* 1. MaintLog */
           const maintLog = await tx.tblMaintLog.findUnique({
             where: { maintLogId, instId },
             select: {
@@ -424,7 +336,7 @@ const ControllerTblWorkOrder = new BaseController({
             },
           });
 
-          if (!maintLog || !maintLog.workOrderId) {
+          if (!maintLog?.workOrderId) {
             set.status = 404;
             return {
               message: "MaintLog or WorkOrder not found",
@@ -432,7 +344,7 @@ const ControllerTblWorkOrder = new BaseController({
             };
           }
 
-          /* 2. WorkOrder --------------------------------------------------------------------- */
+          /* 2. WorkOrder */
           const workOrder = await tx.tblWorkOrder.findUnique({
             where: { workOrderId: maintLog.workOrderId, instId },
             select: {
@@ -443,7 +355,7 @@ const ControllerTblWorkOrder = new BaseController({
             },
           });
 
-          if (!workOrder || !workOrder.compJobId) {
+          if (!workOrder?.compJobId) {
             set.status = 404;
             return {
               message: "CompJob not found in WorkOrder",
@@ -460,15 +372,11 @@ const ControllerTblWorkOrder = new BaseController({
             };
           }
 
-          /* 3. CompJob ------------------------------------------------------------------------- */
+          /* 3. CompJob */
           const compJob = await tx.tblCompJob.findUnique({
             where: { compJobId: workOrder.compJobId, instId },
             include: {
-              tblCompJobCounters: {
-                include: {
-                  tblCompCounter: true,
-                },
-              },
+              tblCompJobCounters: { include: { tblCompCounter: true } },
               tblJobDescription: true,
               tblPeriod: true,
             },
@@ -476,19 +384,12 @@ const ControllerTblWorkOrder = new BaseController({
 
           if (!compJob) {
             set.status = 404;
-            return {
-              message: "CompJob not found",
-              success: false,
-            };
+            return { message: "CompJob not found", success: false };
           }
 
-          /* 5. nextDueDate ------------------------------------------------------------------- */
-          const nextDueDateArray: Date[] = [];
-
+          /* 4. Validate base date */
           const isFixed = compJob.planningMethod === 1;
 
-          // در صورت فیکس بودن تاریخ دیودیت الزامی است
-          // در صورت متغیر بودن که تقریبا 100 درصد هم همین طور هست دیت دان الزامی است
           if (
             (!isFixed && !maintLog.dateDone) ||
             (isFixed && !workOrder.dueDate)
@@ -505,85 +406,64 @@ const ControllerTblWorkOrder = new BaseController({
           );
 
           const now = new Date();
+          const nextDueDateCandidates: Date[] = [];
 
-          /* 6. Time Based calculation --------------------------------------------------------*/
+          /* 5. Time-based calculation */
           if (compJob.frequency && compJob.frequencyPeriod) {
             const days =
               compJob.frequency * periodToDays(compJob.frequencyPeriod);
 
-            const calculatedDate = new Date(baseDateDone);
-            calculatedDate.setDate(calculatedDate.getDate() + days);
-
-            nextDueDateArray.push(calculatedDate);
+            const calculated = new Date(baseDateDone);
+            calculated.setDate(calculated.getDate() + days);
+            nextDueDateCandidates.push(calculated);
           }
 
-          /* 7. Counter-based calculation -------------------------------------------------------- */
+          /* 6. Counter-based calculation */
           compJob.tblCompJobCounters?.forEach((compJobCounter) => {
             const frequency = compJobCounter.frequency ?? 0;
             const averageCountRate =
               compJobCounter.tblCompCounter?.averageCountRate;
 
-            if (frequency === 0) {
-              nextDueDateArray.push(now);
-              return;
-            }
-
-            if (averageCountRate === -1 || averageCountRate === null) {
-              // Error in calc avg (Average Count Rate)
-              nextDueDateArray.push(now);
+            if (
+              frequency === 0 ||
+              averageCountRate == null ||
+              averageCountRate === -1
+            ) {
+              nextDueDateCandidates.push(now);
               return;
             }
 
             if (averageCountRate === 0) {
-              // Sample: Engine is off
-              const cn = new Date(now);
-              cn.setMonth(cn.getMonth() + 6);
-              nextDueDateArray.push(cn);
+              const future = new Date(now);
+              future.setMonth(future.getMonth() + 6);
+              nextDueDateCandidates.push(future);
               return;
             }
 
-            if (averageCountRate && frequency) {
-              //جهت محاسبه تاریخ بعدی در ابتدا باید مقدار فعلی کانتر از جدول اپدیت کانتر خوانده شود
-              //سپس مقدار کانت بعدی که در واقع لست کانت به اضافه فرکونسی است به عنوان نکست کانت محاسبه می شود
-              //.اکنون نکست کانت از کارنت کانتت داخل اپدیت کانتر کم شده و بر اساس میانگین کارکرد تاریخ بعدی محاسبه می شود
+            const logCounter = maintLog.tblLogCounters[0];
+            let baseValue = compJobCounter.tblCompCounter?.currentValue ?? 0;
+            if (!baseValue) baseValue = logCounter?.reportedCount ?? 0;
 
-              //اگر در اپدیت کانتر هیچ مقداری نباشد مقدار گرفته شده ار کاربر به عنوان مبنا محاسبه قرار می گیرد
-              let baseValue = compJobCounter.tblCompCounter?.currentValue ?? 0;
+            const reportedCount = logCounter?.reportedCount ?? 0;
+            const nextCount = reportedCount + frequency;
+            const diffCount = nextCount - baseValue;
+            const diffDays = diffCount / averageCountRate;
 
-              const logCounter = maintLog.tblLogCounters[0];
-
-              if (!baseValue) baseValue = logCounter?.reportedCount ?? 0;
-
-              const reportedCount = logCounter?.reportedCount ?? 0;
-              const frequency = compJobCounter.frequency ?? 0;
-
-              const nextCount = reportedCount + frequency;
-
-              const diffCount = nextCount - baseValue;
-              const diffDay = diffCount / averageCountRate;
-
-              const dateDone = maintLog?.dateDone ?? new Date();
-
-              const nextDate = new Date(
-                dateDone.setDate(dateDone.getDate() + diffDay),
-              );
-
-              nextDueDateArray.push(nextDate);
-
-              return;
-            }
+            const nextDate = new Date(maintLog.dateDone ?? now);
+            nextDate.setDate(nextDate.getDate() + diffDays);
+            nextDueDateCandidates.push(nextDate);
           });
 
-          /* 8. Final DueDate -------------------------------------------------------------------- */
-          if (nextDueDateArray.length === 0) {
-            nextDueDateArray.push(now);
+          /* 7. Final DueDate */
+          if (nextDueDateCandidates.length === 0) {
+            nextDueDateCandidates.push(now);
           }
 
           const finalNextDueDate = new Date(
-            Math.min(...nextDueDateArray.map((d) => d.getTime())),
+            Math.min(...nextDueDateCandidates.map((d) => d.getTime())),
           );
 
-          /* 9. Create Next WorkOrder ------------------------------------------------------------ */
+          /* 8. Create Next WorkOrder */
           const newWorkOrder = await tx.tblWorkOrder.create({
             data: {
               compJobId: compJob.compJobId,
@@ -592,7 +472,7 @@ const ControllerTblWorkOrder = new BaseController({
               compId: compJob.compId,
               title:
                 compJob.tblJobDescription?.jobDescTitle ??
-                "Faild to load jobDescTitle",
+                "Failed to load jobDescTitle",
               priority: compJob.priority,
               window: compJob.window,
               dueDate: finalNextDueDate,
@@ -608,7 +488,7 @@ const ControllerTblWorkOrder = new BaseController({
             },
           });
 
-          /* 10. Update CompJob ------------------------------------------------------------------- */
+          /* 9. Update CompJob */
           await tx.tblCompJob.update({
             where: { compJobId: compJob.compJobId, instId },
             data: {
@@ -618,7 +498,6 @@ const ControllerTblWorkOrder = new BaseController({
             },
           });
 
-          /* 11. Response ------------------------------------------------------------------------- */
           return {
             message: "Next WorkOrder generated successfully",
             success: true,

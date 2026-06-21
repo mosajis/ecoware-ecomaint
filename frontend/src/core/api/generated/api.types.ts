@@ -4013,7 +4013,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get all with custom select */
+        /** Get all work orders */
         get: operations["getTblWorkOrder"];
         put?: never;
         /** Create */
@@ -4464,22 +4464,6 @@ export interface paths {
         };
         /** KPI Metrics */
         get: operations["getStatisticsKpi"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/health": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["getHealth"];
         put?: never;
         post?: never;
         delete?: never;
@@ -65364,7 +65348,72 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            workOrderId: number;
+                            compId: null | number;
+                            pendingdate: null | string;
+                            issuedDate: null | string;
+                            title: null | string;
+                            priority: null | number;
+                            description: null | string;
+                            created: null | string;
+                            woNo: null | string;
+                            started: null | string;
+                            dueDate: null | string;
+                            window: null | number;
+                            completed: null | string;
+                            userComment: null | string;
+                            tblComponentUnit: ({
+                                compId: number;
+                                compNo: null | string;
+                                serialNo: null | string;
+                                isCritical: null | number;
+                                notes: null | string;
+                                tblLocation: ({
+                                    name: null | string;
+                                } | null) | null;
+                            } | null) | null;
+                            tblCompJob: ({
+                                jobDescId: null | number;
+                                compJobId: number;
+                                frequency: null | number;
+                                nextDueDate: null | string;
+                                tblJobDescription: ({
+                                    jobDescCode: null | string;
+                                    jobDescTitle: null | string;
+                                    jobDesc: null | string;
+                                } | null) | null;
+                                tblPeriod: ({
+                                    name: null | string;
+                                } | null) | null;
+                            } | null) | null;
+                            tblPendingType: ({
+                                pendTypeName: null | string;
+                                description: null | string;
+                            } | null) | null;
+                            tblDiscipline: ({
+                                name: null | string;
+                            } | null) | null;
+                            tblWorkOrderStatus: ({
+                                name: null | string;
+                            } | null) | null;
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
     };
     postTblWorkOrder: {
         parameters: {
@@ -70859,7 +70908,9 @@ export interface operations {
     };
     getStatistics: {
         parameters: {
-            query?: never;
+            query: {
+                instId: (number | null) | null;
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -70961,16 +71012,6 @@ export interface operations {
                 };
             };
         };
-    };
-    getHealth: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: never;
     };
     getIndex: {
         parameters: {

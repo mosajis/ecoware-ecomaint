@@ -515,15 +515,15 @@ export default function WorkOrderDetailDialog({
             <Stack spacing={0.5}>
               <DetailRow
                 label="Created By"
-                value={`${wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.lastName}`}
+                value={`${wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.firstName || "--"} ${wo.tblEmployeeTblWorkOrderCreatedByTotblEmployee?.lastName || ""}`}
               />
               <DetailRow
                 label="Issued By"
-                value={`${wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee?.lastName}`}
+                value={`${wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee?.firstName || "--"} ${wo.tblEmployeeTblWorkOrderIssuedByTotblEmployee?.lastName || ""}`}
               />
               <DetailRow
                 label="Planned By"
-                value={`${wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee?.firstName} ${wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee?.lastName}`}
+                value={`${wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee?.firstName || "--"}  ${wo.tblEmployeeTblWorkOrderPlannedByTotblEmployee?.lastName}`}
               />
             </Stack>
           </Paper>
