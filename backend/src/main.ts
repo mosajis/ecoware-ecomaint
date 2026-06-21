@@ -1,8 +1,10 @@
+import path from "node:path";
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 import { staticPlugin } from "@elysiajs/static";
 import { openapi } from "@elysiajs/openapi";
 import { readFile } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 
 import { pluginErrorHandler } from "./plugins/error.plugin";
 import { allRoutes } from "./routes/routes";
@@ -17,6 +19,25 @@ async function renderIndexHtml() {
   return cachedHtml;
 }
 
+/* ---------------- ENV ---------------- */
+const MODE = process.env.NODE_ENV ?? "development";
+const SSL_ENABLED =
+  process.env.SSL_ENABLED === "true" || process.env.SSL_ENABLED === "1";
+const isProd = MODE === "production";
+
+/* ---------------- PORTS ---------------- */
+const HTTPS_PORT = isProd ? 443 : 5273;
+const HTTP_PORT = isProd ? 80 : 5274;
+
+/* ---------------- TLS ---------------- */
+const tls = SSL_ENABLED
+  ? {
+      key: readFileSync(process.env.SSL_KEY_PATH ?? "./ssl/key.pem"),
+      cert: readFileSync(process.env.SSL_CERT_PATH ?? "./ssl/cert.pem"),
+    }
+  : undefined;
+
+/* ---------------- APP ---------------- */
 const app = new Elysia()
   .use(
     cors({
@@ -25,9 +46,9 @@ const app = new Elysia()
       exposeHeaders: ["Content-Disposition"],
     }),
   )
-
   .use(
     openapi({
+      enabled: !isProd,
       path: "/docs",
       specPath: "/docs/json",
       documentation: {
@@ -39,38 +60,53 @@ const app = new Elysia()
       },
     }),
   )
-
   .use(
     staticPlugin({
-      assets: "public/assets",
+      assets: path.join(process.cwd(), "public/assets"),
       prefix: "/assets",
     }),
   )
   .use(pluginErrorHandler)
   .use(allRoutes)
-  .get("/health", () => "OK")
 
-  .get(
-    "/",
-    async ({ set }) => {
-      set.headers["content-type"] = "text/html; charset=utf-8";
-      return await renderIndexHtml();
-    },
-    {},
-  )
-
-  .get("/*", async ({ set }) => {
+  .get("/", async ({ set }) => {
     set.headers["content-type"] = "text/html; charset=utf-8";
-    return await renderIndexHtml();
+    return renderIndexHtml();
+  })
+
+  .get("*", async ({ set, request }) => {
+    const pathname = new URL(request.url).pathname;
+
+    if (pathname.startsWith("/assets")) {
+      return new Response("Not Found", { status: 404 });
+    }
+
+    set.headers["content-type"] = "text/html; charset=utf-8";
+    return renderIndexHtml();
   });
 
-/* -------- Init dirs before listen ------- */
+/* ---------------- INIT ---------------- */
 await initializeUploadDirs();
 
-/* --------------- Server ---------------- */
-const port = Number(process.argv[process.argv.indexOf("--port") + 1]) || 5273;
+/* ---------------- HTTP SERVER (redirect or dev) ---------------- */
+if (SSL_ENABLED) {
+  Bun.serve({
+    port: HTTP_PORT,
+    fetch(req) {
+      const url = new URL(req.url);
+      url.protocol = "https:";
+      url.port = String(HTTPS_PORT);
+      return Response.redirect(url.toString(), 301);
+    },
+  });
+}
 
-const info = app.listen(port);
-const env = info?.server?.development ? "development" : "production";
+/* ---------------- MAIN SERVER ---------------- */
+const server = app.listen({
+  port: HTTPS_PORT,
+  tls,
+});
 
-console.log(`🚀 Server [${env}] running on ${info?.server?.url.origin}`);
+console.log(
+  `🚀 ${MODE.toUpperCase()} | ${SSL_ENABLED ? "HTTPS" : "HTTP"} | ${server.server?.url.origin}`,
+);

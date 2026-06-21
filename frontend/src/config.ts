@@ -1,5 +1,7 @@
 const isProduction = process.env.NODE_ENV === "production";
 
+export const developmentURL = "https://localhost:5273";
+
 export const configAxios = {
-  httpURL: isProduction ? "/" : `http://localhost:5273`,
+  httpURL: isProduction ? "/" : developmentURL,
 };

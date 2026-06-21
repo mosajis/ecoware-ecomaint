@@ -1,12 +1,7 @@
-import Axios from "axios";
 import { TypeTblAttachment } from "@/core/api/generated/api";
-import { configAxios } from "@/config";
+import { developmentURL } from "@/config";
 import { api } from "@/service/axios";
 import { LOCAL_STORAGE } from "@/const";
-
-const axios = Axios.create({
-  baseURL: configAxios.httpURL,
-});
 
 export type CreateAttachmentPayload = {
   file: File;
@@ -49,7 +44,7 @@ export async function downloadAttachment(id: number) {
   const token = localStorage.getItem(LOCAL_STORAGE.ACCESS_KEY);
 
   const isProduction = process.env.NODE_ENV === "production";
-  const httpURL = isProduction ? "" : `http://localhost:5273`;
+  const httpURL = isProduction ? "" : developmentURL;
 
   const response = await fetch(`${httpURL}/tblAttachment/${id}/download`, {
     method: "GET",
