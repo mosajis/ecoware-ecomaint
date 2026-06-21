@@ -37,7 +37,7 @@ export interface MaintLogFilter {
   AND?: any[];
 }
 
-type DateRange = "1D" | "7D" | "1M" | "6M";
+type DateRange = "1D" | "2D" | "3D" | "7D";
 
 type FiltersState = {
   maintClass: TypeTblMaintClass | null;
@@ -85,20 +85,22 @@ function unexpectedToCheckboxes(val: 0 | 1 | 2) {
 function applyRange(value: DateRange): { from: string; to: string } {
   const now = new Date();
   const from = new Date();
+
   switch (value) {
     case "1D":
       from.setDate(now.getDate() - 1);
       break;
+    case "2D":
+      from.setDate(now.getDate() - 2);
+      break;
+    case "3D":
+      from.setDate(now.getDate() - 3);
+      break;
     case "7D":
       from.setDate(now.getDate() - 7);
       break;
-    case "1M":
-      from.setMonth(now.getMonth() - 1);
-      break;
-    case "6M":
-      from.setMonth(now.getMonth() - 6);
-      break;
   }
+
   return {
     from: from.toISOString().slice(0, 10),
     to: now.toISOString().slice(0, 10),
@@ -272,17 +274,22 @@ export default function MaintLogFilterDialog({
     onChange: (range: DateRange, from: string, to: string) => void;
   }) => (
     <ToggleButtonGroup size="small" exclusive value={value}>
-      {(["1D", "7D", "1M", "6M"] as DateRange[]).map((v) => (
+      {[
+        { v: "1D", label: "1D" },
+        { v: "2D", label: "2D" },
+        { v: "3D", label: "3D" },
+        { v: "7D", label: "LW" },
+      ].map((item) => (
         <ToggleButton
-          key={v}
-          value={v}
+          key={item.v}
+          value={item.v}
           onClick={() => {
-            const { from, to } = applyRange(v);
-            onChange(v, from, to);
+            const { from, to } = applyRange(item.v as DateRange);
+            onChange(item.v as DateRange, from, to);
           }}
           sx={{ flex: 1, fontSize: 11 }}
         >
-          {v}
+          {item.label}
         </ToggleButton>
       ))}
     </ToggleButtonGroup>
@@ -301,7 +308,13 @@ export default function MaintLogFilterDialog({
     >
       <Box display="grid" flexDirection="column" gap={2}>
         {/* ===== Work Type Checkboxes ===== */}
-        <Box display="flex" flexDirection="column" gap={0.5}>
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          gap={0.5}
+        >
           <Typography
             variant="caption"
             color="text.secondary"
@@ -516,15 +529,6 @@ export default function MaintLogFilterDialog({
 
         {/* ===== Date Ranges ===== */}
         <Box display="flex" flexDirection="column" gap={1}>
-          <Typography
-            variant="caption"
-            color="text.secondary"
-            fontWeight={600}
-            textTransform="uppercase"
-            letterSpacing={0.5}
-          >
-            Date range
-          </Typography>
           <Box display="flex" gap={2}>
             {/* Done between */}
             <Box display="flex" gap={0.75} flexDirection="column" width="100%">

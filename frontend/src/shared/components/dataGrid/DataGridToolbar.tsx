@@ -92,7 +92,6 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
       >
         <Box display={"flex"} alignItems={"center"}>
           <Box display={"flex"} alignItems={"center"} gap={0.6}>
-            {/* <QuestionMark sx={{ fontSize: 15 }} /> */}
             <Typography fontWeight="bold" mr={2}>
               {label}
             </Typography>

@@ -1,4 +1,3 @@
-// MeasurePointTrendDialog.tsx
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -14,6 +13,8 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Spinner from "@/shared/components/Spinner";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
@@ -21,8 +22,6 @@ import {
   TypeTblCompMeasurePointLog,
 } from "@/core/api/generated/api";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Stack from "@mui/material/Stack";
-import Spinner from "@/shared/components/Spinner";
 import { formatDateTime } from "@/core/helper";
 import { useAtomValue } from "jotai";
 import { atomLanguage } from "@/shared/atoms/general.atom";
@@ -183,6 +182,13 @@ export default function MeasurePointsTrend({
     return { xData, yData };
   }, [logs]);
 
+  const yMax = useMemo(() => {
+    if (!chartData.yData.length) return 0;
+    return Math.max(...chartData.yData);
+  }, [chartData.yData]);
+
+  const yPadding = Math.ceil(yMax * 0.1);
+
   // دکمه‌های Previous / Next برای حالت تعداد
   const handleCountPrevious = () => {
     setOffset((prev) => prev + debouncedRecordCount);
@@ -336,6 +342,12 @@ export default function MeasurePointsTrend({
                   scaleType: "time",
                   valueFormatter: (date) =>
                     formatDateTime(date, "DATE", isPersian, "MM/dd"),
+                },
+              ]}
+              yAxis={[
+                {
+                  min: 0,
+                  max: yMax + yPadding,
                 },
               ]}
               series={[

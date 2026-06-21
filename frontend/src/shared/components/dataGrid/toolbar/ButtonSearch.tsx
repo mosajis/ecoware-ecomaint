@@ -80,8 +80,8 @@ export default function ButtonSearch() {
     const handleKeyDown = (e: KeyboardEvent) => {
       const isMac = navigator.platform.toLowerCase().includes("mac");
       const isSearchShortcut = isMac
-        ? e.metaKey && e.key.toLowerCase() === "f"
-        : e.ctrlKey && e.key.toLowerCase() === "f";
+        ? e.metaKey && e.code === "KeyF"
+        : e.ctrlKey && e.code === "KeyF";
 
       if (!isSearchShortcut) return;
 
