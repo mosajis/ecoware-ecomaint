@@ -170,18 +170,45 @@ function TabSpareUsedUpsert({
               helperText={fieldState.error?.message}
               getRowId={(row) => row.spareUnitId}
               getOptionLabel={(row) => row?.tblSpareType?.name ?? ""}
-              request={() =>
+              request={(params) =>
                 tblSpareUnit.getAll({
                   include: { tblSpareType: true },
-                  filter: {
-                    NOT: {
-                      tblMaintLogSpares: {
-                        some: { maintLogId },
+                  filter: params?.search
+                    ? {
+                        AND: [
+                          {
+                            NOT: {
+                              tblMaintLogSpares: {
+                                some: { maintLogId },
+                              },
+                            },
+                          },
+                          {
+                            OR: [
+                              {
+                                tblSpareType: {
+                                  name: { contains: params.search },
+                                },
+                              },
+                              {
+                                tblSpareType: {
+                                  partTypeNo: { contains: params.search },
+                                },
+                              },
+                            ],
+                          },
+                        ],
+                      }
+                    : {
+                        NOT: {
+                          tblMaintLogSpares: {
+                            some: { maintLogId },
+                          },
+                        },
                       },
-                    },
-                  },
                 })
               }
+              onlineSearch={{ paramKey: "search" }}
               columns={[
                 {
                   field: "name",

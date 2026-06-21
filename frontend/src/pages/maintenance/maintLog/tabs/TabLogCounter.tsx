@@ -57,7 +57,7 @@ const TabLogCounter = (props: Props) => {
       label={label || "Resource Used"}
       rows={rows}
       loading={loading}
-      showToolbar
+      showToolbar={!!selected.maintLogId}
       getRowId={(row) => row.logCounterId}
       onRefreshClick={handleRefresh}
       columns={columns}

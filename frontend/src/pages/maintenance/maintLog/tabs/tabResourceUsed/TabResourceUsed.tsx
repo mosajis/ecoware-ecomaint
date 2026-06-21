@@ -67,7 +67,7 @@ const TabResourceUsed = ({ selected }: Props) => {
         </Alert>
       )}
       <CustomizedDataGrid
-        showToolbar
+        showToolbar={!!maintLogId}
         disableEdit
         label="Resource Used"
         loading={loading}

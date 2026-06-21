@@ -55,7 +55,7 @@ const TabSpareUsed = ({ selected }: Props) => {
   return (
     <>
       <CustomizedDataGrid
-        showToolbar
+        showToolbar={!!maintLogId}
         disableEdit
         onDeleteClick={handleDelete}
         label={"Stock Used"}

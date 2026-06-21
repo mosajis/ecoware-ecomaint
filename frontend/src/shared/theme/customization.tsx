@@ -832,23 +832,6 @@ export const inputsCustomizations: Components<Theme> = {
       }),
     },
   },
-  MuiToggleButtonGroup: {
-    styleOverrides: {
-      root: ({ theme }) => ({
-        borderRadius: "10px",
-        boxShadow: `0 4px 16px ${alpha(gray[400], 0.2)}`,
-        [`& .${toggleButtonGroupClasses.selected}`]: {
-          color: brand[500],
-        },
-        ...theme.applyStyles("dark", {
-          [`& .${toggleButtonGroupClasses.selected}`]: {
-            color: "#fff",
-          },
-          boxShadow: `0 4px 16px ${alpha(brand[700], 0.5)}`,
-        }),
-      }),
-    },
-  },
   MuiToggleButton: {
     styleOverrides: {
       root: ({ theme }) => ({

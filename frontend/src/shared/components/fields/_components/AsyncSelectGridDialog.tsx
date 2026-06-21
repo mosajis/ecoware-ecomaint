@@ -9,13 +9,21 @@ import {
   GridRowIdGetter,
   GridRowSelectionModel,
 } from "@mui/x-data-grid";
+import { useDebounce } from "@/shared/hooks/useDebounce";
+import { TextField } from "@mui/material";
+import { Search } from "@mui/icons-material";
+
+// ---------------- Online Search Config ----------------
+type OnlineSearchConfig = {
+  paramKey?: string; // default: "search"
+};
 
 export interface SelectModalProps<TItem extends Record<string, any>> {
   open: boolean;
   title?: string;
   elementId: number;
   onClose: () => void;
-  request: () => Promise<any>;
+  request: (params?: Record<string, string>) => Promise<any>; // ← آپدیت
   extractRows?: (data: any) => TItem[];
   onSelect: (selected: TItem | TItem[] | null) => void;
   getRowId: GridRowIdGetter<TItem>;
@@ -25,17 +33,19 @@ export interface SelectModalProps<TItem extends Record<string, any>> {
   selected?: TItem | TItem[] | null;
   height?: number | string;
   maxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | false;
+  onlineSearch?: OnlineSearchConfig; // ← اضافه شد
 }
 
 export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
+  onlineSearch,
   elementId,
   open,
   title = "Select",
   selectionMode = "single",
   columns,
   disableRowNumber = false,
+  request, // ← کاما اضافه شد
   onClose,
-  request,
   extractRows,
   onSelect,
   getRowId,
@@ -43,20 +53,27 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
   height = 600,
   maxWidth = "sm",
 }: SelectModalProps<TItem>) {
+  // ---------------- State (باید قبل از useCallback باشه) ----------------
   const [rows, setRows] = useState<TItem[]>([]);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>({
       type: "include",
       ids: new Set(),
     });
 
+  const debouncedSearch = useDebounce(searchTerm, 400);
+
   // ---------------- Fetch Data ----------------
   const fetchData = useCallback(async () => {
     setLoading(true);
-
     try {
-      const data = await request();
+      const params = onlineSearch
+        ? { [onlineSearch.paramKey ?? "search"]: debouncedSearch }
+        : undefined;
+
+      const data = await request(params);
       const items: TItem[] = extractRows
         ? extractRows(data)
         : (data.items ?? []);
@@ -64,15 +81,14 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
     } finally {
       setLoading(false);
     }
-  }, [request, extractRows]);
+  }, [request, extractRows, debouncedSearch, onlineSearch]);
 
-  // ---------------- Initialize Selection ----------------
+  // ---------------- یه useEffect برای هر دو حالت ----------------
   useEffect(() => {
-    if (open) {
-      fetchData();
-    }
+    if (open) fetchData();
   }, [open, fetchData]);
 
+  // ---------------- Initialize Selection ----------------
   useEffect(() => {
     const _s =
       selectionMode === "multiple"
@@ -83,19 +99,16 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
           ? [getRowId(selected as TItem)]
           : [];
 
-    const newSelection = {
+    setRowSelectionModel({
       type: "include" as const,
       ids: new Set<GridRowId>(_s),
-    };
-
-    setRowSelectionModel(newSelection);
+    });
   }, [selected, selectionMode, getRowId]);
 
   const rowMap = new Map<GridRowId, TItem>(rows.map((r) => [getRowId(r), r]));
 
   const resolveSelection = (model: GridRowSelectionModel, rows: TItem[]) => {
     const ids = new Set(model.ids);
-
     const rowMap = new Map(rows.map((r) => [getRowId(r), r]));
 
     if (model.type === "include") {
@@ -104,7 +117,6 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
         .filter(Boolean);
     }
 
-    // exclude mode (Select All)
     return rows.filter((r) => !ids.has(getRowId(r)));
   };
 
@@ -114,14 +126,12 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
       const selectedIds = Array.from(rowSelectionModel.ids);
       const id = selectedIds[0];
       const item = rowMap.get(id) ?? null;
-
       onSelect(item);
       onClose();
       return;
     }
 
     const items = resolveSelection(rowSelectionModel, rows) as TItem[];
-
     onSelect(items);
     onClose();
   };
@@ -129,11 +139,10 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
   // ---------------- Handle Double Click ----------------
   const handleRowDoubleClick = ({ row }: { row: TItem }) => {
     const rowId = getRowId(row);
-    const newSelection = {
+    setRowSelectionModel({
       type: "include" as const,
       ids: new Set<GridRowId>([rowId]),
-    };
-    setRowSelectionModel(newSelection);
+    });
 
     if (selectionMode === "single") {
       onSelect(row);
@@ -144,7 +153,34 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
   // ---------------- Render ----------------
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth={maxWidth}>
-      <DialogContent sx={{ height, p: 1 }}>
+      <DialogContent
+        sx={{
+          height,
+          p: 1,
+          display: "grid",
+          gridTemplateRows: onlineSearch?.paramKey ? "auto 1fr" : "1fr",
+        }}
+      >
+        {onlineSearch?.paramKey && (
+          <TextField
+            autoFocus
+            size="small"
+            fullWidth
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            sx={{ mb: 1 }}
+            InputProps={{
+              startAdornment: (
+                <Search
+                  fontSize="small"
+                  sx={{ mr: 1, color: "text.secondary" }}
+                />
+              ),
+            }}
+          />
+        )}
+
         <CustomizedDataGrid
           elementId={elementId}
           showToolbar

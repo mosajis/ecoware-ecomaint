@@ -6,8 +6,14 @@ import { JSX, useState } from "react";
 import type { GridRowId } from "@mui/x-data-grid";
 import { AsyncSelectGridDialog } from "./_components/AsyncSelectGridDialog";
 
+type OnlineSearchConfig = {
+  paramKey?: string; // default: "search"
+};
+
 // ---------------- Base Props ----------------
 type BaseFieldAsyncSelectGridProps<TItem extends Record<string, any>> = {
+  onlineSearch?: OnlineSearchConfig;
+  request: (params?: Record<string, string>) => Promise<any>;
   elementId?: number;
   label?: string;
   placeholder?: string;
@@ -17,7 +23,6 @@ type BaseFieldAsyncSelectGridProps<TItem extends Record<string, any>> = {
   error?: boolean;
   helperText?: string;
   disableRowNumber?: boolean;
-  request: () => Promise<any>;
   extractRows?: (data: any) => TItem[];
   getRowId: (row: TItem) => GridRowId;
   getOptionLabel?: (item: TItem) => string | null | undefined;
@@ -49,6 +54,7 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
   label,
   placeholder,
   value,
+  onlineSearch,
   error,
   helperText,
   columns,
@@ -154,6 +160,7 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
       />
 
       <AsyncSelectGridDialog<TItem>
+        onlineSearch={onlineSearch}
         disableRowNumber={disableRowNumber}
         elementId={elementId!}
         open={dialogOpen}

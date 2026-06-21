@@ -1,5 +1,8 @@
-import { useCallback, useMemo } from "react";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
+import StatusChip from "../../workOrder/customCell/CellWorkOrderStatus";
+import OverdueText from "../../workOrder/customCell/CellWorkOrderOverDue";
+import { calculateOverdue, formatDateTime } from "@/core/helper";
+import { useCallback, useMemo } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
 import {
@@ -7,9 +10,6 @@ import {
   TypeTblMaintLog,
   TypeTblWorkOrder,
 } from "@/core/api/generated/api";
-import { calculateOverdue, formatDateTime } from "@/core/helper";
-import StatusChip from "../../workOrder/customCell/CellWorkOrderStatus";
-import OverdueText from "../../workOrder/customCell/CellWorkOrderOverDue";
 
 interface Props {
   selected: TypeTblMaintLog;
@@ -128,7 +128,7 @@ const TabWorkOrder = ({ selected, label }: Props) => {
   return (
     <CustomizedDataGrid
       label={label ?? "Work Orders"}
-      showToolbar
+      showToolbar={!!selected.maintLogId}
       rows={rows}
       columns={columns}
       loading={loading}

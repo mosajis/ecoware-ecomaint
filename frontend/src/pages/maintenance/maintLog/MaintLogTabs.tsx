@@ -35,7 +35,7 @@ const tabs: ReusableTabItem[] = [
   { label: "Spare Used", icon: <Inventory />, component: TabStockUsed },
   { label: "Measure Point", icon: <Straighten />, component: TabMeasurePoint },
   { label: "Log Counter", icon: <Speed />, component: TabLogCounter },
-  { label: "WorkOrders", icon: <Work />, component: TabWorkOrders },
+  { label: "WorkOrder", icon: <Work />, component: TabWorkOrders },
   { label: "Follow", icon: <TrackChanges />, component: TabFollow },
   {
     label: "Failure Report",

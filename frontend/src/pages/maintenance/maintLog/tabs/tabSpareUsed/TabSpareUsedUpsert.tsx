@@ -161,7 +161,7 @@ function TabSpareUsedUpsert({
     <FormDialog
       open={open}
       onClose={onClose}
-      title={mode === "create" ? "Add Stock Used" : "Edit Stock Used"}
+      title={mode === "create" ? "Add Spare Used" : "Edit Spare Used"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(handleFormSubmit)}
@@ -178,11 +178,26 @@ function TabSpareUsedUpsert({
               selectionMode="single"
               getOptionLabel={(row) => row?.tblSpareType?.name}
               value={field.value}
-              request={() =>
+              request={(params) =>
                 tblSpareUnit.getAll({
                   include: { tblSpareType: true },
+                  filter: params?.search
+                    ? {
+                        OR: [
+                          {
+                            tblSpareType: { name: { contains: params.search } },
+                          },
+                          {
+                            tblSpareType: {
+                              partTypeNo: { contains: params.search },
+                            },
+                          },
+                        ],
+                      }
+                    : undefined,
                 })
               }
+              onlineSearch={{ paramKey: "search" }}
               columns={[
                 {
                   field: "partName",

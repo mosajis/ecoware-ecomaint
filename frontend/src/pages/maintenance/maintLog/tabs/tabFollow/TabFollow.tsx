@@ -49,7 +49,7 @@ const TabFollow = (props: props) => {
   return (
     <Splitter initialPrimarySize="60%">
       <CustomizedDataGrid
-        showToolbar
+        showToolbar={!!selected?.maintLogId}
         disableRowSelectionOnClick
         disableAdd
         disableEdit
