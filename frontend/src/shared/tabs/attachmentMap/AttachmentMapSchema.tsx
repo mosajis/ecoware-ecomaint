@@ -16,5 +16,7 @@ export const newAttachmentSchema = z.object({
       message: "attachment Type is required",
     }),
   isUserAttachment: z.boolean(),
-  file: z.instanceof(File, { message: "File is required" }),
+  file: z
+    .instanceof(File)
+    .refine((f) => f.size > 0, { message: "File is required" }),
 });

@@ -266,8 +266,9 @@ const baseController = new BaseController({
 
         set.headers["content-type"] = fileData.mimeType;
 
+        const encodedName = encodeURIComponent(fileData.originalName);
         set.headers["content-disposition"] =
-          `attachment; filename="${fileData.originalName}"`;
+          `attachment; filename*=UTF-8''${encodedName}`;
 
         return fileData.buffer;
       } catch (error) {

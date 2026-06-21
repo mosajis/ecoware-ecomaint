@@ -117,9 +117,10 @@ export function useUpsertForm<TValues extends FieldValues, TResult>({
         onSuccessRef.current?.(result);
         onCloseRef.current();
       }
-    } catch {
-      console.error(errorMessage || "Failed to submit");
-      toast.error("Failed to submit");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Failed to submit";
+      console.error(msg);
+      toast.error(msg);
     } finally {
       setSubmitting(false);
     }
