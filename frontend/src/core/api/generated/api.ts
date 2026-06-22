@@ -533,6 +533,24 @@ export const tblCounterType = {
     api.delete<DynamicResponse<'deleteTblCounterType'>>('/tblCounterType', { params: stringifyQuery(query) }),
 };
 
+export type TypeTblDailyReport = DynamicResponse<'getTblDailyReport'>['items'][0];
+export const tblDailyReport = {
+  getAll: (query?: DynamicQuery<'getTblDailyReport'>) =>
+    api.get<DynamicResponse<'getTblDailyReport'>>('/tblDailyReport', { params: stringifyQuery(query) }),
+  getById: (id: number, query?: DynamicQuery<'getTblDailyReportByDailyReportId'>) =>
+    api.get<DynamicResponse<'getTblDailyReportByDailyReportId'>>(`/tblDailyReport/${id}`, { params: stringifyQuery(query) }),
+  count: (query?: DynamicQuery<'getTblDailyReportCount'>) =>
+    api.get<DynamicResponse<'getTblDailyReportCount'>>('/tblDailyReport/count', { params: stringifyQuery(query) }),
+  create: (data: DynamicCreate<'postTblDailyReport'>) =>
+    api.post<DynamicResponse<'postTblDailyReport'>>('/tblDailyReport', { data }),
+  update: (id: number, data: DynamicUpdate<'putTblDailyReportByDailyReportId'>, query?: DynamicQuery<'getTblDailyReportByDailyReportId'>) =>
+    api.put<DynamicResponse<'putTblDailyReportByDailyReportId'>>(`/tblDailyReport/${id}`, { data, params: stringifyQuery(query) }),
+  deleteById: (id: number, query?: DynamicQuery<'deleteTblDailyReportByDailyReportId'>) =>
+    api.delete<DynamicResponse<'deleteTblDailyReportByDailyReportId'>>(`/tblDailyReport/${id}`, { params: stringifyQuery(query) }),
+  deleteAll: (query?: DynamicQuery<'deleteTblDailyReport'>) =>
+    api.delete<DynamicResponse<'deleteTblDailyReport'>>('/tblDailyReport', { params: stringifyQuery(query) }),
+};
+
 export type TypeTblDepartment = DynamicResponse<'getTblDepartment'>['items'][0];
 export const tblDepartment = {
   getAll: (query?: DynamicQuery<'getTblDepartment'>) =>
@@ -1310,6 +1328,21 @@ export const tblWorkOrder = {
     api.delete<DynamicResponse<'deleteTblWorkOrderByWorkOrderId'>>(`/tblWorkOrder/${id}`, { params: stringifyQuery(query) }),
   deleteAll: (query?: DynamicQuery<'deleteTblWorkOrder'>) =>
     api.delete<DynamicResponse<'deleteTblWorkOrder'>>('/tblWorkOrder', { params: stringifyQuery(query) }),
+};
+
+export const tblWorkOrderIssue = {
+  create: (data: DynamicCreate<'postTblWorkOrderIssue'>) =>
+    api.post<DynamicResponse<'postTblWorkOrderIssue'>>('/tblWorkOrderIssue', { data }),
+};
+
+export const tblWorkOrderCancel = {
+  create: (data: DynamicCreate<'postTblWorkOrderCancel'>) =>
+    api.post<DynamicResponse<'postTblWorkOrderCancel'>>('/tblWorkOrderCancel', { data }),
+};
+
+export const tblWorkOrderPostpone = {
+  create: (data: DynamicCreate<'postTblWorkOrderPostpone'>) =>
+    api.post<DynamicResponse<'postTblWorkOrderPostpone'>>('/tblWorkOrderPostpone', { data }),
 };
 
 export type TypeTblWorkOrderStatus = DynamicResponse<'getTblWorkOrderStatus'>['items'][0];

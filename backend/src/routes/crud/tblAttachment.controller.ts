@@ -257,28 +257,34 @@ const baseController = new BaseController({
     );
 
     // GET /:attachmentId/download - Download file
-    app.get("/:attachmentId/download", async ({ params, set }) => {
-      try {
-        const attachmentId = Number(params.attachmentId);
+    app.get(
+      "/:attachmentId/download",
+      async ({ params, set }) => {
+        try {
+          const attachmentId = Number(params.attachmentId);
 
-        const fileData =
-          await ServiceTblAttachment.getFileForDownload(attachmentId);
+          const fileData =
+            await ServiceTblAttachment.getFileForDownload(attachmentId);
 
-        set.headers["content-type"] = fileData.mimeType;
+          set.headers["content-type"] = fileData.mimeType;
 
-        const encodedName = encodeURIComponent(fileData.originalName);
-        set.headers["content-disposition"] =
-          `attachment; filename*=UTF-8''${encodedName}`;
+          const encodedName = encodeURIComponent(fileData.originalName);
+          set.headers["content-disposition"] =
+            `attachment; filename*=UTF-8''${encodedName}`;
 
-        return fileData.buffer;
-      } catch (error) {
-        set.status = 404;
+          return fileData.buffer;
+        } catch (error) {
+          set.status = 404;
 
-        return {
-          message: error instanceof Error ? error.message : "File not found",
-        };
-      }
-    });
+          return {
+            message: error instanceof Error ? error.message : "File not found",
+          };
+        }
+      },
+      {
+        tags: ["tblAttachment"],
+      },
+    );
 
     // DELETE /:attachmentId - Delete with file cleanup
     app.delete(

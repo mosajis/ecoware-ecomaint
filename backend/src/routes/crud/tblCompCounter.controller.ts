@@ -241,6 +241,7 @@ const ControllerTblCompCounter = new BaseController({
           };
         },
         {
+          tags: ["tblCompCounter"],
           query: t.Object({
             sort: t.Optional(t.String()),
             filter: t.Optional(t.String()),

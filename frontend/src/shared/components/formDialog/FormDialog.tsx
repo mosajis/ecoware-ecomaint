@@ -15,6 +15,7 @@ import Alert from "@mui/material/Alert";
 import type { DialogProps } from "@mui/material/Dialog";
 import { useAtom, useAtomValue } from "jotai";
 import { AtomApiError } from "@/shared/atoms/error.atom";
+import { AlertTitle } from "@mui/material";
 
 export type FormDialogWrapperProps = {
   readonly?: boolean;
@@ -107,7 +108,8 @@ export default function FormDialog({
             severity="error"
             sx={{ mb: 1.5, border: "1px solid #a151517a" }}
           >
-            {error.statusCode} - {error.message}
+            {error?.statusCode} -{" "}
+            {error?.details?.details || "Check the console for details"}
           </Alert>
         )}
 

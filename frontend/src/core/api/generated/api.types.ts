@@ -1611,6 +1611,61 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblDailyReport/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all */
+        get: operations["getTblDailyReport"];
+        put?: never;
+        /** Create */
+        post: operations["postTblDailyReport"];
+        /** Delete all */
+        delete: operations["deleteTblDailyReport"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblDailyReport/{dailyReportId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one */
+        get: operations["getTblDailyReportByDailyReportId"];
+        /** Update */
+        put: operations["putTblDailyReportByDailyReportId"];
+        post?: never;
+        /** Delete one */
+        delete: operations["deleteTblDailyReportByDailyReportId"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblDailyReport/count": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Count */
+        get: operations["getTblDailyReportCount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblDepartment/": {
         parameters: {
             query?: never;
@@ -26304,6 +26359,414 @@ export interface operations {
             };
         };
     };
+    getTblDailyReport: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            dailyReportId: number;
+                            reportTitle: string;
+                            reportDate: string;
+                            createdEmployeeId: number;
+                            createdDate: string;
+                            userComment: null | string;
+                            totalwaiting: null | number;
+                            lastUpdate: string;
+                            instId: number;
+                            tblEmployee?: {
+                                employeeId: number;
+                                code: null | string;
+                                lastName: null | string;
+                                firstName: null | string;
+                                discId: null | number;
+                                title: null | string;
+                                lastUpdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            };
+                            tblInstallation?: {
+                                instId: number;
+                                name: string;
+                                orderNo: null | number;
+                                caption: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            };
+                        }[];
+                        total: number;
+                        page: number;
+                        perPage: number;
+                        totalPages: number;
+                    };
+                };
+            };
+        };
+    };
+    postTblDailyReport: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reportDate: string;
+                    userComment: null | string;
+                };
+                "application/x-www-form-urlencoded": {
+                    reportDate: string;
+                    userComment: null | string;
+                };
+                "multipart/form-data": {
+                    reportDate: string;
+                    userComment: null | string;
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        dailyReportId: number;
+                        reportTitle: string;
+                        reportDate: string;
+                        createdEmployeeId: number;
+                        createdDate: string;
+                        userComment: null | string;
+                        totalwaiting: null | number;
+                        lastUpdate: string;
+                        instId: number;
+                        tblEmployee?: {
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            discId: null | number;
+                            title: null | string;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblInstallation?: {
+                            instId: number;
+                            name: string;
+                            orderNo: null | number;
+                            caption: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteTblDailyReport: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        deleted: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblDailyReportByDailyReportId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                dailyReportId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        dailyReportId: number;
+                        reportTitle: string;
+                        reportDate: string;
+                        createdEmployeeId: number;
+                        createdDate: string;
+                        userComment: null | string;
+                        totalwaiting: null | number;
+                        lastUpdate: string;
+                        instId: number;
+                        tblEmployee?: {
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            discId: null | number;
+                            title: null | string;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblInstallation?: {
+                            instId: number;
+                            name: string;
+                            orderNo: null | number;
+                            caption: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    putTblDailyReportByDailyReportId: {
+        parameters: {
+            query?: {
+                include?: string;
+                select?: string;
+            };
+            header?: never;
+            path: {
+                dailyReportId: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reportTitle?: string;
+                    reportDate?: string;
+                    createdDate?: string;
+                    userComment?: null | string;
+                    totalwaiting?: null | number;
+                    lastUpdate?: string;
+                    tblEmployee?: {
+                        connect: {
+                            employeeId: number;
+                        };
+                    };
+                    tblInstallation?: {
+                        connect: {
+                            instId: number;
+                        };
+                    };
+                };
+                "application/x-www-form-urlencoded": {
+                    reportTitle?: string;
+                    reportDate?: string;
+                    createdDate?: string;
+                    userComment?: null | string;
+                    totalwaiting?: null | number;
+                    lastUpdate?: string;
+                    tblEmployee?: {
+                        connect: {
+                            employeeId: number;
+                        };
+                    };
+                    tblInstallation?: {
+                        connect: {
+                            instId: number;
+                        };
+                    };
+                };
+                "multipart/form-data": {
+                    reportTitle?: string;
+                    reportDate?: string;
+                    createdDate?: string;
+                    userComment?: null | string;
+                    totalwaiting?: null | number;
+                    lastUpdate?: string;
+                    tblEmployee?: {
+                        connect: {
+                            employeeId: number;
+                        };
+                    };
+                    tblInstallation?: {
+                        connect: {
+                            instId: number;
+                        };
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        dailyReportId: number;
+                        reportTitle: string;
+                        reportDate: string;
+                        createdEmployeeId: number;
+                        createdDate: string;
+                        userComment: null | string;
+                        totalwaiting: null | number;
+                        lastUpdate: string;
+                        instId: number;
+                        tblEmployee?: {
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            discId: null | number;
+                            title: null | string;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblInstallation?: {
+                            instId: number;
+                            name: string;
+                            orderNo: null | number;
+                            caption: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteTblDailyReportByDailyReportId: {
+        parameters: {
+            query?: {
+                force?: boolean;
+            };
+            header?: never;
+            path: {
+                dailyReportId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        dailyReportId: number;
+                        reportTitle: string;
+                        reportDate: string;
+                        createdEmployeeId: number;
+                        createdDate: string;
+                        userComment: null | string;
+                        totalwaiting: null | number;
+                        lastUpdate: string;
+                        instId: number;
+                        tblEmployee?: {
+                            employeeId: number;
+                            code: null | string;
+                            lastName: null | string;
+                            firstName: null | string;
+                            discId: null | number;
+                            title: null | string;
+                            lastUpdate: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                        tblInstallation?: {
+                            instId: number;
+                            name: string;
+                            orderNo: null | number;
+                            caption: null | string;
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    getTblDailyReportCount: {
+        parameters: {
+            query?: {
+                page?: number;
+                perPage?: number;
+                sort?: string;
+                filter?: string;
+                include?: string;
+                select?: string;
+                paginate?: boolean;
+                force?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
     getTblDepartment: {
         parameters: {
             query?: {
@@ -28739,6 +29202,17 @@ export interface operations {
                                 createdEmployeeId: null | number;
                                 instId: null | number;
                             }[];
+                            tblDailyReports?: {
+                                dailyReportId: number;
+                                reportTitle: string;
+                                reportDate: string;
+                                createdEmployeeId: number;
+                                createdDate: string;
+                                userComment: null | string;
+                                totalwaiting: null | number;
+                                lastUpdate: string;
+                                instId: number;
+                            }[];
                             tblDiscipline?: null | ({
                                 discId: number;
                                 code: null | string;
@@ -29319,6 +29793,11 @@ export interface operations {
                             compTypeJobTriggerId: number;
                         }[];
                     };
+                    tblDailyReports?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                     tblDiscipline?: {
                         connect: {
                             discId: number;
@@ -29531,6 +30010,11 @@ export interface operations {
                             compTypeJobTriggerId: number;
                         }[];
                     };
+                    tblDailyReports?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                     tblDiscipline?: {
                         connect: {
                             discId: number;
@@ -29741,6 +30225,11 @@ export interface operations {
                     tblCompTypeJobTriggers?: {
                         connect: {
                             compTypeJobTriggerId: number;
+                        }[];
+                    };
+                    tblDailyReports?: {
+                        connect: {
+                            id: number;
                         }[];
                     };
                     tblDiscipline?: {
@@ -30111,6 +30600,17 @@ export interface operations {
                             orderNo: null | number;
                             createdEmployeeId: null | number;
                             instId: null | number;
+                        }[];
+                        tblDailyReports?: {
+                            dailyReportId: number;
+                            reportTitle: string;
+                            reportDate: string;
+                            createdEmployeeId: number;
+                            createdDate: string;
+                            userComment: null | string;
+                            totalwaiting: null | number;
+                            lastUpdate: string;
+                            instId: number;
                         }[];
                         tblDiscipline?: null | ({
                             discId: number;
@@ -30877,6 +31377,17 @@ export interface operations {
                             createdEmployeeId: null | number;
                             instId: null | number;
                         }[];
+                        tblDailyReports?: {
+                            dailyReportId: number;
+                            reportTitle: string;
+                            reportDate: string;
+                            createdEmployeeId: number;
+                            createdDate: string;
+                            userComment: null | string;
+                            totalwaiting: null | number;
+                            lastUpdate: string;
+                            instId: number;
+                        }[];
                         tblDiscipline?: null | ({
                             discId: number;
                             code: null | string;
@@ -31502,6 +32013,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblDailyReports?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblDiscipline?: {
                         connect?: {
                             discId: number;
@@ -31835,6 +32354,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblDailyReports?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblDiscipline?: {
                         connect?: {
                             discId: number;
@@ -32163,6 +32690,14 @@ export interface operations {
                     tblCompTypeJobTriggers?: {
                         connect?: {
                             compTypeJobTriggerId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblDailyReports?: {
+                        connect?: {
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -32612,6 +33147,17 @@ export interface operations {
                             orderNo: null | number;
                             createdEmployeeId: null | number;
                             instId: null | number;
+                        }[];
+                        tblDailyReports?: {
+                            dailyReportId: number;
+                            reportTitle: string;
+                            reportDate: string;
+                            createdEmployeeId: number;
+                            createdDate: string;
+                            userComment: null | string;
+                            totalwaiting: null | number;
+                            lastUpdate: string;
+                            instId: number;
                         }[];
                         tblDiscipline?: null | ({
                             discId: number;
@@ -33345,6 +33891,17 @@ export interface operations {
                             orderNo: null | number;
                             createdEmployeeId: null | number;
                             instId: null | number;
+                        }[];
+                        tblDailyReports?: {
+                            dailyReportId: number;
+                            reportTitle: string;
+                            reportDate: string;
+                            createdEmployeeId: number;
+                            createdDate: string;
+                            userComment: null | string;
+                            totalwaiting: null | number;
+                            lastUpdate: string;
+                            instId: number;
                         }[];
                         tblDiscipline?: null | ({
                             discId: number;
@@ -39589,6 +40146,17 @@ export interface operations {
                                 orderNo: null | number;
                                 instId: null | number;
                             }[];
+                            tblDailyReports?: {
+                                dailyReportId: number;
+                                reportTitle: string;
+                                reportDate: string;
+                                createdEmployeeId: number;
+                                createdDate: string;
+                                userComment: null | string;
+                                totalwaiting: null | number;
+                                lastUpdate: string;
+                                instId: number;
+                            }[];
                             tblFailureReports?: {
                                 failureReportId: number;
                                 maintLogId: null | number;
@@ -40044,6 +40612,11 @@ export interface operations {
                             compTypeMeasurePointId: number;
                         }[];
                     };
+                    tblDailyReports?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                     tblFailureReports?: {
                         connect: {
                             failureReportId: number;
@@ -40269,6 +40842,11 @@ export interface operations {
                             compTypeMeasurePointId: number;
                         }[];
                     };
+                    tblDailyReports?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                     tblFailureReports?: {
                         connect: {
                             failureReportId: number;
@@ -40492,6 +41070,11 @@ export interface operations {
                     tblCompTypeMeasurePoints?: {
                         connect: {
                             compTypeMeasurePointId: number;
+                        }[];
+                    };
+                    tblDailyReports?: {
+                        connect: {
+                            id: number;
                         }[];
                     };
                     tblFailureReports?: {
@@ -40933,6 +41516,17 @@ export interface operations {
                             lastUpdate: null | string;
                             orderNo: null | number;
                             instId: null | number;
+                        }[];
+                        tblDailyReports?: {
+                            dailyReportId: number;
+                            reportTitle: string;
+                            reportDate: string;
+                            createdEmployeeId: number;
+                            createdDate: string;
+                            userComment: null | string;
+                            totalwaiting: null | number;
+                            lastUpdate: string;
+                            instId: number;
                         }[];
                         tblFailureReports?: {
                             failureReportId: number;
@@ -41632,6 +42226,17 @@ export interface operations {
                             orderNo: null | number;
                             instId: null | number;
                         }[];
+                        tblDailyReports?: {
+                            dailyReportId: number;
+                            reportTitle: string;
+                            reportDate: string;
+                            createdEmployeeId: number;
+                            createdDate: string;
+                            userComment: null | string;
+                            totalwaiting: null | number;
+                            lastUpdate: string;
+                            instId: number;
+                        }[];
                         tblFailureReports?: {
                             failureReportId: number;
                             maintLogId: null | number;
@@ -42153,6 +42758,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblDailyReports?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblFailureReports?: {
                         connect?: {
                             failureReportId: number;
@@ -42510,6 +43123,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblDailyReports?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblFailureReports?: {
                         connect?: {
                             failureReportId: number;
@@ -42862,6 +43483,14 @@ export interface operations {
                     tblCompTypeMeasurePoints?: {
                         connect?: {
                             compTypeMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblDailyReports?: {
+                        connect?: {
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -43372,6 +44001,17 @@ export interface operations {
                             lastUpdate: null | string;
                             orderNo: null | number;
                             instId: null | number;
+                        }[];
+                        tblDailyReports?: {
+                            dailyReportId: number;
+                            reportTitle: string;
+                            reportDate: string;
+                            createdEmployeeId: number;
+                            createdDate: string;
+                            userComment: null | string;
+                            totalwaiting: null | number;
+                            lastUpdate: string;
+                            instId: number;
                         }[];
                         tblFailureReports?: {
                             failureReportId: number;
@@ -44038,6 +44678,17 @@ export interface operations {
                             lastUpdate: null | string;
                             orderNo: null | number;
                             instId: null | number;
+                        }[];
+                        tblDailyReports?: {
+                            dailyReportId: number;
+                            reportTitle: string;
+                            reportDate: string;
+                            createdEmployeeId: number;
+                            createdDate: string;
+                            userComment: null | string;
+                            totalwaiting: null | number;
+                            lastUpdate: string;
+                            instId: number;
                         }[];
                         tblFailureReports?: {
                             failureReportId: number;

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 // ================= ICONS =================
+import TodayIcon from "@mui/icons-material/Today";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import CompareArrowsRoundedIcon from "@mui/icons-material/CompareArrowsRounded";
 import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
@@ -36,9 +37,6 @@ import StraightenRoundedIcon from "@mui/icons-material/StraightenRounded";
 import DoneAllRoundedIcon from "@mui/icons-material/DoneAllRounded";
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import ReportProblemRoundedIcon from "@mui/icons-material/ReportProblemRounded";
-import TodayRoundedIcon from "@mui/icons-material/TodayRounded";
-import DateRangeRoundedIcon from "@mui/icons-material/DateRangeRounded";
-import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 import PeopleRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 import SecurityRoundedIcon from "@mui/icons-material/SecurityRounded";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
@@ -385,6 +383,13 @@ export const menuContentItems: MenuSection[] = [
         permit: getPermit(1610).canView,
         icon: <ReportProblemRoundedIcon sx={iconStyle} />,
       },
+      // {
+      //   text: "Daily Report",
+      //   path: "/report/daily",
+      //   id: "report:daily",
+      //   permit: true,
+      //   icon: <TodayIcon sx={iconStyle} />,
+      // },
     ],
   },
 

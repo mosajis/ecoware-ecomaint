@@ -599,6 +599,22 @@ model TblCounterType {
   @@map("tblCounterType")
 }
 
+model TblDailyReport {
+  dailyReportId     Int             @id(map: "PK_tblDailyReport") @default(dbgenerated("NEXT VALUE FOR [Seq_DailyReort]"), map: "DF_tblDailyReort_DailyReortId") @map("DailyReportID")
+  reportTitle       String          @map("ReportTitle") @db.NVarChar(200)
+  reportDate        DateTime        @map("ReportDate") @db.DateTime
+  createdEmployeeId Int             @map("CreatedEmployeeId")
+  createdDate       DateTime        @map("CreatedDate") @db.DateTime
+  userComment       String?         @map("UserComment") @db.NVarChar(Max)
+  totalwaiting      Int?            @map("Totalwaiting")
+  lastUpdate        DateTime        @map("LastUpdate") @db.DateTime
+  instId            Int             @map("InstId")
+  tblEmployee       TblEmployee     @relation(fields: [createdEmployeeId], references: [employeeId], onUpdate: NoAction, map: "FK_tblDailyReport_tblEmployee")
+  tblInstallation   TblInstallation @relation(fields: [instId], references: [instId], onUpdate: NoAction, map: "FK_tblDailyReport_tblInstallation")
+
+  @@map("tblDailyReport")
+}
+
 model TblDepartment {
   deptId       Int       @id(map: "PK_tblDepartment") @map("DeptID")
   deptCode     Int?      @map("DeptCode")
@@ -672,6 +688,7 @@ model TblEmployee {
   tblCompTypeJobs                                               TblCompTypeJob[]
   tblCompTypeJobCounters                                        TblCompTypeJobCounter[]
   tblCompTypeJobTriggers                                        TblCompTypeJobTrigger[]
+  tblDailyReports                                               TblDailyReport[]
   tblDiscipline                                                 TblDiscipline?                @relation(fields: [discId], references: [discId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblEmployee_tblDiscipline")
   tblFailureReports                                             TblFailureReport[]
   tblJobDescriptionAttachments                                  TblJobDescriptionAttachment[]
@@ -829,6 +846,7 @@ model TblInstallation {
   tblCompTypeJobMeasurePoints  TblCompTypeJobMeasurePoint[]
   tblCompTypeJobTriggers       TblCompTypeJobTrigger[]
   tblCompTypeMeasurePoints     TblCompTypeMeasurePoint[]
+  tblDailyReports              TblDailyReport[]
   tblFailureReports            TblFailureReport[]
   tblFailureReportWorkShops    TblFailureReportWorkShop[]
   tblFunctions                 TblFunction[]
@@ -1523,21 +1541,4 @@ model TblWorkShopComponent {
   tblWorkShop      TblWorkShop      @relation(fields: [workShopId], references: [workShopId], onUpdate: NoAction, map: "FK_tblWorkShopComponent_tblWorkShop")
 
   @@map("tblWorkShopComponent")
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model TblDailyReport {
-  dailyReportId     Int      @default(dbgenerated("NEXT VALUE FOR [Seq_DailyReort]"), map: "DF_tblDailyReort_DailyReortId") @map("DailyReportID")
-  reportTitle       String   @map("ReportTitle") @db.NVarChar(200)
-  reportText        String?  @map("ReportText") @db.NVarChar(Max)
-  reportDate        DateTime @map("ReportDate") @db.DateTime
-  createdEmployeeId Int      @map("CreatedEmployeeId")
-  createdDate       DateTime @map("CreatedDate") @db.DateTime
-  userComment       String?  @map("UserComment") @db.NVarChar(Max)
-  totalwaiting      Int?     @map("Totalwaiting")
-  lastUpdate        DateTime @updatedAt
-  instId            Int      @map("InstId")
-
-  @@map("tblDailyReport")
-  @@ignore
 }

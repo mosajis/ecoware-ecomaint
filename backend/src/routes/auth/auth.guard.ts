@@ -34,7 +34,7 @@ export const authPlugin = new Elysia()
     const token = headers["authorization"]!.split(" ")[1];
     const payload = (await jwt.verify(token)) as any;
     return {
-      userId: payload!.sub,
+      userId: payload!.sub as number,
       user: payload,
     };
   });

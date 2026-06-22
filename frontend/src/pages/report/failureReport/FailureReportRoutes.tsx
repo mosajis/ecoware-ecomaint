@@ -1,9 +1,8 @@
+import ReportRoute from "../ReportRoutes";
 import { createDetailRoute } from "@/app/router/routes/_components/DetailRoute";
 import { LazyRoute } from "@/app/router/routes/_components/lazyRoute";
-import { protectedRoute } from "@/app/router/routes/protected.routes";
 import { createRoute, Outlet } from "@tanstack/react-router";
 import { lazy } from "react";
-import ReportRoute from "../ReportRoutes";
 
 // --- General parent route ---
 export const Route = createRoute({

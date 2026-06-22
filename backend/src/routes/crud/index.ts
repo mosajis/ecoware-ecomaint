@@ -24,6 +24,7 @@ export { default as ControllerTblCompTypeJobMeasurePoint } from "./tblCompTypeJo
 export { default as ControllerTblCompTypeJobTrigger } from "./tblCompTypeJobTrigger.controller";
 export { default as ControllerTblCompTypeMeasurePoint } from "./tblCompTypeMeasurePoint.controller";
 export { default as ControllerTblCounterType } from "./tblCounterType.controller";
+export { default as ControllerTblDailyReport } from "./tblDailyReport.controller";
 export { default as ControllerTblDepartment } from "./tblDepartment.controller";
 export { default as ControllerTblDiscipline } from "./tblDiscipline.controller";
 export { default as ControllerTblElement } from "./tblElement.controller";
