@@ -31,13 +31,16 @@ import {
   tblEmployee,
   tblCompType,
   TypeTblCompType,
+  TypeTblFollowStatus,
+  tblFollowStatus,
 } from "@/core/api/generated/api";
+import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
 
 export interface MaintLogFilter {
   AND?: any[];
 }
 
-type DateRange = "1D" | "2D" | "3D" | "7D";
+type DateRange = "1D" | "LW" | "L2W";
 
 type FiltersState = {
   maintClass: TypeTblMaintClass | null;
@@ -49,7 +52,7 @@ type FiltersState = {
   componentType: TypeTblCompType | null;
   reporter: TypeTblEmployee | null;
   workOrder: TypeTblWorkOrder | null;
-
+  followStatus: TypeTblFollowStatus | null;
   jobCode: string;
 
   doneFrom: string;
@@ -90,14 +93,13 @@ function applyRange(value: DateRange): { from: string; to: string } {
     case "1D":
       from.setDate(now.getDate() - 1);
       break;
-    case "2D":
-      from.setDate(now.getDate() - 2);
-      break;
-    case "3D":
-      from.setDate(now.getDate() - 3);
-      break;
-    case "7D":
+
+    case "LW":
       from.setDate(now.getDate() - 7);
+      break;
+
+    case "L2W":
+      from.setDate(now.getDate() - 14);
       break;
   }
 
@@ -106,7 +108,6 @@ function applyRange(value: DateRange): { from: string; to: string } {
     to: now.toISOString().slice(0, 10),
   };
 }
-
 export default function MaintLogFilterDialog({
   open,
   onClose,
@@ -127,10 +128,11 @@ export default function MaintLogFilterDialog({
       doneFrom: "",
       doneTo: "",
       doneRange: null,
+      followStatus: null,
       componentType: null,
       reportFrom: daysAgo(7).toISOString(),
       reportTo: new Date().toISOString(),
-      reportRange: "7D",
+      reportRange: "LW",
       routine: true,
       unplannedKpi: false,
       unplannedIgnore: false,
@@ -142,6 +144,8 @@ export default function MaintLogFilterDialog({
     }
 
     for (const c of filter.AND) {
+      if ("followStatusId" in c)
+        base.followStatus = { followStatusId: c.followStatusId } as any;
       if ("maintClassId" in c)
         base.maintClass = { maintClassId: c.maintClassId } as any;
       if ("maintTypeId" in c)
@@ -206,6 +210,11 @@ export default function MaintLogFilterDialog({
   const handleApply = () => {
     const conditions: any[] = [];
 
+    if (filters.followStatus) {
+      conditions.push({
+        followStatusId: filters.followStatus.followStatusId,
+      });
+    }
     if (filters.maintClass)
       conditions.push({ maintClassId: filters.maintClass.maintClassId });
     if (filters.maintType)
@@ -276,9 +285,8 @@ export default function MaintLogFilterDialog({
     <ToggleButtonGroup size="small" exclusive value={value}>
       {[
         { v: "1D", label: "1D" },
-        { v: "2D", label: "2D" },
-        { v: "3D", label: "3D" },
-        { v: "7D", label: "LW" },
+        { v: "LW", label: "LW" },
+        { v: "L2W", label: "L2W" },
       ].map((item) => (
         <ToggleButton
           key={item.v}
@@ -322,9 +330,9 @@ export default function MaintLogFilterDialog({
             textTransform="uppercase"
             letterSpacing={0.5}
           >
-            Work type
+            Type
           </Typography>
-          <FormGroup row sx={{ gap: 1 }}>
+          <FormGroup row sx={{ gap: 1.5 }}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -508,21 +516,35 @@ export default function MaintLogFilterDialog({
                   setFilters((p) => ({ ...p, reporter: v as any }))
                 }
               />
-              <TextField
-                label="Job Code"
-                size="small"
-                value={filters.jobCode}
-                onChange={(e) =>
-                  setFilters((p) => ({ ...p, jobCode: e.target.value }))
+
+              <FieldAsyncSelect<TypeTblFollowStatus>
+                label="Follow Status *"
+                placeholder="Select follow status..."
+                selectionMode="single"
+                value={filters.followStatus}
+                request={tblFollowStatus.getAll}
+                getOptionLabel={(row) => row.fsName || "Unnamed"}
+                getOptionKey={(row) => row.followStatusId}
+                onChange={(v) =>
+                  setFilters((p) => ({ ...p, followStatus: v as any }))
                 }
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">#</InputAdornment>
-                  ),
-                }}
+                minCharsToSearch={0}
               />
             </Box>
           </Box>
+          <TextField
+            label="Job Code"
+            size="small"
+            value={filters.jobCode}
+            onChange={(e) =>
+              setFilters((p) => ({ ...p, jobCode: e.target.value }))
+            }
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">#</InputAdornment>
+              ),
+            }}
+          />
         </Box>
 
         <Divider />

@@ -1,4 +1,5 @@
 import { DynamicCreate, DynamicResponse, DynamicUpdate } from "./dynamicTypes";
+import type { operations } from "./generated/api.types";
 import { api } from "@/service/axios";
 import {
   MaintLogContex,
@@ -32,9 +33,12 @@ export const generateJobTrigger = (jobTriggerId: number) =>
   api.post(`/tblJobTrigger/${jobTriggerId}/generate`);
 
 export const generateNextWorkOrder = async (maintLogId: number) =>
-  api.post("/tblWorkOrder/generate/next", {
-    data: { maintLogId },
-  });
+  api.post<DynamicResponse<"postTblWorkOrderGenerate">>(
+    "/tblWorkOrder/generate/next",
+    {
+      data: { maintLogId },
+    },
+  );
 
 export const tblMaintLogSpareBySpareUnitId = (
   compId?: number,
@@ -84,5 +88,29 @@ export const updateFailureReport = (
 ) =>
   api.put<DynamicResponse<"putTblFailureReportByFailureReportIdFull">>(
     `/tblFailureReport/${id}/full`,
+    { data },
+  );
+
+export const workOrderReschedule = (
+  data: DynamicCreate<"postTblWorkOrderReschedule">,
+) =>
+  api.post<DynamicResponse<"postTblWorkOrderReschedule">>(
+    "/tblWorkOrder/reschedule",
+    { data },
+  );
+
+export const workOrderIssue = (data: { workOrderIds: number[] }) =>
+  api.post<DynamicResponse<"postTblWorkOrderIssue">>("/tblWorkOrder/issue", {
+    data,
+  });
+
+export const workOrderCancel = (data: { workOrderIds: number[] }) =>
+  api.post<DynamicResponse<"postTblWorkOrderCancel">>("/tblWorkOrder/cancel", {
+    data,
+  });
+
+export const workOrderPostpone = (data: { workOrderIds: number[] }) =>
+  api.post<DynamicResponse<"postTblWorkOrderPostpone">>(
+    "/tblWorkOrder/postpone",
     { data },
   );

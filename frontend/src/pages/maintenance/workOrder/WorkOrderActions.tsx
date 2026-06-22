@@ -13,7 +13,6 @@ type Props = {
   onPending: () => void;
   onPostponed: () => void;
   onCancel: () => void;
-  onRequest: () => void;
   onFilter: () => void;
   onReschedule: () => void;
   onPrint: () => void;
@@ -26,7 +25,6 @@ export default function WorkOrderActions({
   onPending,
   onPostponed,
   onCancel,
-  onRequest,
   onFilter,
   onReschedule,
   onPrint,
@@ -82,13 +80,8 @@ export default function WorkOrderActions({
         selectedCount === 0 ||
         !WORK_ORDER_ACTIONS.cancel.isEnabled(selectedStatuses),
     },
-    // {
-    //   ...WORK_ORDER_ACTIONS.request,
-    //   onClick: onRequest,
-    // },
     {
       elementId: 1347,
-
       label: "ReSchedule",
       icon: <AutoModeIcon />,
       disabled:

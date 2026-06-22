@@ -79,3 +79,5 @@ export const columns: GridColDef<TypeTblWorkOrder>[] = [
     width: 70,
   },
 ];
+
+export const getRowId = (row: TypeTblWorkOrder) => row.workOrderId;

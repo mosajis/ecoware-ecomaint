@@ -4,32 +4,42 @@ import FieldNumber from "@/shared/components/fields/FieldNumber";
 import Editor from "@/shared/components/Editor";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import {
-  tblWorkOrder,
-  tblCompJob,
-  tblReScheduleLog,
   tblCompJobCounter,
+  tblWorkOrder,
   TypeTblWorkOrder,
 } from "@/core/api/generated/api";
 import { toast } from "sonner";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
-import { buildRelation } from "@/core/helper";
+import { workOrderReschedule } from "@/core/api/api";
 
-export const schema = z.object({
-  currentDueDate: z.string().nullable(),
-  newDueDate: z.string().nullable(),
+const schema = z
+  .object({
+    currentDueDate: z.string().nullable(),
+    newDueDate: z.string().min(1, "New due date is required"),
+    newDueCount: z.number().nullable().optional(),
+    currentDueCount: z.number().nullable().optional(),
+    reason: z.string().min(1, "Reason must be at least 1 characters"),
+  })
+  .superRefine((data, ctx) => {
+    if (
+      data.currentDueDate &&
+      data.newDueDate &&
+      new Date(data.newDueDate) <= new Date(data.currentDueDate)
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["newDueDate"],
+        message: "New due date must be later than current due date",
+      });
+    }
+  });
 
-  newDueCount: z.number().nullable().optional(),
-  currentDueCount: z.number().nullable().optional(),
-
-  reason: z.string().nullable(),
-});
-
-export type formValues = z.infer<typeof schema>;
+type FormValues = z.infer<typeof schema>;
 
 type Props = {
   open: boolean;
@@ -49,128 +59,80 @@ export default function WorkOrderDialogReschedule({
     handleSubmit,
     reset,
     setValue,
-    watch,
     formState: { isSubmitting },
-  } = useForm<formValues>({
+  } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      currentDueDate: undefined,
-      newDueDate: undefined,
-      currentDueCount: undefined,
-      newDueCount: undefined,
+      currentDueDate: null,
+      newDueDate: "",
+      currentDueCount: null,
+      newDueCount: null,
       reason: "",
     },
   });
 
-  const user = useAtomValue(atomUser);
-  const employeeId = user?.tblEmployee?.employeeId as number;
+  const [isCounterBased, setIsCounterBased] = useState(false);
+  const [loadingInitial, setLoadingInitial] = useState(false);
 
-  // Set current values when workOrder changes
   useEffect(() => {
-    const init = async () => {
-      if (workOrder) {
-        setValue(
-          "currentDueDate",
-          workOrder.dueDate ? workOrder.dueDate : null,
-        );
+    if (!workOrder) return;
 
-        const compJobId = workOrder?.tblCompJob?.compJobId;
+    const init = async () => {
+      try {
+        setLoadingInitial(true);
+
+        setValue("currentDueDate", workOrder.dueDate ?? null);
+
+        const compJobId = workOrder.tblCompJob?.compJobId;
+        if (!compJobId) return;
+
         const compJobCounters = await tblCompJobCounter.getAll({
-          filter: {
-            compJobId,
-          },
+          filter: { compJobId },
         });
 
-        const compJobCounter =
-          compJobCounters.items.length > 0 ? compJobCounters.items[0] : null;
+        const compJobCounter = compJobCounters.items[0] ?? null;
+        setIsCounterBased(!!compJobCounter);
 
         if (compJobCounter) {
-          const nextDueCount = compJobCounter.nextDueCount;
-
-          setValue("currentDueCount", nextDueCount ? nextDueCount : null);
+          setValue("currentDueCount", compJobCounter.nextDueCount ?? null);
         }
+      } finally {
+        setLoadingInitial(false);
       }
     };
 
     init();
   }, [workOrder, setValue]);
 
-  const onSubmit = async (data: formValues) => {
+  useEffect(() => {
+    if (!open) reset();
+  }, [open, reset]);
+
+  const onSubmit = async (data: FormValues) => {
     if (!workOrder) return;
 
-    console.log(data);
-    const compJobId = workOrder?.tblCompJob?.compJobId;
+    if (isCounterBased && data.newDueCount == null) {
+      toast.error("New due count is required");
+      return;
+    }
 
     try {
-      // 1. Update CompJob nextDueDate
-      if (compJobId && data.newDueDate) {
-        await tblCompJob.update(compJobId, {
-          nextDueDate: data.newDueDate,
-          lastUpdate: new Date().toString(),
-        });
-      }
-
-      // 2. Update WorkOrder dueDate
-      const updatedWorkOrder = await tblWorkOrder.update(
-        workOrder.workOrderId,
-        {
-          tblWorkOrderStatus: {
-            connect: {
-              workOrderStatusId: 2,
-            },
-          },
-          issuedDate: null,
-          ...buildRelation(
-            "tblEmployeeTblWorkOrderIssuedByTotblEmployee",
-            "employeeId",
-            null,
-          ),
-          dueDate: data.newDueDate,
-          lastUpdate: new Date().toISOString(),
-        },
-        {
-          include: {
-            tblComponentUnit: {
-              include: {
-                tblCompStatus: true,
-                tblLocation: true,
-              },
-            },
-            tblCompJob: {
-              include: {
-                tblJobDescription: true,
-                tblPeriod: true,
-              },
-            },
-            tblPendingType: true,
-            tblDiscipline: true,
-            tblWorkOrderStatus: true,
-          },
-        },
-      );
-      // 3. Create RescheduleLog
-      await tblReScheduleLog.create({
-        tblWorkOrder: {
-          connect: {
-            workOrderId: workOrder.workOrderId,
-          },
-        },
-        fromDueDate: data.currentDueDate,
-        toDueDate: data.newDueDate,
-        rescheduledDate: new Date().toISOString(),
+      // یه endpoint همه کارها رو atomically انجام میده
+      const result = await workOrderReschedule({
+        workOrderId: workOrder.workOrderId,
+        newDueDate: new Date(data.newDueDate).toISOString(),
+        newDueCount: data.newDueCount ?? undefined,
         reason: data.reason,
-        lastUpdate: new Date().toISOString(),
-        tblEmployee: {
-          connect: {
-            employeeId,
-          },
-        },
       });
 
-      onSuccess(updatedWorkOrder as any);
+      if (!result.success) {
+        toast.error(result.message);
+        return;
+      }
+
+      onSuccess(result?.workOrder as any);
       handleClose();
-    } catch (error) {
-      console.error("Failed to reschedule work order:", error);
+    } catch {
       toast.error("Failed to reschedule work order");
     }
   };
@@ -180,27 +142,27 @@ export default function WorkOrderDialogReschedule({
     onClose();
   };
 
-  const isDisabled = Boolean(watch("currentDueDate"));
-
   return (
     <FormDialog
       open={open}
       onClose={handleClose}
       title="Reschedule Work Order"
       onSubmit={handleSubmit(onSubmit)}
-      loadingInitial={isSubmitting}
+      loadingInitial={loadingInitial || isSubmitting}
     >
-      <Box display="grid" gridTemplateColumns={"1fr 1fr"} gap={1.5} mb={2}>
-        {/* Current Due Date - ReadOnly */}
+      <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5} mb={2}>
         <Controller
           name="currentDueDate"
           control={control}
           render={({ field }) => (
-            <FieldDateTime field={field} label="Current Due Date" />
+            <FieldDateTime
+              pickerProps={{ readOnly: true }}
+              field={field}
+              label="Current Due Date"
+            />
           )}
         />
 
-        {/* New Due Date */}
         <Controller
           name="newDueDate"
           control={control}
@@ -214,13 +176,13 @@ export default function WorkOrderDialogReschedule({
           )}
         />
 
-        {/* Current Due Count - ReadOnly */}
         <Controller
           name="currentDueCount"
           control={control}
           render={({ field }) => (
             <FieldNumber
-              disabled={isDisabled}
+              readOnly
+              disabled={!isCounterBased}
               label="Current Due Count"
               value={field.value}
               onChange={field.onChange}
@@ -228,13 +190,12 @@ export default function WorkOrderDialogReschedule({
           )}
         />
 
-        {/* New Due Count */}
         <Controller
           name="newDueCount"
           control={control}
           render={({ field, fieldState }) => (
             <FieldNumber
-              disabled={isDisabled}
+              disabled={!isCounterBased}
               label="New Due Count"
               value={field.value}
               onChange={field.onChange}
@@ -244,7 +205,7 @@ export default function WorkOrderDialogReschedule({
           )}
         />
       </Box>
-      {/* Reason */}
+
       <Controller
         name="reason"
         control={control}
@@ -255,6 +216,8 @@ export default function WorkOrderDialogReschedule({
             placeholder="Enter reason for rescheduling..."
             initValue={field.value}
             onChange={field.onChange}
+            error={!!fieldState.error}
+            helperText={fieldState.error?.message}
           />
         )}
       />

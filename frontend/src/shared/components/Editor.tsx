@@ -26,6 +26,8 @@ const BtnRedo = createButton("Redo", "↷", "redo");
 
 // === Types ===
 interface AppEditorProps {
+  error?: boolean;
+  helperText?: string;
   initValue?: string | null;
   onSave?: (currentValue: string) => Promise<void> | void;
   onChange?: (currentValue: string) => void;
@@ -117,7 +119,7 @@ const EditorToolbar = memo(
           backgroundColor: (theme.vars || theme).palette.background.paper,
           borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
           padding: "0 8px",
-          height: 45,
+          minHeight: 45,
           flexWrap: "wrap",
         }}
       >
@@ -226,6 +228,8 @@ const EditorToolbar = memo(
 // ======================================================
 
 function AppEditor({
+  error = false,
+  helperText,
   initValue = "",
   onSave,
   onChange,
@@ -340,31 +344,48 @@ function AppEditor({
   );
 
   return (
-    <Editor
-      value={value}
-      onChange={handleChange}
-      placeholder={placeholder}
-      disabled={disabled || readOnly}
-      containerProps={{
-        style: {
-          fontFamily: "tahoma",
-          border: `1px solid ${(theme.vars || theme).palette.divider}`,
-          ...mergedStyle,
-        },
-      }}
-    >
-      <EditorToolbar
-        label={label}
+    <>
+      <Editor
+        value={value}
         onChange={handleChange}
-        onSave={handleSave}
-        disabled={!changed || disabled}
-        loading={loading}
-        readOnly={readOnly}
-        autoSaveEnabled={autoSave}
-        autoSaveStatus={autoSaveStatus}
-      />
-      {loading && <LinearProgress />}
-    </Editor>
+        placeholder={placeholder}
+        disabled={disabled || readOnly}
+        containerProps={{
+          style: {
+            fontFamily: "tahoma",
+            border: error
+              ? `1px solid ${(theme.vars || theme).palette.error.main}`
+              : `1px solid ${(theme.vars || theme).palette.divider}`,
+            ...mergedStyle,
+          },
+        }}
+      >
+        <EditorToolbar
+          label={label}
+          onChange={handleChange}
+          onSave={handleSave}
+          disabled={!changed || disabled}
+          loading={loading}
+          readOnly={readOnly}
+          autoSaveEnabled={autoSave}
+          autoSaveStatus={autoSaveStatus}
+        />
+        {loading && <LinearProgress />}
+      </Editor>
+      {helperText && (
+        <Typography
+          variant="caption"
+          color="error"
+          sx={{
+            mt: 0.5,
+            ml: 1.5,
+            display: "block",
+          }}
+        >
+          {helperText}
+        </Typography>
+      )}
+    </>
   );
 }
 

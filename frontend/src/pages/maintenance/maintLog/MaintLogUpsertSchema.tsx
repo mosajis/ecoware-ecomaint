@@ -33,7 +33,7 @@ export const schema = z.object({
     message: "Maint Class is required",
   }),
 
-  reportedCount: z.number().nullable().optional(),
+  reportedCount: z.number().optional(),
 });
 
 export const buildSchema = (isCounter: boolean) =>

@@ -524,6 +524,384 @@ const ControllerTblWorkOrder = new BaseController({
         },
       },
     );
+
+    app.use(authPlugin).post(
+      "/reschedule",
+      async ({ body, headers, userId, set }) => {
+        const { workOrderId, newDueDate, newDueCount, reason } = body;
+
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          set.status = 400;
+          return {
+            success: false as const,
+            message: "Instance ID is required",
+            workOrder: null,
+          };
+        }
+
+        const user = await prisma.tblUser.findFirst({
+          where: { userId },
+          include: { tblEmployee: true },
+        });
+
+        const employeeId = user?.tblEmployee?.employeeId;
+
+        if (!employeeId) {
+          set.status = 400;
+          return {
+            success: false as const,
+            message: "Employee not found",
+            workOrder: null,
+          };
+        }
+
+        return prisma.$transaction(async (tx) => {
+          const workOrder = await tx.tblWorkOrder.findUnique({
+            where: {
+              workOrderId,
+              instId,
+            },
+            include: {
+              tblCompJob: {
+                include: {
+                  tblCompJobCounters: true,
+                },
+              },
+            },
+          });
+
+          if (!workOrder) {
+            set.status = 404;
+
+            return {
+              success: false,
+              message: "WorkOrder not found",
+              workOrder: null,
+            };
+          }
+
+          const now = new Date();
+
+          // Update CompJob
+          if (workOrder.compJobId) {
+            await tx.tblCompJob.update({
+              where: {
+                compJobId: workOrder.compJobId,
+                instId,
+              },
+              data: {
+                nextDueDate: newDueDate,
+                lastUpdate: now,
+              },
+            });
+          }
+
+          // Update Counter(s)
+          if (
+            newDueCount !== undefined &&
+            workOrder.tblCompJob?.tblCompJobCounters?.length
+          ) {
+            await tx.tblCompJobCounter.updateMany({
+              where: {
+                compJobId: workOrder.compJobId!,
+                instId,
+              },
+              data: {
+                nextDueCount: newDueCount,
+                lastUpdate: now,
+              },
+            });
+          }
+
+          // Update WorkOrder
+          const updatedWorkOrder = await tx.tblWorkOrder.update({
+            include: {
+              tblWorkOrderStatus: true,
+            },
+            where: {
+              workOrderId,
+              instId,
+            },
+            data: {
+              workOrderStatusId: 2,
+              issuedDate: null,
+              issuedBy: null,
+              dueDate: newDueDate,
+              lastUpdate: now,
+            },
+          });
+
+          // Create Log
+          await tx.tblReScheduleLog.create({
+            data: {
+              workOrderId,
+              rescheduledBy: employeeId,
+              fromDueDate: workOrder.dueDate,
+              toDueDate: newDueDate,
+              rescheduledDate: now,
+              reason,
+              lastUpdate: now,
+              instId,
+            },
+          });
+
+          return {
+            success: true,
+            message: "WorkOrder rescheduled successfully",
+            workOrder: updatedWorkOrder,
+          };
+        });
+      },
+      {
+        body: t.Object({
+          workOrderId: t.Number(),
+          newDueDate: t.Date(),
+          newDueCount: t.Optional(t.Number()),
+          reason: t.String(),
+        }),
+        response: t.Object({
+          success: t.Boolean(),
+          message: t.String(),
+          workOrder: t.Union([
+            t.Null(),
+            buildResponseSchema(TblWorkOrderPlain, TblWorkOrder),
+          ]),
+        }),
+        detail: {
+          tags: ["tblWorkOrder"],
+          summary: "Reschedule WorkOrder",
+        },
+      },
+    );
+
+    app.use(authPlugin).post(
+      "/issue",
+      async ({ body, headers, userId, set }) => {
+        const { workOrderIds } = body;
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          set.status = 400;
+          return {
+            success: false,
+            message: "Instance ID is required",
+            count: 0,
+            workOrders: [] as {
+              workOrderId: number;
+              issuedDate: Date | null;
+              tblWorkOrderStatus: { name: string } | null;
+            }[],
+          };
+        }
+
+        const user = await prisma.tblUser.findFirst({
+          where: { userId },
+          include: { tblEmployee: true },
+        });
+
+        const employeeId = user?.tblEmployee?.employeeId;
+
+        if (!employeeId) {
+          set.status = 400;
+          return {
+            success: false,
+            message: "Employee not found",
+            count: 0,
+            workOrders: [] as {
+              workOrderId: number;
+              issuedDate: Date | null;
+              tblWorkOrderStatus: { name: string } | null;
+            }[],
+          };
+        }
+
+        const now = new Date();
+
+        const result = await prisma.tblWorkOrder.updateMany({
+          where: { workOrderId: { in: workOrderIds }, instId },
+          data: {
+            workOrderStatusId: 3,
+            issuedDate: now,
+            issuedBy: employeeId,
+            lastUpdate: now,
+          },
+        });
+
+        const updatedWorkOrders = await prisma.tblWorkOrder.findMany({
+          where: { workOrderId: { in: workOrderIds }, instId },
+          select: {
+            workOrderId: true,
+            issuedDate: true,
+            tblWorkOrderStatus: { select: { name: true } },
+          },
+        });
+
+        return {
+          success: true,
+          message: `${result.count} work order(s) issued successfully`,
+          count: result.count,
+          workOrders: updatedWorkOrders,
+        };
+      },
+      {
+        body: t.Object({
+          workOrderIds: t.Array(t.Number()),
+        }),
+        response: t.Object({
+          success: t.Boolean(),
+          message: t.String(),
+          count: t.Number(),
+          workOrders: t.Array(
+            t.Object({
+              workOrderId: t.Number(),
+              issuedDate: t.Nullable(t.Date()),
+              tblWorkOrderStatus: t.Nullable(
+                t.Pick(TblWorkOrderStatus, ["name"]),
+              ),
+            }),
+          ),
+        }),
+        detail: {
+          tags: ["tblWorkOrder"],
+          summary: "Bulk issue work orders",
+        },
+      },
+    );
+
+    // =========================
+    // POST /cancel
+    // =========================
+    app.use(authPlugin).post(
+      "/cancel",
+      async ({ body, headers, set }) => {
+        const { workOrderIds } = body;
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        const emptyWorkOrders = [] as {
+          workOrderId: number;
+          tblWorkOrderStatus: { name: string } | null;
+        }[];
+
+        if (!instId) {
+          set.status = 400;
+          return {
+            success: false,
+            message: "Instance ID is required",
+            count: 0,
+            workOrders: emptyWorkOrders,
+          };
+        }
+
+        const result = await prisma.tblWorkOrder.updateMany({
+          where: { workOrderId: { in: workOrderIds }, instId },
+          data: { workOrderStatusId: 7, lastUpdate: new Date() },
+        });
+
+        const updatedWorkOrders = await prisma.tblWorkOrder.findMany({
+          where: { workOrderId: { in: workOrderIds }, instId },
+          select: {
+            workOrderId: true,
+            tblWorkOrderStatus: { select: { name: true } },
+          },
+        });
+
+        return {
+          success: true,
+          message: `${result.count} work order(s) cancelled successfully`,
+          count: result.count,
+          workOrders: updatedWorkOrders,
+        };
+      },
+      {
+        body: t.Object({
+          workOrderIds: t.Array(t.Number()),
+        }),
+        response: t.Object({
+          success: t.Boolean(),
+          message: t.String(),
+          count: t.Number(),
+          workOrders: t.Array(
+            t.Object({
+              workOrderId: t.Number(),
+              tblWorkOrderStatus: t.Nullable(
+                t.Pick(TblWorkOrderStatus, ["name"]),
+              ),
+            }),
+          ),
+        }),
+        detail: { tags: ["tblWorkOrder"], summary: "Bulk cancel work orders" },
+      },
+    );
+
+    // =========================
+    // POST /postpone
+    // =========================
+    app.use(authPlugin).post(
+      "/postpone",
+      async ({ body, headers, set }) => {
+        const { workOrderIds } = body;
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        const emptyWorkOrders = [] as {
+          workOrderId: number;
+          tblWorkOrderStatus: { name: string } | null;
+        }[];
+
+        if (!instId) {
+          set.status = 400;
+          return {
+            success: false,
+            message: "Instance ID is required",
+            count: 0,
+            workOrders: emptyWorkOrders,
+          };
+        }
+
+        const result = await prisma.tblWorkOrder.updateMany({
+          where: { workOrderId: { in: workOrderIds }, instId },
+          data: { workOrderStatusId: 8, lastUpdate: new Date() },
+        });
+
+        const updatedWorkOrders = await prisma.tblWorkOrder.findMany({
+          where: { workOrderId: { in: workOrderIds }, instId },
+          select: {
+            workOrderId: true,
+            tblWorkOrderStatus: { select: { name: true } },
+          },
+        });
+
+        return {
+          success: true,
+          message: `${result.count} work order(s) postponed successfully`,
+          count: result.count,
+          workOrders: updatedWorkOrders,
+        };
+      },
+      {
+        body: t.Object({
+          workOrderIds: t.Array(t.Number()),
+        }),
+        response: t.Object({
+          success: t.Boolean(),
+          message: t.String(),
+          count: t.Number(),
+          workOrders: t.Array(
+            t.Object({
+              workOrderId: t.Number(),
+              tblWorkOrderStatus: t.Nullable(
+                t.Pick(TblWorkOrderStatus, ["name"]),
+              ),
+            }),
+          ),
+        }),
+        detail: {
+          tags: ["tblWorkOrder"],
+          summary: "Bulk postpone work orders",
+        },
+      },
+    );
   },
 }).app;
 

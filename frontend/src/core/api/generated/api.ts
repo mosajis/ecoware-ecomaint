@@ -1312,16 +1312,6 @@ export const tblWorkOrder = {
     api.delete<DynamicResponse<'deleteTblWorkOrder'>>('/tblWorkOrder', { params: stringifyQuery(query) }),
 };
 
-export const tblWorkOrderGenerate = {
-  create: (data: DynamicCreate<'postTblWorkOrderGenerate'>) =>
-    api.post<DynamicResponse<'postTblWorkOrderGenerate'>>('/tblWorkOrderGenerate', { data }),
-};
-
-export const tblWorkOrderGenerateNext = {
-  create: (data: DynamicCreate<'postTblWorkOrderGenerateNext'>) =>
-    api.post<DynamicResponse<'postTblWorkOrderGenerateNext'>>('/tblWorkOrderGenerateNext', { data }),
-};
-
 export type TypeTblWorkOrderStatus = DynamicResponse<'getTblWorkOrderStatus'>['items'][0];
 export const tblWorkOrderStatus = {
   getAll: (query?: DynamicQuery<'getTblWorkOrderStatus'>) =>

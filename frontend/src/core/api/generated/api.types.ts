@@ -4095,6 +4095,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblWorkOrder/reschedule": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reschedule WorkOrder */
+        post: operations["postTblWorkOrderReschedule"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkOrder/issue": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Bulk issue work orders */
+        post: operations["postTblWorkOrderIssue"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkOrder/cancel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Bulk cancel work orders */
+        post: operations["postTblWorkOrderCancel"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tblWorkOrder/postpone": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Bulk postpone work orders */
+        post: operations["postTblWorkOrderPostpone"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblWorkOrderStatus/": {
         parameters: {
             query?: never;
@@ -67734,6 +67802,514 @@ export interface operations {
                         workOrderId?: number;
                         dueDate?: string;
                         planningMethod?: string;
+                    };
+                };
+            };
+        };
+    };
+    postTblWorkOrderReschedule: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    workOrderId: number;
+                    newDueDate: string;
+                    newDueCount?: number;
+                    reason: string;
+                };
+                "application/x-www-form-urlencoded": {
+                    workOrderId: number;
+                    newDueDate: string;
+                    newDueCount?: number;
+                    reason: string;
+                };
+                "multipart/form-data": {
+                    workOrderId: number;
+                    newDueDate: string;
+                    newDueCount?: number;
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        success: boolean;
+                        message: string;
+                        workOrder: null | {
+                            workOrderId: number;
+                            compJobId: null | number;
+                            maintClassId: null | number;
+                            maintTypeId: null | number;
+                            maintCauseId: null | number;
+                            createdBy: null | number;
+                            issuedBy: null | number;
+                            plannedBy: null | number;
+                            issuedDate: null | string;
+                            respDiscId: null | number;
+                            compId: null | number;
+                            roundId: null | number;
+                            parentWorkOrderId: null | number;
+                            woNo: null | string;
+                            title: null | string;
+                            priority: null | number;
+                            estTotalDuration: null | number;
+                            dueDate: null | string;
+                            window: null | number;
+                            created: null | string;
+                            started: null | string;
+                            completed: null | string;
+                            description: null | string;
+                            filed: null | number;
+                            unexpected: null | number;
+                            workOrderStatusId: null | number;
+                            workOrderTypeId: null | number;
+                            lastUpdate: null | string;
+                            reportingMethod: null | number;
+                            pendingBy: null | number;
+                            pendTypeId: null | number;
+                            pendingdate: null | string;
+                            orderNo: null | number;
+                            userComment: null | string;
+                            instId: null | number;
+                            tblMaintLogs?: {
+                                maintLogId: number;
+                                maintCauseId: null | number;
+                                maintTypeId: null | number;
+                                maintClassId: null | number;
+                                functionId: null | number;
+                                jobDescId: null | number;
+                                workOrderId: null | number;
+                                compId: null | number;
+                                totalDuration: null | number;
+                                downTime: null | number;
+                                dateDone: null | string;
+                                frequency: null | number;
+                                frequencyPeriod: null | number;
+                                overdueCount: null | number;
+                                unexpected: null | number;
+                                reportedBy: null | number;
+                                lastUpdate: null | string;
+                                history: null | string;
+                                workOrderStatusId: null | number;
+                                followStatusId: null | number;
+                                discId: null | number;
+                                updatedEmployeeId: null | number;
+                                reportedDate: null | string;
+                                instId: null | number;
+                            }[];
+                            tblReScheduleLogs?: {
+                                rescheduleLogId: number;
+                                workOrderId: null | number;
+                                fromDueDate: null | string;
+                                toDueDate: null | string;
+                                rescheduledBy: null | number;
+                                rescheduledDate: null | string;
+                                reason: null | string;
+                                lastUpdate: null | string;
+                                orderNo: null | number;
+                                instId: null | number;
+                            }[];
+                            tblCompJob?: null | ({
+                                compJobId: number;
+                                discId: null | number;
+                                compId: null | number;
+                                jobDescId: null | number;
+                                jobConditionId: null | number;
+                                maintClassId: null | number;
+                                maintCauseId: null | number;
+                                maintTypeId: null | number;
+                                rescheduleLimitId: null | number;
+                                frequency: null | number;
+                                frequencyPeriod: null | number;
+                                changeReason: null | string;
+                                planningMethod: null | number;
+                                statusNone: null | number;
+                                statusInUse: null | number;
+                                statusAvailable: null | number;
+                                statusRepair: null | number;
+                                lastDone: null | string;
+                                nextDueDate: null | string;
+                                cbmStatus: null | number;
+                                outputFormat: null | number;
+                                priority: null | number;
+                                window: null | number;
+                                active: null | number;
+                                mandatoryHistory: null | number;
+                                createdEmployeeId: null | number;
+                                notes: null | string;
+                                lastUpdate: null | string;
+                                orderNo: null | number;
+                                instId: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblComponentUnit?: null | ({
+                                compId: number;
+                                compTypeId: null | number;
+                                locationId: null | number;
+                                parentCompId: null | number;
+                                vendorId: null | number;
+                                compNo: null | string;
+                                serialNo: null | string;
+                                model: null | string;
+                                comment1: null | string;
+                                comment2: null | string;
+                                comment3: null | string;
+                                assetNo: null | string;
+                                statusId: null | number;
+                                notes: null | string;
+                                lastUpdate: null | string;
+                                isCritical: null | number;
+                                orderNo: null | number;
+                                instId: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblDiscipline?: null | ({
+                                discId: number;
+                                code: null | string;
+                                name: null | string;
+                                externalDisc: null | number;
+                                parentDiscId: null | number;
+                                lastUpdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblEmployeeTblWorkOrderCreatedByTotblEmployee?: null | ({
+                                employeeId: number;
+                                code: null | string;
+                                lastName: null | string;
+                                firstName: null | string;
+                                discId: null | number;
+                                title: null | string;
+                                lastUpdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblEmployeeTblWorkOrderIssuedByTotblEmployee?: null | ({
+                                employeeId: number;
+                                code: null | string;
+                                lastName: null | string;
+                                firstName: null | string;
+                                discId: null | number;
+                                title: null | string;
+                                lastUpdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblEmployeeTblWorkOrderPendingByTotblEmployee?: null | ({
+                                employeeId: number;
+                                code: null | string;
+                                lastName: null | string;
+                                firstName: null | string;
+                                discId: null | number;
+                                title: null | string;
+                                lastUpdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblEmployeeTblWorkOrderPlannedByTotblEmployee?: null | ({
+                                employeeId: number;
+                                code: null | string;
+                                lastName: null | string;
+                                firstName: null | string;
+                                discId: null | number;
+                                title: null | string;
+                                lastUpdate: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblInstallation?: null | ({
+                                instId: number;
+                                name: string;
+                                orderNo: null | number;
+                                caption: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblMaintCause?: null | ({
+                                maintCauseId: number;
+                                descr: null | string;
+                                lastUpdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblMaintClass?: null | ({
+                                maintClassId: number;
+                                descr: null | string;
+                                lastUpdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblMaintType?: null | ({
+                                maintTypeId: number;
+                                descr: null | string;
+                                lastUpdate: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblPendingType?: null | ({
+                                pendTypeId: number;
+                                parentId: null | number;
+                                groupId: null | number;
+                                pendTypeName: null | string;
+                                lastUpdate: null | string;
+                                sortId: null | number;
+                                description: null | string;
+                                orderNo: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblRound?: null | ({
+                                roundId: number;
+                                maintCauseId: null | number;
+                                maintClassId: null | number;
+                                maintTypeId: null | number;
+                                rescheduleLimitId: null | number;
+                                roundCode: null | string;
+                                roundTitle: null | string;
+                                discId: null | number;
+                                frequency: null | number;
+                                frequencyPeriod: null | number;
+                                planningMethod: null | number;
+                                includeAllJobs: null | number;
+                                reportingMethod: null | number;
+                                lastDone: null | string;
+                                nextDueDate: null | string;
+                                description: null | string;
+                                priority: null | number;
+                                window: null | number;
+                                lastUpdate: null | string;
+                                orderNo: null | number;
+                                instId: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            tblWorkOrder?: null | ({
+                                workOrderId: number;
+                                compJobId: null | number;
+                                maintClassId: null | number;
+                                maintTypeId: null | number;
+                                maintCauseId: null | number;
+                                createdBy: null | number;
+                                issuedBy: null | number;
+                                plannedBy: null | number;
+                                issuedDate: null | string;
+                                respDiscId: null | number;
+                                compId: null | number;
+                                roundId: null | number;
+                                parentWorkOrderId: null | number;
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | number;
+                                estTotalDuration: null | number;
+                                dueDate: null | string;
+                                window: null | number;
+                                created: null | string;
+                                started: null | string;
+                                completed: null | string;
+                                description: null | string;
+                                filed: null | number;
+                                unexpected: null | number;
+                                workOrderStatusId: null | number;
+                                workOrderTypeId: null | number;
+                                lastUpdate: null | string;
+                                reportingMethod: null | number;
+                                pendingBy: null | number;
+                                pendTypeId: null | number;
+                                pendingdate: null | string;
+                                orderNo: null | number;
+                                userComment: null | string;
+                                instId: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                            otherTblWorkOrders?: {
+                                workOrderId: number;
+                                compJobId: null | number;
+                                maintClassId: null | number;
+                                maintTypeId: null | number;
+                                maintCauseId: null | number;
+                                createdBy: null | number;
+                                issuedBy: null | number;
+                                plannedBy: null | number;
+                                issuedDate: null | string;
+                                respDiscId: null | number;
+                                compId: null | number;
+                                roundId: null | number;
+                                parentWorkOrderId: null | number;
+                                woNo: null | string;
+                                title: null | string;
+                                priority: null | number;
+                                estTotalDuration: null | number;
+                                dueDate: null | string;
+                                window: null | number;
+                                created: null | string;
+                                started: null | string;
+                                completed: null | string;
+                                description: null | string;
+                                filed: null | number;
+                                unexpected: null | number;
+                                workOrderStatusId: null | number;
+                                workOrderTypeId: null | number;
+                                lastUpdate: null | string;
+                                reportingMethod: null | number;
+                                pendingBy: null | number;
+                                pendTypeId: null | number;
+                                pendingdate: null | string;
+                                orderNo: null | number;
+                                userComment: null | string;
+                                instId: null | number;
+                            }[];
+                            tblWorkOrderStatus?: null | ({
+                                workOrderStatusId: number;
+                                name: null | string;
+                            } & {
+                                [key: string]: unknown;
+                            });
+                        };
+                    };
+                };
+            };
+        };
+    };
+    postTblWorkOrderIssue: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    workOrderIds: number[];
+                };
+                "application/x-www-form-urlencoded": {
+                    workOrderIds: number[];
+                };
+                "multipart/form-data": {
+                    workOrderIds: number[];
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        success: boolean;
+                        message: string;
+                        count: number;
+                        workOrders: {
+                            workOrderId: number;
+                            issuedDate: (string | null) | null;
+                            tblWorkOrderStatus: ({
+                                name: null | string;
+                            } | null) | null;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    postTblWorkOrderCancel: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    workOrderIds: number[];
+                };
+                "application/x-www-form-urlencoded": {
+                    workOrderIds: number[];
+                };
+                "multipart/form-data": {
+                    workOrderIds: number[];
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        success: boolean;
+                        message: string;
+                        count: number;
+                        workOrders: {
+                            workOrderId: number;
+                            tblWorkOrderStatus: ({
+                                name: null | string;
+                            } | null) | null;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    postTblWorkOrderPostpone: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    workOrderIds: number[];
+                };
+                "application/x-www-form-urlencoded": {
+                    workOrderIds: number[];
+                };
+                "multipart/form-data": {
+                    workOrderIds: number[];
+                };
+            };
+        };
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        success: boolean;
+                        message: string;
+                        count: number;
+                        workOrders: {
+                            workOrderId: number;
+                            tblWorkOrderStatus: ({
+                                name: null | string;
+                            } | null) | null;
+                        }[];
                     };
                 };
             };

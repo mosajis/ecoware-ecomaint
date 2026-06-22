@@ -23,7 +23,9 @@ import {
   tblMaintClass,
   tblMaintLog,
   tblMaintType,
+  TypeTblMaintLog,
 } from "@/core/api/generated/api";
+import { DynamicResponse } from "@/core/api/dynamicTypes";
 
 type MaintLogUpsertProps = {
   open: boolean;
@@ -33,7 +35,7 @@ type MaintLogUpsertProps = {
   workOrderId?: number;
   compId?: number;
   onClose: () => void;
-  onSuccess?: (result: any) => void;
+  onSuccess?: (result: DynamicResponse<"postTblMaintLog">) => void;
 };
 
 const defaultValues: TypeValues = {
@@ -148,7 +150,7 @@ function MaintLogUpsert({
 
           if (workOrderId) {
             generateNextWorkOrder(res.maintLogId)
-              .then(() => {
+              .then((x) => {
                 toast.success("Next Work Order generated successfully");
               })
               .catch(() => {
@@ -177,7 +179,7 @@ function MaintLogUpsert({
         ...buildRelation("tblMaintCause", "maintCauseId", values.maintCause),
       };
 
-      return await tblMaintLog.update(id, payload as any);
+      return await tblMaintLog.update(id, payload);
     },
 
     onSuccess,
