@@ -1,37 +1,39 @@
-import { TypeTblDailyReport } from "@/core/api/generated/api";
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import { TypeTblDailyReport } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 
-export const getRowId = (row: TypeTblDailyReport) => row.dailyReportId;
+const getRowId = (row: TypeTblDailyReport) => row.dailyReportId;
 
-export const columns: GridColDef<TypeTblDailyReport>[] = [
+const columns: GridColDef<TypeTblDailyReport>[] = [
   {
     field: "reportTitle",
     headerName: "Title",
-    flex: 1,
+    flex: 2,
     minWidth: 250,
+  },
+  {
+    field: "totalwaiting",
+    headerName: "Total Waiting",
+    flex: 1,
   },
   {
     field: "reportDate",
     headerName: "Report Date",
-    width: 180,
+    flex: 1,
     renderCell: ({ value }) => <CellDateTime value={value} type="DATE" />,
   },
   {
     field: "createdDate",
     headerName: "Created Date",
-    width: 180,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
-  },
-  {
-    field: "totalwaiting",
-    headerName: "Total Waiting",
-    width: 150,
+    flex: 1,
+    renderCell: ({ value }) => <CellDateTime value={value} type="DATE" />,
   },
   {
     field: "lastUpdate",
     headerName: "Last Update",
-    width: 100,
+    width: 130,
     renderCell: ({ value }) => <CellDateTime value={value} />,
   },
 ];
+
+export { columns, getRowId };

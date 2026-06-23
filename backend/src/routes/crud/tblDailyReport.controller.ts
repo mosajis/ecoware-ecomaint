@@ -106,12 +106,10 @@ const ControllerTblDailyReport = new BaseController({
           0,
         );
 
-        const disciplineCode =
-          user.tblEmployee.tblDiscipline?.code ??
-          user.tblEmployee.tblDiscipline?.name ??
-          "UNKNOWN";
+        const disciplineName =
+          user.tblEmployee.tblDiscipline?.name ?? "UNKNOWN";
 
-        const reportTitle = `DISP - (${disciplineCode}) - ${formatReportDate(
+        const reportTitle = `${disciplineName} - ${disciplineName.charAt(0).toUpperCase()}DR - ${formatReportDate(
           reportDate,
         )}`;
 

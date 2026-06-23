@@ -1,15 +1,11 @@
 import DataGrid from "@/shared/components/dataGrid/DataGrid";
+import DailyReportUpsert from "./DailyReportUpsert";
 
 import { useCallback } from "react";
-
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
-
 import { columns, getRowId } from "./DailyReportColumns";
-// import DailyReportUpsert from "./DailyReportUpsert";
-
 import { tblDailyReport, TypeTblDailyReport } from "@/core/api/generated/api";
-import DailyReportUpsert from "./DailyReportUpsert";
 
 export default function PageDailyReport() {
   const getAll = useCallback(

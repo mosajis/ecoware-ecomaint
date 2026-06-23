@@ -43,7 +43,7 @@ import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import { getPermit } from "@/shared/hooks/usePermison";
 import { yellow } from "@mui/material/colors";
 // ================= TYPES =================
-export type MenuItem = {
+type MenuItem = {
   text: string;
   path: string;
   id?: string;
@@ -52,7 +52,7 @@ export type MenuItem = {
   permit?: boolean;
 };
 
-export type MenuSection = {
+type MenuSection = {
   title: string;
   icon: ReactNode;
   path?: string;
@@ -383,13 +383,13 @@ export const menuContentItems: MenuSection[] = [
         permit: getPermit(1610).canView,
         icon: <ReportProblemRoundedIcon sx={iconStyle} />,
       },
-      // {
-      //   text: "Daily Report",
-      //   path: "/report/daily",
-      //   id: "report:daily",
-      //   permit: true,
-      //   icon: <TodayIcon sx={iconStyle} />,
-      // },
+      {
+        text: "Daily Report",
+        path: "/report/daily",
+        id: "report:daily",
+        permit: true,
+        icon: <TodayIcon sx={iconStyle} />,
+      },
     ],
   },
 
