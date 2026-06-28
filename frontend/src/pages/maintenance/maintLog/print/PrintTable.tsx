@@ -1,6 +1,7 @@
 import DOMPurify from "dompurify";
 import { TypeTblMaintLog } from "@/core/api/generated/api";
 import { formatDateTime, val } from "@/core/helper";
+import CellUnexpected from "@/shared/components/dataGrid/cells/CellUnexpected";
 
 type Props = {
   row: TypeTblMaintLog;
@@ -66,8 +67,10 @@ export const MaintLogPrintTable = ({ row }: Props) => {
           <tr>
             <td className="print__cell print__label">Down Time</td>
             <td className="print__cell">{data.downTime}</td>
-            <td className="print__cell print__label">UnExpected</td>
-            <td className="print__cell">{data.unexpected ? "Yes" : "No"}</td>
+            <td className="print__cell print__label">Type</td>
+            <td className="print__cell">
+              <CellUnexpected value={data.unexpected} />
+            </td>
           </tr>
 
           {/* History */}

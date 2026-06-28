@@ -8,6 +8,8 @@ import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { columns, getRowId } from "./DailyReportColumns";
 import { tblDailyReport, TypeTblDailyReport } from "@/core/api/generated/api";
 import { useDialogs } from "@/shared/hooks/useDialogs";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 export default function PageDailyReport() {
   const [selectedRow, setSelectedRow] = useState<TypeTblDailyReport | null>(
@@ -18,8 +20,21 @@ export default function PageDailyReport() {
     print: false,
   });
 
+  const user = useAtomValue(atomUser);
+  const disc = user?.tblEmployee?.discId;
+
+  const getAll = useCallback(
+    () =>
+      tblDailyReport.getAll({
+        filter: {
+          discId: disc,
+        },
+      }),
+    [],
+  );
+
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
-    tblDailyReport.getAll,
+    getAll,
     tblDailyReport.deleteById,
     "dailyReportId",
   );
