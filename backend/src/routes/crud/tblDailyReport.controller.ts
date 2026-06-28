@@ -109,9 +109,7 @@ const ControllerTblDailyReport = new BaseController({
         const disciplineName =
           user.tblEmployee.tblDiscipline?.name ?? "UNKNOWN";
 
-        const reportTitle = `${disciplineName} - ${disciplineName.charAt(0).toUpperCase()}DR - ${formatReportDate(
-          reportDate,
-        )}`;
+        const reportTitle = `${disciplineName} - ${disciplineName.charAt(0).toUpperCase()}DR`;
 
         return prisma.tblDailyReport.create({
           data: {

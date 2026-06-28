@@ -1,9 +1,9 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import TabsComponent from "./MaintLogTabs";
 import Splitter from "@/shared/components/Splitter/Splitter";
-import MaintLogFollowDialog from "./maintLogDialogFollow";
+import MaintLogFollowDialog from "./MaintLogDialogFollow";
 import MaintLogDialogPrint from "./MaintLogDialogPrint";
-import Actions from "./maintLogActions";
+import Actions from "./MaintLogActions";
 import MaintLogUpsert from "./MaintLogUpsert";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
@@ -17,7 +17,7 @@ import {
 } from "@/core/api/generated/api";
 import MaintLogFilterDialog, {
   type MaintLogFilter,
-} from "./maintLogDialogFilter";
+} from "./MaintLogDialogFilter";
 
 export default function PageMaintLog() {
   /* ---------------- dialogs ---------------- */

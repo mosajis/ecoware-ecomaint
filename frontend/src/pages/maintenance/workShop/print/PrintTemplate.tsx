@@ -1,7 +1,7 @@
 import PrintLayout from "@/shared/components/print/PrintLayout";
 import PrintContent from "./PrintContent";
 import { forwardRef } from "react";
-import { PrintHeader } from "@/shared/components/print/_components/PrintHeader";
+import PrintHeader from "@/shared/components/print/_components/PrintHeader";
 import { PrintFooter } from "@/shared/components/print/_components/PrintFooter";
 import { TypeTblWorkShop } from "@/core/api/generated/api";
 import { useAtomValue } from "jotai";

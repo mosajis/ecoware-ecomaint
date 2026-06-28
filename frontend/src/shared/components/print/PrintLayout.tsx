@@ -1,7 +1,7 @@
 import Printable from "./Printable";
 import { forwardRef, ReactNode } from "react";
 
-export interface PrintLayoutProps {
+interface PrintLayoutProps {
   header?: ReactNode;
   footer?: ReactNode;
   content: ReactNode;
@@ -12,14 +12,7 @@ export interface PrintLayoutProps {
 
 const PrintLayout = forwardRef<HTMLDivElement, PrintLayoutProps>(
   (
-    {
-      header,
-      footer,
-      content,
-      headerHeight = 100,
-      footerHeight = 45,
-      pagePadding = 11,
-    },
+    { header, footer, content, headerHeight, footerHeight, pagePadding },
     ref,
   ) => {
     return (

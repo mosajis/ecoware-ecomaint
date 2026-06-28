@@ -1,3 +1,12 @@
+import { TblEmployee } from "orm/generated/prismabox/TblEmployee";
+import { TblComponentUnit } from "orm/generated/prismabox/TblComponentUnit";
+import { TblJobDescription } from "orm/generated/prismabox/TblJobDescription";
+import { TblFollowStatus } from "orm/generated/prismabox/TblFollowStatus";
+import { TblDiscipline } from "orm/generated/prismabox/TblDiscipline";
+import { TblMaintClass } from "orm/generated/prismabox/TblMaintClass";
+import { TblMaintType } from "orm/generated/prismabox/TblMaintType";
+import { TblMaintCause } from "orm/generated/prismabox/TblMaintCause";
+import { TblWorkOrder } from "orm/generated/prismabox/TblWorkOrder";
 import { responseSchemaList } from "@/types";
 import { buildResponseSchema } from "@/utils/base.schema";
 import { prisma } from "@/utils/prisma";
@@ -16,15 +25,6 @@ import {
   TblMaintLogInputUpdate,
   TblMaintLogPlain,
 } from "orm/generated/prismabox/TblMaintLog";
-import { TblEmployee } from "orm/generated/prismabox/TblEmployee";
-import { TblComponentUnit } from "orm/generated/prismabox/TblComponentUnit";
-import { TblJobDescription } from "orm/generated/prismabox/TblJobDescription";
-import { TblFollowStatus } from "orm/generated/prismabox/TblFollowStatus";
-import { TblDiscipline } from "orm/generated/prismabox/TblDiscipline";
-import { TblMaintClass } from "orm/generated/prismabox/TblMaintClass";
-import { TblMaintType } from "orm/generated/prismabox/TblMaintType";
-import { TblMaintCause } from "orm/generated/prismabox/TblMaintCause";
-import { TblWorkOrder } from "orm/generated/prismabox/TblWorkOrder";
 import type {
   Prisma,
   TblComponentUnit as TblComponentUnitType,
@@ -45,7 +45,10 @@ const MaintLogItemSchema = t.Composite([
     "totalDuration",
     "history",
     "unexpected",
+    "frequency",
+    "frequencyPeriod",
     "workOrderId",
+    "reportedDate",
   ]),
   t.Object({
     countAttachment: t.Number(),
@@ -80,6 +83,9 @@ const maintLogListSelect = {
       firstName: true,
     },
   },
+  frequency: true,
+  frequencyPeriod: true,
+  reportedDate: true,
   overdueCount: true,
   maintLogId: true,
   dateDone: true,

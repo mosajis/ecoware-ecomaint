@@ -1,58 +1,97 @@
-/* ===== Header ===== */
-.print__header {
-  display: grid;
-  grid-template-columns: 5fr 2fr;
-  border-bottom: 2px solid #333333;
-  align-items: center;
-  padding-bottom: 10px;
+/* ── header ── */
+.pht {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10.5px;
+  color: #1a2a3a;
+  table-layout: fixed;
+  border: 0.5px solid #dde8f0;
+  margin-bottom: 8px;
+  background-color: #f4f8fb;
 }
 
-.print__title {
-  margin: 0;
-  font-size: 20px;
+.cell-label {
+  padding: 3px 8px;
+  background: #e3ecf4;
+  color: #29445e;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  border: 0.5px solid #dde8f0;
+  width: 18%;
 }
 
-.print__subtitle {
-  margin: 4px 0 0;
+.cell-value {
+  padding: 3px 10px;
+  color: #1a2a3a;
+  font-size: 11px;
+  font-weight: bold;
+  border: 0.5px solid #dde8f0;
 }
 
-/* ===== Footer ===== */
+/* ── footer ── */
 .print__footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #333333;
-  border-top: 2px solid #333333;
-  padding-top: 10px;
+  color: #5f7285;
+  border-top: 1.5px solid #dde8f0;
+  padding-top: 6px;
+  font-size: 10px;
 }
 
-/* ===== Table / Box ===== */
+/* ── section divider (unplanned / planned) ── */
+.section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #3a5a78;
+  background: #eef3f8;
+  padding: 2px 8px;
+  border-left: 3px solid #7aaecc;
+  margin: 8px 0 3px;
+}
+
+/* ── table ── */
+
 .print__box {
-  margin-top: 10px;
   width: 100%;
-  page-break-inside: avoid;
-  break-inside: avoid;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 10.5px;
+  color: #1a2a3a;
+  margin-bottom: 8px;
 }
-
 .print__cell {
-  border: 1px solid #333;
-  padding: 4px;
-  vertical-align: top;
+  border: 0.5px solid #dde8f0;
+  padding: 3px 6px;
+  vertical-align: middle;
 }
-
-.print__head-cell {
-  padding: 4px;
-  vertical-align: top;
-}
-
 .print__label {
-  font-weight: bold;
-  background: #f0f0f0;
+  font-weight: 700;
+  background: #f4f8fb;
+  color: #3a5a78;
+  width: 18%;
+}
+.bg--yellow {
+  background: #fff4c7;
+  color: #8a6d00;
+  font-weight: 700;
 }
 
-.bg--yellow {
-  background-color: #fff8b6ff;
-  font-weight: bold;
+/* ── badges ── */
+.badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 10px;
+  letter-spacing: 0.3px;
+}
+.badge--unplanned {
+  background: #fde8e8;
+  color: #991b1b;
+}
+.badge--planned {
+  background: #e2f0e8;
+  color: #1a5c32;
 }

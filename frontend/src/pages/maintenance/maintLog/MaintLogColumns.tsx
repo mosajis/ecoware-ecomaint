@@ -118,6 +118,12 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     ),
   },
   {
+    field: "reportedDate",
+    headerName: "ReportedDate",
+    width: 130,
+    renderCell: ({ value }) => <CellDateTime value={value} />,
+  },
+  {
     field: "tblEmployee",
     headerName: "ReportedBy",
     width: 80,

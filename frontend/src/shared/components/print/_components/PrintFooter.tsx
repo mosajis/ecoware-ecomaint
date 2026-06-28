@@ -1,19 +1,23 @@
-import { formatDateTime } from "@/core/helper";
+import { extractFullName, formatDateTime } from "@/core/helper";
+import { atomUser } from "@/pages/auth/auth.atom";
+import { useAtomValue } from "jotai";
 
-type FooterProps = {
-  printedBy: string;
-};
+export const PrintFooter = () => {
+  const user = useAtomValue(atomUser);
 
-export const PrintFooter = ({ printedBy }: FooterProps) => {
+  const userFullName = extractFullName(user?.tblEmployee);
+  const dateTime = formatDateTime(new Date(), "DATETIME", true);
+
   return (
-    <div className="print__footer">
-      <div>
-        <strong>Printed At:</strong>{" "}
-        {formatDateTime(new Date(), "DATETIME", true)}
-      </div>
-      <div>
-        <strong>Printed By:</strong> {printedBy}
-      </div>
-    </div>
+    <table className="pht">
+      <tbody>
+        <tr>
+          <td className="cell-label">PrintAt</td>
+          <td className="cell-value">{dateTime}</td>
+          <td className="cell-label">PrintBy</td>
+          <td className="cell-value">{userFullName}</td>
+        </tr>
+      </tbody>
+    </table>
   );
 };

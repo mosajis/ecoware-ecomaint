@@ -1,13 +1,24 @@
 import DataGrid from "@/shared/components/dataGrid/DataGrid";
 import DailyReportUpsert from "./DailyReportUpsert";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { columns, getRowId } from "./DailyReportColumns";
 import { tblDailyReport, TypeTblDailyReport } from "@/core/api/generated/api";
+import { useDialogs } from "@/shared/hooks/useDialogs";
+import DailyReportActions from "./DailyReportActions";
+import DailyReportDialogPrint from "./DailyReportDialogPrint";
 
 export default function PageDailyReport() {
+  const [selectedRow, setSelectedRow] = useState<TypeTblDailyReport | null>(
+    null,
+  );
+
+  const { dialogs, openDialog, closeDialog } = useDialogs({
+    print: false,
+  });
+
   const getAll = useCallback(
     () =>
       tblDailyReport.getAll({
@@ -15,6 +26,11 @@ export default function PageDailyReport() {
       }),
     [],
   );
+
+  const handlePrintClick = (row: TypeTblDailyReport) => {
+    setSelectedRow(row);
+    openDialog("print");
+  };
 
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     getAll,
@@ -27,6 +43,10 @@ export default function PageDailyReport() {
       onSuccess: handleRefresh,
     });
 
+  const handleRowClick = useCallback(({ row }: { row: TypeTblDailyReport }) => {
+    setSelectedRow(row);
+  }, []);
+
   return (
     <>
       <DataGrid
@@ -37,15 +57,30 @@ export default function PageDailyReport() {
         loading={loading}
         rows={rows}
         columns={columns}
+        onRowClick={handleRowClick}
         getRowId={getRowId}
         onRefreshClick={handleRefresh}
         onAddClick={openCreate}
         onEditClick={openEdit}
         onDoubleClick={openView}
         onDeleteClick={handleDelete}
+        toolbarChildren={
+          <DailyReportActions
+            onPrint={() => openDialog("print")}
+            selected={selectedRow}
+          />
+        }
       />
 
       <DailyReportUpsert entityName="DailyReport" {...dialogProps} />
+
+      {dialogs.print && (
+        <DailyReportDialogPrint
+          open={dialogs.print}
+          onClose={() => closeDialog("print")}
+          selectedRow={selectedRow}
+        />
+      )}
     </>
   );
 }

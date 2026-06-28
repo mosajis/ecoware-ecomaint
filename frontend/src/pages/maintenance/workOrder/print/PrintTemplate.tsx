@@ -1,13 +1,9 @@
 import PrintLayout from "@/shared/components/print/PrintLayout";
 import PrintContent from "./PrintContent";
+import PrintHeader from "@/shared/components/print/_components/PrintHeader";
 import { forwardRef } from "react";
 import { OutputFormat, SortOrder } from "./PrintTypes";
-import { PrintHeader } from "@/shared/components/print/_components/PrintHeader";
 import { PrintFooter } from "@/shared/components/print/_components/PrintFooter";
-import { extractFullName } from "@/core/helper";
-import { useAtomValue } from "jotai";
-import { atomUser } from "@/pages/auth/auth.atom";
-import { atomRig } from "@/shared/atoms/general.atom";
 import { TypeTblWorkOrder } from "@/core/api/generated/api";
 
 interface PrintProps {
@@ -18,20 +14,11 @@ interface PrintProps {
 
 const PrintTemplate = forwardRef<HTMLDivElement, PrintProps>(
   ({ workOrders, outputFormat, sortOrder }, ref) => {
-    const user = useAtomValue(atomUser);
-    const rig = useAtomValue(atomRig);
-
     return (
       <PrintLayout
         ref={ref}
-        header={
-          <PrintHeader
-            location={rig?.name || "N/A"}
-            title="Work Order Reports"
-            totalLength={workOrders.length}
-          />
-        }
-        footer={<PrintFooter printedBy={extractFullName(user?.tblEmployee)} />}
+        header={<PrintHeader reportTitle="WorkOrder Report" />}
+        footer={<PrintFooter />}
         content={
           <PrintContent
             workOrders={workOrders}
