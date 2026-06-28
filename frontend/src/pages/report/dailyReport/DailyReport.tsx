@@ -1,14 +1,13 @@
 import DataGrid from "@/shared/components/dataGrid/DataGrid";
 import DailyReportUpsert from "./DailyReportUpsert";
-
+import DailyReportActions from "./DailyReportActions";
+import DailyReportDialogPrint from "./DailyReportDialogPrint";
 import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { columns, getRowId } from "./DailyReportColumns";
 import { tblDailyReport, TypeTblDailyReport } from "@/core/api/generated/api";
 import { useDialogs } from "@/shared/hooks/useDialogs";
-import DailyReportActions from "./DailyReportActions";
-import DailyReportDialogPrint from "./DailyReportDialogPrint";
 
 export default function PageDailyReport() {
   const [selectedRow, setSelectedRow] = useState<TypeTblDailyReport | null>(
@@ -19,21 +18,8 @@ export default function PageDailyReport() {
     print: false,
   });
 
-  const getAll = useCallback(
-    () =>
-      tblDailyReport.getAll({
-        include: {},
-      }),
-    [],
-  );
-
-  const handlePrintClick = (row: TypeTblDailyReport) => {
-    setSelectedRow(row);
-    openDialog("print");
-  };
-
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
-    getAll,
+    tblDailyReport.getAll,
     tblDailyReport.deleteById,
     "dailyReportId",
   );

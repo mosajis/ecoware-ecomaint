@@ -9,7 +9,6 @@ const columns: GridColDef<TypeTblDailyReport>[] = [
     field: "reportTitle",
     headerName: "Title",
     flex: 2,
-    minWidth: 250,
   },
   {
     field: "totalwaiting",

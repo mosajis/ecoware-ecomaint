@@ -1,11 +1,12 @@
 import MaintLogPrintTable from "./PrintTable";
-import { TypeTblMaintLog } from "@/core/api/generated/api";
+import { TypeTblDailyReport, TypeTblMaintLog } from "@/core/api/generated/api";
 
 interface Props {
   maintLogs: TypeTblMaintLog[];
+  dailyReport: TypeTblDailyReport;
 }
 
-const PrintContent = ({ maintLogs }: Props) => {
+const PrintContent = ({ maintLogs, dailyReport }: Props) => {
   const unPlanned = maintLogs.filter((l) => l.unexpected !== 0);
   const planned = maintLogs.filter((l) => l.unexpected === 0);
 

@@ -1,84 +1,82 @@
 import DOMPurify from "dompurify";
 import { TypeTblMaintLog } from "@/core/api/generated/api";
 import { formatDateTime, val } from "@/core/helper";
+import CellUnexpected from "@/shared/components/dataGrid/cells/CellUnexpected";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 
 type Props = {
   row: TypeTblMaintLog;
 };
 
 const extractData = (row: TypeTblMaintLog) => ({
-  component: row.tblComponentUnit?.compNo ?? "-",
-  jobCode: row.tblJobDescription?.jobDescCode ?? "-",
-  jobTitle: row.tblJobDescription?.jobDescTitle ?? "-",
-  dateDone: row.dateDone,
-  discipline: row.tblDiscipline?.name ?? "-",
-  maintClass: row.tblMaintClass?.descr ?? "-",
-  followStatus: row.tblFollowStatus?.fsName ?? "-",
-  downTime: row.downTime,
+  component: row.tblComponentUnit?.compNo,
+  jobTitle: row.tblJobDescription?.jobDescTitle,
+  jobCode: row.tblJobDescription?.jobDescCode,
+  history: row?.history ?? "",
+
+  location: row.tblComponentUnit?.compNo,
+
+  maintType: row.tblMaintType?.descr,
+  dateDone: row.dateDone || "",
   unexpected: row.unexpected,
-  description: row.history ?? "",
 });
 
 export const PrintTable = ({ row }: Props) => {
+  if (!row) return;
   const data = extractData(row);
 
-  const sanitizedHistory = DOMPurify.sanitize(data.description);
+  const sanitizedHistory = DOMPurify.sanitize(data.history);
 
   return (
     <div className="print">
       <table className="print__box">
         <colgroup>
+          <col style={{ width: "12%" }} />
           <col style={{ width: "20%" }} />
-          <col style={{ width: "30%" }} />
+          <col style={{ width: "12%" }} />
           <col style={{ width: "20%" }} />
-          <col style={{ width: "30%" }} />
+          <col style={{ width: "12%" }} />
+          <col style={{ width: "20%" }} />
         </colgroup>
 
         <tbody>
           <tr>
             <td className="print__cell print__label bg--yellow">Component</td>
-            <td className="print__cell bg--yellow">{val(data.component)}</td>
-            <td className="print__cell print__label bg--yellow">Job Code</td>
-            <td className="print__cell bg--yellow">{val(data.jobCode)}</td>
-          </tr>
-          <tr>
-            <td className="print__cell print__label">Job Title</td>
-            <td className="print__cell" colSpan={3}>
-              {val(data.jobTitle)}
+            <td className="print__cell bg--yellow" colSpan={2}>
+              {val(data.component)}
+            </td>
+            <td className="print__cell print__label bg--yellow">Location</td>
+            <td className="print__cell bg--yellow" colSpan={2}>
+              {val(data.location)}
             </td>
           </tr>
           <tr>
+            <td className="print__cell print__label">Type</td>
+            <td className="print__cell">
+              <CellUnexpected value={data.unexpected} />
+            </td>
             <td className="print__cell print__label">Date Done</td>
             <td className="print__cell">
-              {data.dateDone
-                ? formatDateTime(data.dateDone, "DATETIME", true)
-                : "-"}
+              <CellDateTime value={data.dateDone} />
             </td>
-            <td className="print__cell print__label">Discipline</td>
-            <td className="print__cell">{val(data.discipline)}</td>
-          </tr>
-          <tr>
-            <td className="print__cell print__label">Maint Class</td>
-            <td className="print__cell">{val(data.maintClass)}</td>
-            <td className="print__cell print__label">Follow Status</td>
-            <td className="print__cell">{val(data.followStatus)}</td>
-          </tr>
-          <tr>
-            <td className="print__cell print__label">Down Time</td>
-            <td className="print__cell">{data.downTime}</td>
-            <td className="print__cell print__label">UnExpected</td>
-            <td className="print__cell">{data.unexpected ? "Yes" : "No"}</td>
+            <td className="print__cell print__label">Maint Type</td>
+            <td className="print__cell">{val(data.maintType)}</td>
           </tr>
 
           {/* History */}
           <tr>
-            <td colSpan={4} className="print__cell print__label">
-              History
+            <td className="print__cell print__label" colSpan={1}>
+              Job Title
             </td>
+            <td className="print__cell" colSpan={3}>
+              {data.jobTitle}
+            </td>
+            <td className="print__cell print__label">Job Code</td>
+            <td className="print__cell">{val(data.jobCode)}</td>
           </tr>
           <tr>
             <td
-              colSpan={4}
+              colSpan={8}
               className="print__cell print__content"
               dangerouslySetInnerHTML={{
                 __html: sanitizedHistory || "-",

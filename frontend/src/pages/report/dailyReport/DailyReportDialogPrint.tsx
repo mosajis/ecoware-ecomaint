@@ -4,9 +4,13 @@ import Typography from "@mui/material/Typography";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import PrintIcon from "@mui/icons-material/Print";
 import DailyReportPrintTemplate from "./print/PrintTemplate";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
-import { TypeTblDailyReport } from "@/core/api/generated/api";
+import {
+  tblMaintLog,
+  TypeTblDailyReport,
+  TypeTblMaintLog,
+} from "@/core/api/generated/api";
 
 type Props = {
   open: boolean;
@@ -22,7 +26,37 @@ export default function DailyReportDialogPrint({
   const contentRef = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({ contentRef });
 
+  const [loading, setLoading] = useState(false);
+  const [maintLogs, setMaintLogs] = useState<TypeTblMaintLog[]>([]);
+
   const isReady = !!selectedRow;
+  const date = selectedRow?.reportDate;
+
+  useEffect(() => {
+    if (!date) return;
+
+    setLoading(true);
+
+    const startOfDay = new Date(date);
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date(date);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    tblMaintLog
+      .getAll({
+        select: {
+          tblMaintCause: true,
+        },
+        filter: {
+          reportedDate: {
+            gte: startOfDay.toISOString(),
+            lte: endOfDay.toISOString(),
+          },
+        },
+      })
+      .then((res) => setMaintLogs(res.items))
+      .finally(() => setLoading(false));
+  }, [date, selectedRow]);
 
   return (
     <FormDialog
@@ -44,7 +78,7 @@ export default function DailyReportDialogPrint({
           variant="contained"
           size="medium"
           startIcon={<PrintIcon />}
-          disabled={!isReady}
+          loading={loading || !isReady}
           sx={{
             alignSelf: "center",
             py: 1.5,
@@ -62,8 +96,9 @@ export default function DailyReportDialogPrint({
       <Box display="none">
         {isReady && (
           <DailyReportPrintTemplate
+            dailyReport={selectedRow}
+            maintLogs={maintLogs}
             ref={contentRef}
-            date={selectedRow.reportDate}
           />
         )}
       </Box>

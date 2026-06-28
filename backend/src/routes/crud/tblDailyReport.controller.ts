@@ -45,6 +45,7 @@ const ControllerTblDailyReport = new BaseController({
   service: ServiceTblDailyReport,
   createSchema: TblDailyReportInputCreate,
   updateSchema: TblDailyReportInputUpdate,
+  scope: true,
   responseSchema: buildResponseSchema(TblDailyReportPlain, TblDailyReport),
   extend(app) {
     app.use(authPlugin).post(

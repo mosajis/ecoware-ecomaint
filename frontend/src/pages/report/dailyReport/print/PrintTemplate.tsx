@@ -1,38 +1,57 @@
+import DOMPurify from "dompurify";
 import PrintTemplate from "@/shared/components/print/PrintTemplate";
 import PrintContent from "./PrintContent";
-import { forwardRef, useEffect, useState } from "react";
-import { tblMaintLog, TypeTblMaintLog } from "@/core/api/generated/api";
+import { formatDateTime } from "@/core/helper";
+import { forwardRef } from "react";
+import { TypeTblDailyReport, TypeTblMaintLog } from "@/core/api/generated/api";
+import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 
 interface Props {
-  date: string; // ISO date string
+  dailyReport: TypeTblDailyReport;
+  maintLogs: TypeTblMaintLog[];
 }
 
 const ReportPrintTemplate = forwardRef<HTMLDivElement, Props>(
-  ({ date }, ref) => {
-    const [maintLogs, setMaintLogs] = useState<TypeTblMaintLog[]>([]);
-
-    useEffect(() => {
-      // فیلتر روی dateDone برای روز مورد نظر
-      const startOfDay = new Date(date);
-      startOfDay.setHours(0, 0, 0, 0);
-      const endOfDay = new Date(date);
-      endOfDay.setHours(23, 59, 59, 999);
-
-      tblMaintLog
-        .getAll({
-          filter: {
-            reportedDate: {
-              gte: startOfDay.toISOString(),
-              lte: endOfDay.toISOString(),
-            },
-          },
-        })
-        .then((res) => setMaintLogs(res.items));
-    }, [date]);
+  ({ maintLogs, dailyReport }, ref) => {
+    const sanitizedUserComment = DOMPurify.sanitize(
+      dailyReport?.userComment || "",
+    );
 
     return (
       <PrintTemplate
-        content={<PrintContent maintLogs={maintLogs} />}
+        content={
+          <>
+            <table className="pht">
+              <tbody>
+                <tr>
+                  <td className="cell-label">Created Date</td>
+                  <td className="cell-value">
+                    <CellDateTime value={dailyReport.createdDate} />
+                  </td>
+                  <td className="cell-label">Reported Date</td>
+                  <td className="cell-value">
+                    <CellDateTime value={dailyReport.reportDate} />{" "}
+                  </td>
+                  <td className="cell-label">Total Waiting</td>
+                  <td className="cell-value">
+                    {dailyReport.totalwaiting ?? "-"}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="cell-value"
+                    dangerouslySetInnerHTML={{
+                      __html: sanitizedUserComment || "-",
+                    }}
+                  />
+                </tr>
+              </tbody>
+            </table>
+            <PrintContent maintLogs={maintLogs} dailyReport={dailyReport} />
+          </>
+        }
         reportTitle="Daily Report"
         ref={ref}
       />

@@ -7,7 +7,6 @@ import FailureReportDialogClose from "./FailureReportDialogClose";
 import FailureReportDialogOpen from "./FailureReportDialogOpen";
 import FailureReportDialogFilter from "./FailureReportDialogFilter";
 import FailureReportDialogPrint from "./FailureReportDialogPrint";
-
 import { useCallback, useMemo, useState } from "react";
 import { FailureReportFilter } from "./FailureReportDialogFilter";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
