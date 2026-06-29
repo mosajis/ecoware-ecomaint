@@ -107,7 +107,7 @@ export const PrintTable = ({ row }: Props) => {
                   Maker Ref No
                 </td>
                 <td className="print__cell print__label" colSpan={1}>
-                  Part No
+                  MESC Code
                 </td>
                 <td className="print__cell print__label">Count</td>
               </tr>

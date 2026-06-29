@@ -59,6 +59,8 @@ export function formatDateTime(
     ? formatJalali(date, formatString)
     : formatGregorian(date, formatString);
 }
+export const endOfDay = (dateStr: string) =>
+  new Date(dateStr + "T23:59:59.999");
 
 export const calculateOverdue = (row: TypeTblWorkOrder) => {
   const status = row?.tblWorkOrderStatus?.name?.toLowerCase();

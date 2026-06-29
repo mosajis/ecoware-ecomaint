@@ -9,6 +9,7 @@ import { tblDiscipline, TypeTblDiscipline } from "@/core/api/generated/api";
 import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
 import { daysAgo } from "@/core/helper";
+import { endOfDay, startOfDay } from "date-fns";
 
 export interface DailyReportFilter {
   AND?: any[];
@@ -41,8 +42,8 @@ export default function DailyReportFilterDialog({
     filter?: DailyReportFilter | null,
   ): FiltersState => {
     const base: FiltersState = {
-      reportDateFrom: daysAgo(14).toISOString().slice(0, 10),
-      reportDateTo: new Date().toISOString().slice(0, 10),
+      reportDateFrom: startOfDay(daysAgo(14)).toISOString(),
+      reportDateTo: endOfDay(new Date()).toISOString(),
       discipline: disipline,
     };
 
@@ -113,8 +114,8 @@ export default function DailyReportFilterDialog({
 
   const handleClearFilter = () => {
     const empty: FiltersState = {
-      reportDateFrom: daysAgo(14).toISOString().slice(0, 10),
-      reportDateTo: new Date().toISOString().slice(0, 10),
+      reportDateFrom: startOfDay(daysAgo(14)).toISOString(),
+      reportDateTo: endOfDay(new Date()).toISOString(),
       discipline: disipline,
     };
 
@@ -178,7 +179,7 @@ export default function DailyReportFilterDialog({
             </Typography>
 
             <FieldDateTime
-              type="DATE"
+              type="DATETIME"
               label="From"
               field={{
                 value: filters.reportDateFrom,
@@ -191,7 +192,7 @@ export default function DailyReportFilterDialog({
             />
 
             <FieldDateTime
-              type="DATE"
+              type="DATETIME"
               label="To"
               field={{
                 value: filters.reportDateTo,
