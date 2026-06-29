@@ -19,6 +19,10 @@ async function renderIndexHtml() {
   return cachedHtml;
 }
 
+const portIndex = Bun.argv.indexOf("--port");
+
+const customPort = portIndex !== -1 ? Number(Bun.argv[portIndex + 1]) : 5273;
+
 /* ---------------- ENV ---------------- */
 const MODE = process.env.NODE_ENV ?? "development";
 const SSL_ENABLED =
@@ -26,7 +30,7 @@ const SSL_ENABLED =
 const isProd = MODE === "production";
 
 /* ---------------- PORTS ---------------- */
-const HTTPS_PORT = isProd ? 443 : 5273;
+const HTTPS_PORT = customPort ?? (isProd ? 443 : 5273);
 const HTTP_PORT = isProd ? 80 : 5274;
 
 /* ---------------- TLS ---------------- */

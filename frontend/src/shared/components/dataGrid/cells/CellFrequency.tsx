@@ -8,7 +8,7 @@ type Props = {
 const CellFrequency = ({ frequency, frequencyPeriod }: Props): string => {
   if (frequency == null) return "-";
 
-  return `${frequency} ${frequencyPeriod?.name || "-"}`;
+  return `${frequency || ""} ${frequencyPeriod?.name || ""}`;
 };
 
 export default CellFrequency;

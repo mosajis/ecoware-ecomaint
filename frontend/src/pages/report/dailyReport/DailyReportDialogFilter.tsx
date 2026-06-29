@@ -1,11 +1,14 @@
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
 import FieldDateTime from "@/shared/components/fields/FieldDateTime";
-import { tblDiscipline, TypeTblDiscipline } from "@/core/api/generated/api";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import React, { useEffect, useState } from "react";
+import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
+import { tblDiscipline, TypeTblDiscipline } from "@/core/api/generated/api";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
+import { daysAgo } from "@/core/helper";
 
 export interface DailyReportFilter {
   AND?: any[];
@@ -14,9 +17,6 @@ export interface DailyReportFilter {
 type FiltersState = {
   reportDateFrom: string;
   reportDateTo: string;
-
-  createdDateFrom: string;
-  createdDateTo: string;
 
   discipline: TypeTblDiscipline | null;
 };
@@ -34,15 +34,16 @@ export default function DailyReportFilterDialog({
   onSubmit,
   initialValue,
 }: DailyReportFilterDialogProps) {
+  const user = useAtomValue(atomUser);
+  const disipline = user?.tblEmployee?.tblDiscipline as TypeTblDiscipline;
+
   const deserializeFilter = (
     filter?: DailyReportFilter | null,
   ): FiltersState => {
     const base: FiltersState = {
-      reportDateFrom: "",
-      reportDateTo: "",
-      createdDateFrom: "",
-      createdDateTo: "",
-      discipline: null,
+      reportDateFrom: daysAgo(14).toISOString().slice(0, 10),
+      reportDateTo: new Date().toISOString().slice(0, 10),
+      discipline: disipline,
     };
 
     if (!filter?.AND || !Array.isArray(filter.AND)) {
@@ -69,25 +70,10 @@ export default function DailyReportFilterDialog({
             .slice(0, 10);
         }
       }
-
-      if (c.createdDate) {
-        if (c.createdDate.gte) {
-          base.createdDateFrom = new Date(c.createdDate.gte)
-            .toISOString()
-            .slice(0, 10);
-        }
-
-        if (c.createdDate.lte) {
-          base.createdDateTo = new Date(c.createdDate.lte)
-            .toISOString()
-            .slice(0, 10);
-        }
-      }
     }
 
     return base;
   };
-
   const [filters, setFilters] = useState<FiltersState>(
     deserializeFilter(initialValue),
   );
@@ -118,19 +104,6 @@ export default function DailyReportFilterDialog({
       });
     }
 
-    if (filters.createdDateFrom || filters.createdDateTo) {
-      conditions.push({
-        createdDate: {
-          gte: filters.createdDateFrom
-            ? new Date(filters.createdDateFrom)
-            : undefined,
-          lte: filters.createdDateTo
-            ? new Date(filters.createdDateTo)
-            : undefined,
-        },
-      });
-    }
-
     onSubmit({
       AND: conditions.length ? conditions : undefined,
     });
@@ -139,10 +112,28 @@ export default function DailyReportFilterDialog({
   };
 
   const handleClearFilter = () => {
-    const empty = deserializeFilter(null);
+    const empty: FiltersState = {
+      reportDateFrom: daysAgo(14).toISOString().slice(0, 10),
+      reportDateTo: new Date().toISOString().slice(0, 10),
+      discipline: disipline,
+    };
 
     setFilters(empty);
-    onSubmit(null);
+
+    onSubmit({
+      AND: [
+        {
+          discId: disipline.discId,
+        },
+        {
+          reportDate: {
+            gte: new Date(daysAgo(14)),
+            lte: new Date(),
+          },
+        },
+      ],
+    });
+
     onClose();
   };
 
@@ -155,7 +146,7 @@ export default function DailyReportFilterDialog({
     <FormDialog
       open={open}
       title="Daily Report Filter"
-      maxWidth="sm"
+      maxWidth="xs"
       submitText="Apply Filter"
       cancelText="Clear Filter"
       onClose={onClose}
@@ -163,13 +154,13 @@ export default function DailyReportFilterDialog({
       onCancelClick={handleClearFilter}
     >
       <Box display="flex" flexDirection="column" gap={2}>
-        <FieldAsyncSelectGrid<TypeTblDiscipline>
-          columns={[{ field: "name", headerName: "Name", flex: 1 }]}
+        <FieldAsyncSelect<TypeTblDiscipline>
+          getOptionLabel={(r) => r.name || "UnKnown"}
           label="Discipline"
           value={filters.discipline}
           selectionMode="single"
+          getOptionKey={(r) => r.discId}
           request={tblDiscipline.getAll}
-          getRowId={(r) => r.discId}
           onChange={(v) =>
             setFilters((p) => ({
               ...p,
@@ -180,7 +171,7 @@ export default function DailyReportFilterDialog({
 
         <Divider />
 
-        <Box display="grid" gridTemplateColumns="1fr 1fr" gap={2}>
+        <Box display="grid" gridTemplateColumns="1fr" gap={2}>
           <Box display="flex" flexDirection="column" gap={1}>
             <Typography variant="body2" fontWeight={500}>
               Report Date
@@ -208,38 +199,6 @@ export default function DailyReportFilterDialog({
                   setFilters((p) => ({
                     ...p,
                     reportDateTo: v,
-                  })),
-              }}
-            />
-          </Box>
-
-          <Box display="flex" flexDirection="column" gap={1}>
-            <Typography variant="body2" fontWeight={500}>
-              Created Date
-            </Typography>
-
-            <FieldDateTime
-              type="DATE"
-              label="From"
-              field={{
-                value: filters.createdDateFrom,
-                onChange: (v: string) =>
-                  setFilters((p) => ({
-                    ...p,
-                    createdDateFrom: v,
-                  })),
-              }}
-            />
-
-            <FieldDateTime
-              type="DATE"
-              label="To"
-              field={{
-                value: filters.createdDateTo,
-                onChange: (v: string) =>
-                  setFilters((p) => ({
-                    ...p,
-                    createdDateTo: v,
                   })),
               }}
             />

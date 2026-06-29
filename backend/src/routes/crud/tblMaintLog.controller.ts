@@ -32,12 +32,14 @@ import type {
   TblMaintClass as TblMaintClassType,
   TblMaintType as TblMaintTypeType,
 } from "orm/generated/prisma/client";
+import { TblPeriod } from "orm/generated/prismabox/TblPeriod";
 
 // =========================
 // SCHEMA
 // =========================
 const MaintLogItemSchema = t.Composite([
   t.Pick(TblMaintLog, [
+    "frequency",
     "maintLogId",
     "overdueCount",
     "dateDone",
@@ -51,6 +53,24 @@ const MaintLogItemSchema = t.Composite([
   t.Object({
     countAttachment: t.Number(),
     countSpare: t.Number(),
+    tblMaintLogSpares: t.Optional(
+      t.Array(
+        t.Object({
+          spareCount: t.Nullable(t.Number()),
+          tblSpareUnit: t.Nullable(
+            t.Object({
+              tblSpareType: t.Nullable(
+                t.Object({
+                  name: t.Nullable(t.String()),
+                  makerRefNo: t.Nullable(t.String()),
+                  partTypeNo: t.Nullable(t.String()),
+                }),
+              ),
+            }),
+          ),
+        }),
+      ),
+    ),
     totalTimeSpent: t.Nullable(t.Number()),
     totalTimeSpentEmp: t.Nullable(t.Number()),
     tblEmployee: t.Optional(
@@ -68,6 +88,7 @@ const MaintLogItemSchema = t.Composite([
     tblMaintClass: t.Nullable(t.Pick(TblMaintClass, ["descr"])),
     tblMaintType: t.Nullable(t.Pick(TblMaintType, ["descr"])),
     tblMaintCause: t.Nullable(t.Pick(TblMaintCause, ["descr"])),
+    tblPeriod: t.Nullable(t.Pick(TblPeriod, ["name"])),
   }),
 ]);
 
@@ -81,6 +102,7 @@ const maintLogListSelect = {
       firstName: true,
     },
   },
+  frequency: true,
   reportedDate: true,
   overdueCount: true,
   maintLogId: true,
@@ -90,6 +112,11 @@ const maintLogListSelect = {
   history: true,
   totalDuration: true,
   workOrderId: true,
+  tblPeriod: {
+    select: {
+      name: true,
+    },
+  },
   tblWorkOrder: {
     select: { description: true },
   },
@@ -153,7 +180,7 @@ const ControllerTblMaintLog = new BaseController({
     app.use(authPlugin).get(
       "/",
       async ({ query, headers }) => {
-        const { sort, filter } = query;
+        const { sort, filter, includeSpares } = query;
         const instId = Number(headers["x-inst-id"] || 0);
 
         if (!instId) throw new Error("Instance ID is required");
@@ -169,7 +196,27 @@ const ControllerTblMaintLog = new BaseController({
             where: { ...(filter ? JSON.parse(filter) : {}), instId },
             orderBy: parseSortString(sort),
             perPage: 250_000,
-            select: maintLogListSelect,
+            select: {
+              ...maintLogListSelect,
+              ...(includeSpares && {
+                tblMaintLogSpares: {
+                  select: {
+                    tblSpareUnit: {
+                      select: {
+                        tblSpareType: {
+                          select: {
+                            name: true,
+                            makerRefNo: true,
+                            partTypeNo: true,
+                          },
+                        },
+                      },
+                    },
+                    spareCount: true,
+                  },
+                },
+              }),
+            },
           }),
           prisma.tblLogDiscipline.groupBy({
             by: ["maintLogId"],
@@ -230,7 +277,12 @@ const ControllerTblMaintLog = new BaseController({
       {
         tags: ["tblMaintLog"],
         detail: { summary: "Get all with per-maintLog timeSpent" },
-        query: querySchema,
+        query: t.Composite([
+          querySchema,
+          t.Object({
+            includeSpares: t.Optional(t.BooleanString()),
+          }),
+        ]),
         response: responseSchemaList(MaintLogItemSchema),
       },
     );

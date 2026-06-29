@@ -77,14 +77,26 @@ interface MaintLogFilterDialogProps {
   initialValue?: MaintLogFilter | null;
 }
 
-function unexpectedToCheckboxes(val: 0 | 1 | 2) {
+function unexpectedToCheckboxes(
+  value:
+    | number
+    | {
+        in?: number[];
+      },
+) {
+  const values =
+    typeof value === "number"
+      ? [value]
+      : Array.isArray(value?.in)
+        ? value.in
+        : [];
+
   return {
-    routine: val === 0,
-    unplannedKpi: val === 1,
-    unplannedIgnore: val === 2,
+    routine: values.includes(0),
+    unplannedKpi: values.includes(1),
+    unplannedIgnore: values.includes(2),
   };
 }
-
 function applyRange(value: DateRange): { from: string; to: string } {
   const now = new Date();
   const from = new Date();
@@ -133,7 +145,7 @@ export default function MaintLogFilterDialog({
       reportFrom: daysAgo(7).toISOString(),
       reportTo: new Date().toISOString(),
       reportRange: "LW",
-      routine: true,
+      routine: false,
       unplannedKpi: false,
       unplannedIgnore: false,
       control: false,
@@ -159,9 +171,9 @@ export default function MaintLogFilterDialog({
         base.workOrder = { workOrderId: c.workOrderId } as any;
       if ("compTypeId" in c)
         base.componentType = { compTypeId: c.compTypeId } as any;
-      if ("unexpected" in c)
+      if ("unexpected" in c) {
         Object.assign(base, unexpectedToCheckboxes(c.unexpected));
-
+      }
       if (c.tblDiscipline?.discId) {
         base.discipline = { discId: c.tblDiscipline.discId } as any;
       }
@@ -200,12 +212,6 @@ export default function MaintLogFilterDialog({
   useEffect(() => {
     setFilters(deserializeFilter(initialValue));
   }, [initialValue]);
-
-  const buildUnexpectedValue = (): 0 | 1 | 2 => {
-    if (filters.unplannedKpi) return 1;
-    if (filters.unplannedIgnore) return 2;
-    return 0;
-  };
 
   const handleApply = () => {
     const conditions: any[] = [];
@@ -257,8 +263,19 @@ export default function MaintLogFilterDialog({
     if (filters.componentType)
       conditions.push({ compTypeId: filters.componentType.compTypeId });
 
-    conditions.push({ unexpected: buildUnexpectedValue() });
+    const unexpectedValues: number[] = [];
 
+    if (filters.routine) unexpectedValues.push(0);
+    if (filters.unplannedKpi) unexpectedValues.push(1);
+    if (filters.unplannedIgnore) unexpectedValues.push(2);
+
+    if (unexpectedValues.length > 0 && unexpectedValues.length < 3) {
+      conditions.push({
+        unexpected: {
+          in: unexpectedValues,
+        },
+      });
+    }
     onSubmit({ AND: conditions.length > 0 ? conditions : undefined });
   };
 

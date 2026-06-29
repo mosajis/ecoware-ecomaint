@@ -1,4 +1,3 @@
-import { TypeTblEmployee } from "@/core/api/generated/api";
 import { FC } from "react";
 
 type Props = {

@@ -4,7 +4,7 @@ import { forwardRef, ReactNode } from "react";
 import { PrintFooter } from "@/shared/components/print/_components/PrintFooter";
 
 interface PrintProps {
-  reportTitle: string;
+  reportTitle: any;
   content: ReactNode;
 }
 

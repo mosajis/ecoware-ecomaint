@@ -1,4 +1,5 @@
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
+import CellDailyReportTitle from "./_components/CellDailyReportTitle";
 import { TypeTblDailyReport } from "@/core/api/generated/api";
 import { GridColDef } from "@mui/x-data-grid";
 
@@ -9,6 +10,7 @@ const columns: GridColDef<TypeTblDailyReport>[] = [
     field: "reportTitle",
     headerName: "Title",
     flex: 2,
+    renderCell: ({ value, row }) => <CellDailyReportTitle row={row} />,
   },
   {
     field: "totalwaiting",

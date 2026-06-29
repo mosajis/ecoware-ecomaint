@@ -11,11 +11,10 @@ import { useDialogs } from "@/shared/hooks/useDialogs";
 import DailyReportFilterDialog, {
   DailyReportFilter,
 } from "./DailyReportDialogFilter";
+import Splitter from "@/shared/components/Splitter/Splitter";
 
 export default function PageDailyReport() {
-  const [selectedRow, setSelectedRow] = useState<TypeTblDailyReport | null>(
-    null,
-  );
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   const { dialogs, openDialog, closeDialog } = useDialogs({
     print: false,
@@ -37,7 +36,11 @@ export default function PageDailyReport() {
     getAll,
     tblDailyReport.deleteById,
     "dailyReportId",
+    !dialogs.filter,
   );
+
+  const selectedRow =
+    rows.find((x) => x.dailyReportId === selectedRowId) ?? null;
 
   const { openCreate, openEdit, openView, dialogProps } =
     useUpsertDialog<TypeTblDailyReport>({
@@ -45,7 +48,7 @@ export default function PageDailyReport() {
     });
 
   const handleRowClick = useCallback(({ row }: { row: TypeTblDailyReport }) => {
-    setSelectedRow(row);
+    setSelectedRowId(row.dailyReportId);
   }, []);
 
   const handleSubmitFilter = useCallback(

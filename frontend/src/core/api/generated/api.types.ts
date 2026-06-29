@@ -26254,7 +26254,6 @@ export interface operations {
                     "application/json": {
                         items: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -26262,8 +26261,8 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
-                            tblDiscipline?: null | ({
+                            discId: number;
+                            tblDiscipline?: {
                                 discId: number;
                                 code: null | string;
                                 name: null | string;
@@ -26273,7 +26272,7 @@ export interface operations {
                                 orderNo: null | number;
                             } & {
                                 [key: string]: unknown;
-                            });
+                            };
                             tblEmployee?: {
                                 employeeId: number;
                                 code: null | string;
@@ -26335,7 +26334,6 @@ export interface operations {
                 content: {
                     "application/json": {
                         dailyReportId: number;
-                        reportTitle: string;
                         reportDate: string;
                         createdEmployeeId: number;
                         createdDate: string;
@@ -26343,8 +26341,8 @@ export interface operations {
                         totalwaiting: null | number;
                         lastUpdate: string;
                         instId: number;
-                        discId: null | number;
-                        tblDiscipline?: null | ({
+                        discId: number;
+                        tblDiscipline?: {
                             discId: number;
                             code: null | string;
                             name: null | string;
@@ -26354,7 +26352,7 @@ export interface operations {
                             orderNo: null | number;
                         } & {
                             [key: string]: unknown;
-                        });
+                        };
                         tblEmployee?: {
                             employeeId: number;
                             code: null | string;
@@ -26432,7 +26430,6 @@ export interface operations {
                 content: {
                     "application/json": {
                         dailyReportId: number;
-                        reportTitle: string;
                         reportDate: string;
                         createdEmployeeId: number;
                         createdDate: string;
@@ -26440,8 +26437,8 @@ export interface operations {
                         totalwaiting: null | number;
                         lastUpdate: string;
                         instId: number;
-                        discId: null | number;
-                        tblDiscipline?: null | ({
+                        discId: number;
+                        tblDiscipline?: {
                             discId: number;
                             code: null | string;
                             name: null | string;
@@ -26451,7 +26448,7 @@ export interface operations {
                             orderNo: null | number;
                         } & {
                             [key: string]: unknown;
-                        });
+                        };
                         tblEmployee?: {
                             employeeId: number;
                             code: null | string;
@@ -26491,16 +26488,14 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": {
-                    reportTitle?: string;
                     reportDate?: string;
                     createdDate?: string;
                     userComment?: null | string;
                     totalwaiting?: null | number;
                     tblDiscipline?: {
-                        connect?: {
+                        connect: {
                             discId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblEmployee?: {
                         connect: {
@@ -26514,16 +26509,14 @@ export interface operations {
                     };
                 };
                 "application/x-www-form-urlencoded": {
-                    reportTitle?: string;
                     reportDate?: string;
                     createdDate?: string;
                     userComment?: null | string;
                     totalwaiting?: null | number;
                     tblDiscipline?: {
-                        connect?: {
+                        connect: {
                             discId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblEmployee?: {
                         connect: {
@@ -26537,16 +26530,14 @@ export interface operations {
                     };
                 };
                 "multipart/form-data": {
-                    reportTitle?: string;
                     reportDate?: string;
                     createdDate?: string;
                     userComment?: null | string;
                     totalwaiting?: null | number;
                     tblDiscipline?: {
-                        connect?: {
+                        connect: {
                             discId: number;
                         };
-                        disconnect?: boolean;
                     };
                     tblEmployee?: {
                         connect: {
@@ -26570,7 +26561,6 @@ export interface operations {
                 content: {
                     "application/json": {
                         dailyReportId: number;
-                        reportTitle: string;
                         reportDate: string;
                         createdEmployeeId: number;
                         createdDate: string;
@@ -26578,8 +26568,8 @@ export interface operations {
                         totalwaiting: null | number;
                         lastUpdate: string;
                         instId: number;
-                        discId: null | number;
-                        tblDiscipline?: null | ({
+                        discId: number;
+                        tblDiscipline?: {
                             discId: number;
                             code: null | string;
                             name: null | string;
@@ -26589,7 +26579,7 @@ export interface operations {
                             orderNo: null | number;
                         } & {
                             [key: string]: unknown;
-                        });
+                        };
                         tblEmployee?: {
                             employeeId: number;
                             code: null | string;
@@ -26635,7 +26625,6 @@ export interface operations {
                 content: {
                     "application/json": {
                         dailyReportId: number;
-                        reportTitle: string;
                         reportDate: string;
                         createdEmployeeId: number;
                         createdDate: string;
@@ -26643,8 +26632,8 @@ export interface operations {
                         totalwaiting: null | number;
                         lastUpdate: string;
                         instId: number;
-                        discId: null | number;
-                        tblDiscipline?: null | ({
+                        discId: number;
+                        tblDiscipline?: {
                             discId: number;
                             code: null | string;
                             name: null | string;
@@ -26654,7 +26643,7 @@ export interface operations {
                             orderNo: null | number;
                         } & {
                             [key: string]: unknown;
-                        });
+                        };
                         tblEmployee?: {
                             employeeId: number;
                             code: null | string;
@@ -27135,7 +27124,6 @@ export interface operations {
                             }[];
                             tblDailyReports?: {
                                 dailyReportId: number;
-                                reportTitle: string;
                                 reportDate: string;
                                 createdEmployeeId: number;
                                 createdDate: string;
@@ -27143,7 +27131,7 @@ export interface operations {
                                 totalwaiting: null | number;
                                 lastUpdate: string;
                                 instId: number;
-                                discId: null | number;
+                                discId: number;
                             }[];
                             tblEmployees?: {
                                 employeeId: number;
@@ -27475,7 +27463,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -27483,7 +27470,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblEmployees?: {
                             employeeId: number;
@@ -27705,7 +27692,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -27713,7 +27699,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblEmployees?: {
                             employeeId: number;
@@ -28117,7 +28103,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -28125,7 +28110,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblEmployees?: {
                             employeeId: number;
@@ -28315,7 +28300,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -28323,7 +28307,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblEmployees?: {
                             employeeId: number;
@@ -29234,7 +29218,6 @@ export interface operations {
                             }[];
                             tblDailyReports?: {
                                 dailyReportId: number;
-                                reportTitle: string;
                                 reportDate: string;
                                 createdEmployeeId: number;
                                 createdDate: string;
@@ -29242,7 +29225,7 @@ export interface operations {
                                 totalwaiting: null | number;
                                 lastUpdate: string;
                                 instId: number;
-                                discId: null | number;
+                                discId: number;
                             }[];
                             tblDiscipline?: null | ({
                                 discId: number;
@@ -30631,7 +30614,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -30639,7 +30621,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblDiscipline?: null | ({
                             discId: number;
@@ -31408,7 +31390,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -31416,7 +31397,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblDiscipline?: null | ({
                             discId: number;
@@ -33177,7 +33158,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -33185,7 +33165,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblDiscipline?: null | ({
                             discId: number;
@@ -33922,7 +33902,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -33930,7 +33909,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblDiscipline?: null | ({
                             discId: number;
@@ -40159,7 +40138,6 @@ export interface operations {
                             }[];
                             tblDailyReports?: {
                                 dailyReportId: number;
-                                reportTitle: string;
                                 reportDate: string;
                                 createdEmployeeId: number;
                                 createdDate: string;
@@ -40167,7 +40145,7 @@ export interface operations {
                                 totalwaiting: null | number;
                                 lastUpdate: string;
                                 instId: number;
-                                discId: null | number;
+                                discId: number;
                             }[];
                             tblFailureReports?: {
                                 failureReportId: number;
@@ -41531,7 +41509,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -41539,7 +41516,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblFailureReports?: {
                             failureReportId: number;
@@ -42241,7 +42218,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -42249,7 +42225,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblFailureReports?: {
                             failureReportId: number;
@@ -44018,7 +43994,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -44026,7 +44001,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblFailureReports?: {
                             failureReportId: number;
@@ -44696,7 +44671,6 @@ export interface operations {
                         }[];
                         tblDailyReports?: {
                             dailyReportId: number;
-                            reportTitle: string;
                             reportDate: string;
                             createdEmployeeId: number;
                             createdDate: string;
@@ -44704,7 +44678,7 @@ export interface operations {
                             totalwaiting: null | number;
                             lastUpdate: string;
                             instId: number;
-                            discId: null | number;
+                            discId: number;
                         }[];
                         tblFailureReports?: {
                             failureReportId: number;
@@ -52626,6 +52600,7 @@ export interface operations {
                 select?: string;
                 paginate?: boolean;
                 force?: boolean;
+                includeSpares?: boolean | string;
             };
             header?: never;
             path?: never;
@@ -52641,6 +52616,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         items: {
+                            frequency: null | number;
                             maintLogId: number;
                             overdueCount: null | number;
                             dateDone: null | string;
@@ -52652,6 +52628,16 @@ export interface operations {
                             reportedDate: null | string;
                             countAttachment: number;
                             countSpare: number;
+                            tblMaintLogSpares?: {
+                                spareCount: (number | null) | null;
+                                tblSpareUnit: ({
+                                    tblSpareType: ({
+                                        name: (string | null) | null;
+                                        makerRefNo: (string | null) | null;
+                                        partTypeNo: (string | null) | null;
+                                    } | null) | null;
+                                } | null) | null;
+                            }[];
                             totalTimeSpent: (number | null) | null;
                             totalTimeSpentEmp: (number | null) | null;
                             tblEmployee?: ({
@@ -52683,6 +52669,9 @@ export interface operations {
                             } | null) | null;
                             tblMaintCause: ({
                                 descr: null | string;
+                            } | null) | null;
+                            tblPeriod: ({
+                                name: null | string;
                             } | null) | null;
                         }[];
                         total: number;

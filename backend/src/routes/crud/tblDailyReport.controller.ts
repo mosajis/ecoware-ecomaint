@@ -76,7 +76,7 @@ const ControllerTblDailyReport = new BaseController({
           throw new Error("Employee not found");
         }
 
-        const disciplineId = user.tblEmployee.discId;
+        const disciplineId = user.tblEmployee.discId as number;
 
         const duplicate = await prisma.tblDailyReport.findFirst({
           where: {
@@ -108,14 +108,8 @@ const ControllerTblDailyReport = new BaseController({
           0,
         );
 
-        const disciplineName =
-          user.tblEmployee.tblDiscipline?.name ?? "UNKNOWN";
-
-        const reportTitle = `${disciplineName} - ${disciplineName.charAt(0).toUpperCase()}DR`;
-
         return prisma.tblDailyReport.create({
           data: {
-            reportTitle,
             reportDate,
             userComment: body.userComment,
             totalwaiting,

@@ -1,4 +1,6 @@
 import Box from "@mui/material/Box";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
@@ -8,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import {
   tblMaintLog,
+  tblMaintLogSpare,
   TypeTblDailyReport,
   TypeTblMaintLog,
 } from "@/core/api/generated/api";
@@ -24,6 +27,8 @@ export default function DailyReportDialogPrint({
   selectedRow,
 }: Props) {
   const contentRef = useRef<HTMLDivElement>(null);
+  const [withRoutine, setWithRoutine] = useState(false);
+
   const handlePrint = useReactToPrint({ contentRef });
 
   const [loading, setLoading] = useState(false);
@@ -44,10 +49,13 @@ export default function DailyReportDialogPrint({
 
     tblMaintLog
       .getAll({
+        includeSpares: true,
         select: {
           tblMaintCause: true,
+          tblMaintLogSpare: true,
         },
         filter: {
+          instId: 300,
           reportedDate: {
             gte: startOfDay.toISOString(),
             lte: endOfDay.toISOString(),
@@ -67,11 +75,15 @@ export default function DailyReportDialogPrint({
       maxWidth="xs"
     >
       <Box display="flex" flexDirection="column" gap={2} p={1}>
-        <Typography variant="body1" color="text.secondary">
-          {isReady
-            ? `Please review before proceeding.`
-            : "No records selected. Please select at least one row to print."}
-        </Typography>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={withRoutine}
+              onChange={(e) => setWithRoutine(e.target.checked)}
+            />
+          }
+          label="Include Routine Jobs"
+        />
 
         <Button
           onClick={handlePrint}
@@ -98,6 +110,7 @@ export default function DailyReportDialogPrint({
           <DailyReportPrintTemplate
             dailyReport={selectedRow}
             maintLogs={maintLogs}
+            withRoutine={withRoutine}
             ref={contentRef}
           />
         )}
