@@ -8,8 +8,9 @@ import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { columns, getRowId } from "./DailyReportColumns";
 import { tblDailyReport, TypeTblDailyReport } from "@/core/api/generated/api";
 import { useDialogs } from "@/shared/hooks/useDialogs";
-import { useAtomValue } from "jotai";
-import { atomUser } from "@/pages/auth/auth.atom";
+import DailyReportFilterDialog, {
+  DailyReportFilter,
+} from "./DailyReportDialogFilter";
 
 export default function PageDailyReport() {
   const [selectedRow, setSelectedRow] = useState<TypeTblDailyReport | null>(
@@ -18,20 +19,19 @@ export default function PageDailyReport() {
 
   const { dialogs, openDialog, closeDialog } = useDialogs({
     print: false,
+    filter: true,
   });
 
-  const user = useAtomValue(atomUser);
-  const disc = user?.tblEmployee?.discId;
+  const [filter, setFilter] = useState<DailyReportFilter | null>(null);
 
-  const getAll = useCallback(
-    () =>
-      tblDailyReport.getAll({
-        filter: {
-          discId: disc,
-        },
-      }),
-    [],
-  );
+  const getAll = useCallback(() => {
+    return tblDailyReport.getAll({
+      filter: filter ?? undefined,
+      include: {
+        tblDiscipline: true,
+      },
+    });
+  }, [filter]);
 
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
     getAll,
@@ -47,6 +47,16 @@ export default function PageDailyReport() {
   const handleRowClick = useCallback(({ row }: { row: TypeTblDailyReport }) => {
     setSelectedRow(row);
   }, []);
+
+  const handleSubmitFilter = useCallback(
+    (f: DailyReportFilter | null) => {
+      setFilter(f);
+      closeDialog("filter");
+    },
+    [closeDialog],
+  );
+
+  const hasFilter = Array.isArray(filter?.AND) && filter.AND.length > 0;
 
   return (
     <>
@@ -67,12 +77,19 @@ export default function PageDailyReport() {
         onDeleteClick={handleDelete}
         toolbarChildren={
           <DailyReportActions
+            onFilter={() => openDialog("filter")}
             onPrint={() => openDialog("print")}
+            hasFilter={hasFilter}
             selected={selectedRow}
           />
         }
       />
 
+      <DailyReportFilterDialog
+        open={dialogs.filter}
+        onClose={() => closeDialog("filter")}
+        onSubmit={handleSubmitFilter}
+      />
       <DailyReportUpsert entityName="DailyReport" {...dialogProps} />
 
       {dialogs.print && (

@@ -52,7 +52,7 @@ const ReportPrintTemplate = forwardRef<HTMLDivElement, Props>(
             <PrintContent maintLogs={maintLogs} dailyReport={dailyReport} />
           </>
         }
-        reportTitle="Daily Report"
+        reportTitle={dailyReport.reportTitle}
         ref={ref}
       />
     );

@@ -22,16 +22,16 @@ const columns: GridColDef<TypeTblDailyReport>[] = [
     renderCell: ({ value }) => <CellDateTime value={value} type="DATE" />,
   },
   {
+    field: "discipline",
+    headerName: "Discipline",
+    width: 130,
+    valueGetter: (_, row) => row?.tblDiscipline?.name,
+  },
+  {
     field: "createdDate",
     headerName: "Created Date",
     flex: 1,
     renderCell: ({ value }) => <CellDateTime value={value} type="DATE" />,
-  },
-  {
-    field: "lastUpdate",
-    headerName: "Last Update",
-    width: 130,
-    renderCell: ({ value }) => <CellDateTime value={value} />,
   },
 ];
 
