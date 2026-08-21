@@ -118,6 +118,7 @@ const ControllerTblDailyReport = new BaseController({
             createdDate: new Date(),
             lastUpdate: new Date(),
             instId,
+
             discId: disciplineId,
           },
         });
