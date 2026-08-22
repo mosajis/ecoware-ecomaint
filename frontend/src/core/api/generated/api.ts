@@ -1435,3 +1435,6 @@ export const tblWorkShopComponent = {
     api.delete<DynamicResponse<'deleteTblWorkShopComponent'>>('/tblWorkShopComponent', { params: stringifyQuery(query) }),
 };
 
+
+
+
