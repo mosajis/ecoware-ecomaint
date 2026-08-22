@@ -66,6 +66,15 @@ export class FileService {
     }
   }
 
+  static sanitizeDirectoryName(name: string): string {
+    return name
+      .trim()
+      .replace(/[<>:"/\\|?*\x00-\x1F]/g, "_")
+      .replace(/\s+/g, "_")
+      .replace(/^\.+|\.+$/g, "")
+      .substring(0, 100);
+  }
+
   /**
    * Save file buffer to disk
    */
@@ -73,27 +82,29 @@ export class FileService {
     buffer: Buffer,
     originalName: string,
     mimeType: string,
+    directory?: string,
   ): Promise<UploadedFileInfo> {
-    // Validate before saving
     const validationError = this.validateFile(
       originalName,
       mimeType,
       buffer.length,
     );
+
     if (validationError) {
       throw new Error(validationError.message);
     }
 
-    // Ensure directory exists
-    await this.ensureUploadDir();
+    const baseDir = directory
+      ? path.join(FILE_CONFIG.ATTACHMENT_DIR, directory)
+      : FILE_CONFIG.ATTACHMENT_DIR;
 
-    // Generate UUID-based filename
+    await fs.mkdir(baseDir, { recursive: true });
+
     const uuid = uuidv4();
     const extension = path.extname(originalName).toLowerCase();
     const storageName = `${uuid}${extension}`;
-    const storagePath = path.join(FILE_CONFIG.ATTACHMENT_DIR, storageName);
+    const storagePath = path.join(baseDir, storageName);
 
-    // Relative path for database storage
     const relativePath = path.relative(FILE_CONFIG.UPLOAD_DIR, storagePath);
 
     try {
@@ -105,7 +116,7 @@ export class FileService {
         mimeType,
         size: buffer.length,
         extension,
-        storagePath: relativePath, // Store relative path in DB
+        storagePath: relativePath,
       };
     } catch (error) {
       throw new Error(`Failed to save file: ${error}`);
@@ -118,11 +129,7 @@ export class FileService {
   static async readFile(storagePath: string): Promise<Buffer> {
     const fullPath = path.join(FILE_CONFIG.UPLOAD_DIR, storagePath);
 
-    try {
-      return await fs.readFile(fullPath);
-    } catch (error) {
-      throw new Error(`File not found: ${error}`);
-    }
+    return await fs.readFile(fullPath);
   }
 
   /**

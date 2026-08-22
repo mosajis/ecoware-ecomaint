@@ -40,10 +40,29 @@ export class AttachmentService extends BaseService<any> {
    * Create attachment with file upload
    */
   async createWithFile(data: CreateAttachmentInput): Promise<any> {
+    const installation = await prisma.tblInstallation.findUnique({
+      where: {
+        instId: data.instId,
+      },
+      select: {
+        instId: true,
+        name: true,
+      },
+    });
+
+    if (!installation) {
+      throw new Error(`Installation with ID ${data.instId} not found`);
+    }
+
+    const installationName = FileService.sanitizeDirectoryName(
+      installation.name,
+    );
+
     const fileInfo = await FileService.saveFile(
       data.buffer,
       data.originalFileName,
       data.mimeType,
+      installationName,
     );
 
     return this.create({

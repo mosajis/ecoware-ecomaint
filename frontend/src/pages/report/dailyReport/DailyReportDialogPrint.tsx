@@ -14,6 +14,10 @@ import {
   TypeTblDailyReport,
   TypeTblMaintLog,
 } from "@/core/api/generated/api";
+import { useAtom, useAtomValue } from "jotai";
+import { atomRig } from "@/shared/atoms/general.atom";
+import { useAtomCallback } from "jotai/utils";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 type Props = {
   open: boolean;
@@ -26,6 +30,10 @@ export default function DailyReportDialogPrint({
   onClose,
   selectedRow,
 }: Props) {
+  const user = useAtomValue(atomUser)
+  const installation = useAtomValue(atomRig)
+  const instId = installation?.instId
+  
   const contentRef = useRef<HTMLDivElement>(null);
   const [withRoutine, setWithRoutine] = useState(false);
 
@@ -36,6 +44,8 @@ export default function DailyReportDialogPrint({
 
   const isReady = !!selectedRow;
   const date = selectedRow?.reportDate;
+
+  const discId = user?.tblEmployee?.discId;
 
   useEffect(() => {
     if (!date) return;
@@ -55,7 +65,8 @@ export default function DailyReportDialogPrint({
           tblMaintLogSpare: true,
         },
         filter: {
-          instId: 300,
+          instId,
+          discId,
           reportedDate: {
             gte: startOfDay.toISOString(),
             lte: endOfDay.toISOString(),
