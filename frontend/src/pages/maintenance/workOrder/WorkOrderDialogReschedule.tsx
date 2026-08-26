@@ -5,7 +5,6 @@ import Editor from "@/shared/components/Editor";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import {
   tblCompJobCounter,
-  tblWorkOrder,
   TypeTblWorkOrder,
 } from "@/core/api/generated/api";
 import { toast } from "sonner";
@@ -13,8 +12,6 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useEffect, useState } from "react";
-import { useAtomValue } from "jotai";
-import { atomUser } from "@/pages/auth/auth.atom";
 import { workOrderReschedule } from "@/core/api/api";
 
 const schema = z
@@ -44,15 +41,15 @@ type FormValues = z.infer<typeof schema>;
 type Props = {
   open: boolean;
   onClose: () => void;
-  onSuccess: (record: TypeTblWorkOrder) => void;
-  workOrder: TypeTblWorkOrder | null;
+  onSuccess: (workOrders: TypeTblWorkOrder[]) => void;
+  workOrders: TypeTblWorkOrder[];
 };
 
 export default function WorkOrderDialogReschedule({
   open,
   onClose,
   onSuccess,
-  workOrder,
+  workOrders,
 }: Props) {
   const {
     control,
@@ -74,27 +71,49 @@ export default function WorkOrderDialogReschedule({
   const [isCounterBased, setIsCounterBased] = useState(false);
   const [loadingInitial, setLoadingInitial] = useState(false);
 
+  const isSingle = workOrders.length === 1;
+
   useEffect(() => {
-    if (!workOrder) return;
+    if (!workOrders.length) return;
 
     const init = async () => {
       try {
         setLoadingInitial(true);
 
-        setValue("currentDueDate", workOrder.dueDate ?? null);
+        // مقایسه‌ی currentDueDate فقط وقتی معنی داره که یک آیتم انتخاب شده باشه
+        setValue(
+          "currentDueDate",
+          isSingle ? (workOrders[0].dueDate ?? null) : null,
+        );
 
-        const compJobId = workOrder.tblCompJob?.compJobId;
-        if (!compJobId) return;
+        const compJobIds = workOrders
+          .map((wo) => wo.tblCompJob?.compJobId)
+          .filter((id): id is number => id != null);
+
+        if (!compJobIds.length) {
+          setIsCounterBased(false);
+          return;
+        }
 
         const compJobCounters = await tblCompJobCounter.getAll({
-          filter: { compJobId },
+          filter: { compJobId: { in: compJobIds } },
         });
 
-        const compJobCounter = compJobCounters.items[0] ?? null;
-        setIsCounterBased(!!compJobCounter);
+        // همه‌ی compJob های انتخاب‌شده باید کانتر داشته باشن تا فیلد newDueCount فعال/الزامی بشه
+        const countedCompJobIds = new Set(
+          compJobCounters.items.map((c) => c.compJobId),
+        );
+        const allCounterBased = compJobIds.every((id) =>
+          countedCompJobIds.has(id),
+        );
 
-        if (compJobCounter) {
-          setValue("currentDueCount", compJobCounter.nextDueCount ?? null);
+        setIsCounterBased(allCounterBased);
+
+        if (isSingle && allCounterBased) {
+          const compJobCounter = compJobCounters.items[0] ?? null;
+          setValue("currentDueCount", compJobCounter?.nextDueCount ?? null);
+        } else {
+          setValue("currentDueCount", null);
         }
       } finally {
         setLoadingInitial(false);
@@ -102,14 +121,14 @@ export default function WorkOrderDialogReschedule({
     };
 
     init();
-  }, [workOrder, setValue]);
+  }, [workOrders, isSingle, setValue]);
 
   useEffect(() => {
     if (!open) reset();
   }, [open, reset]);
 
   const onSubmit = async (data: FormValues) => {
-    if (!workOrder) return;
+    if (!workOrders.length) return;
 
     if (isCounterBased && data.newDueCount == null) {
       toast.error("New due count is required");
@@ -117,9 +136,8 @@ export default function WorkOrderDialogReschedule({
     }
 
     try {
-      // یه endpoint همه کارها رو atomically انجام میده
       const result = await workOrderReschedule({
-        workOrderId: workOrder.workOrderId,
+        workOrderIds: workOrders.map((wo) => wo.workOrderId),
         newDueDate: new Date(data.newDueDate).toISOString(),
         newDueCount: data.newDueCount ?? undefined,
         reason: data.reason,
@@ -130,10 +148,10 @@ export default function WorkOrderDialogReschedule({
         return;
       }
 
-      onSuccess(result?.workOrder as any);
+      onSuccess((result?.workOrders as any) ?? []);
       handleClose();
     } catch {
-      toast.error("Failed to reschedule work order");
+      toast.error("Failed to reschedule work order(s)");
     }
   };
 
@@ -146,7 +164,11 @@ export default function WorkOrderDialogReschedule({
     <FormDialog
       open={open}
       onClose={handleClose}
-      title="Reschedule Work Order"
+      title={
+        isSingle
+          ? "Reschedule Work Order"
+          : `Reschedule ${workOrders.length} Work Orders`
+      }
       onSubmit={handleSubmit(onSubmit)}
       loadingInitial={loadingInitial || isSubmitting}
     >
@@ -159,6 +181,7 @@ export default function WorkOrderDialogReschedule({
               pickerProps={{ readOnly: true }}
               field={field}
               label="Current Due Date"
+              disabled={!isSingle}
             />
           )}
         />
@@ -182,7 +205,7 @@ export default function WorkOrderDialogReschedule({
           render={({ field }) => (
             <FieldNumber
               readOnly
-              disabled={!isCounterBased}
+              disabled={!isCounterBased || !isSingle}
               label="Current Due Count"
               value={field.value}
               onChange={field.onChange}

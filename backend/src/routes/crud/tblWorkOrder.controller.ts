@@ -528,16 +528,25 @@ const ControllerTblWorkOrder = new BaseController({
     app.use(authPlugin).post(
       "/reschedule",
       async ({ body, headers, userId, set }) => {
-        const { workOrderId, newDueDate, newDueCount, reason } = body;
+        const { workOrderIds, newDueDate, newDueCount, reason } = body;
 
         const instId = Number(headers["x-inst-id"] || 0);
+
+        
+        const emptyWorkOrders = [] as {
+          workOrderId: number;
+          dueDate: Date | null;
+          window: number | null;
+          tblWorkOrderStatus: { name: string } | null;
+        }[];
 
         if (!instId) {
           set.status = 400;
           return {
-            success: false as const,
+            success: false,
             message: "Instance ID is required",
-            workOrder: null,
+            count: 0,
+            workOrders: emptyWorkOrders,
           };
         }
 
@@ -551,18 +560,16 @@ const ControllerTblWorkOrder = new BaseController({
         if (!employeeId) {
           set.status = 400;
           return {
-            success: false as const,
+            success: false,
             message: "Employee not found",
-            workOrder: null,
+            count: 0,
+            workOrders: emptyWorkOrders,
           };
         }
 
         return prisma.$transaction(async (tx) => {
-          const workOrder = await tx.tblWorkOrder.findUnique({
-            where: {
-              workOrderId,
-              instId,
-            },
+          const workOrders = await tx.tblWorkOrder.findMany({
+            where: { workOrderId: { in: workOrderIds }, instId },
             include: {
               tblCompJob: {
                 include: {
@@ -572,58 +579,68 @@ const ControllerTblWorkOrder = new BaseController({
             },
           });
 
-          if (!workOrder) {
+          if (!workOrders.length) {
             set.status = 404;
-
             return {
               success: false,
-              message: "WorkOrder not found",
-              workOrder: null,
+              message: "WorkOrders not found",
+              count: 0,
+              workOrders: emptyWorkOrders,
             };
           }
 
           const now = new Date();
 
-          // Update CompJob
-          if (workOrder.compJobId) {
-            await tx.tblCompJob.update({
-              where: {
-                compJobId: workOrder.compJobId,
-                instId,
-              },
+          for (const workOrder of workOrders) {
+            // Update CompJob
+            if (workOrder.compJobId) {
+              await tx.tblCompJob.update({
+                where: {
+                  compJobId: workOrder.compJobId,
+                  instId,
+                },
+                data: {
+                  nextDueDate: newDueDate,
+                  lastUpdate: now,
+                },
+              });
+            }
+
+            // Update Counter(s)
+            if (
+              newDueCount !== undefined &&
+              workOrder.tblCompJob?.tblCompJobCounters?.length
+            ) {
+              await tx.tblCompJobCounter.updateMany({
+                where: {
+                  compJobId: workOrder.compJobId!,
+                  instId,
+                },
+                data: {
+                  nextDueCount: newDueCount,
+                  lastUpdate: now,
+                },
+              });
+            }
+
+            // Create Log
+            await tx.tblReScheduleLog.create({
               data: {
-                nextDueDate: newDueDate,
+                workOrderId: workOrder.workOrderId,
+                rescheduledBy: employeeId,
+                fromDueDate: workOrder.dueDate,
+                toDueDate: newDueDate,
+                rescheduledDate: now,
+                reason,
                 lastUpdate: now,
+                instId,
               },
             });
           }
 
-          // Update Counter(s)
-          if (
-            newDueCount !== undefined &&
-            workOrder.tblCompJob?.tblCompJobCounters?.length
-          ) {
-            await tx.tblCompJobCounter.updateMany({
-              where: {
-                compJobId: workOrder.compJobId!,
-                instId,
-              },
-              data: {
-                nextDueCount: newDueCount,
-                lastUpdate: now,
-              },
-            });
-          }
-
-          // Update WorkOrder
-          const updatedWorkOrder = await tx.tblWorkOrder.update({
-            include: {
-              tblWorkOrderStatus: true,
-            },
-            where: {
-              workOrderId,
-              instId,
-            },
+          // Update WorkOrders
+          await tx.tblWorkOrder.updateMany({
+            where: { workOrderId: { in: workOrderIds }, instId },
             data: {
               workOrderStatusId: 2,
               issuedDate: null,
@@ -633,30 +650,27 @@ const ControllerTblWorkOrder = new BaseController({
             },
           });
 
-          // Create Log
-          await tx.tblReScheduleLog.create({
-            data: {
-              workOrderId,
-              rescheduledBy: employeeId,
-              fromDueDate: workOrder.dueDate,
-              toDueDate: newDueDate,
-              rescheduledDate: now,
-              reason,
-              lastUpdate: now,
-              instId,
+          const updatedWorkOrders = await tx.tblWorkOrder.findMany({
+            where: { workOrderId: { in: workOrderIds }, instId },
+            select: {
+              workOrderId: true,
+              dueDate: true,
+              window: true,
+              tblWorkOrderStatus: { select: { name: true } },
             },
           });
 
           return {
             success: true,
-            message: "WorkOrder rescheduled successfully",
-            workOrder: updatedWorkOrder,
+            message: `${updatedWorkOrders.length} work order(s) rescheduled successfully`,
+            count: updatedWorkOrders.length,
+            workOrders: updatedWorkOrders,
           };
         });
       },
       {
         body: t.Object({
-          workOrderId: t.Number(),
+          workOrderIds: t.Array(t.Number()),
           newDueDate: t.Date(),
           newDueCount: t.Optional(t.Number()),
           reason: t.String(),
@@ -664,14 +678,21 @@ const ControllerTblWorkOrder = new BaseController({
         response: t.Object({
           success: t.Boolean(),
           message: t.String(),
-          workOrder: t.Union([
-            t.Null(),
-            buildResponseSchema(TblWorkOrderPlain, TblWorkOrder),
-          ]),
+          count: t.Number(),
+          workOrders: t.Array(
+            t.Object({
+              workOrderId: t.Number(),
+              dueDate: t.Nullable(t.Date()),
+              window: t.Nullable(t.Number()),
+              tblWorkOrderStatus: t.Nullable(
+                t.Pick(TblWorkOrderStatus, ["name"]),
+              ),
+            }),
+          ),
         }),
         detail: {
           tags: ["tblWorkOrder"],
-          summary: "Reschedule WorkOrder",
+          summary: "Bulk reschedule WorkOrders",
         },
       },
     );

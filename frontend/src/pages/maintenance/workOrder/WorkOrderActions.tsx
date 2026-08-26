@@ -85,7 +85,7 @@ export default function WorkOrderActions({
       label: "ReSchedule",
       icon: <AutoModeIcon />,
       disabled:
-        selectedCount != 1 ||
+        selectedCount === 0 ||
         selectedStatuses.every(
           (s) => s === STATUS.CONTROL || s === STATUS.COMPLETE,
         ),

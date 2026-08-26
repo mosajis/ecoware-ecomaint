@@ -170,13 +170,18 @@ export default function WorkOrderPage() {
     });
   };
 
-  const successReschedule = (record: TypeTblWorkOrder) => {
-    optimisticUpdate(record.workOrderId, {
-      tblWorkOrderStatus: record.tblWorkOrderStatus,
-      dueDate: record.dueDate,
-      window: record.window,
-    });
-  };
+  const successReschedule = useCallback(
+    (workOrders: TypeTblWorkOrder[]) => {
+      workOrders.forEach((wo) => {
+        optimisticUpdate(wo.workOrderId, {
+          tblWorkOrderStatus: wo.tblWorkOrderStatus,
+          dueDate: wo.dueDate,
+          window: wo.window,
+        });
+      });
+    },
+    [optimisticUpdate],
+  );
 
   const successIssue = useCallback(
     (workOrders: TypeTblWorkOrder[]) => {
@@ -356,7 +361,7 @@ export default function WorkOrderPage() {
       {/* Reschedule Dialog */}
       {dialogs.dialogReschedule && (
         <WorkOrderDialogReschedule
-          workOrder={selectedWorkOrders[0]}
+          workOrders={selectedWorkOrders}
           open={dialogs.dialogReschedule}
           onClose={() => closeDialog("dialogReschedule")}
           onSuccess={successReschedule}
