@@ -42,10 +42,10 @@ export default function HeaderBreadcrumbs() {
         ? lastPage.context!.breadcrumb(lastPage)
         : lastPage.context!.breadcrumb;
 
-    document.title = title ? `${title} - ECO` : "ECO";
+    document.title = title ? `${title} - RigMaster` : "RigMaster";
 
     return () => {
-      document.title = "ECO";
+      document.title = "RigMaster";
     };
   }, [breadcrumbMatches]);
 

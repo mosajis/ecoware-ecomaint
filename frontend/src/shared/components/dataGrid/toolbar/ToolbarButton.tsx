@@ -16,12 +16,10 @@ export default function ToolbarButton({
   ...props
 }: ToolbarButtonProps) {
   return (
-    <Tooltip title={title} arrow>
-      <span>
-        <DataGridToolbarButton size="small" {...props}>
-          {children}
-        </DataGridToolbarButton>
-      </span>
+    <Tooltip title={title} arrow aria-label="edit22">
+      <DataGridToolbarButton size="small" {...props}>
+        {children}
+      </DataGridToolbarButton>
     </Tooltip>
   );
 }

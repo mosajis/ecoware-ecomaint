@@ -60,7 +60,7 @@ export default function LoginInfoPanel() {
     >
       <Box fontSize="2.5rem" fontWeight="bold">
         Discover the Benefits of Using{" "}
-        <span style={{ color: "rgba(33, 87, 235, 1)" }}> ECO </span>
+        <span style={{ color: "rgba(33, 87, 235, 1)" }}> RigMaster </span>
         Maintenance System
       </Box>
 

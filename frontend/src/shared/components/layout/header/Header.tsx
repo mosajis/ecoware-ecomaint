@@ -27,9 +27,9 @@ export default function Header() {
     >
       {/* Left side: Menu button + Breadcrumbs */}
       <Box display="flex" alignItems="center" gap={1.5}>
-        <IconButton size="small" onClick={() => setOpen((o) => !o)}>
+        {/* <IconButton size="small" onClick={() => setOpen((o) => !o)}>
           <MenuIcon />
-        </IconButton>
+        </IconButton> */}
         <HeaderBreadcrumbs />
       </Box>
 

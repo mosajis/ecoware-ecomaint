@@ -4,6 +4,8 @@ import { alpha } from "@mui/material/styles";
 import { lazy, Suspense, useMemo } from "react";
 import { Outlet } from "@tanstack/react-router";
 
+const TopMenu = lazy(() => import("@/shared/components/layout/TopMenu"));
+
 const SideMenu = lazy(() => import("@/shared/components/layout/SideMenu"));
 const Header = lazy(() => import("@/shared/components/layout/header/Header"));
 
@@ -18,11 +20,12 @@ function AppLayout() {
     }),
     [],
   );
-
+  // "height: "100vh" withour flexDirection: "column"
   return (
-    <Box sx={{ display: "flex", height: "100vh" }}>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Suspense>
-        <SideMenu />
+        <TopMenu />
+        {/* <SideMenu /> */}
       </Suspense>
 
       <Box component="main" sx={{ flexGrow: 1, overflow: "hidden" }}>

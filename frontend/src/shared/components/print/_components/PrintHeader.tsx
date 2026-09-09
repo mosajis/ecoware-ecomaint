@@ -23,9 +23,9 @@ export default function PrintHeader({ reportTitle }: Props) {
             <td className="cell-label">Installation / Area</td>
             <td className="cell-value">{instName}</td>
             <td className="cell-label">System / Version</td>
-            <td className="cell-value">ECO Maint / v.0.1.14</td>
+            <td className="cell-value">RigMaster / v.0.1.14</td>
             <td className="cell-label">Organization</td>
-            <td className="cell-value">GPTK</td>
+            <td className="cell-value">IPEDco</td>
           </tr>
         </tbody>
       </table>
