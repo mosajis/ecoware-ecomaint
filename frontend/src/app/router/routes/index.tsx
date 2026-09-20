@@ -1,16 +1,15 @@
-import treeGeneral from "@/pages/general/GeneralRoutes";
 import treeAccess from "@/pages/access/AccessRoutes";
 import treeDashboard, { RouteLocal } from "@/pages/dashboard/DashboardRoute";
+import treeGeneral from "@/pages/general/GeneralRoutes";
 
-import treeSpare from "@/pages/spare/SpareRoutes";
 import treeReport from "@/pages/report/ReportRoutes";
-import { createRoute } from "@tanstack/react-router";
-import { redirect } from "@tanstack/react-router";
+import treeSpare from "@/pages/spare/SpareRoutes";
+import { createRoute, redirect } from "@tanstack/react-router";
 import { protectedRoute } from "./protected.routes";
 
-import { AuthLoginRoute } from "./auth.routes";
-import { rootRoute } from "./_components/rootRoute";
 import { maintenanceRoutesTree } from "../../../pages/maintenance/MaintenanceRoutes";
+import { rootRoute } from "./_components/rootRoute";
+import { AuthLoginRoute } from "./auth.routes";
 
 // --- Index redirect "/" → "/dashboard" ---
 export const indexRoute = createRoute({
@@ -23,9 +22,10 @@ export const indexRoute = createRoute({
 
 // --- Route Tree ---
 export const routesTree = rootRoute.addChildren([
-  indexRoute,
   AuthLoginRoute,
   protectedRoute.addChildren([
+    indexRoute,
+
     treeDashboard,
 
     treeGeneral,

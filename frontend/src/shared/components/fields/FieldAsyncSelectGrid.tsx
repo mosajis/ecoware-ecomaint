@@ -1,9 +1,9 @@
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ClearIcon from "@mui/icons-material/Clear";
-import TextField from "@mui/material/TextField";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import IconButton from "@mui/material/IconButton";
-import { JSX, useState } from "react";
+import TextField from "@mui/material/TextField";
 import type { GridRowId } from "@mui/x-data-grid";
+import { useState } from "react";
 import { AsyncSelectGridDialog } from "./_components/AsyncSelectGridDialog";
 
 type OnlineSearchConfig = {
@@ -28,6 +28,7 @@ type BaseFieldAsyncSelectGridProps<TItem extends Record<string, any>> = {
   getOptionLabel?: (item: TItem) => string | null | undefined;
   dialogHeight?: number | string;
   dialogMaxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | false;
+  dataCy?: string;
 };
 // ---------------- Single / Multiple Props ----------------
 type AsyncSelectSingleProps<TItem extends Record<string, any>> =
@@ -68,6 +69,7 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
   getOptionLabel = (item) => item?.name ?? Object.values(item)[1] ?? "",
   dialogHeight = 600,
   dialogMaxWidth = "sm",
+  dataCy,
 }: FieldAsyncSelectGridProps<TItem>) {
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -108,6 +110,7 @@ function FieldAsyncSelectGrid<TItem extends Record<string, any>>({
   return (
     <>
       <TextField
+        data-cy={dataCy}
         label={label}
         value={displayValue}
         placeholder={placeholder}

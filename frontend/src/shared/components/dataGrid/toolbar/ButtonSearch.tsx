@@ -1,17 +1,17 @@
-import { useEffect, useRef, useState } from "react";
-import { styled } from "@mui/material/styles";
-import {
-  ToolbarButton,
-  QuickFilter,
-  QuickFilterControl,
-  QuickFilterClear,
-  QuickFilterTrigger,
-} from "@mui/x-data-grid";
-import Tooltip from "@mui/material/Tooltip";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
 import CancelIcon from "@mui/icons-material/Cancel";
 import SearchIcon from "@mui/icons-material/Search";
+import InputAdornment from "@mui/material/InputAdornment";
+import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
+import {
+  QuickFilter,
+  QuickFilterClear,
+  QuickFilterControl,
+  QuickFilterTrigger,
+  ToolbarButton,
+} from "@mui/x-data-grid";
+import { useEffect, useRef, useState } from "react";
 
 type OwnerState = {
   expanded: boolean;
@@ -112,6 +112,7 @@ export default function ButtonSearch() {
           <Tooltip title="Search" enterDelay={0}>
             <StyledToolbarButton
               {...triggerProps}
+              data-cy="search-button"
               ownerState={{ expanded: expanded || state.expanded }}
               color="default"
               onClick={(e) => {
@@ -129,6 +130,7 @@ export default function ButtonSearch() {
         render={({ ref, ...controlProps }, state) => (
           <StyledTextField
             {...controlProps}
+            data-cy="search-input"
             ownerState={{ expanded: expanded || state.expanded }}
             aria-label="Search"
             placeholder="Search..."

@@ -1,17 +1,17 @@
-import { Controller, Control } from "react-hook-form";
+import { DynamicQuery, DynamicResponse } from "@/core/api/dynamicTypes";
 import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
 import CircularProgress from "@mui/material/CircularProgress";
+import TextField from "@mui/material/TextField";
 import debounce from "lodash-es/debounce";
 import {
-  useState,
-  useCallback,
-  useRef,
-  useEffect,
   ReactNode,
+  useCallback,
+  useEffect,
   useMemo,
+  useRef,
+  useState,
 } from "react";
-import { DynamicQuery, DynamicResponse } from "@/core/api/dynamicTypes";
+import { Control, Controller } from "react-hook-form";
 
 export type SelectionMode = "single" | "multiple";
 
@@ -35,6 +35,7 @@ export interface AsyncSelectProps<T> {
   onChange?: (value: T | T[] | null) => void;
   enableClientSideFilter?: boolean;
   minCharsToSearch?: number;
+  dataCy?: string;
 }
 
 export default function FieldAsyncSelect<T>({
@@ -57,6 +58,7 @@ export default function FieldAsyncSelect<T>({
   onChange,
   enableClientSideFilter = true,
   minCharsToSearch = 0,
+  dataCy,
 }: AsyncSelectProps<T>) {
   const multiple = selectionMode === "multiple";
 
@@ -217,6 +219,7 @@ export default function FieldAsyncSelect<T>({
       renderInput={(params) => (
         <TextField
           {...params}
+          data-cy={dataCy}
           label={label}
           placeholder={placeholder}
           size="small"

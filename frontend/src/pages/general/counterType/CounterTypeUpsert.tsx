@@ -1,10 +1,10 @@
 import * as z from "zod";
 
+import NumberField from "@/shared/components/fields/FieldNumber";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
-import NumberField from "@/shared/components/fields/FieldNumber";
+import TextField from "@mui/material/TextField";
 
 import { memo } from "react";
 import { Controller } from "react-hook-form";
@@ -94,12 +94,16 @@ function CounterTypeUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="counterType-code-input"
               label="Code *"
               size="small"
               sx={{ width: "70%" }}
               error={!!errors.code}
               helperText={errors.code?.message}
               disabled={isDisabled}
+              slotProps={{
+                formHelperText: { "data-cy": "counterType-code-error" },
+              }}
             />
           )}
         />
@@ -110,11 +114,15 @@ function CounterTypeUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="counterType-name-input"
               label="Name *"
               size="small"
               error={!!errors.name}
               helperText={errors.name?.message}
               disabled={isDisabled}
+              slotProps={{
+                formHelperText: { "data-cy": "counterType-name-error" },
+              }}
             />
           )}
         />

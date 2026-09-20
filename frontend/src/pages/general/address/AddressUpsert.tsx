@@ -1,13 +1,13 @@
-import * as z from "zod";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
-import FieldNumber from "@/shared/components/fields/FieldNumber";
-import { memo } from "react";
-import { Controller } from "react-hook-form";
 import { tblAddress, TypeTblAddress } from "@/core/api/generated/api";
 import { requiredStringField } from "@/core/helper";
+import FieldNumber from "@/shared/components/fields/FieldNumber";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { memo } from "react";
+import { Controller } from "react-hook-form";
+import * as z from "zod";
 
 // === Schema ===
 const schema = z.object({
@@ -100,12 +100,16 @@ function AddressUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="address-code-input"
               label="Code *"
               size="small"
               error={!!errors.code}
               helperText={errors.code?.message}
               disabled={isDisabled}
               sx={{ gridColumn: "span 2" }}
+              slotProps={{
+                formHelperText: { "data-cy": "address-code-error" },
+              }}
             />
           )}
         />
@@ -116,12 +120,16 @@ function AddressUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="address-name-input"
               label="Name *"
               size="small"
               error={!!errors.name}
               helperText={errors.name?.message}
               disabled={isDisabled}
               sx={{ gridColumn: "span 4" }}
+              slotProps={{
+                formHelperText: { "data-cy": "address-name-error" },
+              }}
             />
           )}
         />
@@ -132,12 +140,16 @@ function AddressUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="address-address1-input"
               label="Address 1"
               size="small"
               error={!!errors.address1}
               helperText={errors.address1?.message}
               disabled={isDisabled}
               sx={{ gridColumn: "span 4" }}
+              slotProps={{
+                formHelperText: { "data-cy": "address-address1-error" },
+              }}
             />
           )}
         />
@@ -148,12 +160,16 @@ function AddressUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="address-address2-input"
               label="Address 2"
               size="small"
               error={!!errors.address2}
               helperText={errors.address2?.message}
               disabled={isDisabled}
               sx={{ gridColumn: "span 4" }}
+              slotProps={{
+                formHelperText: { "data-cy": "address-address2-error" },
+              }}
             />
           )}
         />
@@ -164,12 +180,16 @@ function AddressUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="address-contact-input"
               label="Contact Person"
               size="small"
               error={!!errors.contact}
               helperText={errors.contact?.message}
               disabled={isDisabled}
               sx={{ gridColumn: "span 2" }}
+              slotProps={{
+                formHelperText: { "data-cy": "address-contact-error" },
+              }}
             />
           )}
         />
@@ -179,6 +199,7 @@ function AddressUpsert({
           control={control}
           render={({ field }) => (
             <TextField
+              data-cy="address-phone-input"
               {...field}
               label="Phone"
               size="small"
@@ -186,6 +207,9 @@ function AddressUpsert({
               helperText={errors.phone?.message}
               disabled={isDisabled}
               sx={{ gridColumn: "span 2" }}
+              slotProps={{
+                formHelperText: { "data-cy": "address-phone-error" },
+              }}
             />
           )}
         />
@@ -196,12 +220,16 @@ function AddressUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="address-email-input"
               label="Email"
               size="small"
               error={!!errors.eMail}
               helperText={errors.eMail?.message}
               disabled={isDisabled}
               sx={{ gridColumn: "span 2" }}
+              slotProps={{
+                formHelperText: { "data-cy": "address-email-error" },
+              }}
             />
           )}
         />
@@ -212,6 +240,7 @@ function AddressUpsert({
           render={({ field }) => (
             <FieldNumber
               {...field}
+              data-cy="address-order-no-input"
               label="Order No"
               size="small"
               error={!!errors.orderNo}

@@ -1,13 +1,13 @@
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
-import DialogHeader from "./dialog/DialogHeader";
 import { useEffect, useState } from "react";
+import DialogHeader from "./dialog/DialogHeader";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -90,6 +90,7 @@ export default function ConfirmDialog({
           color={confirmColor}
           loading={loading}
           onClick={handleConfirm}
+          data-cy="delete-confirm-button"
         >
           {confirmText}
         </Button>

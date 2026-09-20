@@ -1,27 +1,27 @@
 import * as z from "zod";
 
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
-import FileField from "@/shared/components/fields/FieldFile";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import FieldAsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
+import FileField from "@/shared/components/fields/FieldFile";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import Box from "@mui/material/Box";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import TextField from "@mui/material/TextField";
 
+import { useAtomValue } from "jotai";
 import { memo, useEffect } from "react";
 import { Controller } from "react-hook-form";
-import { useAtomValue } from "jotai";
 
-import { atomUser } from "@/pages/auth/auth.atom";
 import {
   tblAttachment,
   tblAttachmentType,
   TypeTblAttachment,
   TypeTblAttachmentType,
 } from "@/core/api/generated/api";
+import { atomUser } from "@/pages/auth/auth.atom";
 
-import { newAttachmentSchema } from "@/shared/tabs/attachmentMap/AttachmentMapSchema";
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+import { newAttachmentSchema } from "@/shared/tabs/attachmentMap/AttachmentMapSchema";
 import { createAttachment } from "./AttachmentService";
 
 // === Types ===
@@ -138,6 +138,7 @@ function AttachmentUpsert({
           control={control}
           render={({ field: { onChange } }) => (
             <FileField
+              data-cy="file-uploader-input"
               label="Attachment File *"
               onChange={onChange}
               error={!!errors.file}
@@ -156,6 +157,7 @@ function AttachmentUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="file-name-input"
               label="Title *"
               size="small"
               error={!!errors.title}

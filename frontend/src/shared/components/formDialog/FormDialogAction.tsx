@@ -1,6 +1,6 @@
-import Button from "@mui/material/Button";
 import IconCheck from "@mui/icons-material/Check";
 import IconClose from "@mui/icons-material/Close";
+import Button from "@mui/material/Button";
 
 type DialogActionsWrapperProps = {
   onCancel: () => void;
@@ -22,6 +22,7 @@ export default function FormDialogAction({
   return (
     <>
       <Button
+        data-cy="form-submit"
         type="submit"
         variant="contained"
         color="secondary"
@@ -33,6 +34,7 @@ export default function FormDialogAction({
         {submitText}
       </Button>
       <Button
+        data-cy="form-cancel"
         onClick={onCancel}
         color="inherit"
         variant="outlined"

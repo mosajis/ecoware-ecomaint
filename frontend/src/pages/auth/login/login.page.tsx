@@ -1,9 +1,9 @@
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import DarkMode from "@mui/icons-material/DarkMode";
+import LightMode from "@mui/icons-material/LightMode";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import LightMode from "@mui/icons-material/LightMode";
-import DarkMode from "@mui/icons-material/DarkMode";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -11,18 +11,18 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
+import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
 
-import { useColorScheme } from "@mui/material/styles";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useColorScheme } from "@mui/material/styles";
 import { useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
 
 import { LOCAL_STORAGE } from "@/const";
 import { login } from "../auth.api";
@@ -108,6 +108,7 @@ export default function LoginPage() {
         onClick={toggleTheme}
         color="inherit"
         aria-label="Toggle theme"
+        data-cy="theme-toggle"
         sx={{
           position: "absolute",
           top: 20,
@@ -191,7 +192,12 @@ export default function LoginPage() {
           </Typography>
         </Box>
 
-        <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          data-cy="login-form"
+        >
           <Box
             sx={{
               display: "flex",
@@ -215,6 +221,12 @@ export default function LoginPage() {
                       <AccountCircleOutlinedIcon color="action" />
                     </InputAdornment>
                   ),
+                },
+                htmlInput: {
+                  "data-cy": "username-input",
+                },
+                formHelperText: {
+                  "data-cy": "username-input-error",
                 },
               }}
             />
@@ -244,11 +256,18 @@ export default function LoginPage() {
                         aria-label={
                           showPassword ? "Hide password" : "Show password"
                         }
+                        data-cy="toggle-password-visibility"
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   ),
+                },
+                htmlInput: {
+                  "data-cy": "password-input",
+                },
+                formHelperText: {
+                  "data-cy": "password-input-error",
                 },
               }}
             />
@@ -265,7 +284,12 @@ export default function LoginPage() {
             >
               <FormControlLabel
                 sx={{ m: 0 }}
-                control={<Checkbox {...register("remember")} />}
+                control={
+                  <Checkbox
+                    {...register("remember")}
+                    data-cy="remember-checkbox"
+                  />
+                }
                 label={<Typography variant="body2">Remember me</Typography>}
               />
 
@@ -273,6 +297,7 @@ export default function LoginPage() {
                 href="#"
                 underline="hover"
                 color="secondary.main"
+                data-cy="forgot-password-link"
                 sx={{
                   fontSize: "0.875rem",
                   fontWeight: 500,
@@ -292,6 +317,7 @@ export default function LoginPage() {
               size="large"
               disabled={loading}
               loading={loading}
+              data-cy="login-submit"
               sx={{
                 mt: 1,
                 minHeight: 48,

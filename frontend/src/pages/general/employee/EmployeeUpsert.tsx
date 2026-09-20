@@ -1,21 +1,21 @@
 import * as z from "zod";
 
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 import { memo } from "react";
 import { Controller } from "react-hook-form";
 
 import {
-  tblEmployee,
-  TypeTblEmployee,
   tblDiscipline,
+  tblEmployee,
   TypeTblDiscipline,
+  TypeTblEmployee,
 } from "@/core/api/generated/api";
 import { buildRelation, requiredStringField } from "@/core/helper";
-import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 import AsyncSelect from "@/shared/components/fields/FieldAsyncSelect";
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 
 // === Schema ===
 const schema = z.object({
@@ -129,12 +129,16 @@ function EmployeeUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="employee-code-input"
               label="Code *"
               size="small"
               sx={{ width: "70%" }}
               error={!!errors.code}
               helperText={errors.code?.message}
               disabled={isDisabled}
+              slotProps={{
+                formHelperText: { "data-cy": "employee-code-error" },
+              }}
             />
           )}
         />
@@ -146,12 +150,16 @@ function EmployeeUpsert({
             render={({ field }) => (
               <TextField
                 {...field}
+                data-cy="employee-lastName-input"
                 label="Last Name *"
                 size="small"
                 sx={{ flex: 1 }}
                 error={!!errors.lastName}
                 helperText={errors.lastName?.message}
                 disabled={isDisabled}
+                slotProps={{
+                  formHelperText: { "data-cy": "employee-lastName-error" },
+                }}
               />
             )}
           />
@@ -162,12 +170,16 @@ function EmployeeUpsert({
             render={({ field }) => (
               <TextField
                 {...field}
+                data-cy="employee-firstName-input"
                 label="First Name *"
                 size="small"
                 sx={{ flex: 1 }}
                 error={!!errors.firstName}
                 helperText={errors.firstName?.message}
                 disabled={isDisabled}
+                slotProps={{
+                  formHelperText: { "data-cy": "employee-firstName-error" },
+                }}
               />
             )}
           />
@@ -178,6 +190,7 @@ function EmployeeUpsert({
           control={control}
           render={({ field }) => (
             <AsyncSelect<TypeTblDiscipline>
+              dataCy="employee-discipline-input"
               label="Discipline *"
               disabled={isDisabled}
               error={!!errors.discipline}

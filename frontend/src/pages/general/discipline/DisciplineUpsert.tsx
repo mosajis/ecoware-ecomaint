@@ -1,16 +1,16 @@
 import * as z from "zod";
 
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 import { memo } from "react";
 import { Controller } from "react-hook-form";
 
 import { tblDiscipline, TypeTblDiscipline } from "@/core/api/generated/api";
 import { requiredStringField } from "@/core/helper";
-import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 import FieldNumber from "@/shared/components/fields/FieldNumber";
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
 
 // === Schema ===
 const schema = z.object({
@@ -87,12 +87,16 @@ function DisciplineUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="discipline-name-input"
               label="Name *"
               size="small"
               error={!!errors.name}
               helperText={errors.name?.message}
               disabled={isDisabled}
               fullWidth
+              slotProps={{
+                formHelperText: { "data-cy": "discipline-name-error" },
+              }}
             />
           )}
         />

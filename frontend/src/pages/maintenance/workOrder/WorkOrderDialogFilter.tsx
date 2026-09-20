@@ -1,14 +1,3 @@
-import FormDialog from "@/shared/components/formDialog/FormDialog";
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
-import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import {
   tblComponentUnit,
   tblCompType,
@@ -21,10 +10,21 @@ import {
   TypeTblMaintType,
   TypeTblPendingType,
 } from "@/core/api/generated/api";
-import { useAtomValue } from "jotai";
 import { atomUser } from "@/pages/auth/auth.atom";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+import FieldDateTime from "@/shared/components/fields/FieldDateTime";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
+import Box from "@mui/material/Box";
+import Checkbox from "@mui/material/Checkbox";
+import Divider from "@mui/material/Divider";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { useAtomValue } from "jotai";
+import React, { useState } from "react";
 
-const RESPONSIBILITIES = [
+export const RESPONSIBILITIES = [
   "Electrician",
   "Mechanic",
   "Toolpusher",
@@ -33,7 +33,7 @@ const RESPONSIBILITIES = [
   "PM",
 ];
 
-const WORKORDER_STATUSES = [
+export const WORKORDER_STATUSES = [
   "Plan",
   "Issue",
   "Pend",
@@ -43,7 +43,7 @@ const WORKORDER_STATUSES = [
   "Postponed",
 ];
 
-const COMPONENT_STATUSES = [
+export const COMPONENT_STATUSES = [
   "None",
   "InUse",
   "Available",
@@ -57,10 +57,17 @@ interface CheckboxGroupProps {
   items: string[];
   selected?: string[];
   onChange: (value: string) => void;
+  dataCyPrefix?: string;
 }
 
 const CheckboxGroup = React.memo(
-  ({ title, items, selected = [], onChange }: CheckboxGroupProps) => (
+  ({
+    title,
+    items,
+    selected = [],
+    onChange,
+    dataCyPrefix,
+  }: CheckboxGroupProps) => (
     <Box>
       <Box sx={{ fontWeight: "bold" }} pb={1}>
         {title}
@@ -72,6 +79,13 @@ const CheckboxGroup = React.memo(
             sx={{ height: "1.7rem" }}
             control={
               <Checkbox
+                slotProps={{
+                  input: {
+                    "data-cy": `${dataCyPrefix}-${item
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`,
+                  },
+                }}
                 size="small"
                 checked={selected.includes(item)}
                 onChange={() => onChange(item)}
@@ -365,6 +379,7 @@ export default function WorkOrderFilterDialog({
             <Box display="flex" flexDirection="column" gap={1.5}>
               {/* 🔹 تبدیل به controlled input */}
               <TextField
+                data-cy="workOrder-number-input"
                 fullWidth
                 size="small"
                 label="Number"
@@ -375,6 +390,7 @@ export default function WorkOrderFilterDialog({
                 }}
               />
               <TextField
+                data-cy="workOrder-title-input"
                 fullWidth
                 size="small"
                 label="Title"
@@ -385,6 +401,7 @@ export default function WorkOrderFilterDialog({
                 }}
               />
               <TextField
+                data-cy="workOrder-code-input"
                 fullWidth
                 size="small"
                 label="Job Code"
@@ -395,6 +412,7 @@ export default function WorkOrderFilterDialog({
                 }}
               />
               <TextField
+                data-cy="workOrder-priority-input"
                 fullWidth
                 type="number"
                 size="small"
@@ -412,6 +430,7 @@ export default function WorkOrderFilterDialog({
 
             <Box display="flex" gap={1.5} flexDirection="column">
               <FieldAsyncSelectGrid
+                dataCy="workOrder-component-input"
                 value={filters.component}
                 dialogMaxWidth="sm"
                 label="Component"
@@ -428,6 +447,7 @@ export default function WorkOrderFilterDialog({
                 }}
               />
               <FieldAsyncSelectGrid
+                dataCy="workOrder-componentType-input"
                 value={filters.componentType}
                 dialogMaxWidth="sm"
                 label="Component Type"
@@ -451,6 +471,7 @@ export default function WorkOrderFilterDialog({
 
             <Box display="flex" gap={1.5} flexDirection="column">
               <FieldAsyncSelectGrid
+                dataCy="workOrder-maintType-input"
                 value={filters.maintType}
                 dialogMaxWidth="sm"
                 label="Maint Type"
@@ -466,6 +487,7 @@ export default function WorkOrderFilterDialog({
                 }}
               />
               <FieldAsyncSelectGrid
+                dataCy="workOrder-maintClass-input"
                 value={filters.maintClass}
                 dialogMaxWidth="sm"
                 label="Maint Class"
@@ -481,6 +503,7 @@ export default function WorkOrderFilterDialog({
                 }}
               />
               <FieldAsyncSelectGrid
+                dataCy="workOrder-pending-input"
                 value={filters.pendingType}
                 dialogMaxWidth="sm"
                 label="Pending Type"
@@ -503,6 +526,11 @@ export default function WorkOrderFilterDialog({
                 control={
                   <Checkbox
                     size="small"
+                    slotProps={{
+                      input: {
+                        "data-cy": "workOrder-critical-component",
+                      },
+                    }}
                     checked={filters.criticalComponent}
                     onChange={() => {
                       setFilters((prev) => ({
@@ -528,6 +556,7 @@ export default function WorkOrderFilterDialog({
           }}
         >
           <CheckboxGroup
+            dataCyPrefix="workOrder-responsibility"
             title="Resp. Discipline"
             items={RESPONSIBILITIES}
             selected={filters.responsibilities}
@@ -548,6 +577,7 @@ export default function WorkOrderFilterDialog({
           <Divider orientation="vertical" flexItem />
 
           <CheckboxGroup
+            dataCyPrefix="workOrder-Status"
             title="WorkOrder Status"
             items={WORKORDER_STATUSES}
             selected={filters.workOrderStatuses}
@@ -568,6 +598,7 @@ export default function WorkOrderFilterDialog({
           <Divider orientation="vertical" flexItem />
 
           <CheckboxGroup
+            dataCyPrefix="workOrder-Component"
             title="Component Status"
             items={COMPONENT_STATUSES}
             selected={filters.componentStatuses}
@@ -605,6 +636,11 @@ export default function WorkOrderFilterDialog({
                   control={
                     <Checkbox
                       size="small"
+                      slotProps={{
+                        input: {
+                          "data-cy": `workOrder-planning-${key}`,
+                        },
+                      }}
                       checked={filters[key as keyof typeof filters] as boolean}
                       onChange={() => {
                         setFilters((prev) => ({

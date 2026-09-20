@@ -1,14 +1,14 @@
-import * as z from "zod";
-import FormDialog from "@/shared/components/formDialog/FormDialog";
-import NumberField from "@/shared/components/fields/FieldNumber";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
-import { memo } from "react";
-import { Controller } from "react-hook-form";
 import { tblLocation, TypeTblLocation } from "@/core/api/generated/api";
 import { buildRelation, requiredStringField } from "@/core/helper";
+import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
+import NumberField from "@/shared/components/fields/FieldNumber";
+import FormDialog from "@/shared/components/formDialog/FormDialog";
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { memo } from "react";
+import { Controller } from "react-hook-form";
+import * as z from "zod";
 
 // === Schema ===
 const schema = z.object({
@@ -115,12 +115,16 @@ function LocationUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="location-code-input"
               label="Code *"
               size="small"
               error={!!errors.locationCode}
               helperText={errors.locationCode?.message}
               disabled={isDisabled}
               sx={{ width: "80%" }}
+              slotProps={{
+                formHelperText: { "data-cy": "location-code-error" },
+              }}
             />
           )}
         />
@@ -132,11 +136,15 @@ function LocationUpsert({
           render={({ field }) => (
             <TextField
               {...field}
+              data-cy="location-name-input"
               label="Name *"
               size="small"
               error={!!errors.name}
               helperText={errors.name?.message}
               disabled={isDisabled}
+              slotProps={{
+                formHelperText: { "data-cy": "location-name-error" },
+              }}
             />
           )}
         />

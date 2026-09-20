@@ -1,21 +1,21 @@
-import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ToolbarButton from "./toolbar/ToolbarButton";
+import EditIcon from "@mui/icons-material/Edit";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import LinearProgress from "@mui/material/LinearProgress";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import { Toolbar } from "@mui/x-data-grid";
+import { useState } from "react";
+import ConfirmDialog from "../ConfirmDialog";
+import ButtonColumns from "./toolbar/ButtonColumns";
 import ButtonDensity from "./toolbar/ButtonDensity";
 import ButtonExport from "./toolbar/ButtonExport";
-import ButtonColumns from "./toolbar/ButtonColumns";
 import ButtonFilters from "./toolbar/ButtonFilter";
 import ButtonSearch from "./toolbar/ButtonSearch";
-import Typography from "@mui/material/Typography";
-import LinearProgress from "@mui/material/LinearProgress";
-import ConfirmDialog from "../ConfirmDialog";
-import Divider from "@mui/material/Divider";
-import { Toolbar } from "@mui/x-data-grid";
-import { useTheme } from "@mui/material/styles";
-import { useState } from "react";
+import ToolbarButton from "./toolbar/ToolbarButton";
 
 interface DataGridToolbarProps {
   label: string;
@@ -119,6 +119,7 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
               title="Edit"
               onClick={onEditClick}
               disabled={!hasSelection}
+              dataCy="edit-button"
             >
               <EditIcon />
             </ToolbarButton>
@@ -128,6 +129,7 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
               title="Delete"
               onClick={handleDeleteClick}
               disabled={!hasSelection}
+              dataCy="delete-button"
             >
               <DeleteIcon />
             </ToolbarButton>
@@ -138,7 +140,7 @@ export default function DataGridToolbar(props: DataGridToolbarProps) {
           </ToolbarButton>
           {/* )} */}
           {!disableAdd && onAddClick && (
-            <ToolbarButton title="Add" onClick={onAddClick}>
+            <ToolbarButton title="Add" onClick={onAddClick} dataCy="add-button">
               <AddIcon />
             </ToolbarButton>
           )}
