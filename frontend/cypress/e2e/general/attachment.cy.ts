@@ -1,37 +1,29 @@
-describe("Attachment Create", () => {
-  const title = "test-file";
-  const filePath = "file/test-file.pdf";
+// cypress/e2e/general/crud.cy.ts
+import { createCrudTests } from "../../support/crudTest";
 
-  beforeEach(() => {
-    cy.login();
-
-    cy.visit("/general/attachment");
-  });
-
-  it("should create an attachment record", () => {
-    cy.get('[data-cy="add-button"]').click();
-
-    cy.get("[data-cy='file-uploader-input']").attachFile({
-      filePath,
+createCrudTests({
+  title: "Attachment",
+  entity: "attachment",
+  path: "/general/attachment",
+  apiPath: "tblAttachment",
+  identifyBy: "name",
+  search: false,
+  validation: false,
+  cancel: false,
+  errorToast: false,
+  waitAfterRowClick: 500,
+  fields: [
+    {
+      key: "file",
+      type: "file",
+      dataCy: "file-uploader-input",
+      create: () => "file/test-file.pdf",
       mimeType: "pdf",
-    });
-
-    cy.get('[data-cy="file-name-input"]').clear().type(title);
-
-    cy.get('[data-cy="form-submit"]').click();
-
-    cy.get('[role="row"]').should("contain", title);
-  });
-
-  it("should delete an attachment record", () => {
-    cy.contains('[role="row"]', title).should("exist").click();
-
-    cy.wait(500);
-
-    cy.get('[data-cy="delete-button"]').click();
-
-    cy.get('[data-cy="delete-confirm-button"]').click();
-
-    cy.contains(new RegExp(`^\\s*${title}\\s*$`)).should("not.exist");
-  });
+    },
+    {
+      key: "name",
+      dataCy: "file-name-input",
+      create: (id) => `test-file-${id}`,
+    },
+  ],
 });

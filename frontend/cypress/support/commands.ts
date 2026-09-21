@@ -12,9 +12,11 @@ Cypress.Commands.add("login", () => {
             password: ADMIN_PASSWORD,
           },
         }).then(({ body }) => {
-          expect(body.accessToken).to.not.equal(undefined);
+          expect(body.accessToken).to.be.a("string").and.not.be.empty;
 
-          window.localStorage.setItem("access-token", body.accessToken);
+          cy.window().then((win) => {
+            win.localStorage.setItem("access-token", body.accessToken);
+          });
         });
       });
     },

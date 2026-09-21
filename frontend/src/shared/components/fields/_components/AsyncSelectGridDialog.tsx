@@ -210,6 +210,7 @@ export function AsyncSelectGridDialog<TItem extends Record<string, any>>({
           color="secondary"
           sx={{ flex: 1 }}
           onClick={handleOk}
+          data-cy="workorder-selectbox-submit-button"
         >
           Ok
         </Button>

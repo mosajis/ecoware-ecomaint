@@ -1,9 +1,9 @@
-import Divider from "@mui/material/Divider";
+import { getPermit } from "@/shared/hooks/usePermison";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { Fragment } from "react";
-import { getPermit } from "@/shared/hooks/usePermison";
 export interface DataGridActionItem {
   label: string;
   loading?: boolean;
@@ -48,6 +48,7 @@ const DataGridActionBar = ({
               sx={action.sx}
               onClick={action.onClick}
               loading={!!action.loading}
+              data-cy="workorder-filter-button"
             >
               {action.label}
             </Button>
