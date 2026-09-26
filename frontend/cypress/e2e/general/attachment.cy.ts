@@ -8,8 +8,6 @@ createCrudTests({
   apiPath: "tblAttachment",
   identifyBy: "name",
   search: false,
-  validation: false,
-  cancel: false,
   errorToast: false,
   waitAfterRowClick: 500,
   fields: [

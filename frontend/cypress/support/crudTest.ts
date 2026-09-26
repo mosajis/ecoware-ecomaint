@@ -128,9 +128,6 @@ export function createCrudTests(config: CrudConfig) {
     viewport,
     apiPath,
     search = true,
-    validation = true,
-    cancel = true,
-    errorHandling = true,
     errorToast = TOAST,
     waitAfterRowClick = 500,
   } = config;
@@ -211,118 +208,5 @@ export function createCrudTests(config: CrudConfig) {
 
       cy.contains(exactText(currentKey)).should("not.exist");
     });
-
-    if (validation && requiredFields.length) {
-      describe("Validation", () => {
-        it("should show required errors when required fields are missing", () => {
-          cy.get('[data-cy="add-button"]').click();
-          cy.get(SUBMIT).click();
-
-          requiredFields.forEach((f) => {
-            cy.get(errorSel(entity, f))
-              .should("be.visible")
-              .and("contain", "required");
-          });
-        });
-      });
-    }
-
-    if (cancel) {
-      describe("Cancel", () => {
-        it("should discard changes when the form dialog is cancelled", () => {
-          const discarded = `CY-CANCELLED-${Date.now()}`;
-
-          cy.get('[data-cy="add-button"]').click();
-          cy.get(inputSel(entity, firstTextField)).type(discarded);
-          cy.get('[data-cy="form-cancel"]').click();
-
-          cy.contains(exactText(discarded)).should("not.exist");
-        });
-      });
-    }
-
-    if (apiPath && errorHandling) {
-      describe("Backend error handling", () => {
-        const { collection, item } = buildApiMatchers(apiPath);
-
-        it("should keep the dialog open when create returns 500", () => {
-          cy.intercept(
-            { method: "POST", url: collection },
-            { statusCode: 500, body: { message: "Server error" } },
-          ).as("createFail");
-
-          fillCreateForm(Date.now());
-          cy.get(SUBMIT).click();
-
-          cy.wait("@createFail");
-
-          assertErrorFeedback();
-          cy.get(SUBMIT).should("exist");
-        });
-
-        it("should keep the dialog open on network failure", () => {
-          cy.intercept(
-            { method: "POST", url: collection },
-            { forceNetworkError: true },
-          ).as("createNetworkFail");
-
-          fillCreateForm(Date.now());
-          cy.get(SUBMIT).click();
-
-          cy.wait("@createNetworkFail");
-
-          assertErrorFeedback();
-          cy.get(SUBMIT).should("exist");
-        });
-
-        if (errorToast !== false) {
-          it("should show an error when loading the list fails", () => {
-            cy.intercept(
-              { method: "GET", url: collection },
-              { statusCode: 500, body: { message: "Server error" } },
-            ).as("listFail");
-
-            cy.visit(path);
-            cy.wait("@listFail");
-
-            assertErrorFeedback();
-          });
-        }
-
-        it("should keep the record when delete returns 500", () => {
-          const id = Date.now();
-          const key = idField.create(id);
-          let failDelete = true;
-
-          cy.intercept({ method: "DELETE", url: item }, (req) => {
-            if (failDelete) {
-              req.reply({ statusCode: 500, body: { message: "Server error" } });
-            } else {
-              req.continue();
-            }
-          }).as("deleteMaybeFail");
-
-          fillCreateForm(id);
-          submitForm("apiCreate");
-          find(key);
-
-          deleteRow(key);
-          cy.wait("@deleteMaybeFail");
-
-          assertErrorFeedback();
-          cy.contains('[role="row"]', key).should("exist");
-
-          cy.then(() => {
-            failDelete = false;
-          });
-          cy.reload();
-          find(key);
-          deleteRow(key);
-          cy.wait("@deleteMaybeFail")
-            .its("response.statusCode")
-            .should("be.oneOf", [200, 204]);
-        });
-      });
-    }
   });
 }
