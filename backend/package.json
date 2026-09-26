@@ -5,7 +5,9 @@
   "scripts": {
     "prisma": "bun run scripts/prisma/prisma.js",
     "dev": "bun --watch src/main.ts",
-    "build": "bun ./scripts/build.js"
+    "build": "bun ./scripts/build.js",
+    "test": "bun test",
+    "test:generate": "bun run scripts/generate-crud-tests.js"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.4.2",

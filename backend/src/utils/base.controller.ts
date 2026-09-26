@@ -1,8 +1,7 @@
+import { authPlugin } from "@/routes/auth/auth.guard";
 import { Elysia, t } from "elysia";
 import { BaseService } from "./base.service";
 import { prisma } from "./prisma";
-import { TblInstallation } from "orm/generated/prismabox/TblInstallation";
-import { authPlugin } from "@/routes/auth/auth.guard";
 
 /* ---------------------------------- */
 /* Query Schema */
@@ -101,13 +100,7 @@ export interface BaseControllerOptions<Model> {
   primaryKey?: string;
   extend?: (app: Elysia) => void;
   excludeRoutes?: (
-    | "getAll"
-    | "getOne"
-    | "create"
-    | "update"
-    | "delete"
-    | "deleteAll"
-    | "count"
+    "getAll" | "getOne" | "create" | "update" | "delete" | "deleteAll" | "count"
   )[];
 
   scope?: boolean; // ⭐ فقط true/false
@@ -202,7 +195,7 @@ export class BaseController<Model extends Record<string, any>> {
     if (isEnabled("getOne")) {
       app.get(
         `/:${primaryKey}`,
-        async ({ userId, params, query, headers, ...ctx }) => {
+        async ({ userId, params, query, headers, set, ...ctx }) => {
           let parsedInclude: Record<string, any> = {};
           let parsedSelect: Record<string, any> = {};
 
@@ -223,7 +216,18 @@ export class BaseController<Model extends Record<string, any>> {
             enabled: scope,
           });
 
-          return await service.findOne(where, parsedInclude, parsedSelect);
+          const result = await service.findOne(
+            where,
+            parsedInclude,
+            parsedSelect,
+          );
+
+          if (!result) {
+            set.status = 404;
+            return { message: "Not found" };
+          }
+
+          return result;
         },
         {
           tags,
@@ -235,7 +239,10 @@ export class BaseController<Model extends Record<string, any>> {
             include: t.Optional(t.String()),
             select: t.Optional(t.String()),
           }),
-          response: responseSchema,
+          response: {
+            200: responseSchema,
+            404: t.Object({ message: t.String() }),
+          },
         },
       );
     }
