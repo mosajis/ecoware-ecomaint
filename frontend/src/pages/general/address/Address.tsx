@@ -1,6 +1,5 @@
 import DataGrid from "@/shared/components/dataGrid/DataGrid";
 import Upsert from "./AddressUpsert";
-
 import { tblAddress } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns, getRowId } from "./AddressColumns";

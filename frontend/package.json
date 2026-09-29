@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "bunx vite",
+    "dev": "bunx vite --host",
     "build": "bunx vite build",
-    "preview": "bunx vite preview"
+    "preview": "bunx vite preview --host"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.1",

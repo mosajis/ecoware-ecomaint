@@ -4,6 +4,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LightMode from "@mui/icons-material/LightMode";
 import DarkMode from "@mui/icons-material/DarkMode";
+import Logo from "@/assets/images/logo.jpg";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -162,7 +163,7 @@ export default function LoginPage() {
           >
             <Box
               component="img"
-              src="/logo.jpg"
+              src={Logo}
               alt="Logo"
               sx={{
                 width: "100%",

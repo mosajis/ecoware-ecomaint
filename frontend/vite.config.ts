@@ -23,4 +23,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  preview: {
+    proxy: {
+      "/": {
+        target: "http://localhost:5273",
+        changeOrigin: true,
+      },
+    },
+  },
 });
