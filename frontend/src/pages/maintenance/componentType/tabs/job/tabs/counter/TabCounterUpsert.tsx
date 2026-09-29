@@ -179,13 +179,13 @@ function JobCounterUpsert({
                   },
                   filter: {
                     compTypeId,
-                    tblCompTypeJobCounters: {
-                      none: {
-                        tblCompTypeCounter: {
-                          compTypeId,
-                        },
-                      },
-                    },
+                    // tblCompTypeJobCounters: {
+                    //   none: {
+                    //     tblCompTypeCounter: {
+                    //       compTypeId,
+                    //     },
+                    //   },
+                    // },
                   },
                 })
               }

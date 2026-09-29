@@ -275,7 +275,7 @@ const ControllerTblCompCounter = new BaseController({
                 changedBy: null,
                 currentDate: null,
                 currentValue: null,
-                lastUpdate: null,
+                lastUpdate: undefined,
                 lastZeroedValue: null,
                 instId,
               },
