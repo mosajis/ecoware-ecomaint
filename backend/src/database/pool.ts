@@ -4,7 +4,7 @@ const config: sql.config = {
   user: "sa",
   password: "Naftaz110110",
   server: "194.147.142.13",
-  database: "ECO",
+  database: "RigMaster",
   options: {
     encrypt: true,
     trustServerCertificate: true,

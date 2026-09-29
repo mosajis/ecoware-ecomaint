@@ -57,7 +57,7 @@ const app = new Elysia()
       specPath: "/docs/json",
       documentation: {
         info: {
-          title: "ECO | API",
+          title: "RigMaster | API",
           version: "1.0.0",
           description: "API documentation",
         },

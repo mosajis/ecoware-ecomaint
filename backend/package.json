@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "ecomaint-backend",
+  "name": "RigMaster-backend",
   "version": "1.0.50",
   "scripts": {
     "prisma": "bun run scripts/prisma/prisma.js",
