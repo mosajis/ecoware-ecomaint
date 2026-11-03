@@ -348,6 +348,8 @@ function ComponentUnitUpsert({
               {...field}
               value={field.value || ""}
               label="Comment 1"
+              multiline
+              rows={3}
               size="small"
               fullWidth
               disabled={isDisabled}

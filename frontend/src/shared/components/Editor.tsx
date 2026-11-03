@@ -1,14 +1,21 @@
-import { useColorScheme, useTheme } from "@mui/material/styles";
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { useTheme } from "@mui/material/styles";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
-import React, {
-  useCallback,
-  memo,
-  useState,
-  useEffect,
-  useRef,
-  useMemo,
-} from "react";
+import IconButton from "@mui/material/IconButton";
+import FormatTextdirectionRToLIcon from "@mui/icons-material/FormatTextdirectionRToL";
+import FormatTextdirectionLToRIcon from "@mui/icons-material/FormatTextdirectionLToR";
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
+import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
+import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
+import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import Editor, {
   Toolbar,
   BtnBold,
@@ -17,14 +24,13 @@ import Editor, {
   ContentEditableEvent,
 } from "react-simple-wysiwyg";
 
-// === Custom Buttons ===
-const BtnAlignLeft = createButton("Align Left", "➡", "justifyLeft");
-const BtnAlignCenter = createButton("Align Center", "≡", "justifyCenter");
-const BtnAlignRight = createButton("Align Right", "⬅", "justifyRight");
 const BtnUndo = createButton("Undo", "↶", "undo");
 const BtnRedo = createButton("Redo", "↷", "redo");
 
-// === Types ===
+type Direction = "rtl" | "ltr";
+type Alignment = "left" | "center" | "right" | "justify";
+type AutoSaveStatus = "idle" | "saving" | "saved";
+
 interface AppEditorProps {
   error?: boolean;
   helperText?: string;
@@ -42,73 +48,236 @@ interface AppEditorProps {
   loading?: boolean;
 }
 
-// ======================================================
-// Helpers
-// ======================================================
+const DEFAULT_DIRECTION: Direction = "rtl";
+const DEFAULT_ALIGNMENT: Alignment = "right";
+const BLOCK_SELECTOR = "p,div,h1,h2,h3,h4,h5,h6,blockquote,pre,li";
 
-const getButtonColors = (theme: any, disabled: boolean) => {
-  if (disabled) return { bg: "transparent", bgHover: "transparent" };
+const getEditorElement = (root: HTMLDivElement | null) =>
+  root?.querySelector<HTMLElement>('[contenteditable="true"]') ?? null;
 
-  const main = theme.vars?.palette?.primary?.mainChannel || "0 0 0";
+/** setAttribute/style don't fire `input`, so tell react-simple-wysiwyg manually. */
+const notifyChange = (editor: HTMLElement) =>
+  editor.dispatchEvent(new Event("input", { bubbles: true }));
 
-  return {
-    bg: `rgba(${main} / 0.08)`,
-    bgHover: `rgba(${main} / 0.15)`,
-  };
-};
+/** Blocks affected by the selection (only the caret's block when collapsed). */
+function getSelectedBlocks(editor: HTMLElement): HTMLElement[] {
+  const selection = window.getSelection();
+  if (!selection || selection.rangeCount === 0) return [];
 
-const dividerStyle = (theme: any) => ({
-  width: "1px",
-  height: "24px",
-  backgroundColor: (theme.vars || theme).palette.divider,
-  margin: "0 4px",
+  const range = selection.getRangeAt(0);
+  if (!editor.contains(range.commonAncestorContainer)) return [];
+
+  const anchor =
+    range.startContainer.nodeType === Node.ELEMENT_NODE
+      ? (range.startContainer as Element)
+      : range.startContainer.parentElement;
+
+  if (range.collapsed) {
+    const block = anchor?.closest<HTMLElement>(BLOCK_SELECTOR);
+    return block && block !== editor && editor.contains(block)
+      ? [block]
+      : [editor];
+  }
+
+  const blocks = Array.from(
+    editor.querySelectorAll<HTMLElement>(BLOCK_SELECTOR),
+  ).filter((block) => {
+    try {
+      return range.intersectsNode(block);
+    } catch {
+      return false;
+    }
+  });
+
+  return blocks.length ? blocks : [editor];
+}
+
+/** Visual (physical) alignment of a block, resolving start/end by direction. */
+function getBlockState(block: HTMLElement): {
+  direction: Direction;
+  alignment: Alignment;
+} {
+  const computed = window.getComputedStyle(block);
+  const direction: Direction = computed.direction === "ltr" ? "ltr" : "rtl";
+
+  switch (computed.textAlign) {
+    case "left":
+    case "center":
+    case "right":
+    case "justify":
+      return { direction, alignment: computed.textAlign };
+    case "end":
+      return { direction, alignment: direction === "rtl" ? "left" : "right" };
+    default: // "start" / "match-parent"
+      return { direction, alignment: direction === "rtl" ? "right" : "left" };
+  }
+}
+
+/**
+ * Word behavior: direction is a paragraph property (never tied to the keyboard
+ * language), and switching it mirrors left/right alignment.
+ */
+function applyDirectionToSelection(editor: HTMLElement, next: Direction) {
+  getSelectedBlocks(editor).forEach((block) => {
+    const { direction: prev, alignment } = getBlockState(block);
+
+    block.setAttribute("dir", next);
+    block.style.direction = next;
+
+    if (prev !== next && (alignment === "left" || alignment === "right")) {
+      block.style.textAlign = alignment === "left" ? "right" : "left";
+    }
+  });
+  notifyChange(editor);
+}
+
+function applyAlignmentToSelection(editor: HTMLElement, next: Alignment) {
+  getSelectedBlocks(editor).forEach((block) => {
+    block.style.textAlign = next;
+  });
+  notifyChange(editor);
+}
+
+function ToolbarButton({
+  title,
+  children,
+  active = false,
+  disabled = false,
+  onClick,
+}: {
+  title: string;
+  children: React.ReactNode;
+  active?: boolean;
+  disabled?: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <IconButton
+      size="small"
+      title={title}
+      aria-label={title}
+      aria-pressed={active}
+      disabled={disabled}
+      // Keep the editor selection/caret when the toolbar receives focus.
+      onMouseDown={(event) => event.preventDefault()}
+      onClick={onClick}
+      sx={{
+        width: 34,
+        height: 32,
+        borderRadius: 1,
+        border: "1px solid",
+        borderColor: active ? "primary.main" : "transparent",
+        color: active ? "primary.main" : "text.primary",
+        backgroundColor: active ? "action.selected" : "transparent",
+        "&:hover": {
+          backgroundColor: active ? "action.selected" : "action.hover",
+        },
+        "&.Mui-disabled": { color: "text.disabled" },
+      }}
+    >
+      {children}
+    </IconButton>
+  );
+}
+
+const Divider = memo(() => {
+  const theme = useTheme();
+  return (
+    <div
+      aria-hidden="true"
+      style={{
+        width: 1,
+        height: 24,
+        backgroundColor: (theme.vars || theme).palette.divider,
+        margin: "0 4px",
+      }}
+    />
+  );
 });
 
 const EditorToolbar = memo(
   ({
-    onSave,
+    label,
     disabled,
     loading,
     readOnly,
     autoSaveEnabled,
     autoSaveStatus,
-    label,
-    onChange,
+    changed,
+    onSave,
+    editorRootRef,
   }: {
-    onChange: any;
     label?: string;
-    onSave?: () => void;
     disabled: boolean;
     loading: boolean;
     readOnly: boolean;
     autoSaveEnabled: boolean;
-    autoSaveStatus: "idle" | "saving" | "saved";
+    autoSaveStatus: AutoSaveStatus;
+    changed: boolean;
+    onSave: () => void;
+    editorRootRef: React.RefObject<HTMLDivElement | null>;
   }) => {
     const theme = useTheme();
+    const palette = (theme.vars || theme).palette;
+    const [direction, setDirection] = useState<Direction>(DEFAULT_DIRECTION);
+    const [alignment, setAlignment] = useState<Alignment>(DEFAULT_ALIGNMENT);
+    const toolbarDisabled = disabled || loading || readOnly;
+    const iconColor = { color: palette.text.primary };
 
-    const rightBtnColors = getButtonColors(theme, disabled || loading);
+    const refreshSelectionState = useCallback(() => {
+      const editor = getEditorElement(editorRootRef.current);
+      if (!editor) return;
 
-    const { mode, systemMode } = useColorScheme();
+      // Ignore selection changes outside this editor.
+      const selection = window.getSelection();
+      if (!selection?.anchorNode || !editor.contains(selection.anchorNode)) {
+        return;
+      }
 
-    const currentMode = mode === "system" ? systemMode : mode;
-    const isLight = currentMode === "light";
+      const block = getSelectedBlocks(editor)[0] ?? editor;
+      const state = getBlockState(block);
+      setDirection(state.direction);
+      setAlignment(state.alignment);
+    }, [editorRootRef]);
 
-    const saveBtnStyle: React.CSSProperties = {
+    useEffect(() => {
+      const root = editorRootRef.current;
+      document.addEventListener("selectionchange", refreshSelectionState);
+      // Direction/alignment changes don't move the selection, so also refresh on input.
+      root?.addEventListener("input", refreshSelectionState);
+      return () => {
+        document.removeEventListener("selectionchange", refreshSelectionState);
+        root?.removeEventListener("input", refreshSelectionState);
+      };
+    }, [refreshSelectionState, editorRootRef]);
+
+    const handleDirection = (next: Direction) => {
+      const editor = getEditorElement(editorRootRef.current);
+      if (!editor || toolbarDisabled) return;
+      editor.focus();
+      applyDirectionToSelection(editor, next);
+    };
+
+    const handleAlignment = (next: Alignment) => {
+      const editor = getEditorElement(editorRootRef.current);
+      if (!editor || toolbarDisabled) return;
+      editor.focus();
+      applyAlignmentToSelection(editor, next);
+    };
+
+    const saveButtonStyle: React.CSSProperties = {
       padding: "6px 12px",
-      cursor: disabled || loading ? "not-allowed" : "pointer",
-      fontSize: "14px",
-      fontWeight: "bold",
-      borderRadius: "4px",
+      cursor: toolbarDisabled || !changed ? "not-allowed" : "pointer",
+      fontSize: 14,
+      fontWeight: 700,
+      borderRadius: 4,
       display: "flex",
       alignItems: "center",
-      gap: "6px",
-      border: `1px solid ${(theme.vars || theme).palette.divider}`,
-      opacity: disabled || loading ? 0.6 : 1,
-      color:
-        disabled || loading
-          ? (theme.vars || theme).palette.text.disabled
-          : (theme.vars || theme).palette.primary.main,
-      transition: "background-color 0.3s ease",
+      gap: 6,
+      border: `1px solid ${palette.divider}`,
+      opacity: toolbarDisabled || !changed ? 0.6 : 1,
+      color: palette.primary.main,
+      background: "transparent",
     };
 
     return (
@@ -116,116 +285,154 @@ const EditorToolbar = memo(
         style={{
           display: "flex",
           justifyContent: "space-between",
-          backgroundColor: (theme.vars || theme).palette.background.paper,
-          borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
-          padding: "0 8px",
-          minHeight: 45,
+          flexDirection: "row-reverse",
+          alignItems: "center",
           flexWrap: "wrap",
+          gap: 6,
+          backgroundColor: palette.background.paper,
+          borderBottom: `1px solid ${palette.divider}`,
+          padding: "4px 8px",
+          minHeight: 45,
         }}
       >
-        <Typography fontWeight={"bold"}>{label}</Typography>
-        {/* Formatting buttons */}
-        <div style={{ display: "flex", gap: "4px", alignItems: "center" }}>
-          <BtnBold style={{ color: isLight ? "#333" : "white" }} />
-          <BtnItalic style={{ color: isLight ? "#333" : "white" }} />
+        {label ? (
+          <Typography fontWeight="bold" sx={{ mr: 1 }}>
+            {label}
+          </Typography>
+        ) : (
+          <span />
+        )}
 
-          <div style={dividerStyle(theme)} />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 3,
+          }}
+        >
+          <BtnBold style={iconColor} />
+          <BtnItalic style={iconColor} />
 
-          <BtnAlignLeft style={{ color: isLight ? "#333" : "white" }} />
-          <BtnAlignCenter style={{ color: isLight ? "#333" : "white" }} />
-          <BtnAlignRight style={{ color: isLight ? "#333" : "white" }} />
+          <Divider />
 
-          <div style={dividerStyle(theme)} />
+          <ToolbarButton
+            title="Right to Left (Ctrl + Right Shift)"
+            active={direction === "rtl"}
+            disabled={toolbarDisabled}
+            onClick={() => handleDirection("rtl")}
+          >
+            <FormatTextdirectionRToLIcon fontSize="small" />
+          </ToolbarButton>
+          <ToolbarButton
+            title="Left to Right (Ctrl + Left Shift)"
+            active={direction === "ltr"}
+            disabled={toolbarDisabled}
+            onClick={() => handleDirection("ltr")}
+          >
+            <FormatTextdirectionLToRIcon fontSize="small" />
+          </ToolbarButton>
 
-          <BtnUndo style={{ color: isLight ? "#333" : "white" }} />
-          <BtnRedo style={{ color: isLight ? "#333" : "white" }} />
-          {/* Right side: autosave + manual save */}
-          {(!readOnly && !onChange) ||
-            (autoSaveEnabled && (
-              <>
-                <div style={dividerStyle(theme)} />
+          <Divider />
+
+          <ToolbarButton
+            title="Align Left"
+            active={alignment === "left"}
+            disabled={toolbarDisabled}
+            onClick={() => handleAlignment("left")}
+          >
+            <FormatAlignLeftIcon fontSize="small" />
+          </ToolbarButton>
+          <ToolbarButton
+            title="Align Center"
+            active={alignment === "center"}
+            disabled={toolbarDisabled}
+            onClick={() => handleAlignment("center")}
+          >
+            <FormatAlignCenterIcon fontSize="small" />
+          </ToolbarButton>
+          <ToolbarButton
+            title="Align Right"
+            active={alignment === "right"}
+            disabled={toolbarDisabled}
+            onClick={() => handleAlignment("right")}
+          >
+            <FormatAlignRightIcon fontSize="small" />
+          </ToolbarButton>
+          <ToolbarButton
+            title="Justify"
+            active={alignment === "justify"}
+            disabled={toolbarDisabled}
+            onClick={() => handleAlignment("justify")}
+          >
+            <FormatAlignJustifyIcon fontSize="small" />
+          </ToolbarButton>
+
+          <Divider />
+
+          <BtnUndo style={iconColor} />
+          <BtnRedo style={iconColor} />
+
+          {!readOnly && (
+            <>
+              <Divider />
+              {autoSaveEnabled ? (
                 <div
-                  style={{ display: "flex", gap: "8px", alignItems: "center" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 5,
+                    fontSize: 12,
+                    opacity: 0.75,
+                    padding: "0 6px",
+                  }}
                 >
-                  {autoSaveEnabled && (
-                    <div
+                  {autoSaveStatus === "saving" && (
+                    <span
                       style={{
-                        fontSize: "12px",
-                        opacity: 0.7,
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "4px",
+                        width: 10,
+                        height: 10,
+                        borderRadius: "50%",
+                        border: "2px solid currentColor",
+                        borderTopColor: "transparent",
+                        animation: "app-editor-spin .7s linear infinite",
                       }}
-                    >
-                      {autoSaveStatus === "saving" && (
-                        <span
-                          style={{
-                            width: "10px",
-                            height: "10px",
-                            borderRadius: "50%",
-                            border: "2px solid currentColor",
-                            borderTop: "2px solid transparent",
-                            animation: "spin .7s linear infinite",
-                          }}
-                        />
-                      )}
-                      {autoSaveStatus === "saved" && <span>✓</span>}
-                      {autoSaveStatus === "idle" && <span>●</span>}
-                      <span>Auto-save</span>
-                    </div>
+                    />
                   )}
-
-                  {!autoSaveEnabled && (
-                    <button
-                      onClick={onSave}
-                      disabled={disabled || loading}
-                      style={saveBtnStyle}
-                      title={
-                        loading ? "Saving..." : disabled ? "No changes" : "Save"
-                      }
-                      onMouseEnter={(e) =>
-                        !disabled &&
-                        !loading &&
-                        (e.currentTarget.style.backgroundColor =
-                          rightBtnColors.bgHover)
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.backgroundColor =
-                          rightBtnColors.bg)
-                      }
-                    >
-                      {loading ? (
-                        <span
-                          style={{
-                            width: "14px",
-                            height: "14px",
-                            borderRadius: "50%",
-                            border: "2px solid currentColor",
-                            borderTop: "2px solid transparent",
-                            animation: "spin .7s linear infinite",
-                          }}
-                        />
-                      ) : (
-                        "✓ Save"
-                      )}
-                    </button>
-                  )}
+                  {autoSaveStatus === "saved" && <span>✓</span>}
+                  {autoSaveStatus === "idle" && <span>●</span>}
+                  <span>
+                    {autoSaveStatus === "saving"
+                      ? "Saving..."
+                      : autoSaveStatus === "saved"
+                        ? "Saved"
+                        : "Auto-save"}
+                  </span>
                 </div>
-              </>
-            ))}
+              ) : (
+                <button
+                  type="button"
+                  onClick={onSave}
+                  disabled={toolbarDisabled || !changed}
+                  style={saveButtonStyle}
+                  title={
+                    loading ? "Saving..." : changed ? "Save" : "No changes"
+                  }
+                >
+                  {loading ? "Saving..." : "✓ Save"}
+                </button>
+              )}
+            </>
+          )}
         </div>
 
         <style>
-          {`@keyframes spin { from {transform:rotate(0)} to {transform:rotate(360deg)} }`}
+          {`@keyframes app-editor-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}
         </style>
       </Toolbar>
     );
   },
 );
-
-// ======================================================
-// Main Component
-// ======================================================
 
 function AppEditor({
   error = false,
@@ -233,7 +440,7 @@ function AppEditor({
   initValue = "",
   onSave,
   onChange,
-  placeholder = "Start typing...",
+  placeholder = "...",
   disabled = false,
   readOnly = false,
   containerStyle,
@@ -244,29 +451,29 @@ function AppEditor({
   loading = false,
 }: AppEditorProps) {
   const theme = useTheme();
+  const palette = (theme.vars || theme).palette;
+  const editorRootRef = useRef<HTMLDivElement>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [value, setValue] = useState("");
-  const [initial, setInitial] = useState("");
+  const [value, setValue] = useState(initValue || "");
+  const [initial, setInitial] = useState(initValue || "");
   const [changed, setChanged] = useState(false);
-  const [_loading, setLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [autoSaveStatus, setAutoSaveStatus] = useState<AutoSaveStatus>("idle");
 
-  const [autoSaveStatus, setAutoSaveStatus] = useState<
-    "idle" | "saving" | "saved"
-  >("idle");
-
-  const debounceRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Sync initial value
   useEffect(() => {
-    setLoading(loading);
-    setValue(initValue || "");
-    setInitial(initValue || "");
+    const nextValue = initValue || "";
+    setValue(nextValue);
+    setInitial(nextValue);
     setChanged(false);
   }, [initValue]);
 
-  // --------------------------------------------------
-  // Handlers
-  // --------------------------------------------------
+  useEffect(
+    () => () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    },
+    [],
+  );
 
   const handleAutoSave = useCallback(
     async (content: string) => {
@@ -278,8 +485,6 @@ function AppEditor({
         setInitial(content);
         setChanged(false);
         setAutoSaveStatus("saved");
-
-        setTimeout(() => setAutoSaveStatus("idle"), 2000);
       } catch (err) {
         console.error("Auto-save failed:", err);
         setAutoSaveStatus("idle");
@@ -289,48 +494,80 @@ function AppEditor({
   );
 
   const handleChange = useCallback(
-    (e: ContentEditableEvent) => {
-      if (readOnly) return;
+    (event: ContentEditableEvent) => {
+      if (readOnly || disabled) return;
 
-      const newVal = e.target.value;
-      setValue(newVal);
-      const hasChanged = newVal !== initial;
+      const newValue = event.target.value;
+      setValue(newValue);
+      const hasChanged = newValue !== initial;
       setChanged(hasChanged);
+      onChange?.(newValue);
 
-      // Call onChange callback
-      if (onChange) {
-        onChange(newVal);
-      }
+      if (debounceRef.current) clearTimeout(debounceRef.current);
 
       if (autoSave && hasChanged && onSave) {
-        if (debounceRef.current) clearTimeout(debounceRef.current);
-
         setAutoSaveStatus("idle");
-
         debounceRef.current = setTimeout(() => {
-          handleAutoSave(newVal);
+          void handleAutoSave(newValue);
         }, autoSaveDelay);
       }
     },
-    [initial, autoSave, autoSaveDelay, onSave, onChange, readOnly],
+    [
+      readOnly,
+      disabled,
+      initial,
+      onChange,
+      autoSave,
+      onSave,
+      autoSaveDelay,
+      handleAutoSave,
+    ],
   );
 
   const handleSave = useCallback(async () => {
-    if (!onSave || !changed) return;
+    if (!onSave || !changed || disabled || readOnly) return;
 
     try {
-      setLoading(true);
+      setIsSaving(true);
       await onSave(value);
       setInitial(value);
       setChanged(false);
     } finally {
-      setLoading(false);
+      setIsSaving(false);
     }
-  }, [changed, value, onSave]);
+  }, [changed, value, onSave, disabled, readOnly]);
 
-  // --------------------------------------------------
-  // Styles
-  // --------------------------------------------------
+  /**
+   * Word shortcuts: Ctrl + Left Shift => LTR, Ctrl + Right Shift => RTL.
+   * We handle them ourselves so the browser's native behavior doesn't
+   * run and the direction is always applied to the paragraph only.
+   */
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (!event.ctrlKey || event.altKey || event.metaKey) return;
+      if (event.code !== "ShiftLeft" && event.code !== "ShiftRight") return;
+
+      event.preventDefault();
+      if (event.repeat || readOnly || disabled || loading || isSaving) return;
+
+      const editor = getEditorElement(editorRootRef.current);
+      if (!editor) return;
+      applyDirectionToSelection(
+        editor,
+        event.code === "ShiftLeft" ? "ltr" : "rtl",
+      );
+    },
+    [readOnly, disabled, loading, isSaving],
+  );
+
+  const handleKeyUp = useCallback((event: React.KeyboardEvent) => {
+    if (
+      event.ctrlKey &&
+      (event.code === "ShiftLeft" || event.code === "ShiftRight")
+    ) {
+      event.preventDefault();
+    }
+  }, []);
 
   const mergedStyle = useMemo<React.CSSProperties>(
     () => ({
@@ -338,6 +575,9 @@ function AppEditor({
       height: "100%",
       outline: 0,
       borderRadius: 8,
+      // Inherited by the contenteditable and by new paragraphs.
+      direction: DEFAULT_DIRECTION,
+      textAlign: DEFAULT_ALIGNMENT,
       ...containerStyle,
     }),
     [containerStyle],
@@ -345,42 +585,47 @@ function AppEditor({
 
   return (
     <>
-      <Editor
-        value={value}
-        onChange={handleChange}
-        placeholder={placeholder}
-        disabled={disabled || readOnly}
-        containerProps={{
-          style: {
-            fontFamily: "tahoma",
-            border: error
-              ? `1px solid ${(theme.vars || theme).palette.error.main}`
-              : `1px solid ${(theme.vars || theme).palette.divider}`,
-            ...mergedStyle,
-          },
-        }}
+      <div
+        ref={editorRootRef}
+        className={className}
+        style={{ height: "100%" }}
+        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
       >
-        <EditorToolbar
-          label={label}
+        <Editor
+          value={value}
           onChange={handleChange}
-          onSave={handleSave}
-          disabled={!changed || disabled}
-          loading={loading}
-          readOnly={readOnly}
-          autoSaveEnabled={autoSave}
-          autoSaveStatus={autoSaveStatus}
-        />
-        {loading && <LinearProgress />}
-      </Editor>
+          placeholder={placeholder}
+          disabled={disabled || readOnly}
+          containerProps={{
+            dir: DEFAULT_DIRECTION,
+            style: {
+              fontFamily: "Tahoma, Arial, sans-serif",
+              border: `1px solid ${error ? palette.error.main : palette.divider}`,
+              ...mergedStyle,
+            },
+          }}
+        >
+          <EditorToolbar
+            label={label}
+            disabled={disabled}
+            loading={loading || isSaving}
+            readOnly={readOnly}
+            autoSaveEnabled={autoSave && !!onSave}
+            autoSaveStatus={autoSaveStatus}
+            changed={changed}
+            onSave={handleSave}
+            editorRootRef={editorRootRef}
+          />
+          {(loading || isSaving) && <LinearProgress />}
+        </Editor>
+      </div>
+
       {helperText && (
         <Typography
           variant="caption"
           color="error"
-          sx={{
-            mt: 0.5,
-            ml: 1.5,
-            display: "block",
-          }}
+          sx={{ mt: 0.5, ml: 1.5, display: "block" }}
         >
           {helperText}
         </Typography>

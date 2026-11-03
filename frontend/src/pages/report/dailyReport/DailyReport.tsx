@@ -6,26 +6,47 @@ import { useCallback, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 import { columns, getRowId } from "./DailyReportColumns";
-import { tblDailyReport, TypeTblDailyReport } from "@/core/api/generated/api";
+import {
+  tblDailyReport,
+  TypeTblDailyReport,
+  TypeTblDiscipline,
+} from "@/core/api/generated/api";
 import { useDialogs } from "@/shared/hooks/useDialogs";
 import DailyReportFilterDialog, {
   DailyReportFilter,
 } from "./DailyReportDialogFilter";
-import Splitter from "@/shared/components/Splitter/Splitter";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
+import { daysAgo } from "@/core/helper";
 
 export default function PageDailyReport() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   const { dialogs, openDialog, closeDialog } = useDialogs({
     print: false,
-    filter: true,
+    filter: false,
   });
 
+  const user = useAtomValue(atomUser);
+
   const [filter, setFilter] = useState<DailyReportFilter | null>(null);
+  const disipline = user?.tblEmployee?.tblDiscipline as TypeTblDiscipline;
 
   const getAll = useCallback(() => {
     return tblDailyReport.getAll({
-      filter: filter ?? undefined,
+      filter: filter ?? {
+        AND: [
+          {
+            discId: disipline.discId,
+          },
+          {
+            reportDate: {
+              gte: new Date(daysAgo(14)),
+              lte: new Date(),
+            },
+          },
+        ],
+      },
       include: {
         tblDiscipline: true,
       },

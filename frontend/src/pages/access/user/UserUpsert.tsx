@@ -243,37 +243,6 @@ function UserUpsert({
     >
       <Box display="grid" gridTemplateColumns="repeat(2, 1fr)" gap={1.5}>
         <Controller
-          name="userName"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Username *"
-              size="small"
-              error={!!errors.userName}
-              helperText={errors.userName?.message}
-              disabled={isDisabled}
-            />
-          )}
-        />
-
-        <Controller
-          name="password"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label={mode === "create" ? "Password *" : "New Password"}
-              type="password"
-              size="small"
-              error={!!errors.password}
-              helperText={errors.password?.message}
-              disabled={isDisabled}
-            />
-          )}
-        />
-
-        <Controller
           name="tblEmployee"
           control={control}
           render={({ field }) => (
@@ -312,7 +281,36 @@ function UserUpsert({
             />
           )}
         />
+        <Controller
+          name="userName"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Username *"
+              size="small"
+              error={!!errors.userName}
+              helperText={errors.userName?.message}
+              disabled={isDisabled}
+            />
+          )}
+        />
 
+        <Controller
+          name="password"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label={mode === "create" ? "Password *" : "New Password"}
+              type="password"
+              size="small"
+              error={!!errors.password}
+              helperText={errors.password?.message}
+              disabled={isDisabled}
+            />
+          )}
+        />
         <Box gridColumn="span 2">
           <Controller
             name="accountDisabled"

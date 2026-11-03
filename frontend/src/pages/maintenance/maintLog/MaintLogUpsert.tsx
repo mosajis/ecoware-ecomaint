@@ -35,7 +35,7 @@ type MaintLogUpsertProps = {
   workOrderId?: number;
   compId?: number;
   onClose: () => void;
-  onSuccess?: (result: DynamicResponse<"postTblMaintLog">) => void;
+  onSuccess?: (result: TypeTblMaintLog) => void;
 };
 
 const defaultValues: TypeValues = {
@@ -158,7 +158,7 @@ function MaintLogUpsert({
               });
           }
 
-          onSuccess?.(res);
+          onSuccess?.(res as any);
         })
         .catch(() => {
           toast.error("Failed to create Maintenance Log");

@@ -43,7 +43,7 @@ import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import { getPermit } from "@/shared/hooks/usePermison";
 import { yellow } from "@mui/material/colors";
 // ================= TYPES =================
-type MenuItem = {
+export type MenuItem = {
   text: string;
   path: string;
   id?: string;
@@ -52,7 +52,7 @@ type MenuItem = {
   permit?: boolean;
 };
 
-type MenuSection = {
+export type MenuSection = {
   title: string;
   icon: ReactNode;
   path?: string;
@@ -141,6 +141,13 @@ export const menuContentItems: MenuSection[] = [
         id: "quick:workshop",
         icon: <EngineeringRoundedIcon sx={iconStyle} />,
         permit: getPermit(1360).canView,
+      },
+      {
+        text: "Counter Alert",
+        path: "/maintenance/counter-alert",
+        id: "maint:counterAlert",
+        permit: getPermit(1380).canView,
+        icon: <WarningAmberRoundedIcon sx={iconStyle} />,
       },
     ],
   },

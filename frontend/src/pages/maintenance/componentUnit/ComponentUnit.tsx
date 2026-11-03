@@ -1,13 +1,11 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import ComponentUnitUpsert from "./ComponentUnitUpsert";
-import ComponentUnitActions, {
-  getComponentUnitActions,
-} from "./ComponentUnitActions";
 import WorkShopUpsert from "../workShop/WorkShopUpsert";
 import FailureReportUpsert from "@/pages/report/failureReport/FailureReportUpsert";
 import ConfirmDialog from "@/shared/components/ConfirmDialog";
-
+import MaintLogUpsert from "../maintLog/MaintLogUpsert";
+import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 import { useRouter } from "@tanstack/react-router";
 import { useDataTree } from "@/shared/hooks/useDataTree";
 import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
@@ -20,14 +18,15 @@ import { RouteDetail } from "./ComponentUnitRoutes";
 import { RouteDetail as FailureReportRouteDetail } from "@/pages/report/failureReport/FailureReportRoutes";
 import { RouteDetail as WorkShopRouteDetail } from "../workShop/WorkShopRoutes";
 import { RouteDetail as MaintLogRouteDetail } from "../maintLog/MaintLogRoute";
+import ComponentUnitActions, {
+  getComponentUnitActions,
+} from "./ComponentUnitActions";
 
 import {
   tblComponentUnit,
   TypeTblComponentUnit,
   TypeTblMaintLog,
 } from "@/core/api/generated/api";
-import MaintLogUpsert from "../maintLog/MaintLogUpsert";
-import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 
 const PERMIT_ID = 1310;
 
@@ -41,12 +40,14 @@ export type PendingRedirect = {
   type: PendingRedirectType;
   id: number | null;
   breadcrumb: string | null;
+  tab?: string | null;
 };
 
 export const DEFAULT_PENDING_REDIRECT: PendingRedirect = {
   type: null,
   id: null,
   breadcrumb: null,
+  tab: null,
 };
 
 export default function PageComponentUnit() {
@@ -138,12 +139,18 @@ export default function PageComponentUnit() {
   );
 
   const openInNewTab = useCallback(
-    (route: { to: string }, id: number, breadcrumb?: string | null) => {
+    (
+      route: { to: string },
+      id: number,
+      breadcrumb?: string | null,
+      tab?: string,
+    ) => {
       const href = router.buildLocation({
         to: route.to,
         params: { id },
         search: {
           breadcrumb: breadcrumb ?? "",
+          ...(tab && { tab }),
         },
       }).href;
 
@@ -151,7 +158,6 @@ export default function PageComponentUnit() {
     },
     [router],
   );
-
   // =======================
   // GRID EVENTS
   // =======================
@@ -187,7 +193,12 @@ export default function PageComponentUnit() {
     const route = routes[pendingRedirect.type];
 
     if (route?.to) {
-      openInNewTab(route, pendingRedirect.id, pendingRedirect.breadcrumb);
+      openInNewTab(
+        route,
+        pendingRedirect.id,
+        pendingRedirect.breadcrumb,
+        pendingRedirect.tab ?? undefined,
+      );
     }
 
     setPendingRedirect(DEFAULT_PENDING_REDIRECT);
@@ -207,6 +218,7 @@ export default function PageComponentUnit() {
       setPendingRedirect({
         type: "maintLog",
         id: record.maintLogId,
+        tab: "Spare Used",
         breadcrumb: selectedRow?.compNo || String(record.maintLogId),
       });
 

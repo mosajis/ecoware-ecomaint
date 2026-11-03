@@ -78,7 +78,7 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
   },
   {
     field: "maintCase",
-    headerName: "Maint Case",
+    headerName: "Maint Cause",
     valueGetter: (_, row) => row?.tblMaintCause?.descr ?? "",
     flex: 1,
   },

@@ -33,6 +33,7 @@ const AlertItemSchema = t.Object({
   }),
 
   info: t.Object({
+    compJobCounterId: t.Number(),
     componentName: t.Optional(t.Nullable(t.String())),
     jobDescTitle: t.String(),
     frequency: t.Optional(t.Nullable(t.Number())),
@@ -71,6 +72,8 @@ const ControllerTblCompJobCounter = new BaseController({
         const compJobCounters = await prisma.tblCompJobCounter.findMany({
           where: { showInAlert: true, instId },
           select: {
+            compJobCounterId: true,
+            frequency: true,
             nextDueCount: true,
             lastDoneCount: true,
             tblCompCounter: {
@@ -136,10 +139,11 @@ const ControllerTblCompJobCounter = new BaseController({
               nextDueDate: x.tblCompJob?.nextDueDate,
             },
             info: {
+              compJobCounterId: x.compJobCounterId,
               componentName: x.tblCompCounter?.tblComponentUnit?.compNo,
               jobDescTitle:
                 x.tblCompJob?.tblJobDescription?.jobDescTitle ?? "N/A",
-              frequency: x.tblCompJob?.frequency,
+              frequency: x.frequency,
               status,
             },
           };

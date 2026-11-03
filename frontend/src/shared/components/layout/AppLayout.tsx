@@ -3,9 +3,6 @@ import Box from "@mui/material/Box";
 import { alpha } from "@mui/material/styles";
 import { lazy, Suspense, useMemo } from "react";
 import { Outlet } from "@tanstack/react-router";
-import { menuLayout } from "@/config";
-
-const TopMenu = lazy(() => import("@/shared/components/layout/TopMenu"));
 
 const SideMenu = lazy(() => import("@/shared/components/layout/SideMenu"));
 const Header = lazy(() => import("@/shared/components/layout/header/Header"));
@@ -23,21 +20,9 @@ function AppLayout() {
   );
 
   return (
-    <Box
-      sx={[
-        menuLayout === "topBarMenu"
-          ? {
-              display: "flex",
-              flexDirection: "column",
-            }
-          : {
-              display: "flex",
-              height: "100vh",
-            },
-      ]}
-    >
+    <Box sx={{ display: "flex", height: "100vh" }}>
       <Suspense>
-        {menuLayout === "topBarMenu" ? <TopMenu /> : <SideMenu />}
+        <SideMenu />
       </Suspense>
 
       <Box component="main" sx={{ flexGrow: 1, overflow: "hidden" }}>
