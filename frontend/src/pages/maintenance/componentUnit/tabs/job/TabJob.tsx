@@ -192,7 +192,7 @@ const TabJob = ({ componentUnit, label }: Props) => {
           loading={loading}
           onRowClick={handleRowClick}
           onEditClick={handleEdit}
-          onDoubleClick={handleEdit}
+          onView={handleEdit}
           onDeleteClick={handleDelete}
           getRowId={getRowId}
           onRefreshClick={handleRefresh}

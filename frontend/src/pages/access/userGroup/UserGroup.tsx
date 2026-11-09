@@ -92,7 +92,7 @@ const UserGroups = () => {
           loading={loading}
           onAddClick={openCreate}
           onEditClick={openEdit}
-          onDoubleClick={openView}
+          onView={openView}
           onDeleteClick={handleDelete}
           onRefreshClick={handleRefresh}
           getRowId={getRowId}

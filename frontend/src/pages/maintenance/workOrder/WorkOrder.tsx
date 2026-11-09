@@ -261,7 +261,7 @@ export default function WorkOrderPage() {
           checkboxSelection
           disableRowSelectionOnClick
           onRowClick={handleClick}
-          onDoubleClick={handleDoubleClick}
+          onView={handleDoubleClick}
           showToolbar
           label="WorkOrders"
           elementId={1340}

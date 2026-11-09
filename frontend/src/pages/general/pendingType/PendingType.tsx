@@ -28,7 +28,7 @@ export default function PagePendingType() {
       loading={loading}
       onDeleteClick={handleDelete}
       onEditClick={openEdit}
-      onDoubleClick={openView}
+      onView={openView}
       onAddClick={openCreate}
       onRefreshClick={handleRefresh}
       getRowId={getRowId}

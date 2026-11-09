@@ -27,6 +27,7 @@ const TabMaintLog = ({ componentUnit, label }: Props) => {
       filter: {
         compId,
       },
+      sort: "dateDone:desc",
       include: {
         tblWorkOrder: {
           include: {

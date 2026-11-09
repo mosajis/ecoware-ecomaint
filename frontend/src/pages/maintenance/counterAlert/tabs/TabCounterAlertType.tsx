@@ -17,5 +17,6 @@ export type CounterAlert = {
     jobDescTitle: string;
     frequency?: number | null;
     status: boolean | null;
+    orderNo: number | null;
   };
 };

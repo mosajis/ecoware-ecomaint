@@ -64,7 +64,7 @@ export default function PageJobDescription() {
           getRowId={getRowId}
           onAddClick={openCreate}
           onEditClick={openEdit}
-          onDoubleClick={openEdit}
+          onView={openEdit}
           onDeleteClick={handleDelete}
           onRowClick={handleRowClick}
           onRefreshClick={handleRefresh}

@@ -3,10 +3,14 @@ import Box from "@mui/material/Box";
 import Editor from "@/shared/components/Editor";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
 import FieldDateTime from "@/shared/components/fields/FieldDateTime";
-import { memo } from "react";
-import { Controller } from "react-hook-form";
+import { memo, useEffect, useRef } from "react";
+import { Controller, useWatch } from "react-hook-form";
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
-import { tblDailyReport, TypeTblDailyReport } from "@/core/api/generated/api";
+import {
+  tblDailyReport,
+  tblMaintLog,
+  TypeTblDailyReport,
+} from "@/core/api/generated/api";
 
 const schema = z.object({
   reportDate: z.string().refine((val) => new Date(val) <= new Date(), {
@@ -68,12 +72,63 @@ function DailyReportUpsert({
     control,
     formState: { errors },
   } = form;
+  const reportDate = useWatch({
+    control,
+    name: "reportDate",
+  });
 
+  const previousDateRef = useRef<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (!reportDate) return;
+
+    // جلوگیری از درخواست تکراری برای یک تاریخ
+    if (previousDateRef.current === reportDate) return;
+
+    previousDateRef.current = reportDate;
+
+    const fetchMaintLogs = async () => {
+      const date = new Date(reportDate);
+
+      const startOfDay = new Date(date);
+      startOfDay.setHours(0, 0, 0, 0);
+
+      const endOfDay = new Date(date);
+      endOfDay.setHours(23, 59, 59, 999);
+
+      try {
+        const res = await tblMaintLog.getAll({
+          includeSpares: true,
+          filter: {
+            reportedDate: {
+              gte: startOfDay.toISOString(),
+              lte: endOfDay.toISOString(),
+            },
+          },
+        });
+
+        // history تمام MaintLogها را جمع می‌کنیم
+        const histories = res.items
+          .map((item) => item.history)
+          .filter(Boolean)
+          .join("<br /><br />");
+
+        form.setValue("userComment", histories, {
+          shouldDirty: true,
+        });
+      } catch (error) {
+        console.error("Failed to fetch maintenance logs", error);
+      }
+    };
+
+    fetchMaintLogs();
+  }, [reportDate, form]);
   return (
     <FormDialog
       open={open}
       onClose={onClose}
       title={title}
+      maxWidth="lg"
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleFormSubmit}
@@ -102,7 +157,7 @@ function DailyReportUpsert({
             <Editor
               initValue={field.value}
               onChange={field.onChange}
-              label="Comment"
+              label="Short Comment"
               error={!!errors.userComment}
               helperText={errors.userComment?.message}
               disabled={isDisabled}

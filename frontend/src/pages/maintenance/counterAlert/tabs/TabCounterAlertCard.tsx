@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 
 const TabCounterAlertCard = ({ counterAlerts }: { counterAlerts: any }) => {
-  const [sortBy, setSortBy] = useState("progress-desc");
+  const [sortBy, setSortBy] = useState("orderNo-asc");
 
   const sortedCounterAlerts = useMemo(() => {
     const items = [...counterAlerts];
@@ -33,6 +33,11 @@ const TabCounterAlertCard = ({ counterAlerts }: { counterAlerts: any }) => {
       );
 
       switch (sortBy) {
+        case "orderNo-asc":
+          return (a.info.orderNo ?? Infinity) - (b.info.orderNo ?? Infinity);
+
+        case "orderNo-desc":
+          return (b.info.orderNo ?? -Infinity) - (a.info.orderNo ?? -Infinity);
         case "component-asc":
           return (a.info.componentName ?? "").localeCompare(
             b.info.componentName ?? "",
@@ -210,6 +215,10 @@ const TabCounterAlertCard = ({ counterAlerts }: { counterAlerts: any }) => {
             }
             sx={{ minWidth: 200 }}
           >
+            <MenuItem value="orderNo-asc">Order No: Low to High</MenuItem>
+
+            <MenuItem value="orderNo-desc">Order No: High to Low</MenuItem>
+
             <MenuItem value="progress-desc">Progress: High to Low</MenuItem>
 
             <MenuItem value="progress-asc">Progress: Low to High</MenuItem>

@@ -229,8 +229,7 @@ export default function MaintLogFilterDialog({
       conditions.push({ maintCauseId: filters.maintCause.maintCauseId });
     if (filters.discipline)
       conditions.push({ tblDiscipline: { discId: filters.discipline.discId } });
-    if (filters.component)
-      conditions.push({ compId: filters.component.compId });
+
     if (filters.reporter)
       conditions.push({ reportedBy: filters.reporter.employeeId });
     if (filters.workOrder)
@@ -260,8 +259,12 @@ export default function MaintLogFilterDialog({
         },
       });
     }
+    if (filters.component)
+      conditions.push({ compId: filters.component.compId });
     if (filters.componentType)
-      conditions.push({ compTypeId: filters.componentType.compTypeId });
+      conditions.push({
+        tblComponentUnit: { compTypeId: filters.componentType.compTypeId },
+      });
 
     const unexpectedValues: number[] = [];
 

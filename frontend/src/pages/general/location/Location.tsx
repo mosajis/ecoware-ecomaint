@@ -51,7 +51,7 @@ export default function PageLocation() {
         data={tree}
         onDelete={handleDelete}
         onEdit={openEdit}
-        onDoubleClick={openView}
+        onView={openView}
         onAdd={openCreate}
         onRefresh={refetch}
         getItemName={getItemName}
@@ -66,7 +66,7 @@ export default function PageLocation() {
         loading={loading}
         rows={rows}
         columns={columns}
-        onDoubleClick={openView}
+        onView={openView}
         onEditClick={openEdit}
         onDeleteClick={handleDelete}
         onRefreshClick={refetch}

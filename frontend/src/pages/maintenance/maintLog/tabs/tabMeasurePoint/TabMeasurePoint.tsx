@@ -93,14 +93,14 @@ const TabMeasures = ({ selected }: Props) => {
   return (
     <>
       <CustomizedDataGrid
-        showToolbar={!!selected.maintLogId}
+        showToolbar={!!selected?.maintLogId}
         label="Component Measures"
         rows={rows}
         columns={columns}
         loading={loading}
         onRefreshClick={handleRefresh}
         onEditClick={handleEdit}
-        onDoubleClick={handleEdit}
+        onView={handleEdit}
         getRowId={getRowId}
       />
 

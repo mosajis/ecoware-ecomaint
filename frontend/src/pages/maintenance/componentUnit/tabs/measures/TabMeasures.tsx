@@ -118,7 +118,7 @@ const TabCompMeasurePoint = ({ componentUnit, label }: Props) => {
         onRefreshClick={handleRefresh}
         onAddClick={handleCreate}
         onEditClick={handleEdit}
-        onDoubleClick={handleEdit}
+        onView={handleEdit}
         onDeleteClick={handleDelete}
         onRowClick={handleRowSelect}
         getRowId={getRowId}

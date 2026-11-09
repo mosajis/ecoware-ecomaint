@@ -134,7 +134,7 @@ export default function PageWorkShop() {
           onRefreshClick={handleRefresh}
           onAddClick={handleCreate}
           onEditClick={handleEdit}
-          onDoubleClick={handleRowDoubleClick}
+          onView={handleRowDoubleClick}
           onDeleteClick={handleDelete}
           onRowClick={handleRowClick}
           toolbarChildren={toolbar}

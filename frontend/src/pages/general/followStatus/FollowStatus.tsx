@@ -31,7 +31,7 @@ export default function PageFollowStatus() {
       onEditClick={openEdit}
       onDeleteClick={handleDelete}
       onRefreshClick={handleRefresh}
-      onDoubleClick={openView}
+      onView={openView}
     >
       <FollowStatusUpsert entityName="Follow Status" {...dialogProps} />
     </CustomizedDataGrid>

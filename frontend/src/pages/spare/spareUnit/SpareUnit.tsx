@@ -41,7 +41,7 @@ export default function PageSpareUnit() {
         columns={columns}
         onAddClick={openCreate}
         onEditClick={openEdit}
-        onDoubleClick={openView}
+        onView={openView}
         onDeleteClick={handleDelete}
         onRefreshClick={handleRefresh}
         getRowId={getRowId}

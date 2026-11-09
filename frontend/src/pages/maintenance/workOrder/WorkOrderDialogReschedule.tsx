@@ -3,10 +3,7 @@ import FieldDateTime from "@/shared/components/fields/FieldDateTime";
 import FieldNumber from "@/shared/components/fields/FieldNumber";
 import Editor from "@/shared/components/Editor";
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import {
-  tblCompJobCounter,
-  TypeTblWorkOrder,
-} from "@/core/api/generated/api";
+import { tblCompJobCounter, TypeTblWorkOrder } from "@/core/api/generated/api";
 import { toast } from "sonner";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,27 +11,26 @@ import { z } from "zod";
 import { useEffect, useState } from "react";
 import { workOrderReschedule } from "@/core/api/api";
 
-const schema = z
-  .object({
-    currentDueDate: z.string().nullable(),
-    newDueDate: z.string().min(1, "New due date is required"),
-    newDueCount: z.number().nullable().optional(),
-    currentDueCount: z.number().nullable().optional(),
-    reason: z.string().min(1, "Reason must be at least 1 characters"),
-  })
-  .superRefine((data, ctx) => {
-    if (
-      data.currentDueDate &&
-      data.newDueDate &&
-      new Date(data.newDueDate) <= new Date(data.currentDueDate)
-    ) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["newDueDate"],
-        message: "New due date must be later than current due date",
-      });
-    }
-  });
+const schema = z.object({
+  currentDueDate: z.string().nullable(),
+  newDueDate: z.string().min(1, "New due date is required"),
+  newDueCount: z.number().nullable().optional(),
+  currentDueCount: z.number().nullable().optional(),
+  reason: z.string().min(1, "Reason must be at least 1 characters"),
+});
+// .superRefine((data, ctx) => {
+//   if (
+//     data.currentDueDate &&
+//     data.newDueDate &&
+//     new Date(data.newDueDate) <= new Date(data.currentDueDate)
+//   ) {
+//     ctx.addIssue({
+//       code: z.ZodIssueCode.custom,
+//       path: ["newDueDate"],
+//       message: "New due date must be later than current due date",
+//     });
+//   }
+// });
 
 type FormValues = z.infer<typeof schema>;
 

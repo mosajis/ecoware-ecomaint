@@ -30,7 +30,7 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
   {
     field: "component",
     headerName: "Component",
-    flex: 1,
+    width: 200,
     valueGetter: (_, row) => row?.tblComponentUnit?.compNo,
   },
   {
@@ -42,7 +42,7 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
   {
     field: "jobDescTitle",
     headerName: "jobDescTitle",
-    flex: 1,
+    width: 200,
     valueGetter: (_, row) => row?.tblJobDescription?.jobDescTitle,
   },
   {
@@ -56,7 +56,7 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     field: "discipline",
     headerName: "Discipline",
     valueGetter: (_, row) => row?.tblDiscipline?.name,
-    flex: 1,
+    width: 100,
   },
   {
     field: "followStatus",
@@ -68,29 +68,29 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     field: "maintClass",
     headerName: "Maint Class",
     valueGetter: (_, row) => row?.tblMaintClass?.descr ?? "",
-    flex: 1,
+    width: 100,
   },
   {
     field: "maintType",
     headerName: "Maint Type",
     valueGetter: (_, row) => row?.tblMaintType?.descr ?? "",
-    flex: 1,
+    width: 100,
   },
   {
     field: "maintCase",
     headerName: "Maint Cause",
     valueGetter: (_, row) => row?.tblMaintCause?.descr ?? "",
-    flex: 1,
+    width: 100,
   },
   {
     field: "downTime",
     headerName: "DownTime",
-    flex: 1,
+    width: 80,
   },
   {
     field: "totalTimeSpent",
     headerName: "Emp / Hrs",
-    width: 80,
+    width: 100,
     renderCell: ({ _, row }: any) => (
       <Tooltip title={` Total Time Spent: ${row.totalTimeSpent}`}>
         <div style={{ width: "100%", height: "100%" }}>
@@ -126,13 +126,13 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
   {
     field: "tblEmployee",
     headerName: "ReportedBy",
-    width: 80,
+    width: 150,
     renderCell: ({ _, row }: any) => <CellFullName value={row.tblEmployee} />,
   },
   {
     field: "unexpected",
     headerName: "Type",
-    flex: 1,
+    width: 150,
     valueGetter: (_, row) =>
       unexpectedMap[row.unexpected as keyof typeof unexpectedMap] ?? "-",
 

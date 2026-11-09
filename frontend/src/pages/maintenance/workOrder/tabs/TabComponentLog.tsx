@@ -94,6 +94,8 @@ const TabComponentLog = (props: Props) => {
         filter: {
           compId: compId,
         },
+        sort: "dateDone:desc",
+
         include: {
           tblComponentUnit: {
             include: {

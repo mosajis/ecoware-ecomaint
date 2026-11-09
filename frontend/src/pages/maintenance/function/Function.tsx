@@ -90,7 +90,7 @@ export default function PageFunction() {
           onEdit={openEdit}
           onDelete={handleDelete}
           onAdd={openCreate}
-          onDoubleClick={handleNavigateDetail}
+          onView={handleNavigateDetail}
         />
 
         {/* GRID VIEW */}
@@ -107,7 +107,7 @@ export default function PageFunction() {
           onDeleteClick={handleDelete}
           onAddClick={openCreate}
           onRefreshClick={refetch}
-          onDoubleClick={openView}
+          onView={openView}
           rowNumberCell={(row: TypeTblFunction, index) => (
             <CellLink
               breadcrumb={row.funcNo || ""}

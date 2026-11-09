@@ -2,6 +2,7 @@ import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
 import { memo } from "react";
 import {
   tblComponentUnitAttachment,
+  tblMaintLogAttachment,
   TypeTblComponentUnit,
 } from "@/core/api/generated/api";
 
@@ -13,17 +14,13 @@ interface Props {
 export function TabComponentUnitAttachment({ componentUnit, label }: Props) {
   return (
     <AttachmentMap
-      extraFilter={{
-        tblAttachment: {
-          isUserAttachment: true,
-        },
-      }}
-      filterId={componentUnit?.compId}
-      filterKey="compId"
-      relName="tblComponentUnit"
-      tableId="componentUnitAttachmentId"
+      extraFilter={{ tblMaintLog: { compId: componentUnit?.compId } }}
+      filterId={undefined}
+      filterKey="maintLogId"
+      relName="tblMaintLog"
+      tableId="maintLogAttachmentId"
       label={label}
-      mapService={tblComponentUnitAttachment}
+      mapService={tblMaintLogAttachment}
     />
   );
 }

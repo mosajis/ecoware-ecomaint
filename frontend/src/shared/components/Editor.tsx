@@ -48,8 +48,8 @@ interface AppEditorProps {
   loading?: boolean;
 }
 
-const DEFAULT_DIRECTION: Direction = "rtl";
-const DEFAULT_ALIGNMENT: Alignment = "right";
+const DEFAULT_DIRECTION: Direction = "ltr";
+const DEFAULT_ALIGNMENT: Alignment = "left";
 const BLOCK_SELECTOR = "p,div,h1,h2,h3,h4,h5,h6,blockquote,pre,li";
 
 const getEditorElement = (root: HTMLDivElement | null) =>
@@ -285,7 +285,6 @@ const EditorToolbar = memo(
         style={{
           display: "flex",
           justifyContent: "space-between",
-          flexDirection: "row-reverse",
           alignItems: "center",
           flexWrap: "wrap",
           gap: 6,

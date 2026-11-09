@@ -14,25 +14,25 @@ export const columns: GridColDef<TypeTblWorkOrder>[] = [
   {
     field: "jobCode",
     headerName: "Job Code",
-    width: 90,
+    width: 100,
     valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescCode,
   },
   {
     field: "component",
     headerName: "Component",
-    flex: 1,
+    width: 250,
     valueGetter: (_, row) => row.tblComponentUnit?.compNo,
   },
   {
     field: "location",
     headerName: "Location",
-    flex: 1,
+    width: 150,
     valueGetter: (_, row) => row?.tblComponentUnit?.tblLocation?.name,
   },
   {
     field: "jobDescTitle",
     headerName: "Job Desc",
-    flex: 1,
+    width: 250,
     valueGetter: (_, row) => row?.tblCompJob?.tblJobDescription?.jobDescTitle,
   },
   {

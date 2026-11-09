@@ -97,7 +97,7 @@ const TabFailureReport = ({ componentUnit, label }: TabFailureReportProps) => {
           rows={rows}
           columns={columns}
           loading={loading}
-          onDoubleClick={handleDoubleClick}
+          onView={handleDoubleClick}
           onRowClick={handleRowClick}
           onRefreshClick={handleRefresh}
           getRowId={getRowId}

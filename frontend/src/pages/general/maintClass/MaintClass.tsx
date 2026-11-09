@@ -79,7 +79,7 @@ export default function PageMaintClass() {
         onEditClick={classDialog.openEdit}
         onDeleteClick={handleDeleteClass}
         onRefreshClick={refreshClass}
-        onDoubleClick={classDialog.openView}
+        onView={classDialog.openView}
         getRowId={getRowIdClass}
       >
         <MaintClassUpsert
@@ -103,7 +103,7 @@ export default function PageMaintClass() {
           onEditClick={typeDialog.openEdit}
           onDeleteClick={handleDeleteType}
           onRefreshClick={refreshType}
-          onDoubleClick={typeDialog.openView}
+          onView={typeDialog.openView}
           getRowId={getRowIdType}
         >
           <MaintTypeUpsert
@@ -126,7 +126,7 @@ export default function PageMaintClass() {
           onEditClick={causeDialog.openEdit}
           onDeleteClick={handleDeleteCause}
           onRefreshClick={refreshCause}
-          onDoubleClick={causeDialog.openView}
+          onView={causeDialog.openView}
           getRowId={getRowIdCause}
         >
           <MaintCauseUpsert

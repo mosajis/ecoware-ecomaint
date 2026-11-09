@@ -29,7 +29,7 @@ export default function PageJobClass() {
       onEditClick={openEdit}
       onDeleteClick={handleDelete}
       onRefreshClick={handleRefresh}
-      onDoubleClick={openView}
+      onView={openView}
     >
       <JobClassUpsert entityName="Job Class" {...dialogProps} />
     </DataGrid>

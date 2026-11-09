@@ -21,7 +21,7 @@ const TabLogCounter = (props: Props) => {
   const getAll = useCallback(() => {
     return tblLogCounter.getAll({
       filter: {
-        maintLogId: selected.maintLogId,
+        maintLogId: selected?.maintLogId,
       },
       include: { tblCounterType: true },
     });
@@ -57,7 +57,7 @@ const TabLogCounter = (props: Props) => {
       label={label || "Resource Used"}
       rows={rows}
       loading={loading}
-      showToolbar={!!selected.maintLogId}
+      showToolbar={!!selected?.maintLogId}
       getRowId={(row) => row.logCounterId}
       onRefreshClick={handleRefresh}
       columns={columns}

@@ -16,7 +16,7 @@ const TabFailureReport = ({ selected, label }: Props) => {
   const getAll = useCallback(() => {
     return tblFailureReport.getAll({
       filter: {
-        maintLogId: selected.maintLogId,
+        maintLogId: selected?.maintLogId,
       },
       include: {
         tblMaintLog: {

@@ -27,6 +27,7 @@ const TabMaintLog = (props: Props) => {
     () =>
       tblMaintLog.getAll({
         filter: { compId, jobDescId },
+        sort: "dateDone:desc",
         include: {
           tblWorkOrder: {
             include: { tblDiscipline: true },

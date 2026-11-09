@@ -35,6 +35,16 @@ interface GenericTreeProps<T> {
   contextMenuItems?: ContextMenuItem<T>[];
 }
 
+const DEFAULT_PERMISSIONS = {
+  canCreate: true,
+  canUpdate: true,
+  canDelete: true,
+  canView: true,
+  canExport: true,
+};
+
+const CLICK_DELAY = 200;
+
 export function GenericTree<T>({
   label,
   data,
@@ -46,108 +56,71 @@ export function GenericTree<T>({
   onAdd,
   onRefresh,
   onDoubleClick,
+  onRefresh: _onRefresh,
   loading = false,
   elementId,
   contextMenuItems,
 }: GenericTreeProps<T>) {
-  // ✅ اصلاح: permission logic درست
-  const defaultPermissions = {
-    canCreate: true,
-    canUpdate: true,
-    canDelete: true,
-    canView: true,
-    canExport: true,
-  };
-
   const [contextMenu, setContextMenu] = useState<{
     mouseX: number;
     mouseY: number;
     row: T;
   } | null>(null);
 
-  const permissions = elementId ? getPermit(elementId) : defaultPermissions;
+  const permissions = elementId ? getPermit(elementId) : DEFAULT_PERMISSIONS;
 
-  const { canCreate, canUpdate, canDelete, canView, canExport } = permissions;
+  const { canCreate, canUpdate, canDelete, canView } = permissions;
 
-  if (!canView) return null;
-
-  // ✅ States
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [focusedItem, setFocusedItem] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // ✅ Refs
-  const clickTimerRef = useRef<number | null>(null);
-  const dataHashRef = useRef<string>("");
-  const CLICK_DELAY = 200;
+  const clickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const previousItemsRef = useRef(data.itemsMap);
+  const previousRootsRef = useRef(data.rootIds);
 
   const { itemsMap, childrenMap, rootIds } = data;
 
-  // ✅ Parent map برای ancestor lookup
+  // Parent lookup فقط هنگام تغییر childrenMap
   const parentMap = useMemo(() => {
     const map = new Map<number, number>();
-    childrenMap.forEach((children, parentId) => {
-      children.forEach((childId) => map.set(childId, parentId));
-    });
+
+    for (const [parentId, children] of childrenMap) {
+      for (const childId of children) {
+        map.set(childId, parentId);
+      }
+    }
+
     return map;
   }, [childrenMap]);
 
-  // ✅ تشخیص تغییر در data (مقایسه هش)
-  const dataHash = useMemo(() => {
-    return `${itemsMap.size}-${rootIds.length}-${childrenMap.size}`;
-  }, [itemsMap, rootIds, childrenMap]);
-
-  // ✅ اولین initialize - expand کردن root items
+  // پاکسازی state هنگام تغییر داده
   useEffect(() => {
-    if (rootIds.length === 0) {
-      setExpandedItems([]);
-      setSelectedItems([]);
-      setFocusedItem(null);
-      dataHashRef.current = dataHash;
-      return;
-    }
+    const validIds = new Set(Array.from(itemsMap.keys(), String));
 
-    // اگر این اولین بار است
-    if (dataHashRef.current === "") {
-      setExpandedItems(rootIds.map(String));
-      dataHashRef.current = dataHash;
-      return;
-    }
+    const isInitial = previousItemsRef.current === null;
 
-    // اگر data تغییر کرده است (add/update/delete)
-    if (dataHashRef.current !== dataHash) {
-      setExpandedItems((prev) => {
-        const validIds = new Set(Array.from(itemsMap.keys()).map(String));
+    setExpandedItems((prev) => {
+      const cleaned = prev.filter((id) => validIds.has(id));
+      const expanded = new Set(cleaned);
 
-        // حفظ expanded items که هنوز موجود اند
-        const cleaned = prev.filter((id) => validIds.has(id));
+      for (const id of rootIds) {
+        expanded.add(String(id));
+      }
 
-        // اضافه کردن root های جدید
-        const newRoots = rootIds
-          .map(String)
-          .filter((id) => !cleaned.includes(id));
+      return Array.from(expanded);
+    });
 
-        return [...cleaned, ...newRoots];
-      });
+    setSelectedItems((prev) => prev.filter((id) => validIds.has(id)));
 
-      // تمیزکاری selected items
-      setSelectedItems((prev) => {
-        const validIds = new Set(Array.from(itemsMap.keys()).map(String));
-        return prev.filter((id) => validIds.has(id));
-      });
+    setFocusedItem((prev) => (prev && validIds.has(prev) ? prev : null));
 
-      // تمیزکاری focused item
-      setFocusedItem((prev) => {
-        const validIds = new Set(Array.from(itemsMap.keys()).map(String));
-        return prev && validIds.has(prev) ? prev : null;
-      });
+    previousItemsRef.current = itemsMap;
+    previousRootsRef.current = rootIds;
+  }, [itemsMap, rootIds]);
 
-      dataHashRef.current = dataHash;
-    }
-  }, [dataHash, rootIds, itemsMap]);
-
-  // ✅ حل memory leak - cleanup timeout در unmount
+  // Cleanup
   useEffect(() => {
     return () => {
       if (clickTimerRef.current) {
@@ -156,53 +129,88 @@ export function GenericTree<T>({
     };
   }, []);
 
+  // Ancestor lookup
   const getAncestorIds = useCallback(
     (id: number): string[] => {
       const result: string[] = [];
       let currentId: number | undefined = id;
+
       while (currentId != null) {
         const parentId = parentMap.get(currentId);
+
         if (parentId == null) break;
+
         result.push(String(parentId));
         currentId = parentId;
       }
+
       return result;
     },
     [parentMap],
   );
 
-  // ✅ Tree config - بهتر شده
+  // Search index
+  const searchIndex = useMemo(() => {
+    const index = new Map<string, string>();
+
+    for (const [id, item] of itemsMap) {
+      index.set(String(id), getItemName(item).toLowerCase());
+    }
+
+    return index;
+  }, [itemsMap, getItemName]);
+  // Tree configuration
   const treeConfig = useMemo(
     () => ({
       rootItemId: "root" as const,
-      state: { selectedItems, expandedItems, focusedItem },
+
+      state: {
+        selectedItems,
+        expandedItems,
+        focusedItem,
+      },
+
       setSelectedItems,
       setExpandedItems,
       setFocusedItem,
+
       getItemName: (item: any) => {
-        const data = item.getItemData();
-        return data ? getItemName(data) : "";
+        const itemData = item.getItemData();
+        return itemData ? getItemName(itemData) : "";
       },
+
       isItemFolder: (item: any) => {
-        const d = item.getItemData();
-        if (!d) return false;
-        const id = Number(getItemId(d));
+        const itemData = item.getItemData();
+
+        if (!itemData) return false;
+
+        const id = Number(getItemId(itemData));
+
         if (Number.isNaN(id)) return false;
-        const children = childrenMap.get(id) || [];
-        return children.length > 0;
+
+        return (childrenMap.get(id)?.length ?? 0) > 0;
       },
+
       dataLoader: {
         getItem: (itemId: string) => {
           if (itemId === "root") return {} as T;
-          const item = itemsMap.get(Number(itemId));
-          return item || ({ id: itemId } as T);
+
+          return itemsMap.get(Number(itemId)) ?? ({ id: itemId } as T);
         },
+
         getChildren: (itemId: string) => {
-          if (itemId === "root") return rootIds.map(String);
-          const children = childrenMap.get(Number(itemId)) || [];
+          if (itemId === "root") {
+            return rootIds.map(String);
+          }
+
+          const children = childrenMap.get(Number(itemId));
+
+          if (!children) return [];
+
           return children.filter((id) => itemsMap.has(id)).map(String);
         },
       },
+
       features: [syncDataLoaderFeature, selectionFeature, hotkeysCoreFeature],
     }),
     [
@@ -219,118 +227,123 @@ export function GenericTree<T>({
 
   const tree = useTree<T>(treeConfig);
 
-  // ✅ Handlers - بهتر شده
-
+  // Expand all
   const handleExpandAll = useCallback(() => {
-    const items = tree.getItems();
-    items.forEach((item) => {
-      if (item.isFolder()) {
-        item.expand();
+    setExpandedItems((prev) => {
+      const next = new Set(prev);
+
+      for (const [id, children] of childrenMap) {
+        if (children.length > 0) {
+          next.add(String(id));
+        }
       }
-    });
-  }, [tree]);
 
+      return Array.from(next);
+    });
+  }, [childrenMap]);
+
+  // Collapse all
   const handleCollapseAll = useCallback(() => {
-    const items = tree.getItems();
-    items.forEach((item) => {
-      item.collapse();
-    });
-  }, [tree]);
+    setExpandedItems([]);
+  }, []);
 
+  // Edit
   const handleEdit = useCallback(() => {
     const firstSelected = selectedItems[0];
+
     if (firstSelected && onEdit) {
       onEdit(Number(firstSelected));
     }
   }, [selectedItems, onEdit]);
 
+  // Delete
   const handleDelete = useCallback(() => {
     const firstSelected = selectedItems[0];
+
     if (firstSelected && onDelete) {
       onDelete(Number(firstSelected));
     }
   }, [selectedItems, onDelete]);
 
+  // Single click
   const handleItemClick = useCallback(
     (item: T) => {
       if (clickTimerRef.current) {
         clearTimeout(clickTimerRef.current);
       }
 
-      clickTimerRef.current = window.setTimeout(() => {
+      clickTimerRef.current = setTimeout(() => {
         clickTimerRef.current = null;
-        if (onItemSelect) {
-          onItemSelect(item);
-        }
+        onItemSelect?.(item);
       }, CLICK_DELAY);
     },
     [onItemSelect],
   );
 
+  // Double click
   const handleItemDoubleClick = useCallback(
     (itemId: number) => {
       if (clickTimerRef.current) {
         clearTimeout(clickTimerRef.current);
         clickTimerRef.current = null;
       }
-      if (onDoubleClick) {
-        onDoubleClick(itemId);
-      }
+
+      onDoubleClick?.(itemId);
     },
     [onDoubleClick],
   );
 
+  // Search
   const handleSearch = useCallback(
     (txt: string) => {
       const q = txt.trim().toLowerCase();
 
+      setSearchQuery(q);
+
       if (!q) {
-        setSearchQuery("");
         setExpandedItems((prev) => {
-          // بازگرداندن به حالت بدون search
-          const validIds = new Set(Array.from(itemsMap.keys()).map(String));
+          const validIds = new Set(Array.from(itemsMap.keys(), String));
+
           return prev.filter((id) => validIds.has(id));
         });
+
         return;
       }
 
-      setSearchQuery(q);
-
       const nextExpanded = new Set<string>();
 
-      for (const [id, item] of Array.from(itemsMap.entries())) {
-        const name = getItemName(item).toLowerCase();
+      for (const [id, name] of searchIndex) {
         if (!name.includes(q)) continue;
 
-        nextExpanded.add(String(id));
-        getAncestorIds(id).forEach((ancestorId) => {
-          nextExpanded.add(ancestorId);
+        nextExpanded.add(id);
+
+        const numericId = Number(id);
+
+        getAncestorIds(numericId).forEach((ancestor) => {
+          nextExpanded.add(ancestor);
         });
       }
 
-      if (nextExpanded.size > 0) {
-        setExpandedItems(Array.from(nextExpanded));
-      } else {
-        // اگر نتیجه‌ای نیافت، حداقل root ها باز باشن
-        setExpandedItems(rootIds.map(String));
-      }
+      setExpandedItems(
+        nextExpanded.size > 0 ? Array.from(nextExpanded) : rootIds.map(String),
+      );
     },
-    [itemsMap, getItemName, getAncestorIds, rootIds],
+    [searchIndex, itemsMap, getAncestorIds, rootIds],
   );
 
-  const handleContextMenu = (event: React.MouseEvent, row: T) => {
+  // Context menu
+  const handleContextMenu = useCallback((event: React.MouseEvent, row: T) => {
     event.preventDefault();
 
-    setContextMenu(null);
+    setContextMenu({
+      mouseX: event.clientX,
+      mouseY: event.clientY,
+      row,
+    });
+  }, []);
 
-    setTimeout(() => {
-      setContextMenu({
-        mouseX: event.clientX,
-        mouseY: event.clientY,
-        row,
-      });
-    }, 0);
-  };
+  // Hooks must always execute before conditional return
+  if (!canView) return null;
 
   return (
     <div className="tree-container" onContextMenu={(e) => e.preventDefault()}>
@@ -346,6 +359,7 @@ export function GenericTree<T>({
         loading={loading}
         hasSelection={selectedItems.length > 0}
       />
+
       <TreeContent
         tree={tree}
         searchQuery={searchQuery}
@@ -355,6 +369,7 @@ export function GenericTree<T>({
         getItemName={getItemName}
         getItemId={getItemId}
       />
+
       <Menu
         slotProps={{
           root: {
@@ -369,7 +384,10 @@ export function GenericTree<T>({
         anchorReference="anchorPosition"
         anchorPosition={
           contextMenu
-            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+            ? {
+                top: contextMenu.mouseY,
+                left: contextMenu.mouseX,
+              }
             : undefined
         }
       >
@@ -377,7 +395,10 @@ export function GenericTree<T>({
           <MenuItem
             key={index}
             onClick={() => {
-              menuItem.onClick(contextMenu!.row);
+              if (contextMenu) {
+                menuItem.onClick(contextMenu.row);
+              }
+
               setContextMenu(null);
             }}
           >
