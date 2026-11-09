@@ -158,6 +158,7 @@ export default function PageCounterUpdate() {
 
       {/* ===== Update Dialog ===== */}
       <CountersUpdate
+        label={selectedRow?.tblComponentUnit?.compNo ?? ""}
         open={openForm}
         recordId={selectedRowId}
         onClose={() => setOpenForm(false)}

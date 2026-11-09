@@ -1,6 +1,7 @@
 import AccountTree from "@mui/icons-material/AccountTree";
 import AttachFile from "@mui/icons-material/AttachFile";
 import Inventory from "@mui/icons-material/Inventory";
+import MemoryIcon from "@mui/icons-material/Memory";
 import TrackChanges from "@mui/icons-material/TrackChanges";
 import ReportProblem from "@mui/icons-material/ReportProblem";
 import Build from "@mui/icons-material/Build";
@@ -27,6 +28,9 @@ const TabMeasurePoint = lazy(
 );
 const TabWorkOrders = lazy(() => import("./tabs/TabWorkOrder"));
 const TabAttachment = lazy(() => import("./tabs/TabAttachment"));
+const TabComponentLog = lazy(
+  () => import("./tabs/tabComponentLog/TabComponentLog"),
+);
 
 // Tabs
 const tabs: ReusableTabItem[] = [
@@ -42,7 +46,11 @@ const tabs: ReusableTabItem[] = [
     icon: <ReportProblem />,
     component: TabFailureReport,
   },
-
+  {
+    label: "Component Log",
+    icon: <MemoryIcon />,
+    component: TabComponentLog,
+  },
   { label: "Attachment", icon: <AttachFile />, component: TabAttachment },
 ];
 

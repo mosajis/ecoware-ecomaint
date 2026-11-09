@@ -262,7 +262,7 @@ export default function PageComponentUnit() {
           elementId={PERMIT_ID}
           loading={loading}
           data={tree}
-          onDoubleClick={handleOpenDetail}
+          onView={handleOpenDetail}
           onAdd={openCreate}
           onRefresh={refetch}
           getItemId={getRowId}
@@ -282,7 +282,7 @@ export default function PageComponentUnit() {
           onEditClick={openEdit}
           onDeleteClick={handleDelete}
           onAddClick={openCreate}
-          onDoubleClick={openView}
+          onView={openView}
           onRefreshClick={refetch}
           onRowClick={handleRowClick}
           rowNumberCell={(row: TypeTblComponentUnit, index) => (

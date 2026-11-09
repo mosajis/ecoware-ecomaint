@@ -51,7 +51,7 @@ export default function PageSpareType() {
       getRowId={getRowId}
       onAddClick={openCreate}
       onEditClick={openEdit}
-      onDoubleClick={openView}
+      onView={openView}
       onDeleteClick={handleDelete}
       onRefreshClick={refetch}
     >

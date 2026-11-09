@@ -69,7 +69,7 @@ export default function PageJobTrigger() {
         getRowId={getRowId}
         onAddClick={openCreate}
         onEditClick={openEdit}
-        onDoubleClick={openView}
+        onView={openView}
         onDeleteClick={handleDelete}
         onRowClick={handleRowClick}
         onRefreshClick={handleRefresh}

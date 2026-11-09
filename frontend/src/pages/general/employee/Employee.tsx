@@ -42,7 +42,7 @@ export default function PageEmployee() {
       onRefreshClick={handleRefresh}
       onDeleteClick={handleDelete}
       onEditClick={openEdit}
-      onDoubleClick={openView}
+      onView={openView}
       getRowId={getRowId}
     >
       <EmployeeUpsert entityName={label} {...dialogProps} />

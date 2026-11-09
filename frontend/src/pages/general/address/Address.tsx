@@ -31,7 +31,7 @@ export default function PageAddress() {
       onDeleteClick={handleDelete}
       onAddClick={openCreate}
       onEditClick={openEdit}
-      onDoubleClick={openView}
+      onView={openView}
       getRowId={getRowId}
     >
       <Upsert entityName={label} {...dialogProps} />

@@ -146,7 +146,7 @@ const TabMeasuresPage = ({ compType, label }: Props) => {
         onAddClick={handleCreate}
         onEditClick={handleEdit}
         onDeleteClick={handleAskDelete}
-        onDoubleClick={handleEdit}
+        onView={handleEdit}
       />
 
       <MeasurePointUpsert

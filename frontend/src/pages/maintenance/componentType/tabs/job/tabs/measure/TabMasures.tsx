@@ -181,7 +181,7 @@ const TabMeasuresPage = ({ compTypeJob }: Props) => {
         columns={columns}
         onAddClick={handleCreate}
         onEditClick={handleEdit}
-        onDoubleClick={handleEdit}
+        onView={handleEdit}
         onDeleteClick={handleAskDelete}
         onRefreshClick={handleRefresh}
         getRowId={getRowId}

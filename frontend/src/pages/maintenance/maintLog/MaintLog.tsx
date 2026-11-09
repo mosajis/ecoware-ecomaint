@@ -22,7 +22,7 @@ import MaintLogFilterDialog, {
 export default function PageMaintLog() {
   /* ---------------- dialogs ---------------- */
   const { dialogs, openDialog, closeDialog } = useDialogs({
-    filter: true,
+    filter: false,
     follow: false,
     print: false,
     detail: false,
@@ -125,7 +125,7 @@ export default function PageMaintLog() {
           rowSelectionModel={selectionModel}
           onRowSelectionModelChange={handleSelectionChange}
           onRowClick={handleRowClick}
-          onDoubleClick={handleRowDoubleClick}
+          onView={handleRowDoubleClick}
           onDeleteClick={handleDelete}
           onRefreshClick={handleRefresh}
           onEditClick={() => {

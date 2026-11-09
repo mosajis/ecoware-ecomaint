@@ -75,7 +75,7 @@ const TabCounter = ({ compJob }: Props) => {
         onRefreshClick={handleRefresh}
         onAddClick={handleCreate}
         onEditClick={handleEdit}
-        onDoubleClick={handleEdit}
+        onView={handleEdit}
         onDeleteClick={handleDelete}
         getRowId={getRowId}
       />

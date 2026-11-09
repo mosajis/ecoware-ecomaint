@@ -43,7 +43,7 @@ export default function PageCounterType() {
         onEditClick={openEdit}
         onDeleteClick={handleDelete}
         onRefreshClick={handleRefresh}
-        onDoubleClick={openView}
+        onView={openView}
         getRowId={getRowId}
       >
         <CounterTypeUpsert entityName={"Counter Type"} {...dialogProps} />

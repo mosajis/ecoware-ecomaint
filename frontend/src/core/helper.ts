@@ -80,9 +80,14 @@ export const calculateOverdue = (row: TypeTblWorkOrder) => {
     const due = new Date(dueDate);
     const completed = new Date(row.completed as any);
 
+    // Ignore time and compare only calendar dates
+    due.setHours(0, 0, 0, 0);
+    completed.setHours(0, 0, 0, 0);
+
     const diffDays = Math.round(
       (due.getTime() - completed.getTime()) / (1000 * 60 * 60 * 24),
     );
+
     return diffDays;
   }
 

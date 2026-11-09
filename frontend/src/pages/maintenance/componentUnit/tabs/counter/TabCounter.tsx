@@ -68,7 +68,7 @@ const TabCompCounter = ({ componentUnit, label }: Props) => {
         loading={loading}
         onRefreshClick={handleRefresh}
         onAddClick={handleCreate}
-        onDoubleClick={handleEdit}
+        onView={handleEdit}
         onEditClick={handleEdit}
         onDeleteClick={handleDelete}
         getRowId={getRowId}

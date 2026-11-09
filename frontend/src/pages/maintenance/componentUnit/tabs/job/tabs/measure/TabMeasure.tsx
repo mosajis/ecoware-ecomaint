@@ -80,7 +80,7 @@ const TabMeasuresPage = ({ compJob }: Props) => {
         onAddClick={handleCreate}
         onEditClick={handleEdit}
         onDeleteClick={handleDelete}
-        onDoubleClick={handleEdit}
+        onView={handleEdit}
       />
 
       <JobMeasureUpsert

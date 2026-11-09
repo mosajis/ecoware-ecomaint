@@ -23,7 +23,7 @@ const TabFollow = (props: props) => {
   const getAll = useCallback(() => {
     return tblMaintLogFollow.getAll({
       filter: {
-        maintLogId: selected.maintLogId,
+        maintLogId: selected?.maintLogId,
       },
       include: {
         tblFollowStatus: true,

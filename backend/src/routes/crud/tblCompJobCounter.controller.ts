@@ -38,6 +38,7 @@ const AlertItemSchema = t.Object({
     jobDescTitle: t.String(),
     frequency: t.Optional(t.Nullable(t.Number())),
     status: t.Nullable(t.Boolean()),
+    orderNo: t.Optional(t.Nullable(t.Number())),
   }),
 });
 
@@ -72,6 +73,7 @@ const ControllerTblCompJobCounter = new BaseController({
         const compJobCounters = await prisma.tblCompJobCounter.findMany({
           where: { showInAlert: true, instId },
           select: {
+            orderNo: true,
             compJobCounterId: true,
             frequency: true,
             nextDueCount: true,
@@ -145,6 +147,7 @@ const ControllerTblCompJobCounter = new BaseController({
                 x.tblCompJob?.tblJobDescription?.jobDescTitle ?? "N/A",
               frequency: x.frequency,
               status,
+              orderNo: x.orderNo,
             },
           };
         });

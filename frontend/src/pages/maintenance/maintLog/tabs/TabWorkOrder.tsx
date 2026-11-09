@@ -22,7 +22,7 @@ const TabWorkOrder = ({ selected, label }: Props) => {
       filter: {
         tblMaintLogs: {
           some: {
-            maintLogId: selected.maintLogId,
+            maintLogId: selected?.maintLogId,
           },
         },
       },
@@ -128,7 +128,7 @@ const TabWorkOrder = ({ selected, label }: Props) => {
   return (
     <CustomizedDataGrid
       label={label ?? "Work Orders"}
-      showToolbar={!!selected.maintLogId}
+      showToolbar={!!selected?.maintLogId}
       rows={rows}
       columns={columns}
       loading={loading}

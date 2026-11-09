@@ -30,7 +30,7 @@ export default function PageDiscipline() {
       onEditClick={openEdit}
       onDeleteClick={handleDelete}
       onRefreshClick={handleRefresh}
-      onDoubleClick={openView}
+      onView={openView}
       getRowId={getRowId}
     >
       <DisciplineUpsert entityName={label} {...dialogProps} />

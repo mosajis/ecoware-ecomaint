@@ -35,6 +35,7 @@ interface CustomizedDataGridProps extends DataGridProps {
   onEditClick?: (rowId: number) => void;
   onDoubleClick?: (rowId: number) => void;
   onDeleteClick?: (rowId: number) => void;
+  onView?: (rowId: number) => void;
   getRowId: (row: any) => GridRowId;
   disableSearch?: boolean;
   disableDensity?: boolean;
@@ -65,6 +66,7 @@ export default function GenericDataGrid({
   onDeleteClick,
   onDoubleClick,
   getRowId,
+  onView,
   disableSearch,
   disableDensity = true,
   disableExport,
@@ -177,8 +179,25 @@ export default function GenericDataGrid({
       }
 
       onDoubleClick?.(Number(params.id));
+      const rowId = Number(params.id);
+
+      // External double click has the highest priority
+      if (onDoubleClick) {
+        onDoubleClick(rowId);
+        return;
+      }
+
+      // Default behavior: Edit if permitted, otherwise View
+      if (canUpdate) {
+        onEditClick?.(rowId);
+        return;
+      }
+
+      if (canView) {
+        onView?.(rowId);
+      }
     },
-    [onDoubleClick],
+    [onDoubleClick, onEditClick, onView, canUpdate, canView],
   );
 
   const ToolbarWrapper = useMemo(

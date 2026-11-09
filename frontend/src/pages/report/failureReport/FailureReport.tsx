@@ -110,7 +110,7 @@ export default function PagefailureReport() {
           onRefreshClick={handleRefresh}
           onAddClick={openCreate}
           onEditClick={openEdit}
-          onDoubleClick={openView}
+          onView={openView}
           onDeleteClick={handleDelete}
           toolbarChildren={toolbar}
         />

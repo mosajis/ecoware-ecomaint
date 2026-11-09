@@ -25,6 +25,7 @@ const TabMaintLog = (props: Props) => {
         filter: {
           compId: compId,
         },
+        sort: "dateDone:desc",
       }),
     [compId],
   );

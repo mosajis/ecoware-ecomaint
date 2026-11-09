@@ -67,6 +67,7 @@ export default function TabMaintLog(props: Props) {
       filter: {
         jobDescId: jobDescriptionId,
       },
+      sort: "dateDone:desc",
       include: {
         tblComponentUnit: true,
         tblJobDescription: true,

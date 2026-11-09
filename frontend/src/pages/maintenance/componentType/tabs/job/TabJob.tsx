@@ -157,7 +157,7 @@ const TabJob = ({ compType, label }: Props) => {
           onAddClick={handleCreate}
           onEditClick={handleEdit}
           onDeleteClick={handleAskDelete}
-          onDoubleClick={handleEdit}
+          onView={handleEdit}
           onRowClick={handleRowClick}
         />
 

@@ -66,7 +66,7 @@ export default function PageComponentType() {
           onDelete={handleDelete}
           onAdd={openCreate}
           onRefresh={refetch}
-          onDoubleClick={handleRowDoubleClick}
+          onView={handleRowDoubleClick}
         />
 
         {/* GRID */}
@@ -83,7 +83,7 @@ export default function PageComponentType() {
           onDeleteClick={handleDelete}
           onAddClick={openCreate}
           onRefreshClick={refetch}
-          onDoubleClick={openView}
+          onView={openView}
         />
       </Splitter>
 

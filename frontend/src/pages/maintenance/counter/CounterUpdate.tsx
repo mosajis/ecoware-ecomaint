@@ -22,13 +22,14 @@ export type CompCounterCurrentFormValues = z.infer<typeof schema>;
 
 /* ================= Props ================= */
 type Props = {
+  label?: string;
   open: boolean;
   recordId: number | null;
   onClose: () => void;
   onSuccess: (data: TypeTblCompCounter) => void;
 };
 
-function CountersUpdate({ open, recordId, onClose, onSuccess }: Props) {
+function CountersUpdate({ open, recordId, label, onClose, onSuccess }: Props) {
   const [loadingInitial, setLoadingInitial] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -100,7 +101,7 @@ function CountersUpdate({ open, recordId, onClose, onSuccess }: Props) {
           },
         });
 
-        onSuccess(result);
+        onSuccess(result as TypeTblCompCounter);
         onClose();
       } catch (err) {
         console.error("Update CompCounter failed", err);
@@ -116,7 +117,7 @@ function CountersUpdate({ open, recordId, onClose, onSuccess }: Props) {
       maxWidth="xs"
       open={open}
       onClose={onClose}
-      title="Update Counter Value"
+      title={label ?? "Update Counter Value"}
       submitting={submitting}
       loadingInitial={loadingInitial}
       onSubmit={handleSubmit(onSubmit)}
