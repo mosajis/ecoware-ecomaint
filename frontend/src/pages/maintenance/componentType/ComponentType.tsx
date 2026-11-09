@@ -1,13 +1,13 @@
 import Splitter from "@/shared/components/Splitter/Splitter";
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import ComponentTypeUpsert from "./ComponentTypeUpsert";
-
+import ConfirmDialog from "@/shared/components/ConfirmDialog";
 import { useRouter } from "@tanstack/react-router";
 import { useDataTree } from "@/shared/hooks/useDataTree";
 import { mapToTree } from "@/shared/components/tree/TreeUtil";
 import { GenericTree } from "@/shared/components/tree/Tree";
 import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
-import { useCallback } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { tblCompType, TypeTblCompType } from "@/core/api/generated/api";
 import { columns, getItemName, getRowId } from "./ComponentTypeColumn";
 import { RouteDetail } from "./ComponentTypeRoutes";
@@ -51,6 +51,27 @@ export default function PageComponentType() {
     [router, rows],
   );
 
+  const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
+
+  const treeActions = useMemo(
+    () => [
+      {
+        label: "Open Detail",
+        onClick: (item: TypeTblCompType) =>
+          handleRowDoubleClick(item.compTypeId),
+      },
+      {
+        label: "Edit",
+        onClick: (item: TypeTblCompType) => openEdit(item.compTypeId),
+      },
+      {
+        label: "Delete",
+        onClick: (item: TypeTblCompType) => setDeleteItemId(item.compTypeId),
+      },
+    ],
+    [handleRowDoubleClick, openEdit, handleDelete],
+  );
+
   return (
     <>
       <Splitter initialPrimarySize="30%">
@@ -66,7 +87,8 @@ export default function PageComponentType() {
           onDelete={handleDelete}
           onAdd={openCreate}
           onRefresh={refetch}
-          onView={handleRowDoubleClick}
+          onDoubleClick={openEdit}
+          contextMenuItems={treeActions}
         />
 
         {/* GRID */}
@@ -89,6 +111,23 @@ export default function PageComponentType() {
 
       {/* UPSERT */}
       <ComponentTypeUpsert entityName="ComponentType" {...dialogProps} />
+
+      <ConfirmDialog
+        open={deleteItemId !== null}
+        title="Delete Item"
+        message="Are you sure you want to delete this item?"
+        confirmText="Delete"
+        cancelText="Cancel"
+        confirmColor="error"
+        onCancel={() => setDeleteItemId(null)}
+        onConfirm={async () => {
+          if (deleteItemId !== null) {
+            await handleDelete(deleteItemId);
+          }
+
+          setDeleteItemId(null);
+        }}
+      />
     </>
   );
 }

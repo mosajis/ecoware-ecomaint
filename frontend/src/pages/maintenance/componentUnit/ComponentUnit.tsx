@@ -262,12 +262,12 @@ export default function PageComponentUnit() {
           elementId={PERMIT_ID}
           loading={loading}
           data={tree}
-          onView={handleOpenDetail}
           onAdd={openCreate}
           onRefresh={refetch}
           getItemId={getRowId}
           getItemName={getItemName}
           contextMenuItems={treeActions}
+          onDoubleClick={openEdit}
           onItemSelect={(item) => setSelectedRowId(item.compId)}
         />
 

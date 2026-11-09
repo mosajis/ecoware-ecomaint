@@ -51,7 +51,6 @@ function AttachmentMap<T = any>({
     getAll,
     undefined as any,
     tableId as any,
-    !!filterId,
   );
 
   // Refresh when trigger changes

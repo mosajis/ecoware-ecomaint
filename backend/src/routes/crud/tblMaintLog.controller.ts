@@ -184,6 +184,20 @@ const ControllerTblMaintLog = new BaseController({
         const instId = Number(headers["x-inst-id"] || 0);
 
         if (!instId) throw new Error("Instance ID is required");
+        const filters = filter ? JSON.parse(filter) : {};
+
+        const { compTypeId, ...restFilters } = filters;
+
+        const where: any = {
+          ...restFilters,
+          instId,
+        };
+
+        if (compTypeId) {
+          where.tblComponentUnit = {
+            compTypeId,
+          };
+        }
 
         const [
           result,
@@ -193,7 +207,7 @@ const ControllerTblMaintLog = new BaseController({
           spareRows,
         ] = await Promise.all([
           ServiceTblMaintLog.findAll({
-            where: { ...(filter ? JSON.parse(filter) : {}), instId },
+            where,
             orderBy: parseSortString(sort),
             perPage: 250_000,
             select: {

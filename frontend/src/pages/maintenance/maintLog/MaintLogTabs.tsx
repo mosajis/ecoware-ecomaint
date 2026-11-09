@@ -31,6 +31,7 @@ const TabAttachment = lazy(() => import("./tabs/TabAttachment"));
 const TabComponentLog = lazy(
   () => import("./tabs/tabComponentLog/TabComponentLog"),
 );
+const TabCompAttachment = lazy(() => import("./tabs/TabCompAttachment"));
 
 // Tabs
 const tabs: ReusableTabItem[] = [
@@ -51,7 +52,8 @@ const tabs: ReusableTabItem[] = [
     icon: <MemoryIcon />,
     component: TabComponentLog,
   },
-  { label: "Attachment", icon: <AttachFile />, component: TabAttachment },
+  { label: "Comp Attachment", icon: <AttachFile />, component: TabAttachment },
+  { label: "Attachment", icon: <AttachFile />, component: TabCompAttachment },
 ];
 
 type Props = {

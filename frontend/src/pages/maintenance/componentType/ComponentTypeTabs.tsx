@@ -9,6 +9,7 @@ import TabsContainer, {
 } from "@/shared/components/TabsContainer";
 import { TypeTblCompType } from "@/core/api/generated/api";
 import { lazy } from "react";
+import { Inventory2 } from "@mui/icons-material";
 
 // ===== Lazy Tabs =====
 const TabJob = lazy(() => import("./tabs/job/TabJob"));
@@ -16,6 +17,7 @@ const TabCounter = lazy(() => import("./tabs/counter/TabCounter"));
 const TabComponentUnit = lazy(() => import("./tabs/TabComponentUnit"));
 const TabAttachment = lazy(() => import("./tabs/TabAttachment"));
 const TabMeasure = lazy(() => import("./tabs/measures/TabMeasures"));
+const TabPart = lazy(() => import("./tabs/part/TabPart"));
 
 // ===== Tabs Config =====
 const tabs: ReusableTabItem[] = [
@@ -40,6 +42,11 @@ const tabs: ReusableTabItem[] = [
     label: "Components",
     icon: <PrecisionManufacturingIcon />,
     component: TabComponentUnit,
+  },
+  {
+    label: "Part List",
+    icon: <Inventory2 />,
+    component: TabPart,
   },
   {
     label: "Attachments",
