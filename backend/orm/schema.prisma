@@ -300,7 +300,7 @@ model TblCompOilInfo {
   tankCapacity     Int?             @map("TankCapacity")
   laboratoryCode   String?          @map("LaboratoryCode") @db.NVarChar(100)
   samplingPosition String?          @map("SamplingPosition") @db.NVarChar(100)
-  oilGrade         String?          @map("OilGrade") @db.NVarChar(100)
+  oilDesc          String?          @map("OilDesc") @db.NVarChar(100)
   orderNo          Int?             @map("OrderNo")
   employeeId       Int?             @map("EmployeeId")
   lastUpdate DateTime @default(now()) @updatedAt @map("lastUpdate")
@@ -1094,6 +1094,7 @@ model TblMaintLog {
   tblMaintLogAttachments TblMaintLogAttachment[]
   tblMaintLogFollows     TblMaintLogFollow[]
   tblMaintLogSpares      TblMaintLogSpare[]
+  tblOilSamplingLogs     TblOilSamplingLog[]
 
   @@map("tblMaintLog")
 }
@@ -1180,20 +1181,12 @@ model TblOilSamplingLog {
   sendToLaboratoryDate                                   DateTime?        @map("SendToLaboratoryDate") @db.DateTime
   tankCapacity                                           Int?             @map("TankCapacity")
   samplingPosition                                       String?          @map("SamplingPosition") @db.NVarChar(500)
-  oilGrade                                               String?          @map("OilGrade") @db.NVarChar(100)
-  responseDate                                           DateTime?        @map("ResponseDate") @db.DateTime
-  resultCompCode                                         Int?             @map("ResultCompCode")
-  resultCompDesc                                         String?          @map("ResultCompDesc") @db.NVarChar(500)
-  resultOilCode                                          Int?             @map("ResultOilCode")
-  resultOilDesc                                          String?          @map("ResultOilDesc") @db.NVarChar(500)
-  resultCode                                             Int?             @map("ResultCode")
-  resultDesc                                             String?          @map("ResultDesc") @db.NVarChar(500)
-  actionCode                                             Int?             @map("ActionCode")
-  actionDesc                                             String?          @map("ActionDesc") @db.NVarChar(500)
+  oilDesc                                                String?          @map("OilDesc") @db.NVarChar(100)
+  resultDesc                                             String?          @map("ResultDesc") @db.NVarChar(2000)
+  actionDesc                                             String?          @map("ActionDesc") @db.NVarChar(2000)
   ladingBillNnumber                                      String?          @map("LadingBillNnumber") @db.NVarChar(100)
   customerName                                           String?          @map("CustomerName") @db.NVarChar(500)
   locationName                                           String?          @map("LocationName") @db.NVarChar(500)
-  sampleNumber                                           Int?             @map("SampleNumber")
   laboratoryCode                                         String?          @map("LaboratoryCode") @db.NVarChar(100)
   userComment                                            String?          @map("UserComment") @db.NVarChar(500)
   orderNo                                                Int?             @map("OrderNo")
@@ -1202,6 +1195,7 @@ model TblOilSamplingLog {
   tblEmployeeTblOilSamplingLogSamplerIdTotblEmployee     TblEmployee?     @relation("TblOilSamplingLog_SamplerIDTotblEmployee", fields: [samplerId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblOilSamplingLog_tblEmployee")
   tblEmployeeTblOilSamplingLogSenderToLabIdTotblEmployee TblEmployee?     @relation("TblOilSamplingLog_SenderToLabIdTotblEmployee", fields: [senderToLabId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblOilSamplingLog_tblEmployee1")
   tblInstallation                                        TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblOilSamplingLog_tblInstallation")
+  tblMaintLog                                            TblMaintLog?     @relation(fields: [maintLogId], references: [maintLogId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblOilSamplingLog_tblMaintLog")
 }
 
 model TblPendingType {

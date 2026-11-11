@@ -8,12 +8,8 @@ import { type UpsertProps } from "@/core/helper.types";
 
 import {
   tblCompOilInfo,
-  tblComponentUnit,
   tblEmployee,
   tblInstallation,
-  tblCompCounter,
-  tblSpareType,
-  tblCompJob,
   TypeTblCompOilInfo,
 } from "@/core/api/generated/api";
 
@@ -24,7 +20,9 @@ import { Controller } from "react-hook-form";
 
 import { DEFAULT_VALUES, schema, SchemaValue } from "./TabOilSchema";
 
-type Props = UpsertProps;
+type Props = UpsertProps & {
+  compId?: number;
+};
 
 function TabOilUpsert({
   entityName,
@@ -33,6 +31,7 @@ function TabOilUpsert({
   recordId,
   onClose,
   onSuccess,
+  compId,
 }: Props) {
   const {
     form,
@@ -53,45 +52,33 @@ function TabOilUpsert({
     onFetch: async (id) => {
       const res = await tblCompOilInfo.getById(id, {
         include: {
-          tblComponentUnit: true,
-          tblCompCounter: true,
-          tblSpareType: true,
-          tblCompJob: true,
           tblEmployee: true,
-          tblInstallation: true,
         },
       });
 
       return {
-        component: res.tblComponentUnit ?? null,
-        compCounter: res.tblCompCounter ?? null,
-        spareType: res.tblSpareType ?? null,
-        compJob: res.tblCompJob ?? null,
         employee: res.tblEmployee ?? null,
         installation: res.tblInstallation ?? null,
 
         tankCapacity: res.tankCapacity ?? null,
         laboratoryCode: res.laboratoryCode ?? "",
         samplingPosition: res.samplingPosition ?? "",
-        oilGrade: res.oilGrade ?? "",
+        oilDesc: res.oilDesc ?? "",
         orderNo: res.orderNo ?? null,
       };
     },
 
     onCreate: async (values) => {
       const body = {
+        compId,
+
         tankCapacity: values.tankCapacity ?? null,
         laboratoryCode: values.laboratoryCode ?? null,
         samplingPosition: values.samplingPosition ?? null,
-        oilGrade: values.oilGrade ?? null,
+        oilDesc: values.oilDesc ?? null,
         orderNo: values.orderNo ?? null,
-
-        ...buildRelation("tblComponentUnit", "compId", values.component),
-        ...buildRelation("tblCompCounter", "compCounterId", values.compCounter),
-        ...buildRelation("tblSpareType", "spareTypeId", values.spareType),
-        ...buildRelation("tblCompJob", "compJobId", values.compJob),
+        // ...buildRelation("tblComponentUnit", "compId", compId),
         ...buildRelation("tblEmployee", "employeeId", values.employee),
-        ...buildRelation("tblInstallation", "instId", values.installation),
       };
 
       return tblCompOilInfo.create(body);
@@ -102,15 +89,10 @@ function TabOilUpsert({
         tankCapacity: values.tankCapacity ?? null,
         laboratoryCode: values.laboratoryCode ?? null,
         samplingPosition: values.samplingPosition ?? null,
-        oilGrade: values.oilGrade ?? null,
+        oilDesc: values.oilDesc ?? null,
         orderNo: values.orderNo ?? null,
-
-        ...buildRelation("tblComponentUnit", "compId", values.component),
-        ...buildRelation("tblCompCounter", "compCounterId", values.compCounter),
-        ...buildRelation("tblSpareType", "spareTypeId", values.spareType),
-        ...buildRelation("tblCompJob", "compJobId", values.compJob),
+        // ...buildRelation("tblComponentUnit", "compId", compId),
         ...buildRelation("tblEmployee", "employeeId", values.employee),
-        ...buildRelation("tblInstallation", "instId", values.installation),
       };
 
       return tblCompOilInfo.update(id, body);
@@ -136,101 +118,29 @@ function TabOilUpsert({
       <Box display="flex" flexDirection="column" gap={1.5}>
         <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
           <Controller
-            name="component"
+            name="employee"
             control={control}
             render={({ field }) => (
               <FieldAsyncSelectGrid
-                label="Component"
+                label="Employee"
                 disabled={isDisabled}
                 value={field.value}
                 selectionMode="single"
-                request={tblComponentUnit.getAll}
-                getOptionLabel={(row) => row.compNo ?? ""}
-                getRowId={(row) => row.compId}
+                request={tblEmployee.getAll}
+                getOptionLabel={(row) =>
+                  `${row.firstName ?? ""} ${row.lastName ?? ""}`.trim()
+                }
+                getRowId={(row) => row.employeeId}
                 onChange={field.onChange}
                 columns={[
                   {
-                    field: "compNo",
-                    headerName: "Component No",
+                    field: "firstName",
+                    headerName: "First Name",
                     flex: 1,
                   },
                   {
-                    field: "model",
-                    headerName: "Model",
-                    flex: 1,
-                  },
-                ]}
-              />
-            )}
-          />
-
-          <Controller
-            name="compCounter"
-            control={control}
-            render={({ field }) => (
-              <FieldAsyncSelectGrid
-                label="Component Counter"
-                disabled={isDisabled}
-                value={field.value}
-                selectionMode="single"
-                request={tblCompCounter.getAll}
-                getOptionLabel={(row) => row.counterName ?? ""}
-                getRowId={(row) => row.compCounterId}
-                onChange={field.onChange}
-                columns={[
-                  {
-                    field: "counterName",
-                    headerName: "Name",
-                    flex: 1,
-                  },
-                ]}
-              />
-            )}
-          />
-        </Box>
-
-        <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
-          <Controller
-            name="spareType"
-            control={control}
-            render={({ field }) => (
-              <FieldAsyncSelectGrid
-                label="Spare Type"
-                disabled={isDisabled}
-                value={field.value}
-                selectionMode="single"
-                request={tblSpareType.getAll}
-                getOptionLabel={(row) => row.spareTypeName ?? ""}
-                getRowId={(row) => row.spareTypeId}
-                onChange={field.onChange}
-                columns={[
-                  {
-                    field: "spareTypeName",
-                    headerName: "Name",
-                    flex: 1,
-                  },
-                ]}
-              />
-            )}
-          />
-
-          <Controller
-            name="compJob"
-            control={control}
-            render={({ field }) => (
-              <FieldAsyncSelectGrid
-                label="Component Job"
-                disabled={isDisabled}
-                value={field.value}
-                selectionMode="single"
-                request={tblCompJob.getAll}
-                getOptionLabel={(row) => row.jobName ?? ""}
-                getRowId={(row) => row.compJobId}
-                onChange={field.onChange}
-                columns={[
-                  {
-                    field: "jobName",
-                    headerName: "Name",
+                    field: "lastName",
+                    headerName: "Last Name",
                     flex: 1,
                   },
                 ]}
@@ -286,13 +196,13 @@ function TabOilUpsert({
         />
 
         <Controller
-          name="oilGrade"
+          name="oilDesc"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
               value={field.value ?? ""}
-              label="Oil Grade"
+              label="Oil Description"
               size="small"
               fullWidth
               disabled={isDisabled}

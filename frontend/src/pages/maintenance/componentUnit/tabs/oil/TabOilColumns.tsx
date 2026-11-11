@@ -6,30 +6,6 @@ export const getRowId = (row: TypeTblCompOilInfo) => row.compOilInfoId;
 
 export const columns: GridColDef<TypeTblCompOilInfo>[] = [
   {
-    field: "compId",
-    headerName: "Component",
-    flex: 1,
-    // valueGetter: (_, row) => row.tblComponentUnit?.compNo ?? "",
-  },
-  {
-    field: "compCounterId",
-    headerName: "Component Counter",
-    flex: 1,
-    // valueGetter: (_, row) => row.tblCompCounter?.counterName ?? "",
-  },
-  {
-    field: "spareTypeId",
-    headerName: "Spare Type",
-    flex: 1,
-    // valueGetter: (_, row) => row.tblSpareType?.spareTypeName ?? "",
-  },
-  {
-    field: "compJobId",
-    headerName: "Component Job",
-    flex: 1,
-    // valueGetter: (_, row) => row.tblCompJob?.jobName ?? "",
-  },
-  {
     field: "tankCapacity",
     headerName: "Tank Capacity",
     width: 130,
@@ -45,8 +21,8 @@ export const columns: GridColDef<TypeTblCompOilInfo>[] = [
     flex: 1,
   },
   {
-    field: "oilGrade",
-    headerName: "Oil Grade",
+    field: "oilDesc",
+    headerName: "Oil Description",
     flex: 1,
   },
   {
@@ -58,6 +34,6 @@ export const columns: GridColDef<TypeTblCompOilInfo>[] = [
   {
     field: "orderNo",
     headerName: "Order No",
-    width: 85,
+    width: 100,
   },
 ];

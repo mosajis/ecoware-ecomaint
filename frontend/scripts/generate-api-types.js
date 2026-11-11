@@ -67,7 +67,7 @@ async function fixTypesFile(path) {
     await download(url, outputPath);
     console.log("[generate-api-types] Downloaded OpenAPI spec.");
 
-    execSync(`npx openapi-typescript ${url} --output ${typesPath}`, {
+    execSync(`bunx openapi-typescript ${url} --output ${typesPath}`, {
       stdio: "inherit",
     });
 

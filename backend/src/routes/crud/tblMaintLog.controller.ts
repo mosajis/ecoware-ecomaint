@@ -865,23 +865,44 @@ const ControllerTblMaintLog = new BaseController({
     // =========================
     app.use(authPlugin).patch(
       "/follow-status/batch",
-      async ({ body, headers }) => {
+      async ({ body, headers, userId }) => {
         const instId = Number(headers["x-inst-id"] || 0);
+
+        const user = await prisma.tblUser.findFirst({
+          where: { userId },
+          include: { tblEmployee: true },
+        });
+
+        const employeeId = user?.tblEmployee?.employeeId as number;
 
         if (!instId) {
           throw new Error("Instance ID is required");
         }
 
-        const result = await prisma.tblMaintLog.updateMany({
-          where: {
-            maintLogId: {
-              in: body.maintLogIds,
+        const result = await prisma.$transaction(async (tx) => {
+          // Update current follow status
+          const updated = await tx.tblMaintLog.updateMany({
+            where: {
+              maintLogId: {
+                in: body.maintLogIds,
+              },
+              instId,
             },
-            instId,
-          },
-          data: {
-            followStatusId: body.followStatusId,
-          },
+            data: {
+              followStatusId: body.followStatusId,
+            },
+          });
+
+          // Create follow history for each maintenance log
+          await tx.tblMaintLogFollow.createMany({
+            data: body.maintLogIds.map((maintLogId) => ({
+              maintLogId,
+              followStatusId: body.followStatusId,
+              followEmployeeId: employeeId,
+            })),
+          });
+
+          return updated;
         });
 
         return {

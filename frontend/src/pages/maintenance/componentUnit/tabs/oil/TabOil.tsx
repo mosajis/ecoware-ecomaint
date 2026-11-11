@@ -1,9 +1,9 @@
 import DataGrid from "@/shared/components/dataGrid/DataGrid";
+import TabOilUpsert from "./TabOilUpsert";
 import { useCallback } from "react";
 import { tblCompOilInfo, TypeTblComponentUnit } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns, getRowId } from "./TabOilColumns";
-import TabOilUpsert from "./TabOilUpsert";
 import { useUpsertDialog } from "@/shared/hooks/useUpsertDialog";
 
 interface Props {
@@ -11,22 +11,17 @@ interface Props {
   label?: string;
 }
 
-export default function TabOil({ componentUnit }: Props) {
+export default function TabOil({ componentUnit, label = "Oil Info" }: Props) {
   const compId = componentUnit?.compId;
 
   const getAll = useCallback(
     () =>
       tblCompOilInfo.getAll({
-        filter: {
-          compId: compId,
-        },
+        // filter: {
+        //   compId,
+        // },
         include: {
           tblEmployee: true,
-          tblInstallation: true,
-          // tblComponentUnit: true,
-          // tblCompCounter: true,
-          // tblSpareType: true,
-          // tblCompJob: true,
         },
       }),
     [compId],
@@ -43,8 +38,6 @@ export default function TabOil({ componentUnit }: Props) {
     onSuccess: handleRefresh,
   });
 
-  const label = "Oil Info";
-
   return (
     <DataGrid
       showToolbar
@@ -59,7 +52,7 @@ export default function TabOil({ componentUnit }: Props) {
       onEditClick={openEdit}
       onView={openView}
     >
-      <TabOilUpsert entityName={label} {...dialogProps} />
+      <TabOilUpsert compId={compId} entityName={label} {...dialogProps} />
     </DataGrid>
   );
 }
