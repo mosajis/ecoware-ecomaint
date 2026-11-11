@@ -9,6 +9,7 @@ import Handyman from "@mui/icons-material/Handyman";
 import History from "@mui/icons-material/History";
 import Inventory2 from "@mui/icons-material/Inventory2";
 import Tune from "@mui/icons-material/Tune";
+import OpacityIcon from "@mui/icons-material/Opacity";
 
 import { lazy } from "react";
 import { TypeTblComponentUnit } from "@/core/api/generated/api";
@@ -29,6 +30,7 @@ const TabMeasures = lazy(() => import("./tabs/measures/TabMeasures"));
 const TabSpareUsed = lazy(() => import("./tabs/TabSpareUsed"));
 const TabWorkshop = lazy(() => import("./tabs/workshop/TabWorkShop"));
 const TabPart = lazy(() => import("./tabs/part/TabPart"));
+const TabOil = lazy(() => import("./tabs/oil/TabOil"));
 
 type Props = {
   componentUnit?: TypeTblComponentUnit | undefined | null;
@@ -70,6 +72,12 @@ const tabs: ReusableTabItem[] = [
     label: "Maint Log",
     icon: <History />,
     component: TabMaintLog,
+  },
+
+  {
+    label: "Oil",
+    icon: <OpacityIcon />,
+    component: TabOil,
   },
   {
     label: "Part List",

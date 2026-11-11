@@ -38,6 +38,7 @@ import { useAtomValue } from "jotai";
 import { atomUser, atomUserDiscipline } from "@/pages/auth/auth.atom";
 import { extractFullName } from "@/core/helper";
 import { createFailureReport, updateFailureReport } from "@/core/api/api";
+import { UpsertProps } from "@/core/helper.types";
 
 function FailureReportUpsert({
   entityName,

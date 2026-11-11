@@ -859,6 +859,49 @@ const ControllerTblMaintLog = new BaseController({
         detail: { summary: "Update with optional counter" },
       },
     );
+
+    // =========================
+    // BATCH UPDATE FOLLOW STATUS
+    // =========================
+    app.use(authPlugin).patch(
+      "/follow-status/batch",
+      async ({ body, headers }) => {
+        const instId = Number(headers["x-inst-id"] || 0);
+
+        if (!instId) {
+          throw new Error("Instance ID is required");
+        }
+
+        const result = await prisma.tblMaintLog.updateMany({
+          where: {
+            maintLogId: {
+              in: body.maintLogIds,
+            },
+            instId,
+          },
+          data: {
+            followStatusId: body.followStatusId,
+          },
+        });
+
+        return {
+          count: result.count,
+        };
+      },
+      {
+        tags: ["tblMaintLog"],
+        body: t.Object({
+          maintLogIds: t.Array(t.Numeric()),
+          followStatusId: t.Numeric(),
+        }),
+        response: t.Object({
+          count: t.Number(),
+        }),
+        detail: {
+          summary: "Batch update maintenance log follow status",
+        },
+      },
+    );
   },
 }).app;
 

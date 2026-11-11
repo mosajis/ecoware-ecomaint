@@ -1,8 +1,13 @@
 import DataGrid from "@/shared/components/dataGrid/DataGrid";
 import { useCallback } from "react";
-import { tblCompSpare } from "@/core/api/generated/api";
+import { tblCompSpare, TypeTblComponentUnit } from "@/core/api/generated/api";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns, getRowId } from "./TabPartColumns";
+
+interface Props {
+  componentUnit?: TypeTblComponentUnit;
+  label?: string;
+}
 
 export default function TabPart() {
   const getAll = useCallback(() => tblCompSpare.getAll(), []);

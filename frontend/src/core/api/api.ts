@@ -114,3 +114,19 @@ export const workOrderPostpone = (data: { workOrderIds: number[] }) =>
     "/tblWorkOrder/postpone",
     { data },
   );
+
+export type MaintLogBatchFollowStatusRequest = {
+  maintLogIds: number[];
+  followStatusId: number;
+};
+
+export type MaintLogBatchFollowStatusResponse = {
+  count: number;
+};
+export const maintLogBatchFollowStatusUpdate = (
+  data: MaintLogBatchFollowStatusRequest,
+) =>
+  api.patch<MaintLogBatchFollowStatusResponse>(
+    "/tblMaintLog/follow-status/batch",
+    { data },
+  );

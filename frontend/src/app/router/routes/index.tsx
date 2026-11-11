@@ -23,9 +23,9 @@ export const indexRoute = createRoute({
 
 // --- Route Tree ---
 export const routesTree = rootRoute.addChildren([
-  indexRoute,
   AuthLoginRoute,
   protectedRoute.addChildren([
+    indexRoute,
     treeDashboard,
 
     treeGeneral,

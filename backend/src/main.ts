@@ -45,7 +45,7 @@ const tls = SSL_ENABLED
 const app = new Elysia()
   .use(
     cors({
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
       allowedHeaders: ["Content-Type", "Authorization", "x-inst-id"],
       exposeHeaders: ["Content-Disposition"],
     }),

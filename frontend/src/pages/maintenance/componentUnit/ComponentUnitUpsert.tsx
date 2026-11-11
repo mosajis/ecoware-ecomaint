@@ -28,6 +28,7 @@ import {
 } from "@/core/api/generated/api";
 
 import { DEFAULT_VALUES, schema, SchemaValue } from "./ComponentUnitSchema";
+import { type UpsertProps } from "@/core/helper.types";
 
 type Props = UpsertProps;
 

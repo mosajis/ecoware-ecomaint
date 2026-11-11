@@ -1,6 +1,6 @@
 import { Split } from "@geoffcox/react-splitter";
 import { useTheme } from "@mui/material/styles";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 import "./Splitter.css";
 
@@ -12,6 +12,9 @@ interface SplitterProps {
   minPrimarySize?: string;
   minSecondarySize?: string;
   splitterSize?: string;
+
+  collapsed?: boolean;
+  collapsedSecondarySize?: string;
 }
 
 const Splitter = ({
@@ -22,9 +25,14 @@ const Splitter = ({
   minPrimarySize,
   minSecondarySize,
   splitterSize,
+  collapsed = true,
+  collapsedSecondarySize = "45px",
   ...rest
 }: SplitterProps) => {
   const theme = useTheme();
+
+  // فقط برای حالت بالا / پایین
+  const [isExpanded, setIsExpanded] = useState(!horizontal || !collapsed);
 
   const colors = {
     color: theme.palette.divider,
@@ -32,18 +40,48 @@ const Splitter = ({
     drag: theme.palette.primary.main,
   };
 
+  const shouldCollapse = horizontal && collapsed;
+
   return (
     <Split
-      resetOnDoubleClick={true}
+      key={shouldCollapse ? (isExpanded ? "expanded" : "collapsed") : "normal"}
+      resetOnDoubleClick={resetOnDoubleClick}
       horizontal={horizontal}
-      initialPrimarySize={initialPrimarySize}
+      initialPrimarySize={
+        shouldCollapse && !isExpanded
+          ? `calc(100% - ${collapsedSecondarySize})`
+          : initialPrimarySize
+      }
       minPrimarySize={minPrimarySize}
-      minSecondarySize={minSecondarySize}
+      minSecondarySize={
+        shouldCollapse && !isExpanded
+          ? collapsedSecondarySize
+          : minSecondarySize
+      }
       splitterSize={splitterSize}
       defaultSplitterColors={colors}
       {...rest}
     >
-      {children}
+      {children[0]}
+
+      {shouldCollapse ? (
+        <div
+          style={{
+            height: "100%",
+            overflow: "hidden",
+            cursor: !isExpanded ? "pointer" : undefined,
+          }}
+          onClick={() => {
+            if (!isExpanded) {
+              setIsExpanded(true);
+            }
+          }}
+        >
+          {children[1]}
+        </div>
+      ) : (
+        children[1]
+      )}
     </Split>
   );
 };

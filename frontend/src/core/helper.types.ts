@@ -1,4 +1,4 @@
-type UpsertProps = {
+export type UpsertProps = {
   entityName: string;
   open: boolean;
   mode: "create" | "update" | "view";

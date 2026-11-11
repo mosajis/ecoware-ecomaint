@@ -1,6 +1,7 @@
 import CellDateTime from "@/shared/components/dataGrid/cells/CellDateTime";
 import CellLink from "@/shared/components/dataGrid/cells/CellLink";
 import CellOverdueCount from "./customCell/CellOverDueCount";
+import Chip from "@mui/material/Chip";
 import CellFullName from "@/shared/components/dataGrid/cells/CellFullName";
 import Tooltip from "@mui/material/Tooltip";
 import CellUnexpected, {
@@ -11,6 +12,22 @@ import { GridColDef } from "@mui/x-data-grid";
 import { RouteDetail } from "./MaintLogRoute";
 
 export const getRowId = (row: TypeTblMaintLog) => row.maintLogId;
+
+const followStatusColorMap = {
+  Reviewed: "success",
+  Reviewed_Note: "info",
+  "In Progress": "warning",
+  Edit: "secondary",
+  Comment: "info",
+  Follow: "primary",
+  F_Report: "info",
+  "Add part": "secondary",
+  "Waiting for part": "warning",
+  "Wait from Rig": "warning",
+  "Waite to Reply": "warning",
+  "Send to Kish": "secondary",
+  Recheck: "error",
+} as const;
 
 export const columns: GridColDef<TypeTblMaintLog>[] = [
   {
@@ -61,8 +78,25 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
   {
     field: "followStatus",
     headerName: "Follow Status",
-    width: 130,
-    valueGetter: (_, row) => row?.tblFollowStatus?.fsName,
+    width: 150,
+    renderCell: ({ row }) => {
+      const value = row?.tblFollowStatus?.fsName;
+
+      console.log(value);
+      if (!value) return "-";
+
+      return (
+        <Chip
+          label={value}
+          size="small"
+          color={
+            followStatusColorMap[value as keyof typeof followStatusColorMap] ??
+            "default"
+          }
+          variant="outlined"
+        />
+      );
+    },
   },
   {
     field: "maintClass",

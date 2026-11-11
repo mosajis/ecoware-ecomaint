@@ -2,14 +2,15 @@ const fs = require("fs");
 const path = require("path");
 
 const schemaPath = path.resolve("./orm/schema.prisma");
+
 let schema = fs.readFileSync(schemaPath, "utf-8");
 
-// فقط lastUpdate رو فیکس کن
+// اضافه کردن default(now()) و updatedAt برای تمام lastUpdate ها
 schema = schema.replace(
-  /^\s*lastUpdate\s+DateTime[^\n]*/gm,
-  `  lastUpdate   DateTime @updatedAt @map("lastUpdate")`,
+  /^(\s*)lastUpdate\s+DateTime[^\n]*/gm,
+  `$1lastUpdate DateTime @default(now()) @updatedAt @map("lastUpdate")`,
 );
 
 fs.writeFileSync(schemaPath, schema, "utf-8");
 
-console.log("✅ Updated existing lastUpdate fields");
+console.log("✅ Updated all existing lastUpdate fields");

@@ -1,22 +1,30 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "jsx": "react-jsx",
-    "types": ["vite/client", "node"],
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "types": ["vite/client"],
+    "allowArbitraryExtensions": true,
     "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": false,
+    "moduleDetection": "force",
+    "noEmit": true,
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": false,
-    "esModuleInterop": true,
-    "strict": true,
-    "baseUrl": ".",
-    "ignoreDeprecations": "6.0",
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "noUnusedParameters": false,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
-    "noImplicitReturns": true
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
   },
   "exclude": ["node_modules", "dist", "build", "**/*.spec.ts", "**/*.test.ts"],
   "include": ["src"]

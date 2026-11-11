@@ -109,7 +109,7 @@ export default function FormDialog({
             sx={{ mb: 1.5, border: "1px solid #a151517a" }}
           >
             {error?.statusCode} -{" "}
-            {error?.details?.details || "Check the console for details"}
+            {error?.message || "Check the console for details"}
           </Alert>
         )}
 

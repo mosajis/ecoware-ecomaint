@@ -1,16 +1,11 @@
-import * as path from "path";
-import react from "@vitejs/plugin-react-swc";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import babel from "@rolldown/plugin-babel";
 import { defineConfig } from "vite";
-import { visualizer } from "rollup-plugin-visualizer";
+import path from "node:path";
 
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    visualizer({
-      open: true,
-      filename: "dist-stats.html",
-    }),
-  ],
+  plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
   build: {
     emptyOutDir: true,
     cssCodeSplit: true,
@@ -20,15 +15,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  preview: {
-    proxy: {
-      "/": {
-        target: "http://localhost:5273",
-        changeOrigin: true,
-      },
+      "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
 });

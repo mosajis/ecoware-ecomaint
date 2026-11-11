@@ -27,6 +27,7 @@ import {
   requiredStringField,
 } from "@/core/helper";
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+import { UpsertProps } from "@/core/helper.types";
 
 /* =======================
    Schema Builder

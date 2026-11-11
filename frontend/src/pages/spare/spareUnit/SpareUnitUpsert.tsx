@@ -11,6 +11,7 @@ import {
   TypeTblSpareUnit,
 } from "@/core/api/generated/api";
 import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+import { UpsertProps } from "@/core/helper.types";
 
 // === Schema ===
 const schema = z.object({

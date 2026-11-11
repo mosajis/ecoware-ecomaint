@@ -60,7 +60,7 @@ export default function PageComponentJob() {
   };
 
   return (
-    <Splitter initialPrimarySize="70%" horizontal>
+    <Splitter initialPrimarySize="60%" horizontal>
       <CustomizedDataGrid
         disableAdd
         disableEdit

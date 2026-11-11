@@ -83,12 +83,15 @@ function generate() {
  */
 function pull() {
   runCommand(`prisma db pull --schema=${SCHEMA}`, "Pull Database");
-  fixLastUpdate();
+
+  // تمام تغییرات خودکار روی Schema
   format();
+
+  // در آخر، تنظیمات Prisma-specific را اعمال کن
+  fixLastUpdate();
+
+  // حالا Client را از Schema نهایی بساز
   generate();
-  // log('Prisma', 'Pushing changes to database...', 'info')
-  // push()
-  // log('Prisma', 'Pull completed successfully!', 'success')
 }
 
 /**
@@ -99,8 +102,11 @@ function push() {
     `prisma db push --accept-data-loss --schema=${SCHEMA}`,
     "Push Database",
   );
-  fixLastUpdate();
+
   format();
+
+  fixLastUpdate();
+
   generate();
 }
 

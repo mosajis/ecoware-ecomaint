@@ -18,6 +18,8 @@ import {
 import MaintLogFilterDialog, {
   type MaintLogFilter,
 } from "./MaintLogDialogFilter";
+import { maintLogBatchFollowStatusUpdate } from "@/core/api/api";
+import { toast } from "sonner";
 
 export default function PageMaintLog() {
   /* ---------------- dialogs ---------------- */
@@ -33,6 +35,9 @@ export default function PageMaintLog() {
   /* ---------------- state ---------------- */
   const [selectedRow, setSelectedRow] = useState<TypeTblMaintLog | null>(null);
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+
+  const [reviewLoading, setReviewLoading] = useState(false);
+  const [reviewNoteLoading, setReviewNoteLoading] = useState(false);
 
   const [selectionModel, setSelectionModel] = useState<GridRowSelectionModel>({
     type: "include",
@@ -77,9 +82,26 @@ export default function PageMaintLog() {
     [openDialog],
   );
 
-  const handleSelectionChange = useCallback((m: GridRowSelectionModel) => {
-    setSelectionModel(m);
-  }, []);
+  const handleSelectionChange = useCallback(
+    (m: GridRowSelectionModel) => {
+      setSelectionModel(m);
+
+      const selectedId = m.ids.values().next().value;
+
+      if (selectedId !== undefined) {
+        const row = rows.find(
+          (r) => String(r.maintLogId) === String(selectedId),
+        );
+
+        setSelectedRow(row ?? null);
+        setSelectedRowId(Number(selectedId));
+      } else {
+        setSelectedRow(null);
+        setSelectedRowId(null);
+      }
+    },
+    [rows],
+  );
 
   /* ---------------- filter ---------------- */
   const handleSubmitFilter = useCallback(
@@ -90,6 +112,12 @@ export default function PageMaintLog() {
     [closeDialog],
   );
 
+  const handleFollow = useCallback(() => {
+    if (selectedRows.length !== 1) return;
+
+    setSelectedRow(selectedRows[0]);
+    openDialog("follow");
+  }, [selectedRows, openDialog]);
   /* ---------------- follow ---------------- */
   const handleFollowSuccess = useCallback(
     (selectedFollowStatus: TypeTblFollowStatus) => {
@@ -106,7 +134,60 @@ export default function PageMaintLog() {
     [selectedRow?.maintLogId, optimisticUpdate, handleRefresh],
   );
 
-  /* ---------------- render ---------------- */
+  const handleBatchReview = useCallback(
+    async (
+      followStatusId: number,
+      statusName: string,
+      setLoading: (loading: boolean) => void,
+    ) => {
+      const maintLogIds = selectedRows
+        .map((row) => row.maintLogId)
+        .filter((id): id is number => Boolean(id));
+
+      if (!maintLogIds.length) return;
+
+      setLoading(true);
+
+      maintLogBatchFollowStatusUpdate({
+        maintLogIds,
+        followStatusId,
+      })
+        .then(() => {
+          // پاک کردن انتخاب‌ها بعد از موفقیت
+          setSelectionModel({
+            type: "include",
+            ids: new Set(),
+          });
+
+          setSelectedRow(null);
+          setSelectedRowId(null);
+          // Optimistic update
+          maintLogIds.forEach((id) => {
+            optimisticUpdate(id, {
+              tblFollowStatus: {
+                fsName: statusName,
+              },
+            });
+          });
+
+          setLoading(false);
+        })
+        .catch((e) => {
+          console.error(e);
+          toast.error("Faild To Change MaintLog Follow Status");
+        });
+    },
+    [selectedRows, optimisticUpdate, handleRefresh],
+  );
+
+  const handleReview = useCallback(() => {
+    return handleBatchReview(1, "Reviewed", setReviewLoading);
+  }, [handleBatchReview]);
+
+  const handleReviewNote = useCallback(() => {
+    return handleBatchReview(2, "Reviewed_Note", setReviewNoteLoading);
+  }, [handleBatchReview]);
+
   return (
     <>
       <Splitter horizontal>
@@ -139,10 +220,14 @@ export default function PageMaintLog() {
           toolbarChildren={
             <Actions
               onFilter={() => openDialog("filter")}
-              onFollow={() => openDialog("follow")}
+              onFollow={handleFollow}
+              onReview={handleReview}
+              onReviewNote={handleReviewNote}
               onPrint={() => openDialog("print")}
               hasFilter={hasFilter}
               selectedCount={selectedRows.length}
+              reviewLoading={reviewLoading}
+              reviewNoteLoading={reviewNoteLoading}
             />
           }
         />
