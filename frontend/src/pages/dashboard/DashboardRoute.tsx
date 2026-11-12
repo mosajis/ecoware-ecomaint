@@ -27,6 +27,15 @@ export const RouteOverall = createRoute({
   beforeLoad: () => ({ breadcrumb: "Overall" }),
 });
 
-Route.addChildren([RouteLocal, RouteOverall]);
+export const RouteDashboardWaiting = createRoute({
+  getParentRoute: () => Route,
+  path: "waiting",
+  component: () => (
+    <LazyRoute Component={lazy(() => import("./DashboardWaiting"))} />
+  ),
+  beforeLoad: () => ({ breadcrumb: "Waiting" }),
+});
+
+Route.addChildren([RouteDashboardWaiting, RouteLocal, RouteOverall]);
 
 export default Route;

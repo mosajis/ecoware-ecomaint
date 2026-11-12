@@ -2,8 +2,10 @@ import type { ReactNode } from "react";
 // ================= ICONS =================
 import TodayIcon from "@mui/icons-material/Today";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+import TroubleshootOutlinedIcon from "@mui/icons-material/TroubleshootOutlined";
 import CompareArrowsRoundedIcon from "@mui/icons-material/CompareArrowsRounded";
 import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
+import TimerOutlinedIcon from "@mui/icons-material/TimerOutlined";
 import InsightsRoundedIcon from "@mui/icons-material/InsightsRounded";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
@@ -87,6 +89,13 @@ export const menuContentItems: MenuSection[] = [
         path: "/dashboard/Overall",
         id: "dashboard:overall",
         icon: <CompareArrowsRoundedIcon sx={iconStyle} />,
+        permit: true,
+      },
+      {
+        text: "Waiting",
+        path: "/dashboard/waiting",
+        id: "dashboard:waiting",
+        icon: <TimerOutlinedIcon sx={iconStyle} />,
         permit: true,
       },
     ],
@@ -372,6 +381,22 @@ export const menuContentItems: MenuSection[] = [
         id: "spare:used",
         permit: getPermit(1530).canView,
         icon: <DoneAllRoundedIcon sx={iconStyle} />,
+      },
+    ],
+  },
+
+  {
+    title: "Waiting",
+    icon: <InventoryRoundedIcon sx={iconStyle} />,
+    permit: true,
+
+    items: [
+      {
+        text: "Analysis",
+        path: "/waiting/analysis",
+        id: "waiting:analysis",
+        permit: true,
+        icon: <TroubleshootOutlinedIcon sx={iconStyle} />,
       },
     ],
   },

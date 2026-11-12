@@ -5,20 +5,17 @@ import WaitingEventsTable from "../_components/WaitingEventsTable";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Spinner from "@/shared/components/Spinner";
-import Stack from "@mui/material/Stack";
 import { useEffect, useState } from "react";
 import { useAtomValue } from "jotai";
 
 import { PageHeader } from "@/shared/components/PageHeader";
 import { atomRig } from "@/shared/atoms/general.atom";
-
 import { getWaitingAnalysis, TypeWaitingAnalysis } from "@/core/api/api";
 
 const Analysis = () => {
   const inst = useAtomValue(atomRig);
 
   const [data, setData] = useState<TypeWaitingAnalysis | null>(null);
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -51,13 +48,35 @@ const Analysis = () => {
   const { summary } = data;
 
   return (
-    <Box display="flex" flexDirection="column" gap={1.5}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      gap={1.5}
+      sx={{ width: "100%" }}
+      p={1.5}
+    >
+      {/* =====================================================
+          HEADER
+      ===================================================== */}
+
       <PageHeader
         title="Waiting Analysis"
         subtitle={`Detailed analysis · ${inst?.name ?? ""}`}
       />
 
-      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
+      {/* =====================================================
+          KPI
+      ===================================================== */}
+
+      <Box
+        display="grid"
+        gridTemplateColumns={{
+          xs: "1fr",
+          sm: "repeat(2, 1fr)",
+          lg: "repeat(4, 1fr)",
+        }}
+        gap={1.5}
+      >
         <WaitingMetricCard
           title="Total Waiting"
           value={`${summary.totalHours.toFixed(1)} h`}
@@ -85,12 +104,35 @@ const Analysis = () => {
 
       <Divider />
 
-      <Stack
+      {/* =====================================================
+          MAIN ANALYSIS
+      ===================================================== */}
+
+      <Box
         display="grid"
-        gridTemplateColumns="1fr 1fr"
-        divider={<Divider orientation="vertical" flexItem />}
+        gridTemplateColumns={{
+          xs: "1fr",
+          lg: "minmax(0, 2fr) minmax(520px, 1fr)",
+        }}
+        gap={1.5}
       >
-        <Box p={1.5}>
+        {/* TOP REASONS - Primary */}
+        <WaitingSection
+          title="Top Reasons"
+          subtitle="Reasons with the highest waiting time"
+        >
+          <WaitingBarChart
+            maxItems={10}
+            items={data.reasons.map((item) => ({
+              name: item.reasonNameEn,
+              value: item.hours,
+              subtitle: `${item.reasonCode} · ${item.events} events`,
+            }))}
+          />
+        </WaitingSection>
+
+        {/* SECONDARY ANALYSIS */}
+        <Box display="flex" flexDirection="column" gap={1.5}>
           <WaitingSection
             title="Reason Groups"
             subtitle="Waiting distribution by category"
@@ -103,63 +145,53 @@ const Analysis = () => {
               }))}
             />
           </WaitingSection>
-        </Box>
 
-        <Box p={1.5}>
           <WaitingSection
-            title="Top Reasons"
-            subtitle="Reasons with the highest waiting time"
+            title="Shift Analysis"
+            subtitle="Waiting distribution by shift"
           >
             <WaitingBarChart
-              maxItems={10}
-              items={data.reasons.map((item) => ({
-                name: item.reasonNameEn,
+              isHorizontal
+              items={data.shifts.map((item) => ({
+                name: item.name,
                 value: item.hours,
-                subtitle: `${item.reasonCode} · ${item.events} events`,
+                subtitle: `${item.events} events`,
+              }))}
+            />
+          </WaitingSection>
+          <WaitingSection title="NPT Class" subtitle="Waiting classification">
+            <WaitingBarChart
+              items={data.nptClasses.map((item) => ({
+                name: item.name,
+                value: item.hours,
+                subtitle: `${item.events} events`,
+              }))}
+            />
+          </WaitingSection>
+          <WaitingSection
+            title="Operation Phase"
+            subtitle="Waiting by operational phase"
+          >
+            <WaitingBarChart
+              items={data.operationPhases.map((item) => ({
+                name: item.name,
+                value: item.hours,
+                subtitle: `${item.events} events`,
               }))}
             />
           </WaitingSection>
         </Box>
-      </Stack>
-
-      <Divider />
-
-      <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={1.5}>
-        <WaitingSection title="NPT Class" subtitle="Waiting classification">
-          <WaitingBarChart
-            items={data.nptClasses.map((item) => ({
-              name: item.name,
-              value: item.hours,
-              subtitle: `${item.events} events`,
-            }))}
-          />
-        </WaitingSection>
-
-        <WaitingSection
-          title="Operation Phase"
-          subtitle="Waiting by operational phase"
-        >
-          <WaitingBarChart
-            items={data.operationPhases.map((item) => ({
-              name: item.name,
-              value: item.hours,
-              subtitle: `${item.events} events`,
-            }))}
-          />
-        </WaitingSection>
-
-        <WaitingSection title="Shift Analysis" subtitle="Waiting by shift">
-          <WaitingBarChart
-            items={data.shifts.map((item) => ({
-              name: item.name,
-              value: item.hours,
-              subtitle: `${item.events} events`,
-            }))}
-          />
-        </WaitingSection>
       </Box>
 
+      {/* =====================================================
+          OPERATIONAL ANALYSIS
+      ===================================================== */}
+
       <Divider />
+
+      {/* =====================================================
+          EVENTS
+      ===================================================== */}
 
       <WaitingSection
         title="Top Waiting Events"

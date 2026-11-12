@@ -12,9 +12,10 @@ export interface TypeWaitingChartItem {
 interface Props {
   items: TypeWaitingChartItem[];
   maxItems?: number;
+  isHorizontal?: boolean;
 }
 
-const WaitingBarChart = ({ items, maxItems }: Props) => {
+const WaitingBarChart = ({ items, maxItems, isHorizontal = false }: Props) => {
   const visibleItems = maxItems ? items.slice(0, maxItems) : items;
 
   const maxValue = Math.max(...visibleItems.map((item) => item.value), 1);
@@ -28,13 +29,17 @@ const WaitingBarChart = ({ items, maxItems }: Props) => {
   }
 
   return (
-    <Stack gap={1.5}>
+    <Stack
+      gap={1.7}
+      display={"grid"}
+      gridTemplateColumns={isHorizontal ? "1fr 1fr" : "1fr"}
+    >
       {visibleItems.map((item) => (
         <Box key={item.name}>
           <Stack
             direction="row"
             justifyContent="space-between"
-            gap={2}
+            gap={1.5}
             mb={0.5}
           >
             <Typography variant="body2" noWrap title={item.name}>

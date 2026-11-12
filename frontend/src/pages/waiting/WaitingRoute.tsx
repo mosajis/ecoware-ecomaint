@@ -10,15 +10,6 @@ export const Route = createRoute({
   beforeLoad: () => ({ breadcrumb: "Waiting" }),
 });
 
-export const RouteDashboard = createRoute({
-  getParentRoute: () => Route,
-  path: "dashboard",
-  component: () => (
-    <LazyRoute Component={lazy(() => import("./dashboard/Dashboard"))} />
-  ),
-  beforeLoad: () => ({ breadcrumb: "Dashboard" }),
-});
-
 export const RouteAnalysis = createRoute({
   getParentRoute: () => Route,
   path: "analysis",
@@ -28,6 +19,6 @@ export const RouteAnalysis = createRoute({
   beforeLoad: () => ({ breadcrumb: "Analysis" }),
 });
 
-Route.addChildren([RouteDashboard, RouteAnalysis]);
+Route.addChildren([RouteAnalysis]);
 
 export default Route;
