@@ -1,7 +1,10 @@
 import TreeHeader from "./TreeHeader";
 import TreeContent from "./TreeContent";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
+import {
+  TreeContextMenu,
+  type ContextMenuItem,
+  type ContextMenuOpener,
+} from "./TreeContextMenu";
 import { getPermit } from "@/shared/hooks/usePermison";
 import { useTree } from "@headless-tree/react";
 import { useEffect, useCallback, useState, useMemo, useRef } from "react";
@@ -13,11 +16,6 @@ import {
 } from "@headless-tree/core";
 
 import "./tree.css";
-
-interface ContextMenuItem<T> {
-  label: string;
-  onClick: (row: T) => void;
-}
 
 interface GenericTreeProps<T> {
   label?: string;
@@ -45,6 +43,10 @@ const DEFAULT_PERMISSIONS = {
 
 const CLICK_DELAY = 200;
 
+// فقط شاخه‌ی اول پیش‌فرض باز باشد
+const getInitialExpanded = (rootIds: number[]) =>
+  rootIds.slice(0, 1).map(String);
+
 export function GenericTree<T>({
   label,
   data,
@@ -56,20 +58,14 @@ export function GenericTree<T>({
   onAdd,
   onRefresh,
   onDoubleClick,
-  onRefresh: _onRefresh,
   loading = false,
   elementId,
   contextMenuItems,
 }: GenericTreeProps<T>) {
-  const [contextMenu, setContextMenu] = useState<{
-    mouseX: number;
-    mouseY: number;
-    row: T;
-  } | null>(null);
-
   const permissions = elementId ? getPermit(elementId) : DEFAULT_PERMISSIONS;
-
   const { canCreate, canUpdate, canDelete, canView } = permissions;
+
+  const { itemsMap, childrenMap, rootIds } = data;
 
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
@@ -77,59 +73,60 @@ export function GenericTree<T>({
   const [searchQuery, setSearchQuery] = useState("");
 
   const clickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const previousItemsRef = useRef(data.itemsMap);
-  const previousRootsRef = useRef(data.rootIds);
+  const initializedRef = useRef(false);
+  const preSearchExpandedRef = useRef<string[] | null>(null);
+  const contextMenuOpenerRef = useRef<ContextMenuOpener<T> | null>(null);
 
-  const { itemsMap, childrenMap, rootIds } = data;
+  // callbackها در ref تا با تغییر هویتشان، config درخت دوباره ساخته نشود
+  const getItemNameRef = useRef(getItemName);
+  const getItemIdRef = useRef(getItemId);
+  getItemNameRef.current = getItemName;
+  getItemIdRef.current = getItemId;
 
-  // Parent lookup فقط هنگام تغییر childrenMap
+  // Parent lookup
   const parentMap = useMemo(() => {
     const map = new Map<number, number>();
-
     for (const [parentId, children] of childrenMap) {
-      for (const childId of children) {
-        map.set(childId, parentId);
-      }
+      for (const childId of children) map.set(childId, parentId);
     }
-
     return map;
   }, [childrenMap]);
 
-  // پاکسازی state هنگام تغییر داده
+  // Search index
+  const searchIndex = useMemo(() => {
+    const index = new Map<string, string>();
+    for (const [id, item] of itemsMap) {
+      index.set(String(id), getItemNameRef.current(item).toLowerCase());
+    }
+    return index;
+  }, [itemsMap]);
+  // همگام‌سازی state با داده + باز کردن شاخه‌ی اول (فقط یک بار)
   useEffect(() => {
+    if (itemsMap.size === 0 || rootIds.length === 0) return;
+
     const validIds = new Set(Array.from(itemsMap.keys(), String));
 
-    const isInitial = previousItemsRef.current === null;
-
     setExpandedItems((prev) => {
-      const cleaned = prev.filter((id) => validIds.has(id));
-      const expanded = new Set(cleaned);
+      const next = prev.filter((id) => validIds.has(id));
 
-      for (const id of rootIds) {
-        expanded.add(String(id));
-      }
+      if (initializedRef.current) return next;
 
-      return Array.from(expanded);
+      initializedRef.current = true;
+
+      return Array.from(new Set([...next, ...getInitialExpanded(rootIds)]));
     });
 
     setSelectedItems((prev) => prev.filter((id) => validIds.has(id)));
 
     setFocusedItem((prev) => (prev && validIds.has(prev) ? prev : null));
-
-    previousItemsRef.current = itemsMap;
-    previousRootsRef.current = rootIds;
   }, [itemsMap, rootIds]);
-
-  // Cleanup
+  // Cleanup timer
   useEffect(() => {
     return () => {
-      if (clickTimerRef.current) {
-        clearTimeout(clickTimerRef.current);
-      }
+      if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
     };
   }, []);
 
-  // Ancestor lookup
   const getAncestorIds = useCallback(
     (id: number): string[] => {
       const result: string[] = [];
@@ -137,55 +134,51 @@ export function GenericTree<T>({
 
       while (currentId != null) {
         const parentId = parentMap.get(currentId);
-
         if (parentId == null) break;
-
         result.push(String(parentId));
         currentId = parentId;
       }
-
       return result;
     },
     [parentMap],
   );
 
-  // Search index
-  const searchIndex = useMemo(() => {
-    const index = new Map<string, string>();
+  // نتیجه‌ی جستجو: فقط وقتی searchQuery (بعد از OK) عوض شود محاسبه می‌شود
+  const searchResult = useMemo(() => {
+    if (!searchQuery) return null;
 
-    for (const [id, item] of itemsMap) {
-      index.set(String(id), getItemName(item).toLowerCase());
+    const matched = new Set<string>();
+    const visible = new Set<string>();
+
+    for (const [id, name] of searchIndex) {
+      if (!name.includes(searchQuery)) continue;
+      matched.add(id);
+      visible.add(id);
+      for (const ancestor of getAncestorIds(Number(id))) visible.add(ancestor);
     }
 
-    return index;
-  }, [itemsMap, getItemName]);
+    return { matched, visible };
+  }, [searchQuery, searchIndex, getAncestorIds]);
+
   // Tree configuration
   const treeConfig = useMemo(
     () => ({
       rootItemId: "root" as const,
-
-      state: {
-        selectedItems,
-        expandedItems,
-        focusedItem,
-      },
-
+      state: { selectedItems, expandedItems, focusedItem },
       setSelectedItems,
       setExpandedItems,
       setFocusedItem,
 
       getItemName: (item: any) => {
         const itemData = item.getItemData();
-        return itemData ? getItemName(itemData) : "";
+        return itemData ? getItemNameRef.current(itemData) : "";
       },
 
       isItemFolder: (item: any) => {
         const itemData = item.getItemData();
-
         if (!itemData) return false;
 
-        const id = Number(getItemId(itemData));
-
+        const id = Number(getItemIdRef.current(itemData));
         if (Number.isNaN(id)) return false;
 
         return (childrenMap.get(id)?.length ?? 0) > 0;
@@ -194,17 +187,12 @@ export function GenericTree<T>({
       dataLoader: {
         getItem: (itemId: string) => {
           if (itemId === "root") return {} as T;
-
           return itemsMap.get(Number(itemId)) ?? ({ id: itemId } as T);
         },
-
         getChildren: (itemId: string) => {
-          if (itemId === "root") {
-            return rootIds.map(String);
-          }
+          if (itemId === "root") return rootIds.map(String);
 
           const children = childrenMap.get(Number(itemId));
-
           if (!children) return [];
 
           return children.filter((id) => itemsMap.has(id)).map(String);
@@ -213,64 +201,47 @@ export function GenericTree<T>({
 
       features: [syncDataLoaderFeature, selectionFeature, hotkeysCoreFeature],
     }),
-    [
-      selectedItems,
-      expandedItems,
-      focusedItem,
-      getItemName,
-      getItemId,
-      childrenMap,
-      itemsMap,
-      rootIds,
-    ],
+    [selectedItems, expandedItems, focusedItem, childrenMap, itemsMap, rootIds],
   );
 
   const tree = useTree<T>(treeConfig);
 
-  // Expand all
+  useEffect(() => {
+    console.log("TREE AFTER DATA:", {
+      itemCount: itemsMap.size,
+      rootIds,
+      expandedItems,
+      rootChildren: tree.getItemInstance("root").getChildren().length,
+      visibleItems: tree.getItems().map((item) => item.getId()),
+    });
+  }, [itemsMap, expandedItems, tree]);
+
   const handleExpandAll = useCallback(() => {
     setExpandedItems((prev) => {
       const next = new Set(prev);
-
       for (const [id, children] of childrenMap) {
-        if (children.length > 0) {
-          next.add(String(id));
-        }
+        if (children.length > 0) next.add(String(id));
       }
-
       return Array.from(next);
     });
   }, [childrenMap]);
 
-  // Collapse all
-  const handleCollapseAll = useCallback(() => {
-    setExpandedItems([]);
-  }, []);
+  const handleCollapseAll = useCallback(() => setExpandedItems([]), []);
 
-  // Edit
   const handleEdit = useCallback(() => {
-    const firstSelected = selectedItems[0];
-
-    if (firstSelected && onEdit) {
-      onEdit(Number(firstSelected));
-    }
+    const first = selectedItems[0];
+    if (first && onEdit) onEdit(Number(first));
   }, [selectedItems, onEdit]);
 
-  // Delete
   const handleDelete = useCallback(() => {
-    const firstSelected = selectedItems[0];
-
-    if (firstSelected && onDelete) {
-      onDelete(Number(firstSelected));
-    }
+    const first = selectedItems[0];
+    if (first && onDelete) onDelete(Number(first));
   }, [selectedItems, onDelete]);
 
-  // Single click
+  // انتخاب آیتم در TreeContent فوری است؛ فقط onItemSelect با تأخیر صدا زده می‌شود
   const handleItemClick = useCallback(
     (item: T) => {
-      if (clickTimerRef.current) {
-        clearTimeout(clickTimerRef.current);
-      }
+      if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
 
       clickTimerRef.current = setTimeout(() => {
         clickTimerRef.current = null;
@@ -280,76 +251,73 @@ export function GenericTree<T>({
     [onItemSelect],
   );
 
-  // Double click
   const handleItemDoubleClick = useCallback(
     (itemId: number) => {
       if (clickTimerRef.current) {
         clearTimeout(clickTimerRef.current);
         clickTimerRef.current = null;
       }
-
       onDoubleClick?.(itemId);
     },
     [onDoubleClick],
   );
 
-  // Search
-  const handleSearch = useCallback(
+  // Cancel: پاک کردن جستجو و برگرداندن وضعیت قبلی درخت
+  const handleSearchCancel = useCallback(() => {
+    setSearchQuery("");
+
+    const saved = preSearchExpandedRef.current;
+    if (saved) {
+      preSearchExpandedRef.current = null;
+      setExpandedItems(saved);
+    }
+  }, []);
+
+  // OK: اعمال جستجو
+  const handleSearchApply = useCallback(
     (txt: string) => {
       const q = txt.trim().toLowerCase();
 
-      setSearchQuery(q);
-
       if (!q) {
-        setExpandedItems((prev) => {
-          const validIds = new Set(Array.from(itemsMap.keys(), String));
-
-          return prev.filter((id) => validIds.has(id));
-        });
-
+        handleSearchCancel();
         return;
       }
 
+      // وضعیت قبل از اولین جستجو را ذخیره کن
+      if (!preSearchExpandedRef.current) {
+        preSearchExpandedRef.current = expandedItems;
+      }
+
+      // فقط ancestorهای نتایج باز می‌شوند
       const nextExpanded = new Set<string>();
 
       for (const [id, name] of searchIndex) {
         if (!name.includes(q)) continue;
-
-        nextExpanded.add(id);
-
-        const numericId = Number(id);
-
-        getAncestorIds(numericId).forEach((ancestor) => {
+        for (const ancestor of getAncestorIds(Number(id))) {
           nextExpanded.add(ancestor);
-        });
+        }
       }
 
-      setExpandedItems(
-        nextExpanded.size > 0 ? Array.from(nextExpanded) : rootIds.map(String),
-      );
+      setSearchQuery(q);
+      setExpandedItems(Array.from(nextExpanded));
     },
-    [searchIndex, itemsMap, getAncestorIds, rootIds],
+    [searchIndex, getAncestorIds, expandedItems, handleSearchCancel],
   );
 
-  // Context menu
-  const handleContextMenu = useCallback((event: React.MouseEvent, row: T) => {
-    event.preventDefault();
-
-    setContextMenu({
-      mouseX: event.clientX,
-      mouseY: event.clientY,
-      row,
-    });
+  // Context menu (state در کامپوننت جدا، بدون رندر درخت)
+  const handleContextMenu = useCallback((e: React.MouseEvent, row: T) => {
+    e.preventDefault();
+    contextMenuOpenerRef.current?.(e, row);
   }, []);
 
-  // Hooks must always execute before conditional return
   if (!canView) return null;
 
   return (
     <div className="tree-container" onContextMenu={(e) => e.preventDefault()}>
       <TreeHeader
         label={label || "Tree View"}
-        onSearch={handleSearch}
+        onSearchApply={handleSearchApply}
+        onSearchCancel={handleSearchCancel}
         onDelete={canDelete && onDelete ? handleDelete : undefined}
         onEdit={canUpdate && onEdit ? handleEdit : undefined}
         onAdd={canCreate && onAdd ? onAdd : undefined}
@@ -363,49 +331,18 @@ export function GenericTree<T>({
       <TreeContent
         tree={tree}
         searchQuery={searchQuery}
+        visibleIds={searchResult?.visible ?? null}
+        matchedIds={searchResult?.matched ?? null}
         onItemClick={handleItemClick}
         onItemDoubleClick={handleItemDoubleClick}
         onItemContextMenu={handleContextMenu}
         getItemName={getItemName}
-        getItemId={getItemId}
       />
 
-      <Menu
-        slotProps={{
-          root: {
-            onContextMenu: (e: any) => {
-              e.preventDefault();
-              setContextMenu(null);
-            },
-          },
-        }}
-        open={!!contextMenu}
-        onClose={() => setContextMenu(null)}
-        anchorReference="anchorPosition"
-        anchorPosition={
-          contextMenu
-            ? {
-                top: contextMenu.mouseY,
-                left: contextMenu.mouseX,
-              }
-            : undefined
-        }
-      >
-        {contextMenuItems?.map((menuItem, index) => (
-          <MenuItem
-            key={index}
-            onClick={() => {
-              if (contextMenu) {
-                menuItem.onClick(contextMenu.row);
-              }
-
-              setContextMenu(null);
-            }}
-          >
-            {menuItem.label}
-          </MenuItem>
-        ))}
-      </Menu>
+      <TreeContextMenu
+        items={contextMenuItems}
+        openRef={contextMenuOpenerRef}
+      />
     </div>
   );
 }

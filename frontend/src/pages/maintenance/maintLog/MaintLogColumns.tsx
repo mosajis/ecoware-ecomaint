@@ -82,7 +82,6 @@ export const columns: GridColDef<TypeTblMaintLog>[] = [
     renderCell: ({ row }) => {
       const value = row?.tblFollowStatus?.fsName;
 
-      console.log(value);
       if (!value) return "-";
 
       return (

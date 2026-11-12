@@ -12,36 +12,20 @@ interface TreeHeaderProps {
   onCollapseAll?: () => void;
   onDelete?: () => void;
   onEdit?: () => void;
-  onSearch?: (txt: string) => void;
+  onSearchApply: (txt: string) => void;
+  onSearchCancel: () => void;
   hasSelection?: boolean;
 }
 
 const TreeHeader = memo(function TreeHeader({
   loading,
-  onAdd,
-  onRefresh,
-  onExpandAll,
-  onCollapseAll,
-  onEdit,
-  onDelete,
-  onSearch,
   label,
   hasSelection,
+  ...handlers
 }: TreeHeaderProps) {
   return (
     <Box>
-      <TreeToolbar
-        hasSelection={hasSelection}
-        label={label}
-        onDelete={onDelete}
-        onEdit={onEdit}
-        onAdd={onAdd}
-        onRefresh={onRefresh}
-        onExpandAll={onExpandAll}
-        onCollapseAll={onCollapseAll}
-        onSearch={onSearch}
-      />
-
+      <TreeToolbar label={label} hasSelection={hasSelection} {...handlers} />
       {loading && <LinearProgress />}
     </Box>
   );

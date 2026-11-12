@@ -1,114 +1,151 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import Box from "@mui/material/Box";
-import Popper from "@mui/material/Popper";
-import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
-import SearchIcon from "@mui/icons-material/Search";
+import Popper from "@mui/material/Popper";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
 import ClearIcon from "@mui/icons-material/Clear";
+import SearchIcon from "@mui/icons-material/Search";
 
 interface SearchPopperProps {
-  onSearch?: (value: string) => void;
-  debounceMs?: number;
+  onApply: (value: string) => void;
+  onCancel: () => void;
 }
 
-const SearchPopper: React.FC<SearchPopperProps> = ({
-  onSearch,
-  debounceMs = 250,
-}) => {
+function SearchPopperBase({ onApply, onCancel }: SearchPopperProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [value, setValue] = useState("");
-  const debounceRef = useRef<number | undefined>(undefined);
+  const [applied, setApplied] = useState(false);
 
   const open = Boolean(anchorEl);
-  const id = open ? "search-popper" : undefined;
 
-  const handleToggle = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl((prev) => (prev ? null : event.currentTarget));
-  };
+  const handleToggle = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const target = e.currentTarget;
+    setAnchorEl((prev) => (prev ? null : target));
+  }, []);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setAnchorEl(null);
-  };
+  }, []);
 
-  useEffect(() => {
-    if (!onSearch) return;
+  const handleCancel = useCallback(() => {
+    setValue("");
+    setApplied(false);
+    setAnchorEl(null);
+    onCancel();
+  }, [onCancel]);
 
-    window.clearTimeout(debounceRef.current);
-    debounceRef.current = window.setTimeout(() => {
-      onSearch(value);
-    }, debounceMs);
+  const handleOk = useCallback(() => {
+    const query = value.trim();
 
-    return () => window.clearTimeout(debounceRef.current);
-  }, [value, onSearch, debounceMs]);
+    if (query.length < 4) return;
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "Escape") {
-      if (value) {
-        setValue("");
-      } else {
-        handleClose();
+    setApplied(true);
+    setAnchorEl(null);
+    onApply(query);
+  }, [value, onApply]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleOk();
       }
-    }
-  };
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        handleCancel();
+      }
+    },
+    [handleOk, handleCancel],
+  );
 
   return (
-    <>
-      <IconButton size="small" onClick={handleToggle} aria-describedby={id}>
-        <SearchIcon />
-      </IconButton>
-
-      <Popper
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        sx={{ zIndex: 1 }}
-        placement="bottom-start"
-        modifiers={[
-          {
-            name: "offset",
-            options: {
-              offset: [0, 6],
-            },
-          },
-        ]}
-      >
-        <Box
-          sx={{
-            p: 1,
-            minWidth: 220,
-            bgcolor: "background.paper",
-            borderRadius: 1,
-            boxShadow: 3,
-          }}
+    <ClickAwayListener onClickAway={handleClose}>
+      <Box sx={{ display: "inline-flex" }}>
+        <IconButton
+          size="small"
+          onClick={handleToggle}
+          color={applied ? "primary" : "default"}
+          aria-label="Search"
         >
-          <TextField
-            size="small"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            placeholder="Search..."
-            autoFocus
-            fullWidth
-            onKeyDown={handleKeyDown}
-            InputProps={{
-              endAdornment: value ? (
-                <InputAdornment position="end">
-                  <IconButton
-                    sx={{ border: 0 }}
-                    size="small"
-                    onClick={() => setValue("")}
-                    edge="end"
-                  >
-                    <ClearIcon fontSize="small" />
-                  </IconButton>
-                </InputAdornment>
-              ) : null,
-            }}
-          />
-        </Box>
-      </Popper>
-    </>
-  );
-};
+          <SearchIcon />
+        </IconButton>
 
-export default SearchPopper;
+        <Popper
+          id="search-popper"
+          open={open}
+          anchorEl={anchorEl}
+          placement="bottom-start"
+          disablePortal
+          sx={{ zIndex: (theme) => theme.zIndex.modal }}
+          modifiers={[
+            {
+              name: "offset",
+              options: { offset: [0, 6] },
+            },
+          ]}
+        >
+          <Box
+            sx={{
+              p: 1,
+              minWidth: 280,
+              bgcolor: "background.paper",
+              borderRadius: 1,
+              boxShadow: 3,
+            }}
+          >
+            <TextField
+              size="small"
+              fullWidth
+              autoFocus
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Search (min. 4 characters)..."
+              slotProps={{
+                input: {
+                  endAdornment: value ? (
+                    <InputAdornment position="end">
+                      <IconButton
+                        size="small"
+                        edge="end"
+                        onClick={() => setValue("")}
+                      >
+                        <ClearIcon fontSize="small" />
+                      </IconButton>
+                    </InputAdornment>
+                  ) : null,
+                },
+              }}
+            />
+
+            <Stack
+              direction="row"
+              spacing={1}
+              justifyContent="flex-end"
+              sx={{ mt: 1 }}
+            >
+              <Button size="small" variant="outlined" onClick={handleCancel}>
+                Cancel
+              </Button>
+
+              <Button
+                size="small"
+                onClick={handleOk}
+                disabled={value.trim().length < 4}
+              >
+                OK
+              </Button>
+            </Stack>
+          </Box>
+        </Popper>
+      </Box>
+    </ClickAwayListener>
+  );
+}
+
+export default memo(SearchPopperBase);

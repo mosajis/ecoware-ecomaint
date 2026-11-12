@@ -1,18 +1,21 @@
 import cn from "classnames";
 import { useTree } from "@headless-tree/react";
-import { CSSProperties, useRef, useMemo, memo, FC } from "react";
+import type { ItemInstance } from "@headless-tree/core";
+import { CSSProperties, memo } from "react";
 
 interface TreeContentProps<T> {
   tree: ReturnType<typeof useTree<T>>;
   getItemName: (item: T) => string;
-  getItemId: (item: T) => string | number;
   onItemClick?: (item: T) => void;
   onItemDoubleClick?: (rowId: number) => void;
   onItemContextMenu?: (event: React.MouseEvent, item: T) => void;
+  /** متن جستجوی اعمال‌شده (lowercase، برای هایلایت) */
   searchQuery?: string;
+  /** null یعنی جستجوی فعال نیست */
+  visibleIds?: Set<string> | null;
+  matchedIds?: Set<string> | null;
 }
 
-// ✅ Memoized highlight component
 const HighlightedText = memo(function HighlightedText({
   text,
   query,
@@ -20,12 +23,7 @@ const HighlightedText = memo(function HighlightedText({
   text: string;
   query: string;
 }) {
-  if (!query) return <>{text}</>;
-
-  const lowerText = text.toLowerCase();
-  const lowerQuery = query.toLowerCase();
-  const index = lowerText.indexOf(lowerQuery);
-
+  const index = text.toLowerCase().indexOf(query);
   if (index === -1) return <>{text}</>;
 
   return (
@@ -39,273 +37,156 @@ const HighlightedText = memo(function HighlightedText({
   );
 });
 
-// ✅ Cache visibility results to avoid re-computing
-const visibilityCache = new WeakMap<any, Map<string, boolean>>();
-
-function isVisible<T>(
-  item: any,
-  getItemName: (item: T) => string,
-  searchQuery?: string,
-): boolean {
-  const q = searchQuery?.trim().toLowerCase();
-  if (!q) return true;
-
-  // ✅ Check cache first
-  let itemCache = visibilityCache.get(item);
-  if (!itemCache) {
-    itemCache = new Map();
-    visibilityCache.set(item, itemCache);
-  }
-
-  if (itemCache.has(q)) {
-    return itemCache.get(q)!;
-  }
-
-  // ✅ Check current item
-  const itemData = item.getItemData();
-  const name = getItemName(itemData).toLowerCase();
-  if (name.includes(q)) {
-    itemCache.set(q, true);
-    return true;
-  }
-
-  // ✅ Check children
-  const children = item.getChildren();
-  const hasVisibleChild = children.some((child: any) =>
-    isVisible(child, getItemName, searchQuery),
-  );
-
-  itemCache.set(q, hasVisibleChild);
-  return hasVisibleChild;
-}
-
-// ✅ Memoized TreeItem component to prevent unnecessary re-renders
 interface TreeItemProps<T> {
-  item: any;
+  item: ItemInstance<T>;
   itemId: string;
   level: number;
   name: string;
+  query: string;
   isHighlighted: boolean;
-  searchQuery: string;
-  onItemClick?: (itemData: T) => void;
-  onItemDoubleClick?: (rowId: number) => void;
-  clickTimerRef: React.MutableRefObject<number | null>;
-  CLICK_DELAY: number;
-  // ✅ Add state props so memo can detect changes
   isSelected: boolean;
   isFocused: boolean;
   isExpanded: boolean;
   isFolder: boolean;
+  onItemClick?: (item: T) => void;
+  onItemDoubleClick?: (rowId: number) => void;
   onItemContextMenu?: (event: React.MouseEvent, item: T) => void;
 }
 
-// Create a wrapper to preserve generics with memo
 function TreeItemComponent<T>({
   item,
   itemId,
   level,
   name,
+  query,
   isHighlighted,
-  searchQuery,
-  onItemClick,
-  onItemDoubleClick,
-  onItemContextMenu,
-  clickTimerRef,
-  CLICK_DELAY,
   isSelected,
   isFocused,
   isExpanded,
   isFolder,
+  onItemClick,
+  onItemDoubleClick,
+  onItemContextMenu,
 }: TreeItemProps<T>) {
-  const itemData = item.getItemData();
+  // تأخیر تشخیص single/double click در GenericTree انجام می‌شود
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    item.getProps().onClick?.(e);
+    onItemClick?.(item.getItemData());
+  };
+
+  const handleDoubleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onItemDoubleClick?.(Number(itemId));
+  };
 
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
-    // ✅ itemId از props موجوده، نیازی به getItemId نیست
+    const data = item.getItemData();
     item.getTree().setSelectedItems([itemId]);
-    onItemClick?.(itemData);
-
-    onItemContextMenu?.(e, itemData);
+    onItemClick?.(data);
+    onItemContextMenu?.(e, data);
   };
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    if (clickTimerRef.current) return;
-
-    clickTimerRef.current = window.setTimeout(() => {
-      clickTimerRef.current = null;
-      item.getProps().onClick?.(e);
-      onItemClick?.(itemData);
-    }, CLICK_DELAY);
-  };
-
-  const handleDoubleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-
-    if (clickTimerRef.current) {
-      clearTimeout(clickTimerRef.current);
-      clickTimerRef.current = null;
+    if (item.isExpanded()) {
+      item.collapse();
+    } else {
+      item.expand();
     }
-
-    onItemDoubleClick?.(Number(itemId));
   };
 
-  const handleToggleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const style: CSSProperties = {
+    paddingLeft: `${level * 20}px`,
+    ["--tree-level" as string]: level,
   };
-
-  // ✅ Memoize style object
-  const style = useMemo<CSSProperties>(
-    () => ({
-      paddingLeft: `${level * 20}px`,
-      "--tree-level": level,
-    }),
-    [level],
-  );
-
-  // ✅ Build className based on props (memo will detect changes)
-  const itemClassName = cn("tree-item", {
-    focused: isFocused,
-    expanded: isExpanded,
-    selected: isSelected,
-    folder: isFolder,
-    highlight: isHighlighted,
-  });
 
   return (
     <div
-      key={itemId}
       className="tree-item-parent"
       style={style}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
       onContextMenu={handleContextMenu}
     >
-      <div className={itemClassName}>
-        {item.isFolder() && (
-          <span className="tree-toggle" onClick={handleToggleClick}></span>
-        )}
+      <div
+        className={cn("tree-item", {
+          focused: isFocused,
+          expanded: isExpanded,
+          selected: isSelected,
+          folder: isFolder,
+          highlight: isHighlighted,
+        })}
+      >
+        {isFolder && <span className="tree-toggle" onClick={handleToggle} />}
 
         <span className="tree-label">
-          {isHighlighted ? (
-            <HighlightedText text={name} query={searchQuery} />
-          ) : (
-            name
-          )}
+          {isHighlighted ? <HighlightedText text={name} query={query} /> : name}
         </span>
       </div>
     </div>
   );
 }
 
-// ✅ Memoize TreeItem while preserving generic type
 const TreeItem = memo(TreeItemComponent) as typeof TreeItemComponent;
 
 function TreeContent<T>({
   tree,
-  searchQuery,
+  searchQuery = "",
+  visibleIds = null,
+  matchedIds = null,
   getItemName,
-  getItemId,
   onItemClick,
   onItemDoubleClick,
   onItemContextMenu,
 }: TreeContentProps<T>) {
-  const clickTimerRef = useRef<number | null>(null);
-  const CLICK_DELAY = 200;
+  const items = Array.from(tree.getItems());
 
-  const items = tree.getItems();
+  const rows: React.ReactNode[] = [];
 
-  // ✅ Memoize visible items calculation
-  const visibleItems = useMemo(() => {
-    if (!searchQuery) return items;
-    return items.filter((item) => isVisible(item, getItemName, searchQuery));
-  }, [items, searchQuery, getItemName]);
+  for (const item of items) {
+    const itemId = item.getId();
 
-  // ✅ Process items - don't memoize to get real-time state updates
-  const query = searchQuery?.toLowerCase() || "";
+    if (visibleIds && !visibleIds.has(itemId)) continue;
 
-  const processedItems = items.map((item) => {
-    const itemData = item.getItemData();
-    const itemId = String(getItemId(itemData));
-    const level = item.getItemMeta().level;
-    const name = getItemName(itemData);
-    const isItemVisible =
-      !searchQuery || isVisible(item, getItemName, searchQuery);
-    const isHighlighted = !!query && name.toLowerCase().includes(query);
+    rows.push(
+      <TreeItem<T>
+        key={itemId}
+        item={item}
+        itemId={itemId}
+        level={item.getItemMeta().level}
+        name={getItemName(item.getItemData())}
+        query={searchQuery}
+        isHighlighted={!!matchedIds?.has(itemId)}
+        isSelected={item.isSelected()}
+        isFocused={item.isFocused()}
+        isExpanded={item.isExpanded()}
+        isFolder={item.isFolder()}
+        onItemClick={onItemClick}
+        onItemDoubleClick={onItemDoubleClick}
+        onItemContextMenu={onItemContextMenu}
+      />,
+    );
+  }
 
-    // ✅ Get state flags for memo comparison
-    const isSelected = item.isSelected();
-    const isFocused = item.isFocused();
-    const isExpanded = item.isExpanded();
-    const isFolder = item.isFolder();
-
-    return {
-      item,
-      itemId,
-      level,
-      name,
-      isItemVisible,
-      isHighlighted,
-      isSelected,
-      isFocused,
-      isExpanded,
-      isFolder,
-    };
+  console.log("TREE FINAL DEBUG", {
+    itemsCount: items.length,
+    rowsCount: rows.length,
+    itemIds: items.map((item) => item.getId()),
+    expandedItems: tree.getState().expandedItems,
   });
 
-  if (visibleItems.length === 0) {
-    return (
-      <div
-        className="tree not-found"
-        style={{ padding: 10, textAlign: "center", color: "#999" }}
-      >
-        No items found
-      </div>
-    );
+  if (rows.length === 0) {
+    return <div className="tree not-found">No items found</div>;
   }
 
   return (
     <div {...tree.getContainerProps()} className="tree">
-      {processedItems.map(
-        ({
-          item,
-          itemId,
-          level,
-          name,
-          isItemVisible,
-          isHighlighted,
-          isSelected,
-          isFocused,
-          isExpanded,
-          isFolder,
-        }) => {
-          if (!isItemVisible) return null;
-
-          return (
-            <TreeItem<T>
-              key={itemId}
-              item={item}
-              itemId={itemId}
-              level={level}
-              name={name}
-              isHighlighted={isHighlighted}
-              searchQuery={searchQuery || ""}
-              onItemClick={onItemClick}
-              onItemDoubleClick={onItemDoubleClick}
-              clickTimerRef={clickTimerRef}
-              CLICK_DELAY={CLICK_DELAY}
-              isSelected={isSelected}
-              isFocused={isFocused}
-              isExpanded={isExpanded}
-              isFolder={isFolder}
-              onItemContextMenu={onItemContextMenu}
-            />
-          );
-        },
-      )}
+      {rows}
     </div>
   );
 }
