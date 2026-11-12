@@ -1,24 +1,16 @@
 import FormDialog from "@/shared/components/formDialog/FormDialog";
-import FieldAsyncSelectGrid from "@/shared/components/fields/FieldAsyncSelectGrid";
-import NumberField from "@/shared/components/fields/FieldNumber";
-import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
-
-import { buildRelation } from "@/core/helper";
-import { type UpsertProps } from "@/core/helper.types";
-
-import {
-  tblCompOilInfo,
-  tblEmployee,
-  tblInstallation,
-  TypeTblCompOilInfo,
-} from "@/core/api/generated/api";
-
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import NumberField from "@/shared/components/fields/FieldNumber";
+import { type UpsertProps } from "@/core/helper.types";
+import { useUpsertForm } from "@/shared/hooks/useUpsertForm";
+import { buildRelation } from "@/core/helper";
+import { tblCompOilInfo, TypeTblCompOilInfo } from "@/core/api/generated/api";
 import { memo } from "react";
 import { Controller } from "react-hook-form";
-
 import { DEFAULT_VALUES, schema, SchemaValue } from "./TabOilSchema";
+import { useAtomValue } from "jotai";
+import { atomUser } from "@/pages/auth/auth.atom";
 
 type Props = UpsertProps & {
   compId?: number;
@@ -33,6 +25,9 @@ function TabOilUpsert({
   onSuccess,
   compId,
 }: Props) {
+  const user = useAtomValue(atomUser);
+  const employee = user?.tblEmployee;
+
   const {
     form,
     loadingInitial,
@@ -57,7 +52,6 @@ function TabOilUpsert({
       });
 
       return {
-        employee: res.tblEmployee ?? null,
         installation: res.tblInstallation ?? null,
 
         tankCapacity: res.tankCapacity ?? null,
@@ -77,8 +71,8 @@ function TabOilUpsert({
         samplingPosition: values.samplingPosition ?? null,
         oilDesc: values.oilDesc ?? null,
         orderNo: values.orderNo ?? null,
-        // ...buildRelation("tblComponentUnit", "compId", compId),
-        ...buildRelation("tblEmployee", "employeeId", values.employee),
+        ...buildRelation("tblComponentUnit", "compId", { compId }),
+        ...buildRelation("tblEmployee", "employeeId", employee),
       };
 
       return tblCompOilInfo.create(body);
@@ -91,8 +85,8 @@ function TabOilUpsert({
         samplingPosition: values.samplingPosition ?? null,
         oilDesc: values.oilDesc ?? null,
         orderNo: values.orderNo ?? null,
-        // ...buildRelation("tblComponentUnit", "compId", compId),
-        ...buildRelation("tblEmployee", "employeeId", values.employee),
+        ...buildRelation("tblComponentUnit", "compId", { compId }),
+        ...buildRelation("tblEmployee", "employeeId", employee),
       };
 
       return tblCompOilInfo.update(id, body);
@@ -106,7 +100,6 @@ function TabOilUpsert({
 
   return (
     <FormDialog
-      maxWidth="md"
       open={open}
       onClose={onClose}
       title={title}
@@ -116,39 +109,6 @@ function TabOilUpsert({
       readonly={readonly}
     >
       <Box display="flex" flexDirection="column" gap={1.5}>
-        <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
-          <Controller
-            name="employee"
-            control={control}
-            render={({ field }) => (
-              <FieldAsyncSelectGrid
-                label="Employee"
-                disabled={isDisabled}
-                value={field.value}
-                selectionMode="single"
-                request={tblEmployee.getAll}
-                getOptionLabel={(row) =>
-                  `${row.firstName ?? ""} ${row.lastName ?? ""}`.trim()
-                }
-                getRowId={(row) => row.employeeId}
-                onChange={field.onChange}
-                columns={[
-                  {
-                    field: "firstName",
-                    headerName: "First Name",
-                    flex: 1,
-                  },
-                  {
-                    field: "lastName",
-                    headerName: "Last Name",
-                    flex: 1,
-                  },
-                ]}
-              />
-            )}
-          />
-        </Box>
-
         <Box display="grid" gridTemplateColumns="1fr 1fr" gap={1.5}>
           <Controller
             name="tankCapacity"

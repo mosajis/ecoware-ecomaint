@@ -1,6 +1,5 @@
 import { BaseController } from "@/utils/base.controller";
 import { BaseService } from "@/utils/base.service";
-
 import {
   TblCompOilInfo,
   TblCompOilInfoInputCreate,
@@ -17,7 +16,6 @@ const ControllerTblCompOilInfo = new BaseController({
   swagger: {
     tags: ["tblCompOilInfo"],
   },
-  scope: true,
   primaryKey: "compOilInfoId",
   service: ServiceTblCompOilInfo,
   createSchema: TblCompOilInfoInputCreate,

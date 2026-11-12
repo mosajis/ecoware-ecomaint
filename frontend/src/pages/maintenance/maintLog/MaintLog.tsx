@@ -5,6 +5,7 @@ import MaintLogFollowDialog from "./MaintLogDialogFollow";
 import MaintLogDialogPrint from "./MaintLogDialogPrint";
 import Actions from "./MaintLogActions";
 import MaintLogUpsert from "./MaintLogUpsert";
+import OilSamplingLogUpsert from "../OilSamplingLog/OilSamplingLogUpsert";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { useCallback, useMemo, useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
@@ -24,6 +25,7 @@ import { toast } from "sonner";
 export default function PageMaintLog() {
   /* ---------------- dialogs ---------------- */
   const { dialogs, openDialog, closeDialog } = useDialogs({
+    sampleOil: false,
     filter: false,
     follow: false,
     print: false,
@@ -219,6 +221,7 @@ export default function PageMaintLog() {
           onAddClick={() => openDialog("create")}
           toolbarChildren={
             <Actions
+              onSampleOil={() => openDialog("sampleOil")}
               onFilter={() => openDialog("filter")}
               onFollow={handleFollow}
               onReview={handleReview}
@@ -284,6 +287,17 @@ export default function PageMaintLog() {
           onClose={() => closeDialog("follow")}
           maintLogId={selectedRow.maintLogId}
           onSuccess={handleFollowSuccess}
+        />
+      )}
+
+      {selectedRow?.maintLogId && (
+        <OilSamplingLogUpsert
+          title="Sample Oil"
+          mode="create"
+          open={dialogs.sampleOil}
+          onClose={() => closeDialog("sampleOil")}
+          recordId={selectedRow.maintLogId}
+          // onSuccess={handleFollowSuccess}
         />
       )}
 

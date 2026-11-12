@@ -130,3 +130,182 @@ export const maintLogBatchFollowStatusUpdate = (
     "/tblMaintLog/follow-status/batch",
     { data },
   );
+
+export type OilSamplingLogContextRequest = {
+  maintLogId: number;
+};
+
+export type OilSamplingLogContextResponse = {
+  maintLogId: number;
+  component: {
+    compId: number;
+    compNo: string | null;
+  } | null;
+
+  compOilInfoId: number;
+
+  defaults: {
+    compCounterVal: number;
+    oilCounterVal: number;
+
+    tankCapacity: number | null;
+    samplingPosition: string | null;
+    laboratoryCode: string | null;
+    oilDesc: string;
+
+    orderNo: number | null;
+
+    changeOilDate: string | null;
+    addOilVal: number | null;
+
+    lastSamplingDate: string | null;
+    samplerId: number | null;
+  };
+};
+
+export const getOilSamplingLogContext = (
+  params: OilSamplingLogContextRequest,
+) =>
+  api.get<OilSamplingLogContextResponse>("/tblOilSamplingLog/context", {
+    params,
+  });
+
+export type TypeWaitingDashboard = {
+  summary: {
+    totalHours: number;
+    totalEvents: number;
+    installationsWithWaiting: number;
+    daysWithWaiting: number;
+    averageDurationHours: number;
+  };
+
+  worstInstallation: {
+    instId: number;
+    name: string;
+    hours: number;
+    events: number;
+  } | null;
+
+  topReason: {
+    waitingReasonId: number | null;
+    reasonCode: string;
+    reasonNameEn: string;
+    reasonNameFa: string | null;
+    hours: number;
+    events: number;
+  } | null;
+
+  installations: {
+    instId: number;
+    name: string;
+    caption: string | null;
+    hours: number;
+    events: number;
+    daysWithWaiting: number;
+    averageDurationHours: number;
+  }[];
+
+  reasonGroups: {
+    waitingReasonGroupId: number | null;
+    name: string;
+    hours: number;
+    events: number;
+    shareOfHours: number;
+  }[];
+
+  rigReasonGroups: {
+    instId: number;
+    installationName: string;
+    reasonGroup: string;
+    hours: number;
+  }[];
+
+  monthly: {
+    month: string;
+    hours: number;
+    events: number;
+  }[];
+};
+
+export type TypeWaitingAnalysis = {
+  summary: {
+    totalEvents: number;
+    totalHours: number;
+    averageDurationHours: number;
+    daysWithWaiting: number;
+  };
+
+  reasonGroups: {
+    waitingReasonGroupId: number | null;
+    name: string;
+    events: number;
+    hours: number;
+    shareOfHours: number;
+  }[];
+
+  reasons: {
+    waitingReasonId: number | null;
+    reasonCode: string;
+    reasonNameEn: string;
+    reasonNameFa: string | null;
+    reasonGroup: string | null;
+    events: number;
+    hours: number;
+    shareOfHours: number;
+  }[];
+
+  nptClasses: {
+    waitingNptClassId: number | null;
+    name: string;
+    events: number;
+    hours: number;
+  }[];
+
+  operationPhases: {
+    waitingOperationPhaseId: number | null;
+    name: string;
+    events: number;
+    hours: number;
+  }[];
+
+  shifts: {
+    waitingShiftId: number | null;
+    name: string;
+    events: number;
+    hours: number;
+  }[];
+
+  topEvents: {
+    waitingEventId: number;
+    eventCode: string | null;
+    startDateTime: string;
+    endDateTime: string;
+    durationHours: number;
+
+    reason: {
+      code: string;
+      nameEn: string;
+      nameFa: string | null;
+    } | null;
+
+    reasonGroup: string | null;
+    operationPhase: string | null;
+    nptClass: string | null;
+  }[];
+};
+
+type WaitingQuery = {
+  instId?: number;
+  startDate?: string;
+  endDate?: string;
+};
+
+export const getWaitingDashboard = (params?: WaitingQuery) =>
+  api.get<TypeWaitingDashboard>("/waiting/dashboard", {
+    params,
+  });
+
+export const getWaitingAnalysis = (params?: WaitingQuery) =>
+  api.get<TypeWaitingAnalysis>("/waiting/analysis", {
+    params,
+  });

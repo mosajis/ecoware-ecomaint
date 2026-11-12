@@ -75,7 +75,7 @@ const tabs: ReusableTabItem[] = [
   },
 
   {
-    label: "Oil",
+    label: "Oil Info",
     icon: <OpacityIcon />,
     component: TabOil,
   },

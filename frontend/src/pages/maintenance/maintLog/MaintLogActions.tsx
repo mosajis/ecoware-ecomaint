@@ -1,4 +1,5 @@
 import DataGridActionBar from "@/shared/components/dataGrid/DataGridActionBar";
+import { Opacity } from "@mui/icons-material";
 import FilterList from "@mui/icons-material/FilterList";
 import FollowTheSignsIcon from "@mui/icons-material/FollowTheSigns";
 import PrintIcon from "@mui/icons-material/Print";
@@ -12,6 +13,7 @@ type Props = {
   onReview: () => void;
   onReviewNote: () => void;
   onPrint: () => void;
+  onSampleOil: () => void;
   hasFilter: boolean;
   selectedCount: number;
   reviewLoading?: boolean;
@@ -24,6 +26,7 @@ export default function MaintLogActions({
   onReview,
   onReviewNote,
   onPrint,
+  onSampleOil,
   reviewLoading,
   reviewNoteLoading,
   hasFilter,
@@ -64,6 +67,13 @@ export default function MaintLogActions({
       onClick: onReviewNote,
       loading: reviewNoteLoading,
       disabled: !hasSelection || reviewLoading || reviewNoteLoading,
+    },
+    {
+      label: `Sample Oil`,
+      icon: <Opacity fontSize="small" />,
+      isEnabled: true,
+      onClick: onSampleOil,
+      disabled: !hasSelection,
     },
     {
       label: `Print (${selectedCount})`,

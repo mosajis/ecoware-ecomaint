@@ -1,8 +1,6 @@
 import { z } from "zod";
 
 export const schema = z.object({
-  employee: z.any().nullable(),
-
   tankCapacity: z.number().nullable(),
   laboratoryCode: z.string().nullable(),
   samplingPosition: z.string().nullable(),
@@ -13,8 +11,6 @@ export const schema = z.object({
 export type SchemaValue = z.infer<typeof schema>;
 
 export const DEFAULT_VALUES: SchemaValue = {
-  employee: null,
-
   tankCapacity: null,
   laboratoryCode: "",
   samplingPosition: "",

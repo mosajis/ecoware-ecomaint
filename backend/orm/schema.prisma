@@ -292,21 +292,20 @@ model TblCompMeasurePointLog {
 }
 
 model TblCompOilInfo {
-  compOilInfoId    Int              @id(map: "PK_TblCompOilInfo") @default(dbgenerated("NEXT VALUE FOR [Seq_CompOilInfo]"), map: "DF_TblCompOilInfo_CompOilInfoID") @map("CompOilInfoID")
-  compId           Int?             @map("CompId")
-  compCounterId    Int?             @map("CompCounterID")
-  spareTypeId      Int?             @map("SpareTypeID")
-  compJobId        Int?             @map("CompJobID")
-  tankCapacity     Int?             @map("TankCapacity")
-  laboratoryCode   String?          @map("LaboratoryCode") @db.NVarChar(100)
-  samplingPosition String?          @map("SamplingPosition") @db.NVarChar(100)
-  oilDesc          String?          @map("OilDesc") @db.NVarChar(100)
-  orderNo          Int?             @map("OrderNo")
-  employeeId       Int?             @map("EmployeeId")
+  compOilInfoId    Int               @id(map: "PK_TblCompOilInfo") @default(dbgenerated("NEXT VALUE FOR [Seq_CompOilInfo]"), map: "DF_TblCompOilInfo_CompOilInfoID") @map("CompOilInfoID")
+  compId           Int?              @map("CompId")
+  spareTypeId      Int?              @map("SpareTypeID")
+  tankCapacity     Int?              @map("TankCapacity")
+  laboratoryCode   String?           @map("LaboratoryCode") @db.NVarChar(100)
+  samplingPosition String?           @map("SamplingPosition") @db.NVarChar(100)
+  oilDesc          String?           @map("OilDesc") @db.NVarChar(100)
+  orderNo          Int?              @map("OrderNo")
+  employeeId       Int?              @map("EmployeeId")
   lastUpdate DateTime @default(now()) @updatedAt @map("lastUpdate")
-  instId           Int?             @map("InstId")
-  tblEmployee      TblEmployee?     @relation(fields: [employeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblCompOilInfo_tblEmployee")
-  tblInstallation  TblInstallation? @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblCompOilInfo_tblInstallation")
+  instId           Int?              @map("InstId")
+  tblComponentUnit TblComponentUnit? @relation(fields: [compId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblCompOilInfo_tblComponentUnit")
+  tblEmployee      TblEmployee?      @relation(fields: [employeeId], references: [employeeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblCompOilInfo_tblEmployee")
+  tblInstallation  TblInstallation?  @relation(fields: [instId], references: [instId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblCompOilInfo_tblInstallation")
 }
 
 model TblComponentUnit {
@@ -331,6 +330,7 @@ model TblComponentUnit {
   tblCompCounters             TblCompCounter[]
   tblCompJobs                 TblCompJob[]
   tblCompMeasurePoints        TblCompMeasurePoint[]
+  tblCompOilInfos             TblCompOilInfo[]
   tblAddress                  TblAddress?                  @relation(fields: [vendorId], references: [addressId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblAddress")
   tblComponentUnit            TblComponentUnit?            @relation("tblComponentUnitTotblComponentUnit", fields: [parentCompId], references: [compId], onDelete: NoAction, onUpdate: NoAction, map: "FK_tblComponentUnit_tblComponentUnit")
   otherTblComponentUnits      TblComponentUnit[]           @relation("tblComponentUnitTotblComponentUnit")
@@ -867,6 +867,7 @@ model TblInstallation {
   tblRounds                    TblRound[]
   tblRoundCompJobs             TblRoundCompJob[]
   tblUserInstallations         TblUserInstallation[]
+  tblWaitingEvents             TblWaitingEvent[]
   tblWorkOrders                TblWorkOrder[]
   tblWorkShops                 TblWorkShop[]
   tblWorkShopAttachments       TblWorkShopAttachment[]
@@ -1564,4 +1565,84 @@ model Tblspareunit2 {
 
   @@map("tblspareunit2")
   @@ignore
+}
+
+model TblWaitingEvent {
+  waitingEventId           Int                       @id(map: "PK_TblWaitingEvent") @default(dbgenerated("NEXT VALUE FOR [dbo].[SeqTblWaitingEvent]"), map: "DF_TblWaitingEvent_ID") @map("WaitingEventID")
+  instId                   Int                       @map("InstID")
+  eventCode                String?                   @map("EventCode") @db.NVarChar(30)
+  startDateTime            DateTime                  @map("StartDateTime")
+  endDateTime              DateTime                  @map("EndDateTime")
+  isFullDay                Boolean                   @default(false, map: "DF_TblWaitingEvent_IsFullDay") @map("IsFullDay")
+  durationHours            Decimal                   @map("DurationHours") @db.Decimal(9, 2)
+  waitingReasonGroupId     Int?                      @map("WaitingReasonGroupID")
+  waitingReasonId          Int?                      @map("WaitingReasonID")
+  customReason             String?                   @map("CustomReason") @db.NVarChar(200)
+  waitingOperationPhaseId  Int?                      @map("WaitingOperationPhaseID")
+  waitingNptClassId        Int?                      @map("WaitingNptClassID")
+  waitingShiftId           Int?                      @map("WaitingShiftID")
+  reportedBy               String?                   @map("ReportedBy") @db.NVarChar(100)
+  sourceDocument           String?                   @map("SourceDocument") @db.NVarChar(300)
+  remarks                  String?                   @map("Remarks") @db.NVarChar(2000)
+  createdAt                DateTime                  @default(dbgenerated("sysdatetime()"), map: "DF_TblWaitingEvent_CreatedAt") @map("CreatedAt")
+  updatedAt                DateTime?                 @map("UpdatedAt")
+  tblInstallation          TblInstallation           @relation(fields: [instId], references: [instId], onUpdate: NoAction, map: "FK_TblWaitingEvent_tblInstallation")
+  tblWaitingNptClass       TblWaitingNptClass?       @relation(fields: [waitingNptClassId], references: [waitingNptClassId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblWaitingEvent_TblWaitingNptClass")
+  tblWaitingOperationPhase TblWaitingOperationPhase? @relation(fields: [waitingOperationPhaseId], references: [waitingOperationPhaseId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblWaitingEvent_TblWaitingOperationPhase")
+  tblWaitingReason         TblWaitingReason?         @relation(fields: [waitingReasonId], references: [waitingReasonId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblWaitingEvent_TblWaitingReason")
+  tblWaitingReasonGroup    TblWaitingReasonGroup?    @relation(fields: [waitingReasonGroupId], references: [waitingReasonGroupId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblWaitingEvent_TblWaitingReasonGroup")
+  tblWaitingShift          TblWaitingShift?          @relation(fields: [waitingShiftId], references: [waitingShiftId], onDelete: NoAction, onUpdate: NoAction, map: "FK_TblWaitingEvent_TblWaitingShift")
+
+  @@index([instId, startDateTime], map: "IX_TblWaitingEvent_InstID_StartDateTime")
+  @@index([waitingReasonGroupId], map: "IX_TblWaitingEvent_WaitingReasonGroupID")
+  @@index([waitingReasonId], map: "IX_TblWaitingEvent_WaitingReasonID")
+  @@index([instId, endDateTime], map: "IX_TblWaitingEvent_InstID_EndDateTime")
+}
+
+model TblWaitingNptClass {
+  waitingNptClassId Int               @id(map: "PK_TblWaitingNptClass") @default(dbgenerated("NEXT VALUE FOR [dbo].[SeqTblWaitingNptClass]"), map: "DF_TblWaitingNptClass_ID") @map("WaitingNptClassID")
+  nptClassName      String            @unique(map: "UQ_TblWaitingNptClass_NptClassName") @map("NptClassName") @db.NVarChar(50)
+  orderNo           Int?              @map("OrderNo")
+  isActive          Boolean           @default(true, map: "DF_TblWaitingNptClass_IsActive") @map("IsActive")
+  tblWaitingEvents  TblWaitingEvent[]
+}
+
+model TblWaitingOperationPhase {
+  waitingOperationPhaseId Int               @id(map: "PK_TblWaitingOperationPhase") @default(dbgenerated("NEXT VALUE FOR [dbo].[SeqTblWaitingOperationPhase]"), map: "DF_TblWaitingOperationPhase_ID") @map("WaitingOperationPhaseID")
+  phaseName               String            @unique(map: "UQ_TblWaitingOperationPhase_PhaseName") @map("PhaseName") @db.NVarChar(100)
+  orderNo                 Int?              @map("OrderNo")
+  isActive                Boolean           @default(true, map: "DF_TblWaitingOperationPhase_IsActive") @map("IsActive")
+  tblWaitingEvents        TblWaitingEvent[]
+}
+
+model TblWaitingReason {
+  waitingReasonId       Int                   @id(map: "PK_TblWaitingReason") @default(dbgenerated("NEXT VALUE FOR [dbo].[SeqTblWaitingReason]"), map: "DF_TblWaitingReason_ID") @map("WaitingReasonID")
+  waitingReasonGroupId  Int                   @map("WaitingReasonGroupID")
+  reasonCode            String                @unique(map: "UQ_TblWaitingReason_ReasonCode") @map("ReasonCode") @db.NVarChar(20)
+  reasonNameEn          String                @map("ReasonNameEn") @db.NVarChar(200)
+  reasonNameFa          String?               @map("ReasonNameFa") @db.NVarChar(200)
+  notes                 String?               @map("Notes") @db.NVarChar(500)
+  orderNo               Int?                  @map("OrderNo")
+  isActive              Boolean               @default(true, map: "DF_TblWaitingReason_IsActive") @map("IsActive")
+  tblWaitingEvents      TblWaitingEvent[]
+  tblWaitingReasonGroup TblWaitingReasonGroup @relation(fields: [waitingReasonGroupId], references: [waitingReasonGroupId], onUpdate: NoAction, map: "FK_TblWaitingReason_TblWaitingReasonGroup")
+
+  @@index([waitingReasonGroupId], map: "IX_TblWaitingReason_WaitingReasonGroupID")
+}
+
+model TblWaitingReasonGroup {
+  waitingReasonGroupId Int                @id(map: "PK_TblWaitingReasonGroup") @default(dbgenerated("NEXT VALUE FOR [dbo].[SeqTblWaitingReasonGroup]"), map: "DF_TblWaitingReasonGroup_ID") @map("WaitingReasonGroupID")
+  groupName            String             @unique(map: "UQ_TblWaitingReasonGroup_GroupName") @map("GroupName") @db.NVarChar(50)
+  orderNo              Int?               @map("OrderNo")
+  isActive             Boolean            @default(true, map: "DF_TblWaitingReasonGroup_IsActive") @map("IsActive")
+  tblWaitingEvents     TblWaitingEvent[]
+  tblWaitingReasons    TblWaitingReason[]
+}
+
+model TblWaitingShift {
+  waitingShiftId   Int               @id(map: "PK_TblWaitingShift") @default(dbgenerated("NEXT VALUE FOR [dbo].[SeqTblWaitingShift]"), map: "DF_TblWaitingShift_ID") @map("WaitingShiftID")
+  shiftName        String            @unique(map: "UQ_TblWaitingShift_ShiftName") @map("ShiftName") @db.NVarChar(50)
+  orderNo          Int?              @map("OrderNo")
+  isActive         Boolean           @default(true, map: "DF_TblWaitingShift_IsActive") @map("IsActive")
+  tblWaitingEvents TblWaitingEvent[]
 }

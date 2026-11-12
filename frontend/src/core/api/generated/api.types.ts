@@ -3363,6 +3363,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/tblOilSamplingLog/context": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get oil sampling log context
+         * @description Returns component information and default values for creating an oil sampling log.
+         */
+        get: operations["getTblOilSamplingLogContext"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tblPendingType/": {
         parameters: {
             query?: never;
@@ -13962,9 +13982,7 @@ export interface operations {
                         items: {
                             compOilInfoId: number;
                             compId: null | number;
-                            compCounterId: null | number;
                             spareTypeId: null | number;
-                            compJobId: null | number;
                             tankCapacity: null | number;
                             laboratoryCode: string | null;
                             samplingPosition: string | null;
@@ -13973,6 +13991,28 @@ export interface operations {
                             employeeId: null | number;
                             lastUpdate: number;
                             instId: null | number;
+                            tblComponentUnit?: ({
+                                compId: number;
+                                compTypeId: null | number;
+                                locationId: null | number;
+                                parentCompId: null | number;
+                                vendorId: null | number;
+                                compNo: string | null;
+                                serialNo: string | null;
+                                model: string | null;
+                                comment1: string | null;
+                                comment2: string | null;
+                                comment3: string | null;
+                                assetNo: string | null;
+                                statusId: null | number;
+                                notes: string | null;
+                                lastUpdate: number;
+                                isCritical: null | number;
+                                orderNo: null | number;
+                                instId: null | number;
+                            } & {
+                                [key: string]: unknown;
+                            }) | null;
                             tblEmployee?: ({
                                 employeeId: number;
                                 code: string | null;
@@ -14017,6 +14057,11 @@ export interface operations {
                     samplingPosition?: string | null;
                     oilDesc?: string | null;
                     orderNo?: null | number;
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
                     tblEmployee?: {
                         connect: {
                             employeeId: number;
@@ -14034,6 +14079,11 @@ export interface operations {
                     samplingPosition?: string | null;
                     oilDesc?: string | null;
                     orderNo?: null | number;
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
                     tblEmployee?: {
                         connect: {
                             employeeId: number;
@@ -14051,6 +14101,11 @@ export interface operations {
                     samplingPosition?: string | null;
                     oilDesc?: string | null;
                     orderNo?: null | number;
+                    tblComponentUnit?: {
+                        connect: {
+                            compId: number;
+                        };
+                    };
                     tblEmployee?: {
                         connect: {
                             employeeId: number;
@@ -14074,9 +14129,7 @@ export interface operations {
                     "application/json": {
                         compOilInfoId: number;
                         compId: null | number;
-                        compCounterId: null | number;
                         spareTypeId: null | number;
-                        compJobId: null | number;
                         tankCapacity: null | number;
                         laboratoryCode: string | null;
                         samplingPosition: string | null;
@@ -14085,6 +14138,28 @@ export interface operations {
                         employeeId: null | number;
                         lastUpdate: number;
                         instId: null | number;
+                        tblComponentUnit?: ({
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: string | null;
+                            serialNo: string | null;
+                            model: string | null;
+                            comment1: string | null;
+                            comment2: string | null;
+                            comment3: string | null;
+                            assetNo: string | null;
+                            statusId: null | number;
+                            notes: string | null;
+                            lastUpdate: number;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            instId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        }) | null;
                         tblEmployee?: ({
                             employeeId: number;
                             code: string | null;
@@ -14163,9 +14238,7 @@ export interface operations {
                     "application/json": {
                         compOilInfoId: number;
                         compId: null | number;
-                        compCounterId: null | number;
                         spareTypeId: null | number;
-                        compJobId: null | number;
                         tankCapacity: null | number;
                         laboratoryCode: string | null;
                         samplingPosition: string | null;
@@ -14174,6 +14247,28 @@ export interface operations {
                         employeeId: null | number;
                         lastUpdate: number;
                         instId: null | number;
+                        tblComponentUnit?: ({
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: string | null;
+                            serialNo: string | null;
+                            model: string | null;
+                            comment1: string | null;
+                            comment2: string | null;
+                            comment3: string | null;
+                            assetNo: string | null;
+                            statusId: null | number;
+                            notes: string | null;
+                            lastUpdate: number;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            instId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        }) | null;
                         tblEmployee?: ({
                             employeeId: number;
                             code: string | null;
@@ -14218,6 +14313,12 @@ export interface operations {
                     samplingPosition?: string | null;
                     oilDesc?: string | null;
                     orderNo?: null | number;
+                    tblComponentUnit?: {
+                        connect?: {
+                            compId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblEmployee?: {
                         connect?: {
                             employeeId: number;
@@ -14237,6 +14338,12 @@ export interface operations {
                     samplingPosition?: string | null;
                     oilDesc?: string | null;
                     orderNo?: null | number;
+                    tblComponentUnit?: {
+                        connect?: {
+                            compId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblEmployee?: {
                         connect?: {
                             employeeId: number;
@@ -14256,6 +14363,12 @@ export interface operations {
                     samplingPosition?: string | null;
                     oilDesc?: string | null;
                     orderNo?: null | number;
+                    tblComponentUnit?: {
+                        connect?: {
+                            compId: number;
+                        };
+                        disconnect?: boolean;
+                    };
                     tblEmployee?: {
                         connect?: {
                             employeeId: number;
@@ -14281,9 +14394,7 @@ export interface operations {
                     "application/json": {
                         compOilInfoId: number;
                         compId: null | number;
-                        compCounterId: null | number;
                         spareTypeId: null | number;
-                        compJobId: null | number;
                         tankCapacity: null | number;
                         laboratoryCode: string | null;
                         samplingPosition: string | null;
@@ -14292,6 +14403,28 @@ export interface operations {
                         employeeId: null | number;
                         lastUpdate: number;
                         instId: null | number;
+                        tblComponentUnit?: ({
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: string | null;
+                            serialNo: string | null;
+                            model: string | null;
+                            comment1: string | null;
+                            comment2: string | null;
+                            comment3: string | null;
+                            assetNo: string | null;
+                            statusId: null | number;
+                            notes: string | null;
+                            lastUpdate: number;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            instId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        }) | null;
                         tblEmployee?: ({
                             employeeId: number;
                             code: string | null;
@@ -14338,9 +14471,7 @@ export interface operations {
                     "application/json": {
                         compOilInfoId: number;
                         compId: null | number;
-                        compCounterId: null | number;
                         spareTypeId: null | number;
-                        compJobId: null | number;
                         tankCapacity: null | number;
                         laboratoryCode: string | null;
                         samplingPosition: string | null;
@@ -14349,6 +14480,28 @@ export interface operations {
                         employeeId: null | number;
                         lastUpdate: number;
                         instId: null | number;
+                        tblComponentUnit?: ({
+                            compId: number;
+                            compTypeId: null | number;
+                            locationId: null | number;
+                            parentCompId: null | number;
+                            vendorId: null | number;
+                            compNo: string | null;
+                            serialNo: string | null;
+                            model: string | null;
+                            comment1: string | null;
+                            comment2: string | null;
+                            comment3: string | null;
+                            assetNo: string | null;
+                            statusId: null | number;
+                            notes: string | null;
+                            lastUpdate: number;
+                            isCritical: null | number;
+                            orderNo: null | number;
+                            instId: null | number;
+                        } & {
+                            [key: string]: unknown;
+                        }) | null;
                         tblEmployee?: ({
                             employeeId: number;
                             code: string | null;
@@ -22649,6 +22802,19 @@ export interface operations {
                                 orderNo: null | number;
                                 instId: null | number;
                             }[];
+                            tblCompOilInfos?: {
+                                compOilInfoId: number;
+                                compId: null | number;
+                                spareTypeId: null | number;
+                                tankCapacity: null | number;
+                                laboratoryCode: string | null;
+                                samplingPosition: string | null;
+                                oilDesc: string | null;
+                                orderNo: null | number;
+                                employeeId: null | number;
+                                lastUpdate: number;
+                                instId: null | number;
+                            }[];
                             tblAddress?: ({
                                 addressId: number;
                                 name: string | null;
@@ -22901,6 +23067,11 @@ export interface operations {
                             compMeasurePointId: number;
                         }[];
                     };
+                    tblCompOilInfos?: {
+                        connect: {
+                            compOilInfoId: number;
+                        }[];
+                    };
                     tblAddress?: {
                         connect: {
                             addressId: number;
@@ -22993,6 +23164,11 @@ export interface operations {
                             compMeasurePointId: number;
                         }[];
                     };
+                    tblCompOilInfos?: {
+                        connect: {
+                            compOilInfoId: number;
+                        }[];
+                    };
                     tblAddress?: {
                         connect: {
                             addressId: number;
@@ -23083,6 +23259,11 @@ export interface operations {
                     tblCompMeasurePoints?: {
                         connect: {
                             compMeasurePointId: number;
+                        }[];
+                    };
+                    tblCompOilInfos?: {
+                        connect: {
+                            compOilInfoId: number;
                         }[];
                     };
                     tblAddress?: {
@@ -23242,6 +23423,19 @@ export interface operations {
                             operationalMaxValue: null | number;
                             lastUpdate: number;
                             orderNo: null | number;
+                            instId: null | number;
+                        }[];
+                        tblCompOilInfos?: {
+                            compOilInfoId: number;
+                            compId: null | number;
+                            spareTypeId: null | number;
+                            tankCapacity: null | number;
+                            laboratoryCode: string | null;
+                            samplingPosition: string | null;
+                            oilDesc: string | null;
+                            orderNo: null | number;
+                            employeeId: null | number;
+                            lastUpdate: number;
                             instId: null | number;
                         }[];
                         tblAddress?: ({
@@ -23591,6 +23785,19 @@ export interface operations {
                             orderNo: null | number;
                             instId: null | number;
                         }[];
+                        tblCompOilInfos?: {
+                            compOilInfoId: number;
+                            compId: null | number;
+                            spareTypeId: null | number;
+                            tankCapacity: null | number;
+                            laboratoryCode: string | null;
+                            samplingPosition: string | null;
+                            oilDesc: string | null;
+                            orderNo: null | number;
+                            employeeId: null | number;
+                            lastUpdate: number;
+                            instId: null | number;
+                        }[];
                         tblAddress?: ({
                             addressId: number;
                             name: string | null;
@@ -23852,6 +24059,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompOilInfos?: {
+                        connect?: {
+                            compOilInfoId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblAddress?: {
                         connect?: {
                             addressId: number;
@@ -23980,6 +24195,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblCompOilInfos?: {
+                        connect?: {
+                            compOilInfoId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblAddress?: {
                         connect?: {
                             addressId: number;
@@ -24103,6 +24326,14 @@ export interface operations {
                     tblCompMeasurePoints?: {
                         connect?: {
                             compMeasurePointId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblCompOilInfos?: {
+                        connect?: {
+                            compOilInfoId: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -24292,6 +24523,19 @@ export interface operations {
                             operationalMaxValue: null | number;
                             lastUpdate: number;
                             orderNo: null | number;
+                            instId: null | number;
+                        }[];
+                        tblCompOilInfos?: {
+                            compOilInfoId: number;
+                            compId: null | number;
+                            spareTypeId: null | number;
+                            tankCapacity: null | number;
+                            laboratoryCode: string | null;
+                            samplingPosition: string | null;
+                            oilDesc: string | null;
+                            orderNo: null | number;
+                            employeeId: null | number;
+                            lastUpdate: number;
                             instId: null | number;
                         }[];
                         tblAddress?: ({
@@ -24607,6 +24851,19 @@ export interface operations {
                             operationalMaxValue: null | number;
                             lastUpdate: number;
                             orderNo: null | number;
+                            instId: null | number;
+                        }[];
+                        tblCompOilInfos?: {
+                            compOilInfoId: number;
+                            compId: null | number;
+                            spareTypeId: null | number;
+                            tankCapacity: null | number;
+                            laboratoryCode: string | null;
+                            samplingPosition: string | null;
+                            oilDesc: string | null;
+                            orderNo: null | number;
+                            employeeId: null | number;
+                            lastUpdate: number;
                             instId: null | number;
                         }[];
                         tblAddress?: ({
@@ -29225,9 +29482,7 @@ export interface operations {
                             tblCompOilInfos?: {
                                 compOilInfoId: number;
                                 compId: null | number;
-                                compCounterId: null | number;
                                 spareTypeId: null | number;
-                                compJobId: null | number;
                                 tankCapacity: null | number;
                                 laboratoryCode: string | null;
                                 samplingPosition: string | null;
@@ -30605,9 +30860,7 @@ export interface operations {
                         tblCompOilInfos?: {
                             compOilInfoId: number;
                             compId: null | number;
-                            compCounterId: null | number;
                             spareTypeId: null | number;
-                            compJobId: null | number;
                             tankCapacity: null | number;
                             laboratoryCode: string | null;
                             samplingPosition: string | null;
@@ -31365,9 +31618,7 @@ export interface operations {
                         tblCompOilInfos?: {
                             compOilInfoId: number;
                             compId: null | number;
-                            compCounterId: null | number;
                             spareTypeId: null | number;
-                            compJobId: null | number;
                             tankCapacity: null | number;
                             laboratoryCode: string | null;
                             samplingPosition: string | null;
@@ -33117,9 +33368,7 @@ export interface operations {
                         tblCompOilInfos?: {
                             compOilInfoId: number;
                             compId: null | number;
-                            compCounterId: null | number;
                             spareTypeId: null | number;
-                            compJobId: null | number;
                             tankCapacity: null | number;
                             laboratoryCode: string | null;
                             samplingPosition: string | null;
@@ -33845,9 +34094,7 @@ export interface operations {
                         tblCompOilInfos?: {
                             compOilInfoId: number;
                             compId: null | number;
-                            compCounterId: null | number;
                             spareTypeId: null | number;
-                            compJobId: null | number;
                             tankCapacity: null | number;
                             laboratoryCode: string | null;
                             samplingPosition: string | null;
@@ -40015,9 +40262,7 @@ export interface operations {
                             tblCompOilInfos?: {
                                 compOilInfoId: number;
                                 compId: null | number;
-                                compCounterId: null | number;
                                 spareTypeId: null | number;
-                                compJobId: null | number;
                                 tankCapacity: null | number;
                                 laboratoryCode: string | null;
                                 samplingPosition: string | null;
@@ -40440,6 +40685,26 @@ export interface operations {
                                 instId: number;
                                 userId: number;
                             }[];
+                            tblWaitingEvents?: {
+                                waitingEventId: number;
+                                instId: number;
+                                eventCode: string | null;
+                                startDateTime: number;
+                                endDateTime: number;
+                                isFullDay: boolean;
+                                durationHours: number;
+                                waitingReasonGroupId: null | number;
+                                waitingReasonId: null | number;
+                                customReason: string | null;
+                                waitingOperationPhaseId: null | number;
+                                waitingNptClassId: null | number;
+                                waitingShiftId: null | number;
+                                reportedBy: string | null;
+                                sourceDocument: string | null;
+                                remarks: string | null;
+                                createdAt: number;
+                                updatedAt: null | number;
+                            }[];
                             tblWorkOrders?: {
                                 workOrderId: number;
                                 compJobId: null | number;
@@ -40738,6 +41003,11 @@ export interface operations {
                             userInstId: number;
                         }[];
                     };
+                    tblWaitingEvents?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -40966,6 +41236,11 @@ export interface operations {
                     tblUserInstallations?: {
                         connect: {
                             userInstId: number;
+                        }[];
+                    };
+                    tblWaitingEvents?: {
+                        connect: {
+                            id: number;
                         }[];
                     };
                     tblWorkOrders?: {
@@ -41198,6 +41473,11 @@ export interface operations {
                             userInstId: number;
                         }[];
                     };
+                    tblWaitingEvents?: {
+                        connect: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect: {
                             workOrderId: number;
@@ -41378,9 +41658,7 @@ export interface operations {
                         tblCompOilInfos?: {
                             compOilInfoId: number;
                             compId: null | number;
-                            compCounterId: null | number;
                             spareTypeId: null | number;
-                            compJobId: null | number;
                             tankCapacity: null | number;
                             laboratoryCode: string | null;
                             samplingPosition: string | null;
@@ -41802,6 +42080,26 @@ export interface operations {
                             userInstId: number;
                             instId: number;
                             userId: number;
+                        }[];
+                        tblWaitingEvents?: {
+                            waitingEventId: number;
+                            instId: number;
+                            eventCode: string | null;
+                            startDateTime: number;
+                            endDateTime: number;
+                            isFullDay: boolean;
+                            durationHours: number;
+                            waitingReasonGroupId: null | number;
+                            waitingReasonId: null | number;
+                            customReason: string | null;
+                            waitingOperationPhaseId: null | number;
+                            waitingNptClassId: null | number;
+                            waitingShiftId: null | number;
+                            reportedBy: string | null;
+                            sourceDocument: string | null;
+                            remarks: string | null;
+                            createdAt: number;
+                            updatedAt: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -42079,9 +42377,7 @@ export interface operations {
                         tblCompOilInfos?: {
                             compOilInfoId: number;
                             compId: null | number;
-                            compCounterId: null | number;
                             spareTypeId: null | number;
-                            compJobId: null | number;
                             tankCapacity: null | number;
                             laboratoryCode: string | null;
                             samplingPosition: string | null;
@@ -42503,6 +42799,26 @@ export interface operations {
                             userInstId: number;
                             instId: number;
                             userId: number;
+                        }[];
+                        tblWaitingEvents?: {
+                            waitingEventId: number;
+                            instId: number;
+                            eventCode: string | null;
+                            startDateTime: number;
+                            endDateTime: number;
+                            isFullDay: boolean;
+                            durationHours: number;
+                            waitingReasonGroupId: null | number;
+                            waitingReasonId: null | number;
+                            customReason: string | null;
+                            waitingOperationPhaseId: null | number;
+                            waitingNptClassId: null | number;
+                            waitingShiftId: null | number;
+                            reportedBy: string | null;
+                            sourceDocument: string | null;
+                            remarks: string | null;
+                            createdAt: number;
+                            updatedAt: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -42925,6 +43241,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWaitingEvents?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -43285,6 +43609,14 @@ export interface operations {
                     tblUserInstallations?: {
                         connect?: {
                             userInstId: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
+                    tblWaitingEvents?: {
+                        connect?: {
+                            id: number;
                         }[];
                         disconnect?: {
                             id: number;
@@ -43655,6 +43987,14 @@ export interface operations {
                             id: number;
                         }[];
                     };
+                    tblWaitingEvents?: {
+                        connect?: {
+                            id: number;
+                        }[];
+                        disconnect?: {
+                            id: number;
+                        }[];
+                    };
                     tblWorkOrders?: {
                         connect?: {
                             workOrderId: number;
@@ -43847,9 +44187,7 @@ export interface operations {
                         tblCompOilInfos?: {
                             compOilInfoId: number;
                             compId: null | number;
-                            compCounterId: null | number;
                             spareTypeId: null | number;
-                            compJobId: null | number;
                             tankCapacity: null | number;
                             laboratoryCode: string | null;
                             samplingPosition: string | null;
@@ -44271,6 +44609,26 @@ export interface operations {
                             userInstId: number;
                             instId: number;
                             userId: number;
+                        }[];
+                        tblWaitingEvents?: {
+                            waitingEventId: number;
+                            instId: number;
+                            eventCode: string | null;
+                            startDateTime: number;
+                            endDateTime: number;
+                            isFullDay: boolean;
+                            durationHours: number;
+                            waitingReasonGroupId: null | number;
+                            waitingReasonId: null | number;
+                            customReason: string | null;
+                            waitingOperationPhaseId: null | number;
+                            waitingNptClassId: null | number;
+                            waitingShiftId: null | number;
+                            reportedBy: string | null;
+                            sourceDocument: string | null;
+                            remarks: string | null;
+                            createdAt: number;
+                            updatedAt: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -44516,9 +44874,7 @@ export interface operations {
                         tblCompOilInfos?: {
                             compOilInfoId: number;
                             compId: null | number;
-                            compCounterId: null | number;
                             spareTypeId: null | number;
-                            compJobId: null | number;
                             tankCapacity: null | number;
                             laboratoryCode: string | null;
                             samplingPosition: string | null;
@@ -44940,6 +45296,26 @@ export interface operations {
                             userInstId: number;
                             instId: number;
                             userId: number;
+                        }[];
+                        tblWaitingEvents?: {
+                            waitingEventId: number;
+                            instId: number;
+                            eventCode: string | null;
+                            startDateTime: number;
+                            endDateTime: number;
+                            isFullDay: boolean;
+                            durationHours: number;
+                            waitingReasonGroupId: null | number;
+                            waitingReasonId: null | number;
+                            customReason: string | null;
+                            waitingOperationPhaseId: null | number;
+                            waitingNptClassId: null | number;
+                            waitingShiftId: null | number;
+                            reportedBy: string | null;
+                            sourceDocument: string | null;
+                            remarks: string | null;
+                            createdAt: number;
+                            updatedAt: null | number;
                         }[];
                         tblWorkOrders?: {
                             workOrderId: number;
@@ -58831,6 +59207,70 @@ export interface operations {
                 content: {
                     "application/json": {
                         count: number;
+                    };
+                };
+            };
+        };
+    };
+    getTblOilSamplingLogContext: {
+        parameters: {
+            query: {
+                maintLogId: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response for status 200 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        maintLogId: number;
+                        component: (({
+                            compId: number;
+                            compNo: ((string | null) | null) | null;
+                        } | null) | null) | null;
+                        compOilInfoId: number;
+                        defaults: {
+                            compCounterVal: number;
+                            oilCounterVal: number;
+                            tankCapacity: ((number | null) | null) | null;
+                            samplingPosition: ((string | null) | null) | null;
+                            laboratoryCode: ((string | null) | null) | null;
+                            oilDesc: ((string | null) | null) | null;
+                            orderNo: ((number | null) | null) | null;
+                            changeOilDate: ((string | null) | null) | null;
+                            addOilVal: ((number | null) | null) | null;
+                            lastSamplingDate: ((string | null) | null) | null;
+                            samplerId: ((number | null) | null) | null;
+                        };
+                    };
+                };
+            };
+            /** @description Response for status 400 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        message: string;
+                    };
+                };
+            };
+            /** @description Response for status 404 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        message: string;
                     };
                 };
             };

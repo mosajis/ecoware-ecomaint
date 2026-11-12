@@ -1078,6 +1078,12 @@ export const tblOilSamplingLog = {
     api.delete<DynamicResponse<'deleteTblOilSamplingLog'>>('/tblOilSamplingLog', { params: stringifyQuery(query) }),
 };
 
+export type TypeTblOilSamplingLogContext = DynamicResponse<'getTblOilSamplingLogContext'>['items'][0];
+export const tblOilSamplingLogContext = {
+  getAll: (query?: DynamicQuery<'getTblOilSamplingLogContext'>) =>
+    api.get<DynamicResponse<'getTblOilSamplingLogContext'>>('/tblOilSamplingLogContext', { params: stringifyQuery(query) }),
+};
+
 export type TypeTblPendingType = DynamicResponse<'getTblPendingType'>['items'][0];
 export const tblPendingType = {
   getAll: (query?: DynamicQuery<'getTblPendingType'>) =>

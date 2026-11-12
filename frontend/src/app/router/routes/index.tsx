@@ -1,6 +1,10 @@
 import treeGeneral from "@/pages/general/GeneralRoutes";
 import treeAccess from "@/pages/access/AccessRoutes";
 import treeDashboard, { RouteLocal } from "@/pages/dashboard/DashboardRoute";
+import treeWaiting, {
+  RouteAnalysis,
+  RouteDashboard,
+} from "@/pages/waiting/WaitingRoute";
 
 import treeSpare from "@/pages/spare/SpareRoutes";
 import treeReport from "@/pages/report/ReportRoutes";
@@ -27,7 +31,7 @@ export const routesTree = rootRoute.addChildren([
   protectedRoute.addChildren([
     indexRoute,
     treeDashboard,
-
+    treeWaiting,
     treeGeneral,
     treeAccess,
     treeSpare,

@@ -17,9 +17,9 @@ export default function TabOil({ componentUnit, label = "Oil Info" }: Props) {
   const getAll = useCallback(
     () =>
       tblCompOilInfo.getAll({
-        // filter: {
-        //   compId,
-        // },
+        filter: {
+          compId,
+        },
         include: {
           tblEmployee: true,
         },
@@ -52,7 +52,11 @@ export default function TabOil({ componentUnit, label = "Oil Info" }: Props) {
       onEditClick={openEdit}
       onView={openView}
     >
-      <TabOilUpsert compId={compId} entityName={label} {...dialogProps} />
+      <TabOilUpsert
+        compId={compId}
+        entityName={label + " Oil Info"}
+        {...dialogProps}
+      />
     </DataGrid>
   );
 }
