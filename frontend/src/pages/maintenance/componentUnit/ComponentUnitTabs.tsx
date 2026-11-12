@@ -11,7 +11,7 @@ import Inventory2 from "@mui/icons-material/Inventory2";
 import Tune from "@mui/icons-material/Tune";
 import OpacityIcon from "@mui/icons-material/Opacity";
 
-import { lazy } from "react";
+import { lazy, useMemo } from "react";
 import { TypeTblComponentUnit } from "@/core/api/generated/api";
 import TabsContainer, {
   ReusableTabItem,
@@ -109,15 +109,15 @@ const tabs: ReusableTabItem[] = [
 const ComponentUnitTabs = (props: Props) => {
   const { label, componentUnit } = props;
 
-  return (
-    <TabsContainer
-      tabs={tabs}
-      tabProps={{
-        label,
-        componentUnit,
-      }}
-    />
+  const tabProps = useMemo(
+    () => ({
+      label,
+      componentUnit,
+    }),
+    [componentUnit?.compId],
   );
+
+  return <TabsContainer tabs={tabs} tabProps={tabProps} />;
 };
 
 export default ComponentUnitTabs;

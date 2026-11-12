@@ -1,9 +1,10 @@
-import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Spinner from "@/shared/components/Spinner";
-import TabContainer from "./TabContainer";
+import Tabs from "@mui/material/Tabs";
 import { cloneElement, JSX, Suspense, useEffect, useState } from "react";
 import { useNavigate, useRouter, useSearch } from "@tanstack/react-router";
+
+import Spinner from "@/shared/components/Spinner";
+import TabContainer from "./TabContainer";
 
 export type ReusableTabItem<T = any> = {
   label: string;
@@ -33,31 +34,56 @@ const TabsContainer = ({
   const navigate = useNavigate({ from: current });
 
   const allSearch = useSearch({ strict: false });
+
   const searchTab = useSearch({
     strict: false,
     select: (search) => search[queryParamKey],
   });
 
-  const [activeTab, setActiveTab] = useState<string>(
-    persistInUrl && searchTab ? searchTab : tabs[0].label,
-  );
+  const initialTab =
+    persistInUrl && typeof searchTab === "string" ? searchTab : tabs[0]?.label;
 
-  // ✅ تب‌هایی که حداقل یه بار باز شدن رو track میکنیم
+  const [activeTab, setActiveTab] = useState(initialTab);
+
+  // Tabهایی که حداقل یک بار باز شده‌اند
   const [mountedTabs, setMountedTabs] = useState<Set<string>>(
-    new Set([activeTab]),
+    () => new Set(initialTab ? [initialTab] : []),
   );
 
+  // هماهنگی با URL
   useEffect(() => {
-    if (persistInUrl && searchTab && searchTab !== activeTab) {
+    if (
+      persistInUrl &&
+      typeof searchTab === "string" &&
+      searchTab !== activeTab
+    ) {
       setActiveTab(searchTab);
-      setMountedTabs((prev) => new Set(prev).add(searchTab));
+
+      setMountedTabs((prev) => {
+        if (prev.has(searchTab)) {
+          return prev;
+        }
+
+        const next = new Set(prev);
+        next.add(searchTab);
+        return next;
+      });
     }
   }, [searchTab, persistInUrl, activeTab]);
 
-  const handleChange = (_: any, newValue: string) => {
+  const handleChange = (_: React.SyntheticEvent, newValue: string) => {
     setActiveTab(newValue);
-    // ✅ تب جدید رو به mounted اضافه کن
-    setMountedTabs((prev) => new Set(prev).add(newValue));
+
+    // فقط اگر برای اولین بار است، به mountedTabs اضافه شود
+    setMountedTabs((prev) => {
+      if (prev.has(newValue)) {
+        return prev;
+      }
+
+      const next = new Set(prev);
+      next.add(newValue);
+      return next;
+    });
 
     if (persistInUrl) {
       navigate({
@@ -87,10 +113,12 @@ const TabsContainer = ({
       >
         {tabs.map((tab) => (
           <Tab
-            disabled={tab.disabled}
             key={tab.label}
             value={tab.label}
-            icon={cloneElement(tab.icon, { sx: { fontSize: 17 } })}
+            disabled={tab.disabled}
+            icon={cloneElement(tab.icon, {
+              sx: { fontSize: 17 },
+            })}
             label={tab.label}
             iconPosition="start"
           />
@@ -102,17 +130,23 @@ const TabsContainer = ({
         const isMounted = mountedTabs.has(tab.label);
         const TabComponent = tab.component;
 
+        // هنوز یک بار هم باز نشده → اصلاً render نشود
+        if (!isMounted || !TabComponent) {
+          return null;
+        }
+
         return (
           <TabContainer
             key={tab.label}
             {...tab.containerProps}
-            style={{ display: isActive ? undefined : "none" }}
+            style={{
+              ...tab.containerProps?.style,
+              display: isActive ? undefined : "none",
+            }}
           >
-            {isMounted && TabComponent && isActive && (
-              <Suspense fallback={<Spinner />}>
-                <TabComponent {...tabProps} />
-              </Suspense>
-            )}
+            <Suspense fallback={<Spinner />}>
+              <TabComponent {...tabProps} />
+            </Suspense>
           </TabContainer>
         );
       })}

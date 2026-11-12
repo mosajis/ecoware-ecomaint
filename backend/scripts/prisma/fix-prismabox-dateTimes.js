@@ -5,11 +5,9 @@ const path = require("path");
 const schemaPath = path.resolve("./orm/schema.prisma");
 const prismaboxDir = path.resolve("./orm/generated/prismabox");
 
-/**
- * Log utility with timestamps
- */
 function log(message, type = "info") {
   const timestamp = new Date().toLocaleTimeString("en-US");
+
   const icons = {
     info: "ℹ️",
     success: "✅",
@@ -21,31 +19,65 @@ function log(message, type = "info") {
 }
 
 /**
- * Extract DateTime field names from Prisma schema
+ * Extract DateTime fields and detect automatically managed fields.
+ *
+ * A field with @default(...) or @updatedAt does not need to be
+ * supplied by the API client.
  */
 function extractDateTimeFields(schemaPath) {
   try {
     const content = fs.readFileSync(schemaPath, "utf-8");
+
     const dateTimeFields = new Set();
+    const autoManagedFields = new Set();
 
-    const dateTimeMatches = content.matchAll(/(\w+)\s+DateTime/g);
+    // Read line by line because Prisma fields are normally declared
+    // on a single line.
+    for (const line of content.split(/\r?\n/)) {
+      const match = line.match(/^\s*(\w+)\s+DateTime\b(.*)$/);
 
-    for (const match of dateTimeMatches) {
-      dateTimeFields.add(match[1]);
+      if (!match) continue;
+
+      const [, fieldName, attributes] = match;
+
+      dateTimeFields.add(fieldName);
+
+      if (
+        attributes.includes("@default(") ||
+        attributes.includes("@updatedAt")
+      ) {
+        autoManagedFields.add(fieldName);
+      }
     }
 
-    return Array.from(dateTimeFields);
+    return {
+      dateTimeFields: Array.from(dateTimeFields),
+      autoManagedFields: Array.from(autoManagedFields),
+    };
   } catch (error) {
     log(`Error reading schema: ${error.message}`, "error");
-    return [];
+
+    return {
+      dateTimeFields: [],
+      autoManagedFields: [],
+    };
   }
 }
 
 /**
- * Fix generated files to convert t.Date() to t.String() for DateTime fields
+ * Fix generated files.
+ *
+ * 1. Convert DateTime from t.Date() to t.String()
+ * 2. Make Prisma-managed fields optional.
  */
-function fixDateTimeInGeneratedFiles(generatedDir, dateTimeFields) {
+function fixDateTimeInGeneratedFiles(
+  generatedDir,
+  dateTimeFields,
+  autoManagedFields,
+) {
   let fixedCount = 0;
+
+  const autoManagedSet = new Set(autoManagedFields);
 
   function walkDir(dir) {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -62,55 +94,70 @@ function fixDateTimeInGeneratedFiles(generatedDir, dateTimeFields) {
 
       let content = fs.readFileSync(fullPath, "utf-8");
       const original = content;
-      let hasChanges = false;
 
-      // For each DateTime field, replace t.Date() with t.String()
+      // -----------------------------------
+      // Step 1: Convert DateTime -> String
+      // -----------------------------------
       for (const field of dateTimeFields) {
-        // Pattern 1: fieldName: t.Date()
-        const pattern1 = new RegExp(
-          `(\\b${field}\\s*:\\s*)t\\.Date\\(\\)`,
-          "g",
-        );
-        if (pattern1.test(content)) {
-          content = content.replace(pattern1, `$1t.String()`);
-          hasChanges = true;
-        }
+        const escapedField = field.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-        // Pattern 2: fieldName: __nullable__(t.Date())
-        const pattern2 = new RegExp(
-          `(\\b${field}\\s*:\\s*)__nullable__\\(t\\.Date\\(\\)\\)`,
-          "g",
+        // field: t.Date()
+        content = content.replace(
+          new RegExp(`(\\b${escapedField}\\s*:\\s*)t\\.Date\\(\\)`, "g"),
+          "$1t.String()",
         );
-        if (pattern2.test(content)) {
-          content = content.replace(pattern2, `$1__nullable__(t.String())`);
-          hasChanges = true;
-        }
 
-        // Pattern 3: fieldName: t.Optional(__nullable__(t.Date()))
-        const pattern3 = new RegExp(
-          `(\\b${field}\\s*:\\s*)t\\.Optional\\(__nullable__\\(t\\.Date\\(\\)\\)\\)`,
-          "g",
+        // field: __nullable__(t.Date())
+        content = content.replace(
+          new RegExp(
+            `(\\b${escapedField}\\s*:\\s*)__nullable__\\(t\\.Date\\(\\)\\)`,
+            "g",
+          ),
+          "$1__nullable__(t.String())",
         );
-        if (pattern3.test(content)) {
-          content = content.replace(
-            pattern3,
-            `$1t.Optional(__nullable__(t.String()))`,
-          );
-          hasChanges = true;
-        }
 
-        // Pattern 4: fieldName: t.Optional(t.Date())
-        const pattern4 = new RegExp(
-          `(\\b${field}\\s*:\\s*)t\\.Optional\\(t\\.Date\\(\\)\\)`,
-          "g",
+        // field: t.Optional(t.Date())
+        content = content.replace(
+          new RegExp(
+            `(\\b${escapedField}\\s*:\\s*)t\\.Optional\\(t\\.Date\\(\\)\\)`,
+            "g",
+          ),
+          "$1t.Optional(t.String())",
         );
-        if (pattern4.test(content)) {
-          content = content.replace(pattern4, `$1t.Optional(t.String())`);
-          hasChanges = true;
-        }
+
+        // field: t.Optional(__nullable__(t.Date()))
+        content = content.replace(
+          new RegExp(
+            `(\\b${escapedField}\\s*:\\s*)t\\.Optional\\(__nullable__\\(t\\.Date\\(\\)\\)\\)`,
+            "g",
+          ),
+          "$1t.Optional(__nullable__(t.String()))",
+        );
       }
 
-      if (hasChanges && content !== original) {
+      // -----------------------------------
+      // Step 2: Make auto-managed fields optional
+      // -----------------------------------
+      for (const field of autoManagedSet) {
+        const escapedField = field.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+        // field: t.String()
+        content = content.replace(
+          new RegExp(`(\\b${escapedField}\\s*:\\s*)t\\.String\\(\\)`, "g"),
+          "$1t.Optional(t.String())",
+        );
+
+        // field: __nullable__(t.String())
+        content = content.replace(
+          new RegExp(
+            `(\\b${escapedField}\\s*:\\s*)__nullable__\\(t\\.String\\(\\)\\)`,
+            "g",
+          ),
+          "$1t.Optional(__nullable__(t.String()))",
+        );
+      }
+
+      if (content !== original) {
         fixedCount++;
         fs.writeFileSync(fullPath, content, "utf-8");
       }
@@ -118,31 +165,42 @@ function fixDateTimeInGeneratedFiles(generatedDir, dateTimeFields) {
   }
 
   walkDir(generatedDir);
+
   return fixedCount;
 }
 
-/**
- * Main function
- */
 function main() {
   try {
     if (!fs.existsSync(schemaPath)) {
-      log(`Error: Schema file not found: ${schemaPath}`, "error");
+      log(`Schema file not found: ${schemaPath}`, "error");
       process.exit(1);
-    }
-
-    const dateTimeFields = extractDateTimeFields(schemaPath);
-
-    if (dateTimeFields.length === 0) {
-      process.exit(0);
     }
 
     if (!fs.existsSync(prismaboxDir)) {
-      log(`Error: Directory not found: ${prismaboxDir}`, "error");
+      log(`Directory not found: ${prismaboxDir}`, "error");
       process.exit(1);
     }
 
-    fixDateTimeInGeneratedFiles(prismaboxDir, dateTimeFields);
+    const { dateTimeFields, autoManagedFields } =
+      extractDateTimeFields(schemaPath);
+
+    if (dateTimeFields.length === 0) {
+      log("No DateTime fields found.", "warn");
+      return;
+    }
+
+    const fixedCount = fixDateTimeInGeneratedFiles(
+      prismaboxDir,
+      dateTimeFields,
+      autoManagedFields,
+    );
+
+    log(
+      `Fixed ${fixedCount} generated file(s). ` +
+        `Found ${dateTimeFields.length} DateTime field(s), ` +
+        `${autoManagedFields.length} auto-managed field(s).`,
+      "success",
+    );
   } catch (error) {
     log(`Error: ${error.message}`, "error");
     process.exit(1);

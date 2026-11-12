@@ -1,7 +1,7 @@
 import CustomizedDataGrid from "@/shared/components/dataGrid/DataGrid";
 import Splitter from "@/shared/components/Splitter/Splitter";
 import AttachmentMap from "@/shared/tabs/attachmentMap/AttachmentMap";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDataGrid } from "@/shared/hooks/useDataGrid";
 import { columns, getRowId } from "./TabWorkShopColumns";
 import {
@@ -9,7 +9,6 @@ import {
   tblWorkShopAttachment,
   tblWorkShopComponent,
   TypeTblComponentUnit,
-  TypeTblWorkShop,
 } from "@/core/api/generated/api";
 
 interface Props {
@@ -25,7 +24,7 @@ export default function PageWorkShop({ componentUnit }: Props) {
     () =>
       tblWorkShopComponent.getAll({
         filter: {
-          compId: componentUnit?.compId ?? undefined,
+          compId: componentUnit?.compId,
         },
         include: {
           tblWorkShop: {
@@ -35,7 +34,7 @@ export default function PageWorkShop({ componentUnit }: Props) {
           },
         },
       }),
-    [],
+    [componentUnit?.compId],
   );
 
   const { rows, loading, handleRefresh, handleDelete } = useDataGrid(
@@ -44,46 +43,55 @@ export default function PageWorkShop({ componentUnit }: Props) {
     "workShopId",
   );
 
+  // با تغییر Component، انتخاب قبلی پاک شود
+  useEffect(() => {
+    setSelectedRowId(null);
+    setSelectedLabel(null);
+  }, [componentUnit?.compId]);
+
   const handleRowClick = useCallback(
-    ({ row }: { row: TypeTblWorkShop }) => {
-      if (row.workShopId === selectedRowId) {
+    ({ row }: { row: (typeof rows)[number] }) => {
+      const workShopId = row.workShopId;
+
+      if (workShopId === selectedRowId) {
         setSelectedRowId(null);
         setSelectedLabel(null);
         return;
       }
-      setSelectedRowId(row.workShopId);
-      setSelectedLabel(row.workShopNo ?? null);
+
+      setSelectedRowId(workShopId);
+      setSelectedLabel(row.tblWorkShop?.workShopNo ?? null);
     },
     [selectedRowId],
   );
 
   return (
-    <>
-      <Splitter horizontal initialPrimarySize="65%">
-        <CustomizedDataGrid
-          disableAdd
-          disableEdit
-          disableDelete
-          showToolbar
-          disableRowNumber
-          label="WorkShop"
-          loading={loading}
-          rows={rows}
-          columns={columns}
-          getRowId={getRowId}
-          onRefreshClick={handleRefresh}
-          onDeleteClick={handleDelete}
-          onRowClick={handleRowClick}
-        />
-        <AttachmentMap
-          label={selectedLabel || "WorkShop Attachments"}
-          mapService={tblWorkShopAttachment}
-          filterId={selectedRowId}
-          filterKey="workShopId"
-          relName="tblWorkShop"
-          tableId="workShopAttachmentId"
-        />
-      </Splitter>
-    </>
+    <Splitter horizontal initialPrimarySize="65%">
+      <CustomizedDataGrid
+        disableAdd
+        disableEdit
+        disableDelete
+        showToolbar
+        disableRowNumber
+        label="WorkShop"
+        loading={loading}
+        rows={rows}
+        columns={columns}
+        getRowId={getRowId}
+        onRefreshClick={handleRefresh}
+        onDeleteClick={handleDelete}
+        onRowClick={handleRowClick}
+      />
+
+      <AttachmentMap
+        label={selectedLabel || "WorkShop Attachments"}
+        mapService={tblWorkShopAttachment}
+        filterId={selectedRowId}
+        filterKey="workShopId"
+        relName="tblWorkShop"
+        tableId="workShopAttachmentId"
+        disable={!selectedRowId}
+      />
+    </Splitter>
   );
 }

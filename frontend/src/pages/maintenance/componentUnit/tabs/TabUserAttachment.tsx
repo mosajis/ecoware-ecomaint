@@ -14,13 +14,17 @@ interface Props {
 export function TabComponentUnitAttachment({ componentUnit, label }: Props) {
   return (
     <AttachmentMap
-      extraFilter={{ tblMaintLog: { compId: componentUnit?.compId } }}
-      filterId={undefined}
-      filterKey="maintLogId"
-      relName="tblMaintLog"
-      tableId="maintLogAttachmentId"
+      extraFilter={{
+        tblAttachment: {
+          isUserAttachment: true,
+        },
+      }}
+      filterId={componentUnit?.compId}
+      filterKey="compId"
+      relName="tblComponentUnit"
+      tableId="componentUnitAttachmentId"
       label={label}
-      mapService={tblMaintLogAttachment}
+      mapService={tblComponentUnitAttachment}
     />
   );
 }
