@@ -1,299 +1,172 @@
-import { useEffect, useState } from "react";
+import WaitingMetricCard from "../_components/WaitingMetricCard";
+import WaitingSection from "../_components/WaitingSection";
+import WaitingBarChart from "../_components/WaitingBarChart";
+import WaitingEventsTable from "../_components/WaitingEventsTable";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-
 import Spinner from "@/shared/components/Spinner";
-import { PageHeader } from "@/shared/components/PageHeader";
-import { atomRig } from "@/shared/atoms/general.atom";
+import Stack from "@mui/material/Stack";
+import { useEffect, useState } from "react";
 import { useAtomValue } from "jotai";
 
-import { getWaitingAnalysis } from "@/core/api/api";
+import { PageHeader } from "@/shared/components/PageHeader";
+import { atomRig } from "@/shared/atoms/general.atom";
 
-import {
-  MetricCard,
-  WaitingSection,
-  WaitingBarList,
-  WaitingDateFilter,
-} from "../_components/WaitingShared";
-import { WaitingAnalysisData } from "../WaitingTypes";
+import { getWaitingAnalysis, TypeWaitingAnalysis } from "@/core/api/api";
 
 const Analysis = () => {
   const inst = useAtomValue(atomRig);
-  const instId = inst?.instId;
 
-  const [data, setData] = useState<WaitingAnalysisData | null>(null);
+  const [data, setData] = useState<TypeWaitingAnalysis | null>(null);
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     if (!inst?.instId) {
-      setData(null);
       setLoading(false);
       return;
     }
 
-    let active = true;
+    const initFetch = async () => {
+      setLoading(true);
 
-    const fetchData = async () => {
       try {
-        setLoading(true);
-        setError(null);
-
         const result = await getWaitingAnalysis({
-          instId,
+          instId: inst.instId,
         });
 
-        if (active) setData(result);
-      } catch {
-        if (active) {
-          setError("Failed to load waiting analysis.");
-        }
+        setData(result);
       } finally {
-        if (active) setLoading(false);
+        setLoading(false);
       }
     };
 
-    fetchData();
+    initFetch();
+  }, [inst?.instId]);
 
-    return () => {
-      active = false;
-    };
-  }, [inst?.instId, startDate, endDate]);
-
-  if (!inst?.instId) {
-    return (
-      <Typography color="text.secondary">
-        Please select an installation.
-      </Typography>
-    );
+  if (loading || !data) {
+    return <Spinner />;
   }
-
-  if (loading && !data) return <Spinner />;
-
-  if (error && !data) {
-    return <Typography color="error">{error}</Typography>;
-  }
-
-  if (!data) return null;
 
   const { summary } = data;
 
   return (
-    <Box display="flex" flexDirection="column" gap={2}>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        flexWrap="wrap"
-        gap={2}
-      >
-        <PageHeader
-          title="Waiting Analysis"
-          subtitle={`Detailed waiting analysis · ${inst.name}`}
+    <Box display="flex" flexDirection="column" gap={1.5}>
+      <PageHeader
+        title="Waiting Analysis"
+        subtitle={`Detailed analysis · ${inst?.name ?? ""}`}
+      />
+
+      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={1.5}>
+        <WaitingMetricCard
+          title="Total Waiting"
+          value={`${summary.totalHours.toFixed(1)} h`}
+          subtitle="Accumulated waiting"
         />
 
-        <WaitingDateFilter
-          startDate={startDate}
-          endDate={endDate}
-          onStartChange={setStartDate}
-          onEndChange={setEndDate}
+        <WaitingMetricCard
+          title="Events"
+          value={summary.totalEvents}
+          subtitle="Registered events"
         />
-      </Stack>
 
-      {loading && <Spinner />}
+        <WaitingMetricCard
+          title="Average Duration"
+          value={`${summary.averageDurationHours.toFixed(1)} h`}
+          subtitle="Per event"
+        />
 
-      {error && <Typography color="error">{error}</Typography>}
-
-      <Grid container spacing={1.5}>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <MetricCard
-            title="Total Events"
-            value={summary.totalEvents}
-            subtitle="Registered waiting events"
-          />
-        </Grid>
-
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <MetricCard
-            title="Total Waiting"
-            value={`${summary.totalHours.toFixed(1)} h`}
-            subtitle="Accumulated waiting hours"
-          />
-        </Grid>
-
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <MetricCard
-            title="Average Duration"
-            value={`${summary.averageDurationHours.toFixed(1)} h`}
-            subtitle="Average hours per event"
-          />
-        </Grid>
-
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <MetricCard
-            title="Waiting Days"
-            value={summary.daysWithWaiting}
-            subtitle="Distinct days with waiting"
-          />
-        </Grid>
-      </Grid>
+        <WaitingMetricCard
+          title="Waiting Days"
+          value={summary.daysWithWaiting}
+          subtitle="Affected days"
+        />
+      </Box>
 
       <Divider />
 
-      <Grid container spacing={1.5}>
-        <Grid size={{ xs: 12, md: 6 }}>
+      <Stack
+        display="grid"
+        gridTemplateColumns="1fr 1fr"
+        divider={<Divider orientation="vertical" flexItem />}
+      >
+        <Box p={1.5}>
           <WaitingSection
-            title="Reason Group Analysis"
-            subtitle="Waiting hours by reason group"
+            title="Reason Groups"
+            subtitle="Waiting distribution by category"
           >
-            <WaitingBarList
-              items={data.reasonGroups.map((x) => ({
-                name: x.name,
-                value: x.hours,
-                subtitle: `${x.events} events · ${(x.shareOfHours * 100).toFixed(1)}%`,
+            <WaitingBarChart
+              items={data.reasonGroups.map((item) => ({
+                name: item.name,
+                value: item.hours,
+                subtitle: `${item.events} events`,
               }))}
             />
           </WaitingSection>
-        </Grid>
+        </Box>
 
-        <Grid size={{ xs: 12, md: 6 }}>
+        <Box p={1.5}>
           <WaitingSection
-            title="Top Waiting Reasons"
-            subtitle="Reasons ranked by accumulated hours"
+            title="Top Reasons"
+            subtitle="Reasons with the highest waiting time"
           >
-            <WaitingBarList
-              items={data.reasons.map((x) => ({
-                name: x.reasonNameEn,
-                value: x.hours,
-                subtitle: `${x.reasonCode} · ${x.events} events`,
+            <WaitingBarChart
+              maxItems={10}
+              items={data.reasons.map((item) => ({
+                name: item.reasonNameEn,
+                value: item.hours,
+                subtitle: `${item.reasonCode} · ${item.events} events`,
               }))}
             />
           </WaitingSection>
-        </Grid>
+        </Box>
+      </Stack>
 
-        <Grid size={{ xs: 12, md: 4 }}>
-          <WaitingSection
-            title="NPT Classification"
-            subtitle="Distribution by NPT class"
-          >
-            <WaitingBarList
-              items={data.nptClasses.map((x) => ({
-                name: x.name,
-                value: x.hours,
-                subtitle: `${x.events} events`,
-              }))}
-            />
-          </WaitingSection>
-        </Grid>
+      <Divider />
 
-        <Grid size={{ xs: 12, md: 4 }}>
-          <WaitingSection
-            title="Operation Phase"
-            subtitle="Waiting hours by operation phase"
-          >
-            <WaitingBarList
-              items={data.operationPhases.map((x) => ({
-                name: x.name,
-                value: x.hours,
-                subtitle: `${x.events} events`,
-              }))}
-            />
-          </WaitingSection>
-        </Grid>
+      <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={1.5}>
+        <WaitingSection title="NPT Class" subtitle="Waiting classification">
+          <WaitingBarChart
+            items={data.nptClasses.map((item) => ({
+              name: item.name,
+              value: item.hours,
+              subtitle: `${item.events} events`,
+            }))}
+          />
+        </WaitingSection>
 
-        <Grid size={{ xs: 12, md: 4 }}>
-          <WaitingSection
-            title="Shift Analysis"
-            subtitle="Waiting hours by shift"
-          >
-            <WaitingBarList
-              items={data.shifts.map((x) => ({
-                name: x.name,
-                value: x.hours,
-                subtitle: `${x.events} events`,
-              }))}
-            />
-          </WaitingSection>
-        </Grid>
+        <WaitingSection
+          title="Operation Phase"
+          subtitle="Waiting by operational phase"
+        >
+          <WaitingBarChart
+            items={data.operationPhases.map((item) => ({
+              name: item.name,
+              value: item.hours,
+              subtitle: `${item.events} events`,
+            }))}
+          />
+        </WaitingSection>
 
-        <Grid size={12}>
-          <WaitingSection
-            title="Waiting Events"
-            subtitle="Latest and longest waiting events"
-          >
-            <TableContainer>
-              <Table size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Event Code</TableCell>
-                    <TableCell>Start</TableCell>
-                    <TableCell>End</TableCell>
-                    <TableCell>Reason</TableCell>
-                    <TableCell>Reason Group</TableCell>
-                    <TableCell>Operation Phase</TableCell>
-                    <TableCell>NPT Class</TableCell>
-                    <TableCell align="right">Duration</TableCell>
-                  </TableRow>
-                </TableHead>
+        <WaitingSection title="Shift Analysis" subtitle="Waiting by shift">
+          <WaitingBarChart
+            items={data.shifts.map((item) => ({
+              name: item.name,
+              value: item.hours,
+              subtitle: `${item.events} events`,
+            }))}
+          />
+        </WaitingSection>
+      </Box>
 
-                <TableBody>
-                  {data.topEvents.map((event) => (
-                    <TableRow key={event.waitingEventId} hover>
-                      <TableCell>{event.eventCode ?? "-"}</TableCell>
+      <Divider />
 
-                      <TableCell>
-                        {new Date(event.startDateTime).toLocaleString()}
-                      </TableCell>
-
-                      <TableCell>
-                        {new Date(event.endDateTime).toLocaleString()}
-                      </TableCell>
-
-                      <TableCell>
-                        {event.reason?.nameEn ?? "Custom / Unspecified"}
-                      </TableCell>
-
-                      <TableCell>{event.reasonGroup ?? "-"}</TableCell>
-
-                      <TableCell>{event.operationPhase ?? "-"}</TableCell>
-
-                      <TableCell>{event.nptClass ?? "-"}</TableCell>
-
-                      <TableCell align="right">
-                        <Typography fontWeight={700}>
-                          {event.durationHours.toFixed(1)} h
-                        </Typography>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-
-                  {data.topEvents.length === 0 && (
-                    <TableRow>
-                      <TableCell colSpan={8} align="center">
-                        No waiting events found
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </WaitingSection>
-        </Grid>
-      </Grid>
+      <WaitingSection
+        title="Top Waiting Events"
+        subtitle="Longest recorded waiting events"
+      >
+        <WaitingEventsTable events={data.topEvents} />
+      </WaitingSection>
     </Box>
   );
 };

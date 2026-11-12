@@ -1,274 +1,192 @@
-import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Spinner from "@/shared/components/Spinner";
+import WaitingMetricCard from "../_components/WaitingMetricCard";
+import WaitingSection from "../_components/WaitingSection";
+import WaitingBarChart from "../_components/WaitingBarChart";
+import { useEffect, useState } from "react";
+import { useAtomValue } from "jotai";
 import { PageHeader } from "@/shared/components/PageHeader";
 import { atomRig } from "@/shared/atoms/general.atom";
-import { useAtomValue } from "jotai";
-
-import { getWaitingDashboard } from "@/core/api/api";
-
-import {
-  MetricCard,
-  WaitingSection,
-  WaitingBarList,
-  WaitingDateFilter,
-} from "../_components/WaitingShared";
-import { WaitingDashboardData } from "../WaitingTypes";
+import { getWaitingDashboard, TypeWaitingDashboard } from "@/core/api/api";
 
 const Dashboard = () => {
-  const inst = useAtomValue(atomRig);
-  const instId = inst?.instId;
-
-  const [data, setData] = useState<WaitingDashboardData | null>(null);
+  const [data, setData] = useState<TypeWaitingDashboard | null>(null);
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const inst = useAtomValue(atomRig);
 
   useEffect(() => {
-    let active = true;
+    const initFetch = async () => {
+      setLoading(true);
 
-    const fetchData = async () => {
       try {
-        setLoading(true);
-        setError(null);
-
         const result = await getWaitingDashboard({
-          instId,
+          instId: inst?.instId,
         });
 
-        if (active) setData(result);
-      } catch (err) {
-        if (active) {
-          setError("Failed to load waiting dashboard.");
-        }
+        setData(result);
       } finally {
-        if (active) setLoading(false);
+        setLoading(false);
       }
     };
 
-    fetchData();
+    initFetch();
+  }, [inst?.instId]);
 
-    return () => {
-      active = false;
-    };
-  }, [inst?.instId, startDate, endDate]);
-
-  if (loading && !data) return <Spinner />;
-
-  if (error && !data) {
-    return <Typography color="error">{error}</Typography>;
+  if (loading || !data) {
+    return <Spinner />;
   }
-
-  if (!data) return null;
 
   const { summary } = data;
 
   return (
-    <Box display="flex" flexDirection="column" gap={2}>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        flexWrap="wrap"
-        gap={2}
-      >
-        <PageHeader
-          title="Waiting Dashboard"
-          subtitle="Overview of waiting time and operational losses"
+    <Box display="flex" flexDirection="column" gap={1.5}>
+      <PageHeader
+        title="Waiting Dashboard"
+        subtitle="Overview of operational waiting and downtime"
+      />
+
+      <Box display="grid" gridTemplateColumns="repeat(5, 1fr)" gap={1.5}>
+        <WaitingMetricCard
+          title="Total Waiting"
+          value={`${summary.totalHours.toFixed(1)} h`}
+          subtitle="Accumulated waiting time"
         />
 
-        <WaitingDateFilter
-          startDate={startDate}
-          endDate={endDate}
-          onStartChange={setStartDate}
-          onEndChange={setEndDate}
+        <WaitingMetricCard
+          title="Events"
+          value={summary.totalEvents}
+          subtitle="Registered waiting events"
         />
-      </Stack>
 
-      {loading && <Spinner />}
+        <WaitingMetricCard
+          title="Waiting Days"
+          value={summary.daysWithWaiting}
+          subtitle="Days affected by waiting"
+        />
 
-      {error && <Typography color="error">{error}</Typography>}
+        <WaitingMetricCard
+          title="Average Duration"
+          value={`${summary.averageDurationHours.toFixed(1)} h`}
+          subtitle="Per waiting event"
+        />
 
-      <Grid container spacing={1.5}>
-        {[
-          {
-            title: "Total Waiting Hours",
-            value: summary.totalHours.toFixed(1),
-            subtitle: "Total accumulated waiting time",
-          },
-          {
-            title: "Total Events",
-            value: summary.totalEvents,
-            subtitle: "Registered waiting events",
-          },
-          {
-            title: "Rigs with Waiting",
-            value: summary.installationsWithWaiting ?? 0,
-            subtitle: "Affected installations",
-          },
-          {
-            title: "Days with Waiting",
-            value: summary.daysWithWaiting,
-            subtitle: "Distinct calendar days",
-          },
-          {
-            title: "Average Duration",
-            value: `${summary.averageDurationHours.toFixed(1)} h`,
-            subtitle: "Average hours per event",
-          },
-        ].map((item) => (
-          <Grid key={item.title} size={{ xs: 12, sm: 6, md: 2.4 }}>
-            <MetricCard {...item} />
-          </Grid>
-        ))}
-      </Grid>
+        <WaitingMetricCard
+          title="Affected Rigs"
+          value={summary.installationsWithWaiting}
+          subtitle="Installations with waiting"
+        />
+      </Box>
 
       <Divider />
 
-      <Grid container spacing={1.5}>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <WaitingSection
-            title="Waiting by Installation"
-            subtitle="Total waiting hours per rig"
-          >
-            <WaitingBarList
-              items={data.installations.map((x) => ({
-                name: x.name,
-                value: x.hours,
-                subtitle: `${x.events} events`,
-              }))}
-            />
-          </WaitingSection>
-        </Grid>
-
-        <Grid size={{ xs: 12, md: 6 }}>
+      <Stack
+        display="grid"
+        gridTemplateColumns="1fr 1fr"
+        divider={<Divider orientation="vertical" flexItem />}
+      >
+        <Box p={1.5}>
           <WaitingSection
             title="Waiting by Reason Group"
-            subtitle="Distribution of operational losses"
+            subtitle="Distribution of waiting hours"
           >
-            <WaitingBarList
-              items={data.reasonGroups.map((x) => ({
-                name: x.name,
-                value: x.hours,
-                subtitle: `${x.events} events · ${(x.shareOfHours * 100).toFixed(1)}%`,
+            <WaitingBarChart
+              maxItems={8}
+              items={data.reasonGroups.map((item) => ({
+                name: item.name,
+                value: item.hours,
+                subtitle: `${item.events} events · ${(item.shareOfHours * 100).toFixed(1)}%`,
               }))}
             />
           </WaitingSection>
-        </Grid>
+        </Box>
 
-        <Grid size={{ xs: 12, md: 7 }}>
+        <Box p={1.5}>
           <WaitingSection
-            title="Monthly Waiting Trend"
-            subtitle="Monthly accumulated waiting hours"
+            title="Waiting by Installation"
+            subtitle="Comparison between rigs"
           >
-            <WaitingBarList
-              items={data.monthly.map((x) => ({
-                name: x.month,
-                value: x.hours,
-                subtitle: `${x.events} events`,
+            <WaitingBarChart
+              maxItems={8}
+              items={data.installations.map((item) => ({
+                name: item.name,
+                value: item.hours,
+                subtitle: `${item.events} events`,
               }))}
             />
           </WaitingSection>
-        </Grid>
+        </Box>
+      </Stack>
 
-        <Grid size={{ xs: 12, md: 5 }}>
+      <Divider />
+
+      <Stack
+        display="grid"
+        gridTemplateColumns="1fr 1fr"
+        divider={<Divider orientation="vertical" flexItem />}
+      >
+        <Box p={1.5}>
           <WaitingSection
-            title="Top Waiting Reason"
-            subtitle="Reason with the highest accumulated hours"
+            title="Monthly Trend"
+            subtitle="Waiting hours over time"
           >
-            {data.topReason ? (
-              <Stack gap={1}>
-                <Typography variant="h5" fontWeight={700}>
-                  {data.topReason.reasonNameEn}
-                </Typography>
-
-                {data.topReason.reasonNameFa && (
-                  <Typography color="text.secondary">
-                    {data.topReason.reasonNameFa}
-                  </Typography>
-                )}
-
-                <Typography variant="h4">
-                  {data.topReason.hours.toFixed(1)} h
-                </Typography>
-
-                <Typography variant="body2" color="text.secondary">
-                  {data.topReason.events} waiting events
-                </Typography>
-              </Stack>
-            ) : (
-              <Typography color="text.secondary">
-                No waiting reason available
-              </Typography>
-            )}
+            <WaitingBarChart
+              items={data.monthly.map((item) => ({
+                name: item.month,
+                value: item.hours,
+                subtitle: `${item.events} events`,
+              }))}
+            />
           </WaitingSection>
-        </Grid>
+        </Box>
 
-        <Grid size={12}>
+        <Box p={1.5}>
           <WaitingSection
-            title="Rig × Reason Group"
-            subtitle="Waiting hours by installation and reason group"
+            title="Highest Impact"
+            subtitle="Main sources of waiting"
           >
-            <Box
-              sx={{
-                overflowX: "auto",
-              }}
-            >
-              <Box
-                display="grid"
-                gridTemplateColumns="minmax(130px, 1fr) repeat(3, minmax(130px, 1fr))"
-                gap={1}
-                minWidth={550}
-              >
-                <Typography fontWeight={700}>Installation</Typography>
-                {Array.from(
-                  new Set(data.rigReasonGroups.map((x) => x.reasonGroup)),
-                ).map((group) => (
-                  <Typography key={group} fontWeight={700}>
-                    {group}
-                  </Typography>
-                ))}
+            <Stack gap={2}>
+              <Box>
+                <Typography variant="caption" color="text.secondary">
+                  Top Waiting Reason
+                </Typography>
 
-                {data.installations.map((rig) => (
-                  <>
-                    <Typography key={rig.instId}>{rig.name}</Typography>
+                <Typography variant="h6" fontWeight={700}>
+                  {data.topReason?.reasonNameEn ?? "-"}
+                </Typography>
 
-                    {Array.from(
-                      new Set(data.rigReasonGroups.map((x) => x.reasonGroup)),
-                    ).map((group) => {
-                      const value =
-                        data.rigReasonGroups.find(
-                          (x) =>
-                            x.instId === rig.instId && x.reasonGroup === group,
-                        )?.hours ?? 0;
-
-                      return (
-                        <Box
-                          key={`${rig.instId}-${group}`}
-                          bgcolor="action.hover"
-                          borderRadius={1}
-                          p={1}
-                        >
-                          <Typography fontWeight={700}>
-                            {value.toFixed(1)} h
-                          </Typography>
-                        </Box>
-                      );
-                    })}
-                  </>
-                ))}
+                <Typography color="text.secondary">
+                  {data.topReason
+                    ? `${data.topReason.hours.toFixed(1)} h · ${data.topReason.events} events`
+                    : "No data"}
+                </Typography>
               </Box>
-            </Box>
+
+              <Divider />
+
+              <Box>
+                <Typography variant="caption" color="text.secondary">
+                  Highest Waiting Installation
+                </Typography>
+
+                <Typography variant="h6" fontWeight={700}>
+                  {data.worstInstallation?.name ?? "-"}
+                </Typography>
+
+                <Typography color="text.secondary">
+                  {data.worstInstallation
+                    ? `${data.worstInstallation.hours.toFixed(1)} h · ${data.worstInstallation.events} events`
+                    : "No data"}
+                </Typography>
+              </Box>
+            </Stack>
           </WaitingSection>
-        </Grid>
-      </Grid>
+        </Box>
+      </Stack>
     </Box>
   );
 };
