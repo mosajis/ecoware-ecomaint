@@ -177,6 +177,7 @@ export default function PageMaintLog() {
         .catch((e) => {
           console.error(e);
           toast.error("Faild To Change MaintLog Follow Status");
+          setLoading(false);
         });
     },
     [selectedRows, optimisticUpdate, handleRefresh],

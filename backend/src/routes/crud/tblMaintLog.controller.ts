@@ -897,7 +897,7 @@ const ControllerTblMaintLog = new BaseController({
           await tx.tblMaintLogFollow.createMany({
             data: body.maintLogIds.map((maintLogId) => ({
               maintLogId,
-              followStatusId: body.followStatusId,
+              followStatuseId: body.followStatusId,
               followEmployeeId: employeeId,
             })),
           });
